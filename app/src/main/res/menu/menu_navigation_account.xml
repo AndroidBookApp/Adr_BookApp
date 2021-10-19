@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item android:id="@+id/btn_thong_tin" android:title="@string/thong_tin" android:icon="@drawable/ic_baseline_account_24"/>
+    <item android:id="@+id/btn_setting" android:title="@string/setting" android:icon="@drawable/ic_baseline_settings_24"/>
+    <item android:id="@+id/btn_support" android:title="@string/Support" android:icon="@drawable/ic_baseline_phone_enabled_24"/>
+    <item android:id="@+id/btn_logout" android:title="@string/Log_Out" android:icon="@drawable/ic_baseline_logout_power_24"/>
+</menu>

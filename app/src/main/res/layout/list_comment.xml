@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+
+  >
+<de.hdodenhof.circleimageview.CircleImageView
+    android:id="@+id/cir_account"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:src="@drawable/account"/>
+
+    <TextView
+        android:id="@+id/name_user"
+        android:layout_toRightOf="@id/cir_account"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nguyễn Văn Quỳnh"
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        android:fontFamily="@font/roboto_bold"
+        />
+
+    <EditText
+        android:id="@+id/txt_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/name_user"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/cir_account"
+        android:background="@drawable/color_edittext"
+        android:fontFamily="@font/roboto_regular"
+        android:hint="Đây là một cuốn sách hay nhất tôi từng đọc "
+        android:inputType="none"
+        android:paddingStart="10dp"
+        android:textColorHint="#A3A3A3"
+        android:textSize="10dp" />
+    <TextView
+        android:id="@+id/like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_comment"
+        android:drawableStart="@drawable/ic_like"
+        android:layout_marginTop="10dp"
+        android:text="Thích"
+        android:textSize="10dp"
+        android:textColor="#BFBABA"
+        />
+
+    <TextView
+        android:id="@+id/feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_comment"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/like"
+        android:drawableStart="@drawable/ic_feedback"
+        android:text="Phản hồi"
+        android:textColor="#BFBABA"
+        android:textSize="10dp" />
+<TextView
+    android:id="@+id/txt_time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/txt_comment"
+    android:text="1 ngày trước"
+    android:fontFamily="@font/roboto_regular"
+    android:textSize="12dp"
+    android:layout_marginStart="150dp"
+    android:layout_alignParentEnd="true"
+    android:layout_marginTop="10dp"
+    android:layout_toRightOf="@id/feedback"
+    />
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/like"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+</RelativeLayout>

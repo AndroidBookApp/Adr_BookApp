@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/start"
+    tools:context=".onboarding.fragment_onboarding_three">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+
+        >
+
+        <View
+            android:id="@+id/vector"
+            android:layout_width="232dp"
+            android:layout_height="245dp"
+            android:layout_marginTop="46dp"
+            android:alpha="0.8"
+            android:background="@drawable/ic_backgound_one"
+            android:elevation="4dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            tools:ignore="DuplicateIds" />
+        <View
+            android:id="@+id/vector"
+            android:layout_width="221dp"
+            android:layout_height="234dp"
+            android:alpha="0.8"
+            android:background="@drawable/ic_backgound_two"
+            android:elevation="4dp"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="64dp"
+            tools:ignore="DuplicateIds" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        >
+<ImageView
+    android:layout_width="280dp"
+    android:layout_height="240dp"
+    android:background="@drawable/icon_bg"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="39dp">
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="280dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="90dp"
+            android:background="@drawable/color_btn"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Đăng Nhập"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_dki"
+            android:layout_width="280dp"
+            android:layout_height="44dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/stoker"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Đăng Ký"
+            android:textColor="@color/btn_color"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="330dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+
+            android:text="Android Book Đăng Nhập"
+            android:textColor="@color/white"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="216dp"
+            android:layout_height="59dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="Xin mời bạn đăng nhập
+hoặc đăng kí để tiếp tục sử dụng"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </RelativeLayout>
+</RelativeLayout>

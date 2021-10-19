@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/start">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="648dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/solid_login">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Đăng Ký"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/black"
+            android:textSize="32dp"
+            android:textStyle="bold" />
+<LinearLayout
+    android:id="@+id/lo3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_centerHorizontal="true">
+        <EditText
+            android:id="@+id/user"
+            android:layout_width="280dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="114dp"
+            android:background="@drawable/color_edittext"
+            android:drawableStart="@drawable/ic_account_focused"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="Tài Khoản"
+            android:paddingStart="10dp"
+            android:textColorHint="@color/text"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/pass_1"
+            android:layout_width="280dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/color_edittext"
+            android:drawableStart="@drawable/lock_focused"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="Mật Khẩu"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:textColorHint="@color/text"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/pass_2"
+            android:layout_width="280dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/color_edittext"
+            android:drawableStart="@drawable/ic_email_focused"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="Email"
+            android:inputType="textWebEmailAddress"
+            android:paddingStart="10dp"
+            android:textColorHint="@color/text"
+            android:textSize="15dp" />
+
+        <RadioButton
+            android:id="@+id/radio_btn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Bạn có đồng ý với điều khoản của chúng tôi"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_dangky"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/color_btn"
+            android:text="Đăng Ký"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+</LinearLayout>
+       
+<LinearLayout
+    android:id="@+id/lo4"
+    android:layout_below="@id/lo5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="20dp"
+    android:orientation="horizontal">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_google"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:elevation="35dp"
+            android:src="@drawable/google"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_marginLeft="20dp"
+
+            android:backgroundTint="@color/white"
+            android:elevation="35dp"
+            android:src="@drawable/ci_facebook"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+</LinearLayout>
+        <Button
+            android:id="@+id/dangky"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/lo4"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/stoker_btn"
+            android:text="Bạn Đã Có Tài Khoản"
+            android:textColor="@color/btn_color"
+            android:textSize="18dp" />
+
+        <LinearLayout
+            android:id="@+id/lo5"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lo3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="112dp"
+                android:layout_height="1.5dp"
+                android:layout_gravity="center"
+                android:background="@color/line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="Hoặc"
+                android:textColor="@color/line"
+                android:textSize="14dp" />
+
+            <View
+                android:layout_width="112dp"
+                android:layout_height="1.5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="2dp"
+                android:background="@color/line" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
