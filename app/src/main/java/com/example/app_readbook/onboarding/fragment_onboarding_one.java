@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.app_readbook.R;
-import com.example.app_readbook.dangky;
-import com.example.app_readbook.login;
+import com.example.app_readbook.DataLogin.login;
 
 /**
  * A simple {@link Fragment} subclass.
