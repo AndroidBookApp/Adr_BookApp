@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,7 +22,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignIn extends AppCompatActivity {
-    private Button btn_register;
 ApiInterface apiInterface;
     @SuppressLint("NonConstantResourceId")
     @BindView(R.id.user) EditText txt_username;
@@ -43,16 +41,19 @@ ApiInterface apiInterface;
         apiReponseCall.enqueue(new Callback<ApiReponse>() {
             @Override
             public void onResponse(Call<ApiReponse> call, Response<ApiReponse> response) {
-                    if (response.body()!=null)
+                    if (response.body()!= null)
                     {
                         ApiReponse apiReponse = response.body();
                         if(apiReponse.isSuccess())
                         {
-                            Toast.makeText(SignIn.this  , "Login successful " , Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignIn.this  , "Login successful" , Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(SignIn.this , home.class);
+                            startActivity(intent);
                         }
                         else{
-                            Toast.makeText(SignIn.this  , "user not found "+apiReponse.getMassage() , Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignIn.this  , "User not found "+apiReponse.getMassage(), Toast.LENGTH_LONG).show();
+                            txt_username.setText("");
+                            txt_password.setText("");
                         }
                     }
             }
@@ -60,6 +61,7 @@ ApiInterface apiInterface;
             @Override
             public void onFailure(Call<ApiReponse> call, Throwable t) {
                 Toast.makeText(SignIn.this  , "Error, could not connect " , Toast.LENGTH_LONG).show();
+
             }
         });
     }

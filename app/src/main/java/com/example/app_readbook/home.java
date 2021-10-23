@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,10 +30,13 @@ import java.util.List;
 import me.relex.circleindicator.CircleIndicator3;
 
 public class home extends AppCompatActivity {
+    private ScrollView scrollView;
     private RecyclerView recyclerView;
     private NameBookAdaptor nameBookAdaptor;
     private ViewPager2 viewPager2 , view;
+    private RelativeLayout layout;
 private LinearLayout relativeLayout;
+
     private BottomNavigationView bottomNavigationView;
     private CircleIndicator3 indicator;
     private List<photo> mlist;
@@ -56,8 +60,10 @@ private LinearLayout relativeLayout;
         setContentView(R.layout.scroll_home);
         viewPager2 = findViewById(R.id.viewview);
         view = findViewById(R.id.view_2);
+        scrollView = findViewById(R.id.scv);
         relativeLayout = findViewById(R.id.rl);
         indicator  = findViewById(R.id.cr);
+        layout = findViewById(R.id.lo_main);
         mlist = getListphoto();
         bottomNavigationView = findViewById(R.id.btn_navigatione);
         ViewPagerAdaptor2 viewPagerAdaptor2 = new ViewPagerAdaptor2(this);
@@ -65,7 +71,6 @@ private LinearLayout relativeLayout;
         PhotoAdaptor photoAdaptor = new PhotoAdaptor(mlist);
         view.setAdapter(photoAdaptor);
         indicator.setViewPager(view);
-        // recyclerView
         recyclerView = findViewById(R.id.rcv_name);
         nameBookAdaptor = new NameBookAdaptor(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , RecyclerView.VERTICAL , false);
@@ -79,27 +84,41 @@ private LinearLayout relativeLayout;
                 {
                     case R.id.btn_home:
                         viewPager2.setCurrentItem(0);
-                    view.setVisibility(View.VISIBLE);
-                    relativeLayout.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.VISIBLE);
+                        view.setVisibility(View.VISIBLE);
+                        relativeLayout.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        layout.setVisibility(View.VISIBLE);
+                        scrollView.setVisibility(View.VISIBLE);
+//                        viewPager2.setVisibility(View.VISIBLE);
+
                     break;
                     case R.id.btn_search:
                         viewPager2.setCurrentItem(1);
                         view.setVisibility(View.GONE);
                         relativeLayout.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.GONE);
+//                        scrollView.setVisibility(View.GONE);
+//                        viewPager2.setVisibility(View.GONE);
+//                        layout.setVisibility(View.GONE);
                         break;
                     case R.id.btn_favorite:
                         viewPager2.setCurrentItem(2);
                         view.setVisibility(View.GONE);
                         relativeLayout.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.GONE);
+//                      viewPager2.setVisibility(View.GONE);
+                        layout.setVisibility(View.GONE);
+//                        scrollView.setVisibility(View.GONE);
+
                         break;
                     case R.id.btn_account:
                         viewPager2.setCurrentItem(3);
                         view.setVisibility(View.GONE);
                         relativeLayout.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.GONE);
+//                        viewPager2.setVisibility(View.GONE);
+//                        scrollView.setVisibility(View.GONE);
+//                        layout.setVisibility(View.GONE);
                         break;
 
                 }

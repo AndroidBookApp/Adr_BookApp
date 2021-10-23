@@ -7,7 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String URL = "https://192.168.66.1/demo_app/";
+    private static final String URL = "https://10.0.2.2:8888/demo_app/";
     private static Retrofit retrofit = null;
     public static Retrofit getApiclient()
     {

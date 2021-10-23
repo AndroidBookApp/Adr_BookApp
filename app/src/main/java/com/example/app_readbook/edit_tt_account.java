@@ -1,18 +1,15 @@
 package com.example.app_readbook;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-
-import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -48,6 +45,7 @@ public class edit_tt_account extends AppCompatActivity {
                     if (result != null) {
                         add_background.setImageURI(result);
                     }
+                    Toast.makeText(edit_tt_account.this , "hihhi" , Toast.LENGTH_LONG).show();
                 }
             });
 }

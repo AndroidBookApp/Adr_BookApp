@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/start">
+    android:background="@color/start"
+    tools:context=".activity.Register"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,6 +16,7 @@
         android:background="@drawable/solid_login">
 
         <TextView
+            android:id="@+id/txt_register"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="30dp"
@@ -24,6 +28,7 @@
             android:textStyle="bold" />
 <LinearLayout
     android:id="@+id/lo3"
+    android:layout_below="@id/txt_register"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -33,7 +38,7 @@
             android:layout_width="280dp"
             android:layout_height="48dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="114dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/color_edittext"
             android:drawableStart="@drawable/ic_account_focused"
             android:drawablePadding="10dp"
@@ -44,7 +49,7 @@
             android:textSize="15dp" />
 
         <EditText
-            android:id="@+id/pass_1"
+            android:id="@+id/pass"
             android:layout_width="280dp"
             android:layout_height="48dp"
             android:layout_centerHorizontal="true"
@@ -60,7 +65,7 @@
             android:textSize="15dp" />
 
         <EditText
-            android:id="@+id/pass_2"
+            android:id="@+id/email"
             android:layout_width="280dp"
             android:layout_height="48dp"
             android:layout_centerHorizontal="true"
@@ -93,12 +98,13 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/color_btn"
             android:text="Đăng Ký"
+            android:onClick="SignUp"
             android:fontFamily="@font/roboto_medium"
             android:textColor="@color/white"
             android:textSize="18dp"
             android:textStyle="bold" />
 </LinearLayout>
-       
+
 <LinearLayout
     android:id="@+id/lo4"
     android:layout_below="@id/lo5"
@@ -178,3 +184,4 @@
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
+</layout>
