@@ -34,7 +34,7 @@
             android:name=".list_comment.View_Readbook"
             android:exported="true" />
         <activity
-            android:name=".home"
+            android:name=".activity.SignIn"
             android:exported="true" />
         <activity
             android:name=".dangky"
@@ -44,7 +44,7 @@
             android:exported="true" />
 
         <activity
-            android:name=".activity.SignIn"
+            android:name=".home"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

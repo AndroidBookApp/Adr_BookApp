@@ -33,7 +33,7 @@ public class home extends AppCompatActivity {
     private ScrollView scrollView;
     private RecyclerView recyclerView;
     private NameBookAdaptor nameBookAdaptor;
-    private ViewPager2 viewPager2 , view;
+    private ViewPager2  viewPager2, view;
     private RelativeLayout layout;
 private LinearLayout relativeLayout;
 
@@ -66,6 +66,7 @@ private LinearLayout relativeLayout;
         layout = findViewById(R.id.lo_main);
         mlist = getListphoto();
         bottomNavigationView = findViewById(R.id.btn_navigatione);
+
         ViewPagerAdaptor2 viewPagerAdaptor2 = new ViewPagerAdaptor2(this);
         viewPager2.setAdapter(viewPagerAdaptor2);
         PhotoAdaptor photoAdaptor = new PhotoAdaptor(mlist);
@@ -107,7 +108,7 @@ private LinearLayout relativeLayout;
                         relativeLayout.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.GONE);
 //                      viewPager2.setVisibility(View.GONE);
-                        layout.setVisibility(View.GONE);
+//                        layout.setVisibility(View.GONE);
 //                        scrollView.setVisibility(View.GONE);
 
                         break;
