@@ -18,6 +18,7 @@
     <color name="focused_account">#8EA6FD</color>
     <color name="attribute">#9AB0FF</color>
     <color name="line">#D3D3D3</color>
+    <color name="search">#F0F3FF</color>
     <color name="background_home">#F5F8FF</color>
     <color name="btn_navigation">#ADBFFF</color>
     <color name="focus_btn_navigation">#404040</color>

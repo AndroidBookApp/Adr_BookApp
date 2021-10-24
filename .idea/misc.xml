@@ -20,6 +20,8 @@
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/color_btn.xml" value="0.3712962962962963" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/color_circle.xml" value="0.3712962962962963" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/color_edittext.xml" value="0.3828125" />
+        <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/custom_clear.xml" value="0.3828125" />
+        <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/custom_search.xml" value="0.3828125" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/edit_text_line.xml" value="0.19768518518518519" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/ic_account_focused.xml" value="0.3402777777777778" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/ic_baseline_account_24.xml" value="0.3828125" />
@@ -34,6 +36,8 @@
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/ic_baseline_navigate_next1_24.xml" value="0.3402777777777778" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/ic_baseline_navigate_next_24.xml" value="0.3828125" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/ic_baseline_phone_enabled_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/ic_baseline_search_24_1.xml" value="0.3828125" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.3828125" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/ic_email_focused.xml" value="0.3828125" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/ic_tab_onboarding.xml" value="0.3828125" />
@@ -41,6 +45,7 @@
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/lock_focused.xml" value="0.3828125" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/radius_bg_one.xml" value="0.3828125" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/solid_login.xml" value="0.3828125" />
+        <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/solid_search.xml" value="0.3828125" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/stoker.xml" value="0.3828125" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/stoker_btn.xml" value="0.3402777777777778" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/drawable/stroke_btn_account.xml" value="0.3828125" />
@@ -72,11 +77,13 @@
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/item_text.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/list_chapter.xml" value="0.5" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/list_comment.xml" value="0.5" />
+        <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/list_history.xml" value="0.25" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/list_item_book.xml" value="0.5" />
+        <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/list_search.xml" value="0.33" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/login.xml" value="0.25" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/photo_view.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/readbook.xml" value="0.33" />
-        <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/scroll_home.xml" value="0.25" />
+        <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/scroll_home.xml" value="0.33" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/scrollview.xml" value="0.32592592592592595" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/slider.xml" value="0.25" />
         <entry key="..\:/Users/NGUYEN VAN QUYNH/AndroidStudioProjects/App_ReadBook/app/src/main/res/layout/thong_tin_ca_nhan.xml" value="0.36666666666666664" />

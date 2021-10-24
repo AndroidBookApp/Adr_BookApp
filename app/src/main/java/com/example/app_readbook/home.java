@@ -21,6 +21,8 @@ import com.example.app_readbook.book.book;
 import com.example.app_readbook.fragment.PhotoAdaptor;
 import com.example.app_readbook.fragment.ViewPagerAdaptor2;
 import com.example.app_readbook.fragment.photo;
+import com.example.app_readbook.model_search.IClickHistory;
+import com.example.app_readbook.model_search.history;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -34,7 +36,8 @@ public class home extends AppCompatActivity {
     private RecyclerView recyclerView;
     private NameBookAdaptor nameBookAdaptor;
     private ViewPager2  viewPager2, view;
-    private RelativeLayout layout;
+    private RelativeLayout layout , relativeLayout_footer;
+
 private LinearLayout relativeLayout;
 
     private BottomNavigationView bottomNavigationView;
@@ -58,6 +61,7 @@ private LinearLayout relativeLayout;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scroll_home);
+        relativeLayout_footer = findViewById(R.id.lo6);
         viewPager2 = findViewById(R.id.viewview);
         view = findViewById(R.id.view_2);
         scrollView = findViewById(R.id.scv);
@@ -66,7 +70,6 @@ private LinearLayout relativeLayout;
         layout = findViewById(R.id.lo_main);
         mlist = getListphoto();
         bottomNavigationView = findViewById(R.id.btn_navigatione);
-
         ViewPagerAdaptor2 viewPagerAdaptor2 = new ViewPagerAdaptor2(this);
         viewPager2.setAdapter(viewPagerAdaptor2);
         PhotoAdaptor photoAdaptor = new PhotoAdaptor(mlist);
@@ -78,13 +81,15 @@ private LinearLayout relativeLayout;
         recyclerView.setLayoutManager(linearLayoutManager);
         nameBookAdaptor.setData(getListName());
         recyclerView.setAdapter(nameBookAdaptor);
+
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId())
                 {
                     case R.id.btn_home:
-                        viewPager2.setCurrentItem(0);
+//                        viewPager2.setCurrentItem(0);
+                        relativeLayout_footer.setVisibility(View.VISIBLE);
                         view.setVisibility(View.VISIBLE);
                         relativeLayout.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.VISIBLE);
@@ -94,15 +99,24 @@ private LinearLayout relativeLayout;
 
                     break;
                     case R.id.btn_search:
-                        viewPager2.setCurrentItem(1);
-                        view.setVisibility(View.GONE);
-                        relativeLayout.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.GONE);
-//                        scrollView.setVisibility(View.GONE);
-//                        viewPager2.setVisibility(View.GONE);
-//                        layout.setVisibility(View.GONE);
+                        listHistory();
+                        relativeLayout_footer.setVisibility(View.VISIBLE);
+////                        viewPager2.setCurrentItem(1);
+//                        view.setVisibility(View.GONE);
+//                        relativeLayout.setVisibility(View.GONE);
+//                        recyclerView.setVisibility(View.GONE);
+////                        scrollView.setVisibility(View.GONE);
+////                        viewPager2.setVisibility(View.GONE);
+////                        layout.setVisibility(View.GONE);
+                        viewPager2.setCurrentItem(0);
+                        view.setVisibility(View.VISIBLE);
+                        relativeLayout.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        layout.setVisibility(View.VISIBLE);
+                        scrollView.setVisibility(View.VISIBLE);
                         break;
                     case R.id.btn_favorite:
+                        relativeLayout_footer.setVisibility(View.GONE);
                         viewPager2.setCurrentItem(2);
                         view.setVisibility(View.GONE);
                         relativeLayout.setVisibility(View.GONE);
@@ -113,6 +127,7 @@ private LinearLayout relativeLayout;
 
                         break;
                     case R.id.btn_account:
+                        relativeLayout_footer.setVisibility(View.GONE);
                         viewPager2.setCurrentItem(3);
                         view.setVisibility(View.GONE);
                         relativeLayout.setVisibility(View.GONE);
@@ -137,8 +152,6 @@ private LinearLayout relativeLayout;
             }
         });
     }
-
-
     public List<photo> getListphoto() {
         List<photo> list = new ArrayList<>();
         list.add(new photo(R.drawable.sachhome));
@@ -164,5 +177,21 @@ private LinearLayout relativeLayout;
         ls.add(new Name("Sách Khoa Học","(10)","xem tất cả" ,list));
         ls.add(new Name("Sách Làm Giàu" ,"(10)","xem tất cả",list));
         return ls;
+    }
+    private void listHistory(){
+        List<history> list = new ArrayList<>();
+        list.add(new history(R.drawable.ic_baseline_access_time_24 , "Đắc Nhân Tâm" , R.drawable.ic_baseline_clear_24));
+        list.add(new history(R.drawable.ic_baseline_access_time_24 , "Đắc Nhân Sĩ" , R.drawable.ic_baseline_clear_24));
+        list.add(new history(R.drawable.ic_baseline_access_time_24 , "Kinh Doanh Online" , R.drawable.ic_baseline_clear_24));
+        list.add(new history(R.drawable.ic_baseline_access_time_24 , "Nghĩ giàu làm giàu" , R.drawable.ic_baseline_clear_24));
+        list.add(new history(R.drawable.ic_baseline_access_time_24 , "Đắc Nhân Tâm" , R.drawable.ic_baseline_clear_24));
+        list.add(new history(R.drawable.ic_baseline_access_time_24 , "Đắc Nhân Tâm" , R.drawable.ic_baseline_clear_24));
+        MyBottomSheetDialogFragment myBottomSheetDialogFragment = new MyBottomSheetDialogFragment(list, new IClickHistory() {
+            @Override
+            public void clickItem(history history) {
+
+            }
+        });
+        myBottomSheetDialogFragment.show(getSupportFragmentManager(), myBottomSheetDialogFragment.getTag());
     }
 }
