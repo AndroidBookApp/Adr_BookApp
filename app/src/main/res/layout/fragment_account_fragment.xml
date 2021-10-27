@@ -5,7 +5,7 @@
     android:fillViewport="true"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragment_pager.Account_fragment"
+    tools:context=".fragment_pager.model_account.Account_fragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
    >
     <RelativeLayout
@@ -89,7 +89,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="@drawable/solid_acount"
-                        android:src="@drawable/ic_baseline_account_24" />
+                        android:src="@drawable/ic_baseline_accountt_24" />
 
                     <TextView
                         android:layout_width="160dp"

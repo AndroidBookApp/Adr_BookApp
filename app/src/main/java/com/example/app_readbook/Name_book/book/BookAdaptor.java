@@ -1,11 +1,10 @@
-package com.example.app_readbook.book;
+package com.example.app_readbook.Name_book.book;
 
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;

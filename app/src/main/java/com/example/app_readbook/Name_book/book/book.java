@@ -1,4 +1,4 @@
-package com.example.app_readbook.book;
+package com.example.app_readbook.Name_book.book;
 
 public class book {
     private int resourceId;

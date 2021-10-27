@@ -1,4 +1,4 @@
-package com.example.app_readbook.fragment_pager;
+package com.example.app_readbook.fragment_pager.model_account;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.R;
-import com.example.app_readbook.edit_tt_account;
 
 
 public class Account_fragment extends Fragment {

@@ -82,11 +82,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_listHistory"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/ln1"
         android:layout_marginStart="23dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="23dp"
         android:layout_marginBottom="23dp" />
 </RelativeLayout>

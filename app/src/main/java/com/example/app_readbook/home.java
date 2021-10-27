@@ -22,15 +22,14 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.app_readbook.Name_book.Name;
 import com.example.app_readbook.Name_book.NameBookAdaptor;
-import com.example.app_readbook.book.book;
-import com.example.app_readbook.fragment_pager.Account_fragment;
-import com.example.app_readbook.fragment_pager.Favorite_fragment;
+import com.example.app_readbook.Name_book.book.book;
+import com.example.app_readbook.fragment_pager.model_account.Account_fragment;
+import com.example.app_readbook.fragment_pager.model_favorite.Favorite_fragment;
 import com.example.app_readbook.fragment_pager.Home_fragment;
 import com.example.app_readbook.fragment_pager.PhotoAdaptor;
+import com.example.app_readbook.fragment_pager.model_search.Search_fragment;
 import com.example.app_readbook.fragment_pager.photo;
-import com.example.app_readbook.model_search.IClickHistory;
-import com.example.app_readbook.model_search.MyBottomSheetDialogFragment;
-import com.example.app_readbook.model_search.history;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -41,7 +40,7 @@ import me.relex.circleindicator.CircleIndicator3;
 
 public class home extends AppCompatActivity {
     private ScrollView scrollView;
-
+private AppBarLayout toolbar;
     private RecyclerView recyclerView;
     private NameBookAdaptor nameBookAdaptor;
     private ViewPager2 viewPager2, view;
@@ -70,12 +69,13 @@ public class home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scroll_home);
-        viewPager2 = findViewById(R.id.viewview);
+//        viewPager2 = findViewById(R.id.viewview);
         view = findViewById(R.id.view_2);
         scrollView = findViewById(R.id.scv);
         linearLayout = findViewById(R.id.rl);
         main = findViewById(R.id.lo6);
         indicator = findViewById(R.id.cr);
+        toolbar = findViewById(R.id.bar_footer);
         mlist = getListphoto();
         bottomNavigationView = findViewById(R.id.btn_navigatione);
 //        ViewPagerAdaptor2 viewPagerAdaptor2 = new ViewPagerAdaptor2(this);
@@ -90,7 +90,8 @@ public class home extends AppCompatActivity {
         nameBookAdaptor.setData(getListName());
         recyclerView.setAdapter(nameBookAdaptor);
         statusbar();
-        bottomNavigationView.setSelectedItemId(R.id.btn_home);
+
+//        bottomNavigationView.setSelectedItemId(R.id.btn_home);
        bottomNavigationView.setOnItemSelectedListener(navListener);
 
 //        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -178,49 +179,35 @@ private NavigationBarView.OnItemSelectedListener navListener = new NavigationBar
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
          switch (item.getItemId()){
             case R.id.btn_home:
+                toolbar.setVisibility(View.VISIBLE);
                 main.setVisibility(View.VISIBLE);
                 showFragment(new Home_fragment());
                 view.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_search:
-                listHistory();
-                switch (item.getItemId())
-                {
-                    case R.id.btn_home:
-                        showFragment(new Home_fragment());
-                        view.setVisibility(View.VISIBLE);
-                        main.setVisibility(View.VISIBLE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                        break;
-                    case R.id.btn_favorite:
-                        showFragment(new Favorite_fragment());
-                        main.setVisibility(View.GONE);
-                        view.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.GONE);
-                        break;
-                    case R.id.btn_account:
-                        showFragment(new Account_fragment());
+                toolbar.setVisibility(View.GONE);
+                showFragment(new Search_fragment());
                 main.setVisibility(View.GONE);
-                        view.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.GONE);
-                        break;
-                }
-
+                view.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
                 break;
             case R.id.btn_favorite:
+                toolbar.setVisibility(View.GONE);
                 showFragment(new Favorite_fragment());
                 main.setVisibility(View.GONE);
                 view.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 break;
             case R.id.btn_account:
+                toolbar.setVisibility(View.GONE);
                 showFragment(new Account_fragment());
                 main.setVisibility(View.GONE);
                 view.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 break;
             default:
+                toolbar.setVisibility(View.VISIBLE);
                 main.setVisibility(View.VISIBLE);
                 showFragment(new Home_fragment());
                 view.setVisibility(View.VISIBLE);
@@ -276,39 +263,4 @@ private NavigationBarView.OnItemSelectedListener navListener = new NavigationBar
         ls.add(new Name("Sách Làm Giàu", "(10)", "xem tất cả", list));
         return ls;
     }
-
-    private void listHistory() {
-        List<history> list = new ArrayList<>();
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Tâm", ""));
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Sĩ", ""));
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Kinh Doanh Online", ""));
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Nghĩ giàu làm giàu", ""));
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Tâm", ""));
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Tâm", ""));
-        MyBottomSheetDialogFragment myBottomSheetDialogFragment = new MyBottomSheetDialogFragment(list, new IClickHistory() {
-            @Override
-            public void clickItem(history history) {
-
-            }
-        });
-        myBottomSheetDialogFragment.show(getSupportFragmentManager(), myBottomSheetDialogFragment.getTag());
-
-
-    }
-    private void diMiss(){
-//        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
-//        bottomSheetDialog.getDismissWithAnimation()
-    }
-//    private void checkToolBar()
-//    {
-//        Toolbar toolbar = new Toolbar();
-//        MyBottomSheetDialogFragment myBottomSheetDialogFragment = new MyBottomSheetDialogFragment(toolbar , new IClickHistory() {
-//            @Override
-//            public void clickItem(history history) {
-//
-//            }
-//        });
-//        myBottomSheetDialogFragment.show(getSupportFragmentManager(), myBottomSheetDialogFragment.getTag());
-//    }
-//    }
 }

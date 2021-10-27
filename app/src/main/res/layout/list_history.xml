@@ -12,14 +12,17 @@
             android:id="@+id/image_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:src="@drawable/ic_baseline_access_time_24"/>
         <TextView
+            android:layout_marginLeft="10dp"
             android:id="@+id/tv_namebook"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Đắc Nhân Tâm"
             android:textSize="16dp"
             android:layout_gravity="center"
+            android:gravity="center"
             android:fontFamily="@font/roboto_regular"
             android:textColor="@color/black"
             />
@@ -27,6 +30,7 @@
             android:id="@+id/img_clear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:drawableEnd="@drawable/ic_baseline_clear_24"
 
             />

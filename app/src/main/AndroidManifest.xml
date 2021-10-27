@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.app_readbook" >
-    <uses-permission android:name="android.permission.INTERNET" >
+    package="com.example.app_readbook">
 
-    </uses-permission>
-<supports-screens
-    android:largeScreens="true"
-    android:normalScreens="true"
-    android:smallScreens="true"
-    android:xlargeScreens="true"
-    />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <application
         android:allowBackup="true"
@@ -19,8 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App_ReadBook"
-        android:usesCleartextTraffic="true" >
-
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".fragment_pager.model_account.Data_edit_account"
+            android:exported="true" />
         <activity
             android:name=".readbook.MainReadbook"
             android:exported="true" />
@@ -34,7 +35,7 @@
             android:name=".list_book.Main_ListBook"
             android:exported="true" />
         <activity
-            android:name=".edit_tt_account"
+            android:name=".home"
             android:exported="true" />
         <activity
             android:name=".onboarding.OnboardingMain"
@@ -42,13 +43,15 @@
         <activity
             android:name=".chapter.Main_Chapter"
             android:exported="true" />
-        <activity android:name=".list_comment.View_Readbook"
-            android:exported="true"/>
-        <activity android:name=".DataLogin.dangky"
-            android:exported="true"/>
         <activity
-            android:name=".home"
-            android:exported="true" >
+            android:name=".list_comment.View_Readbook"
+            android:exported="true" />
+        <activity
+            android:name=".DataLogin.dangky"
+            android:exported="true" />
+        <activity
+            android:name=".fragment_pager.model_account.edit_tt_account"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

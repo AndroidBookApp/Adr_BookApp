@@ -3,12 +3,9 @@ package com.example.app_readbook.Name_book;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.CpuUsageInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,11 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.R;
-import com.example.app_readbook.book.BookAdaptor;
+import com.example.app_readbook.Name_book.book.BookAdaptor;
 import com.example.app_readbook.list_book.Main_ListBook;
 
 import java.util.List;
-import java.util.Vector;
 
 public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBookViewHolder> {
     private List<Name> mName;

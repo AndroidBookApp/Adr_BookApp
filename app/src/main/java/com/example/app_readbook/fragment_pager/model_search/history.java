@@ -1,4 +1,4 @@
-package com.example.app_readbook.model_search;
+package com.example.app_readbook.fragment_pager.model_search;
 
 import java.io.Serializable;
 

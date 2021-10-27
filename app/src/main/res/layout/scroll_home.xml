@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:background="@color/background_home">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -40,22 +40,31 @@
             android:layout_marginTop="8dp"
             android:background="@color/line" />
     </com.google.android.material.appbar.AppBarLayout>
+
     <ScrollView
         android:id="@+id/scv"
-        android:layout_below="@+id/bar_footer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/btn_navigatione"
+        android:layout_below="@+id/bar_footer"
         >
+
         <FrameLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="ScrollViewSize">
-        <!--            android:id="@+id/rlt_home"-->
             <RelativeLayout
                 android:id="@+id/lo6"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
+
+<!--                <androidx.viewpager2.widget.ViewPager2-->
+<!--                    android:id="@+id/viewview"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="620dp"-->
+<!--                    android:layout_alignBottom="@+id/lo_main"-->
+<!--                    tools:ignore="NotSibling" />-->
 
                 <LinearLayout
                     android:id="@+id/id3"
@@ -64,8 +73,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:layout_marginLeft="23dp"
-                    android:layout_marginRight="23dp"
                     android:layout_marginTop="27dp"
+                    android:layout_marginRight="23dp"
                     android:orientation="horizontal"
                     tools:ignore="NotSibling">
 
@@ -91,77 +100,69 @@
                         android:textStyle="bold" />
 
                     <LinearLayout
-                        android:layout_gravity="right"
-                        android:gravity="left"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                       >
+                        android:layout_gravity="right"
+                        android:gravity="left"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:gravity="right"
-
                             android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+
                             android:fontFamily="@font/roboto_regular"
+                            android:gravity="right"
                             android:padding="5dp"
                             android:text="Xem tất cả" />
                     </LinearLayout>
                 </LinearLayout>
 
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:layout_width="match_parent"
-                android:layout_height="800dp"
-                android:layout_below="@+id/btn_navigatione"
-                android:id="@+id/viewview"
-                tools:ignore="NotSibling" />
-
-            <RelativeLayout
-                android:id="@+id/lo_main"
-                android:layout_width="match_parent"
-                android:layout_below="@id/id3"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/rl"
+                <RelativeLayout
+                    android:id="@+id/lo_main"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:orientation="vertical"
-                    android:overScrollMode="never">
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/id3">
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/view_2"
-                        android:layout_marginLeft="23dp"
-                        android:layout_marginRight="23dp"
+                    <LinearLayout
+                        android:id="@+id/rl"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp" />
-
-                    <me.relex.circleindicator.CircleIndicator3
-                        android:id="@+id/cr"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_gravity="center_horizontal"
-                        app:ci_drawable="@drawable/color_circle" />
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:overScrollMode="never">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rl"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginEnd="23dp"
-                    android:layout_marginBottom="23dp"
-                    android:screenReaderFocusable="false"
-                    android:scrollbarAlwaysDrawHorizontalTrack="false"
-                    tools:ignore="NotSibling" />
-            </RelativeLayout>
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/view_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_marginLeft="23dp"
+                            android:layout_marginRight="23dp" />
+
+                        <me.relex.circleindicator.CircleIndicator3
+                            android:id="@+id/cr"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center_horizontal"
+                            app:ci_drawable="@drawable/color_circle" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rl"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="23dp"
+                        android:layout_marginEnd="23dp"
+                        android:layout_marginBottom="23dp"
+                        android:screenReaderFocusable="false"
+                        android:scrollbarAlwaysDrawHorizontalTrack="false"
+                        tools:ignore="NotSibling" />
+                </RelativeLayout>
             </RelativeLayout>
         </FrameLayout>
     </ScrollView>

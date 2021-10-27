@@ -1,11 +1,13 @@
 package com.example.app_readbook.onboarding;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -34,6 +36,7 @@ private com.example.app_readbook.onboarding.viewpager_onboarding viewpager_onboa
         linearLayout = findViewById(R.id.logo);
         viewPager.setAdapter(viewpager_onboarding);
         circleIndicator.setViewPager(viewPager);
+        statusbar();
         circleIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -67,6 +70,12 @@ private com.example.app_readbook.onboarding.viewpager_onboarding viewpager_onboa
             }
         });
 
+    }
+    private void statusbar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+        getWindow().setStatusBarColor(ContextCompat.getColor(OnboardingMain.this, R.color.white));
     }
     private void initUI()
     {

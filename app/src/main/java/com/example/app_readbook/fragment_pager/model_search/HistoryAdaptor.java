@@ -1,4 +1,4 @@
-package com.example.app_readbook.model_search;
+package com.example.app_readbook.fragment_pager.model_search;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.R;
+import com.example.app_readbook.home;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.HistoryViewHolder>{
    private List<history> mList;
-   private IClickHistory iClickHistory;
-    public HistoryAdaptor(List<history> mList, IClickHistory iClickHistory) {
+
+    public void setData(List<history> mList ) {
         this.mList = mList;
-        this.iClickHistory = iClickHistory;
+        notifyDataSetChanged();
+    }
+    public HistoryAdaptor(home home) {
     }
 
     @NonNull
@@ -42,7 +46,7 @@ public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.HistoryV
         holder.img_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iClickHistory.clickItem(history);
+
             }
         });
     }
@@ -55,7 +59,11 @@ public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.HistoryV
         }
         return 0;
     }
-
+public void historyList(ArrayList<history> filterList)
+{
+    mList = filterList;
+    notifyDataSetChanged();
+}
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
         private final ImageView img_time;
         private final TextView img_clear;
