@@ -38,7 +38,7 @@ public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.HistoryV
         }
         holder.img_time.setImageResource(history.getImg_time());
         holder.txt_nameBook.setText(history.getBook());
-        holder.img_clear.setImageResource(history.getImg_clear());
+        holder.img_clear.setText(history.getImg_clear());
         holder.img_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +58,7 @@ public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.HistoryV
 
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
         private final ImageView img_time;
-        private final ImageView img_clear;
+        private final TextView img_clear;
         private final TextView txt_nameBook;
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);

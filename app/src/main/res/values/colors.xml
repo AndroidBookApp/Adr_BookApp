@@ -21,6 +21,7 @@
     <color name="search">#F0F3FF</color>
     <color name="background_home">#F5F8FF</color>
     <color name="btn_navigation">#ADBFFF</color>
+    <color name="favorite">#FF5D5D</color>
     <color name="focus_btn_navigation">#404040</color>
     <color name="color_chapter">#3B519F</color>
 </resources>

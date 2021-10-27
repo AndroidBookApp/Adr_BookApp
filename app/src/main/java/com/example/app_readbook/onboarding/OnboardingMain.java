@@ -1,26 +1,25 @@
 package com.example.app_readbook.onboarding;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.app_readbook.R;
-import com.example.app_readbook.onboarding.viewpager_onboarding;
 
 import me.relex.circleindicator.CircleIndicator;
 
 public class OnboardingMain extends AppCompatActivity {
 private Button button;
 private ViewPager viewPager;
+private View view;
 private CircleIndicator circleIndicator;
-private RelativeLayout relativeLayout1;
-    private RelativeLayout relativeLayout2;
+private LinearLayout relativeLayout1;
+private LinearLayout relativeLayout2;
 private LinearLayout linearLayout;
 private com.example.app_readbook.onboarding.viewpager_onboarding viewpager_onboarding;
     @Override
@@ -50,6 +49,7 @@ private com.example.app_readbook.onboarding.viewpager_onboarding viewpager_onboa
                     relativeLayout2.setVisibility(View.GONE);
                     linearLayout.setVisibility(View.GONE);
 
+
                 }
                 else
                 {
@@ -57,6 +57,7 @@ private com.example.app_readbook.onboarding.viewpager_onboarding viewpager_onboa
                     relativeLayout1.setVisibility(View.VISIBLE);
                     relativeLayout2.setVisibility(View.VISIBLE);
                     linearLayout.setVisibility(View.VISIBLE);
+
                 }
             }
 
@@ -72,6 +73,7 @@ private com.example.app_readbook.onboarding.viewpager_onboarding viewpager_onboa
         button = findViewById(R.id.btn_skip);
         viewPager = findViewById(R.id.view_pager);
         circleIndicator = findViewById(R.id.circle);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

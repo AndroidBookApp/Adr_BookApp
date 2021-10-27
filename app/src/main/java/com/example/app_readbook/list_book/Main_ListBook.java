@@ -1,15 +1,12 @@
 package com.example.app_readbook.list_book;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
 import com.example.app_readbook.R;
-import com.example.app_readbook.list_comment.View_Readbook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +14,6 @@ import java.util.List;
 public class Main_ListBook extends AppCompatActivity {
 private RecyclerView recyclerView;
 private ListBookAdaptor listBookAdaptor;
-
 List<list_book> mList;
 
     @Override
@@ -35,16 +31,6 @@ List<list_book> mList;
 
     }
 
-//    private void setOnClickListner() {
-//        listener = new ListBookAdaptor.RecyclerViewClickListener() {
-//            @Override
-//            public void onClick(View v, int position) {
-//                Intent intent = new Intent(getApplicationContext() , View_Readbook.class);
-//                startActivity(intent);
-//            }
-//        };
-
-
     private List<list_book> getListItem() {
         List<list_book> list = new ArrayList<>();
         list.add(new list_book(R.drawable.sach2 , "Nghĩ Giàu Làm Giàu","tác giả 1",
@@ -61,8 +47,6 @@ List<list_book> mList;
                 R.drawable.ic_baseline_favorite_24,"100" , "10.000" , "400 Trang" ));
         list.add(new list_book(R.drawable.sach2 , "Nghĩ Giàu Làm Giàu","tác giả 1",
                 R.drawable.ic_baseline_favorite_24,"100" , "10.000" , "400 Trang" ));
-
-
 
         return list;
     }

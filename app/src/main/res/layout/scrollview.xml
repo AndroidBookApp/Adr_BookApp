@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <LinearLayout
                 android:id="@+id/layout_1"
                 android:layout_width="match_parent"
@@ -53,7 +52,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="23dp"
                 android:orientation="horizontal">
-
                 <ImageView
                     android:layout_width="105dp"
                     android:layout_height="158dp"
@@ -61,13 +59,13 @@
                     android:src="@drawable/sach3" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:text="Nghĩ Giàu Làm Giàu"
@@ -83,16 +81,17 @@
                         android:textSize="14dp" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginStart="40dp"
-                    android:src="@drawable/ic_baseline_favorite_24" />
-            </LinearLayout>
 
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="Thêm Vào Yêu Thích"
+                android:layout_marginLeft="23dp"
+                android:drawableStart="@drawable/ic_baseline_favorite_24" />
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="23dp"
                 android:orientation="vertical">
@@ -149,7 +148,7 @@ rất có giá trị và làm thay đổi cuộc sống của nhiều người. 
                 android:textSize="20dp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="23dp"
                 android:orientation="horizontal">
@@ -161,13 +160,13 @@ rất có giá trị và làm thay đổi cuộc sống của nhiều người. 
                     android:src="@drawable/account" />
 
                 <EditText
-                    android:layout_width="260dp"
+                    android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:layout_marginStart="20dp"
                     android:background="@drawable/edit_text_line"
                     android:fontFamily="@font/roboto_medium"
                     android:hint="Viết bình luận..."
-                    android:paddingStart="20dp"
+
                     android:textColorHint="#9A9A9A"
                     android:textSize="12dp"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -203,10 +202,10 @@ rất có giá trị và làm thay đổi cuộc sống của nhiều người. 
                 android:textSize="20dp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_margin="23dp"
                 android:id="@+id/rcv_reabook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="23dp"
                 android:layout_marginBottom="23dp"
                 tools:ignore="NotSibling" />
         </LinearLayout>

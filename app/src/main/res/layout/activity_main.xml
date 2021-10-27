@@ -1,91 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".onboarding.OnboardingMain">
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/ic_bg_bg" />
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <RelativeLayout
-        android:id="@+id/background_1"
-        android:layout_width="18dp"
-        android:layout_height="206dp"
-        android:layout_centerVertical="true"
-        android:background="@drawable/bg_rangle_1">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_tab_onboarding" />
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/background_2"
-        android:layout_width="18dp"
-        android:layout_height="206dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/bg_rangle_2"
-        >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_tab_onboarding" />
-    </RelativeLayout>
-<RelativeLayout
-    android:layout_width="81dp"
-    android:layout_height="32dp"
-    android:layout_centerInParent="true"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="104dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".onboarding.OnboardingMain"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <Button
-        android:id="@+id/btn_skip"
-        android:layout_width="81dp"
-        android:layout_height="32dp"
-        android:background="@drawable/color_btn"
-        android:text="Skip"
-        android:textColor="@color/white"
-        tools:ignore="TouchTargetSizeCheck" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="700dp"
 
+    >
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="700dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+
+        <LinearLayout
+            android:id="@+id/background_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="206dp"
+                android:background="@drawable/bg_rangle_1"
+                android:src="@drawable/ic_tab_onboarding" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/background_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="right"
+
+            >
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="206dp"
+                android:background="@drawable/bg_rangle_2"
+                android:src="@drawable/ic_tab_onboarding" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="104dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/circle"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                app:ci_drawable="@drawable/color_circle"
+
+                />
+
+            <Button
+                android:id="@+id/btn_skip"
+                android:layout_width="81dp"
+                android:layout_height="32dp"
+                android:background="@drawable/color_btn"
+                android:text="Skip"
+                android:textColor="@color/white"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="77dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="210dp"
+                android:layout_height="140dp"
+                android:background="@drawable/icon_logo" />
+        </LinearLayout>
 </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="140dp">
+    </ScrollView>
 
-        <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/circle"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            app:ci_drawable="@drawable/color_circle"
-
-            />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/logo"
-        android:layout_width="210dp"
-        android:layout_height="140dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="45dp"
-        android:background="@drawable/icon_logo"
-        android:orientation="vertical" />
-</RelativeLayout>

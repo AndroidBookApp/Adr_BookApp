@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_home"
-    tools:context=".main_list">
+    tools:context=".Name_book.Main_ListSach_Home">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_name"

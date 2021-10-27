@@ -74,4 +74,5 @@ public class list_book {
     public void setIcon_book(String icon_book) {
         this.icon_book = icon_book;
     }
+
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,6 +60,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                 context.startActivity(intent);
             }
         });
+
     }
 
 
@@ -77,7 +79,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         private TextView tv_3;
         private TextView tv_4;
         private TextView tv_5;
-        private ImageView mIcon;
+        private ImageButton mIcon;
         private ImageView mBook;
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,17 +90,25 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
             tv_5 = itemView.findViewById(R.id.icon_book);
             mBook = itemView.findViewById(R.id.bg_sach);
             mIcon = itemView.findViewById(R.id.icon_favorite);
-//           itemView.setOnClickListener(this);
-            
+            mIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    list_book listBook = mList.get(position);
+                   if (v == null)
+                   {
+                       mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
+                   }
+                   mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+
+
+                }
+
+            });
+
+
         }
 
-//        @Override
-//        public void onClick(View v) {
-//        listener.onClick(v, getAdapterPosition());
-//        }
-//    }
-//    public  interface  RecyclerViewClickListener{
-//        void onClick(View v , int position);
-//
   }
+
 }

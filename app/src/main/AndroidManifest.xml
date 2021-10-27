@@ -4,7 +4,12 @@
     <uses-permission android:name="android.permission.INTERNET" >
 
     </uses-permission>
-
+<supports-screens
+    android:largeScreens="true"
+    android:normalScreens="true"
+    android:smallScreens="true"
+    android:xlargeScreens="true"
+    />
 
     <application
         android:allowBackup="true"
@@ -15,34 +20,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App_ReadBook"
         android:usesCleartextTraffic="true" >
-        <activity
-            android:name=".activity.Register"
-            android:exported="true" />
+
         <activity
             android:name=".readbook.MainReadbook"
             android:exported="true" />
         <activity
-            android:name=".onboarding.OnboardingMain"
+            android:name=".DataLogin.login"
             android:exported="true" />
         <activity
-            android:name=".main_list"
+            android:name=".Name_book.Main_ListSach_Home"
             android:exported="true" />
         <activity
             android:name=".list_book.Main_ListBook"
             android:exported="true" />
         <activity
-            android:name=".list_comment.View_Readbook"
+            android:name=".edit_tt_account"
             android:exported="true" />
         <activity
-            android:name=".activity.SignIn"
-            android:exported="true" />
-        <activity
-            android:name=".dangky"
+            android:name=".onboarding.OnboardingMain"
             android:exported="true" />
         <activity
             android:name=".chapter.Main_Chapter"
             android:exported="true" />
-
+        <activity android:name=".list_comment.View_Readbook"
+            android:exported="true"/>
+        <activity android:name=".DataLogin.dangky"
+            android:exported="true"/>
         <activity
             android:name=".home"
             android:exported="true" >
