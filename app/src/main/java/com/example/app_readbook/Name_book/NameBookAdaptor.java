@@ -13,17 +13,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app_readbook.R;
 import com.example.app_readbook.Name_book.book.BookAdaptor;
+import com.example.app_readbook.Name_book.book.book;
+import com.example.app_readbook.R;
+import com.example.app_readbook.home;
 import com.example.app_readbook.list_book.Main_ListBook;
+import com.example.app_readbook.list_comment.View_Readbook;
 
 import java.util.List;
 
 public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBookViewHolder> {
     private List<Name> mName;
+    private List<book> mBook;
     private Context mcontext;
+    private home home;
+    private book book;
 
-    public NameBookAdaptor(Context mcontext) {
+    public NameBookAdaptor(Context mcontext  ) {
+
         this.mcontext = mcontext;
     }
     @SuppressLint("NotifyDataSetChanged")
@@ -47,21 +54,41 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
       {
           return;
       }
+      home = new home();
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mcontext , LinearLayoutManager.HORIZONTAL, false);
       holder.recyclerView.setLayoutManager(linearLayoutManager);
       holder.tvname.setText(name.getName());
       holder.tv_sl.setText(name.getSl());
       holder.tvnext.setText(name.getAll());
-        BookAdaptor bookAdaptor = new BookAdaptor();
+
+
+      holder.recyclerView.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+                Intent intent = new Intent(mcontext , View_Readbook.class);
+//                intent.putExtra("tac_gia" ,);
+          }
+      });
+      BookAdaptor bookAdaptor = new BookAdaptor(new IClickItemBook() {
+          @Override
+          public void ClickItem(book book) {
+
+          }
+      } , mcontext);
         bookAdaptor.setData(name.getNameBook());
         holder.recyclerView.setAdapter(bookAdaptor);
+
         holder.tvnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mcontext , Main_ListBook.class);
+                intent.putExtra("object_nameBook" , name.getName());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mcontext.startActivity(intent);
             }
         });
+
     }
 
     @Override

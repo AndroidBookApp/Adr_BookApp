@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.app_readbook">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <supports-screens
         android:largeScreens="true"
@@ -20,6 +20,9 @@
         android:theme="@style/Theme.App_ReadBook"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".list_comment.Main_NodeReadBook"
+            android:exported="true" />
+        <activity
             android:name=".fragment_pager.model_account.Data_edit_account"
             android:exported="true" />
         <activity
@@ -35,7 +38,7 @@
             android:name=".list_book.Main_ListBook"
             android:exported="true" />
         <activity
-            android:name=".home"
+            android:name=".fragment_pager.model_account.edit_tt_account"
             android:exported="true" />
         <activity
             android:name=".onboarding.OnboardingMain"
@@ -50,7 +53,10 @@
             android:name=".DataLogin.dangky"
             android:exported="true" />
         <activity
-            android:name=".fragment_pager.model_account.edit_tt_account"
+            android:name=".list_book.Main_BookNew"
+            android:exported="true" />
+        <activity
+            android:name=".home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

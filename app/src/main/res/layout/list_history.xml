@@ -3,37 +3,43 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
+    android:id="@+id/rlt_history"
     >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/image_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:src="@drawable/ic_baseline_access_time_24"/>
+            android:src="@drawable/ic_baseline_access_time_24" />
+
         <TextView
-            android:layout_marginLeft="10dp"
             android:id="@+id/tv_namebook"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Đắc Nhân Tâm"
-            android:textSize="16dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:fontFamily="@font/roboto_regular"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/img_clear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/image_time"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="left"
+            android:text="Đắc Nhân Tâm"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
 
-            android:drawableEnd="@drawable/ic_baseline_clear_24"
-
-            />
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/img_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_baseline_clear_24" />
+    </RelativeLayout>
 
     </RelativeLayout>

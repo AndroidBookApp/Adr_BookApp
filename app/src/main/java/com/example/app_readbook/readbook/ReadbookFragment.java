@@ -1,13 +1,12 @@
 package com.example.app_readbook.readbook;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.app_readbook.R;
 
@@ -53,7 +52,7 @@ private TextView textView;
     Bundle bundle = getArguments();
     if(bundle != null)
     {
-        ReadbookName readbookName = (ReadbookName) bundle.get("readbook_object");
+        ReadbookName readbookName = (ReadbookName) bundle.get("readBook_object");
         textView.setText(readbookName.getName());
     }
         return mview;

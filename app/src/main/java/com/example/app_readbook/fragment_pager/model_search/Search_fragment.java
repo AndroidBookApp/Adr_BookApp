@@ -1,5 +1,6 @@
 package com.example.app_readbook.fragment_pager.model_search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,7 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_readbook.Name_book.Main_ListSach_Home;
 import com.example.app_readbook.R;
+import com.example.app_readbook.fragment_pager.model_account.IClickSearch;
 import com.example.app_readbook.home;
 
 import java.util.ArrayList;
@@ -39,6 +42,7 @@ public class Search_fragment extends Fragment {
         historyList = getlist();
         text = view.findViewById(R.id.txt_search);
         historyAdaptor = new HistoryAdaptor(home);
+
         historyAdaptor.setData(historyList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(home , LinearLayoutManager.VERTICAL , false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -63,6 +67,19 @@ public class Search_fragment extends Fragment {
         return view;
     }
 
+    private void onClickNextPage(history history) {
+        Intent intent = new Intent(getContext(), Main_ListSach_Home.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("object_key" , history);
+//        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
     private void fliter(String name) {
         ArrayList<history> filterList = new ArrayList<>();
         for(history item : historyList)
@@ -73,19 +90,18 @@ public class Search_fragment extends Fragment {
                 history history ;
 
             }
-
         }
         historyAdaptor.historyList(filterList);
     }
 
     private List<history> getlist() {
         List<history> list = new ArrayList<>();
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Tâm", ""));
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Sĩ", ""));
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Kinh Doanh Online", ""));
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Nghĩ giàu làm giàu", ""));
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Mỹ", ""));
-        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Lão", ""));
+        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Tâm", R.drawable.ic_baseline_clear_24 ));
+        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Sĩ", R.drawable.ic_baseline_clear_24));
+        list.add(new history(R.drawable.ic_baseline_access_time_24, "Kinh Doanh Online", R.drawable.ic_baseline_clear_24));
+        list.add(new history(R.drawable.ic_baseline_access_time_24, "Nghĩ giàu làm giàu", R.drawable.ic_baseline_clear_24));
+        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Mỹ", R.drawable.ic_baseline_clear_24));
+        list.add(new history(R.drawable.ic_baseline_access_time_24, "Đắc Nhân Lão", R.drawable.ic_baseline_clear_24));
         return list;
     }
 

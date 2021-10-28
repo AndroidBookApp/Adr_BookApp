@@ -1,33 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/lo1"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_readBook"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:elevation="0dp">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="23dp"
-            android:layout_marginTop="23dp"
+            app:navigationIcon="@drawable/ic_baseline_navigate_before_24"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
 
-            android:src="@drawable/ic_baseline_navigate_before_24" />
+                android:textColor="@color/black"
+                android:textSize="24dp" />
+        </androidx.appcompat.widget.Toolbar>
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1.5dp"
-            android:background="@drawable/stoker_btn" />
-    </LinearLayout>
-    <androidx.viewpager2.widget.ViewPager2
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
-        android:layout_below="@id/lo1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/lo2"
-        />
+        android:layout_below="@id/toolbar_readBook" />
 
     <LinearLayout
         android:id="@+id/lo2"

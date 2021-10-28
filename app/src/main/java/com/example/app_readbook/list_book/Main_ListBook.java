@@ -1,6 +1,7 @@
 package com.example.app_readbook.list_book;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ public class Main_ListBook extends AppCompatActivity {
 private RecyclerView recyclerView;
 private ListBookAdaptor listBookAdaptor;
 List<list_book> mList;
+private TextView textView_page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,8 @@ List<list_book> mList;
         recyclerView = findViewById(R.id.rcv_book);
         mList = getListItem();
         listBookAdaptor = new ListBookAdaptor(this);
+        textView_page = findViewById(R.id.name_page);
+        textView_page.setText(getIntent().getStringExtra("object_nameBook"));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
         recyclerView.setLayoutManager(linearLayoutManager);
         listBookAdaptor.setData(getListItem() );

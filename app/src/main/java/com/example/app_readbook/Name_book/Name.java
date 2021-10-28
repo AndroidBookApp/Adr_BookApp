@@ -2,9 +2,10 @@ package com.example.app_readbook.Name_book;
 
 import com.example.app_readbook.Name_book.book.book;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Name {
+public class Name implements Serializable {
     private String name ;
     private String sl;
     private String all;

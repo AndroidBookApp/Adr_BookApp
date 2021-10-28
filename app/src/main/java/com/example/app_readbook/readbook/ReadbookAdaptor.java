@@ -4,10 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class ReadbookAdaptor extends FragmentStatePagerAdapter {
         ReadbookName readbookName = readbookNames.get(position);
         ReadbookFragment readbookFragment = new ReadbookFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("readbook_object", readbookName);
+        bundle.putSerializable("readBook_object", readbookName);
         readbookFragment.setArguments(bundle);
         return readbookFragment;
     }

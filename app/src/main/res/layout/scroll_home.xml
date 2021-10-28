@@ -107,11 +107,11 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/all_bookNew"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
-
                             android:fontFamily="@font/roboto_regular"
                             android:gravity="right"
                             android:padding="5dp"
@@ -167,7 +167,6 @@
         </FrameLayout>
     </ScrollView>
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/btn_navigatione"
         android:layout_width="match_parent"
@@ -179,6 +178,12 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_navigation"
         tools:ignore="InvalidId,MissingConstraints,NotSibling" />
+<!--    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation-->
+<!--        android:id="@+id/btn_navigatione"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom" />-->
 <!--    <com.etebarian.meowbottomnavigation.MeowBottomNavigation-->
 <!--        android:id="@+id/btn_navigation"-->
 <!--        android:layout_width="match_parent"-->

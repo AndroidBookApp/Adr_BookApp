@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".list_comment.Main_NodeReadBook">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_nodeRead"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:elevation="0dp">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_baseline_navigate_before_24"
+            >
+            <TextView
+                android:id="@+id/name_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+
+                android:textColor="@color/black"
+                android:textSize="24dp" />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_nodeRead">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/text_node"
+            android:layout_width="match_parent"
+            android:layout_margin="23dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_height="match_parent"
+            android:text="Khi hệ thống chữ viết được con người tạo ra trong các nền văn minh cổ đại, một loạt các đối tượng, như đá, đất sét, vỏ cây, kim loại được dùng để lưu lại chữ viết. Nghiên cứu những đối tượng chữ viết trên là một phần quan trọng của lịch sử (tiếng Anh: epigraphy). Chữ viết theo trật tự ABC xuất hiện đầu tiên ở Ai Cập. Người Ai Cập cổ đại thường viết trên giấy cói, một loại cây mọc dọc theo sông Nile. Lúc đầu các từ không được chia tách rời nhau (scriptura continua) và không có dấu chấm câu. Văn bản được viết từ phải sang trái, trái sang phải, hoặc thậm chí mỗi dòng được viết theo chiều khác nhau. Thuật ngữ cho việc viết mỗi dòng theo chiều khác nhau được gọi là boustrophedon, có nghĩa đen là quay-trâu vì lối viết này tương tự cách người nông dân quay đầu trâu khi đi hết một đầu của luống cày." />
+
+
+</RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

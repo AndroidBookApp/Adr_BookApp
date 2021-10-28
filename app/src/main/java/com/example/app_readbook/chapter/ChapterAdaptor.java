@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,13 +45,21 @@ public void setData(List<NameChapter>nameChapterList)
             }
             holder.tv_chaper.setText(name.getChapter());
             holder.tv_book.setText(name.getBook());
-            holder.tv_chaper.setOnClickListener(new View.OnClickListener() {
+            holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context , MainReadbook.class);
                     context.startActivity(intent);
                 }
             });
+//            holder.tv_chaper.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context , MainReadbook.class);
+//                    context.startActivity(intent);
+//                }
+//            });
+
     }
 
     @Override
@@ -64,10 +73,12 @@ public void setData(List<NameChapter>nameChapterList)
 
     public class ChapterViewHolder extends RecyclerView.ViewHolder{
         private TextView tv_chaper , tv_book;
+        private RelativeLayout relativeLayout;
         public ChapterViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_chaper = itemView.findViewById(R.id.txt_chapter);
             tv_book = itemView.findViewById(R.id.txt_book);
+            relativeLayout = itemView.findViewById(R.id.rlt_chapter);
 
         }
     }

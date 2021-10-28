@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class history implements Serializable {
     private int img_time;
     private String book ;
-    private String img_clear;
+    private int img_clear;
 
-    public history(int img_time, String book, String img_clear) {
+    public history(int img_time, String book, int img_clear) {
         this.img_time = img_time;
         this.book = book;
         this.img_clear = img_clear;
@@ -29,11 +29,11 @@ public class history implements Serializable {
         this.book = book;
     }
 
-    public String getImg_clear() {
+    public int getImg_clear() {
         return img_clear;
     }
 
-    public void setImg_clear(String img_clear) {
+    public void setImg_clear(int img_clear) {
         this.img_clear = img_clear;
     }
 }

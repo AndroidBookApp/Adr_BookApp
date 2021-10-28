@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    >
+
+
+        <ImageButton
+            android:id="@+id/bg_sach_new"
+            android:layout_width="48dp"
+            android:layout_height="72dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sach1" />
+
+        <TextView
+            android:id="@+id/txt_tensach_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="53dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Nghĩ Giàu Làm Giàu"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/txt_tacgia_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="53dp"
+            android:layout_marginTop="27dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Tác giả : Napoleonh Hill"
+            android:textSize="12dp" />
+
+
+        <TextView
+            android:id="@+id/icon_book_new"
+            android:layout_width="68dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_tacgia_new"
+            android:layout_marginStart="13dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@+id/bg_sach_new"
+            android:drawableStart="@drawable/ic_book_1"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="400 Trang"
+            android:textColor="@color/text"
+            android:textSize="10dp" />
+
+        <ImageButton
+            android:id="@+id/icon_favorite_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="65dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_baseline_favorite_24" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/line" />
+
+</RelativeLayout>

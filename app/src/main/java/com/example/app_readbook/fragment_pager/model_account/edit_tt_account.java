@@ -1,5 +1,6 @@
 package com.example.app_readbook.fragment_pager.model_account;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,9 +36,6 @@ private TextView txt_username;
         add_background = findViewById(R.id.image_view_add);
         fl_add_image_1 = findViewById(R.id.add_image_bg_1);
         txt_username = findViewById(R.id.txt_username);
-        Bundle bn = getIntent().getExtras();
-        String name = bn.getString("key_username");
-        txt_username.setText(String.valueOf(name));
         txt_username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,21 +52,21 @@ private TextView txt_username;
 
     private void pushUsername() {
 
-//        String txt_name = txt_username.getText().toString().trim();
+        String txt_name = txt_username.getText().toString().trim();
         Intent intent = new Intent(edit_tt_account.this , Data_edit_account.class);
-//        intent.putExtra("key_username" , txt_name );
+        intent.putExtra("key_username" , txt_name );
         startActivityForResult(intent , MY_REQUEST_CODE);
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if(MY_REQUEST_CODE == requestCode && resultCode == Activity.RESULT_OK)
-//        {
-//            txt_username.setText(data.getStringExtra("key_username"));
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(MY_REQUEST_CODE == requestCode && resultCode == Activity.RESULT_OK)
+        {
+            txt_username.setText(data.getStringExtra("key_username"));
+        }
+    }
 
     ActivityResultLauncher<String> Getcontent = registerForActivityResult(
             new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {

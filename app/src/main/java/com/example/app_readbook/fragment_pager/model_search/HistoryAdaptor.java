@@ -1,28 +1,35 @@
 package com.example.app_readbook.fragment_pager.model_search;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.R;
+import com.example.app_readbook.fragment_pager.model_account.IClickSearch;
 import com.example.app_readbook.home;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.HistoryViewHolder>{
-   private List<history> mList;
+    private List<history> mList;
+    private IClickSearch iClicksearch;
+    private Context context;
 
     public void setData(List<history> mList ) {
         this.mList = mList;
         notifyDataSetChanged();
     }
     public HistoryAdaptor(home home) {
+        this.context = context;
+
     }
 
     @NonNull
@@ -42,8 +49,14 @@ public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.HistoryV
         }
         holder.img_time.setImageResource(history.getImg_time());
         holder.txt_nameBook.setText(history.getBook());
-        holder.img_clear.setText(history.getImg_clear());
-        holder.img_clear.setOnClickListener(new View.OnClickListener() {
+        holder.imgClear.setImageResource(history.getImg_clear());
+        holder.click_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        holder.imgClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -66,13 +79,15 @@ public void historyList(ArrayList<history> filterList)
 }
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
         private final ImageView img_time;
-        private final TextView img_clear;
+        private final ImageView imgClear;
         private final TextView txt_nameBook;
+        private RelativeLayout click_history;
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             img_time  = itemView.findViewById(R.id.image_time);
-            img_clear = itemView.findViewById(R.id.img_clear);
+            imgClear = itemView.findViewById(R.id.img_clear);
             txt_nameBook = itemView.findViewById(R.id.tv_namebook);
+            click_history = itemView.findViewById(R.id.rlt_history);
         }
     }
 }
