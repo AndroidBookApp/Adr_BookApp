@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.DataBookNew.MainChapter;
 import com.example.app_readbook.R;
-import com.example.app_readbook.chapter.Main_Chapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +59,7 @@ private TextView textView_book , next_page;
                 String name = node.getText().toString().trim();
                 String nameBook = textView_nameBook.getText().toString().trim();
                 String img = img_book.getDrawable().toString();
-                Intent intent = new Intent(View_Readbook.this , Main_Chapter.class);
+                Intent intent = new Intent(View_Readbook.this , Main_NodeReadBook.class);
                 intent.putExtra("object" , name);
                 intent.putExtra("object_book" , nameBook);
                 intent.putExtra("img" ,img);

@@ -45,6 +45,14 @@ public class login extends AppCompatActivity {
                     Toast.makeText(login.this , "Đăng Nhập Thành Công" , Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }
+                else if(username.equals("quynh123") && password.equals(""))
+                {
+                    DiaLog();
+                }
+                else if(username.equals("") && password.equals("123"))
+                {
+                    DiaLog();
+                }
                 else if(username.equals("") || password.equals("")){
                     Toast.makeText(login.this , "Không được bỏ trống tài khoản hoặc mật khẩu" , Toast.LENGTH_LONG).show();
                 }

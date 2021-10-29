@@ -83,6 +83,8 @@
             android:layout_marginStart="344dp"
             android:layout_marginTop="171dp"
             android:clickable="true"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             app:srcCompat="@drawable/ic_baseline_add_photo_alternate_24"
             tools:ignore="SpeakableTextPresentCheck" />
 
