@@ -1,13 +1,12 @@
 package com.example.app_readbook.readbook;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.app_readbook.R;
 
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainReadbook extends AppCompatActivity {
-private TextView btn_back , btn_next , txt_book , txt_book_all;
+private TextView btn_back , btn_next , txt_book , txt_book_all , read;
 private ViewPager viewPager;
 private List<ReadbookName> readbookNames;
     @Override
@@ -24,6 +23,7 @@ private List<ReadbookName> readbookNames;
         setContentView(R.layout.readbook);
         iniU();
         readbookNames = getReadbook();
+        read.setText(getIntent().getStringExtra("value"));
         ReadbookAdaptor readbookAdaptor = new ReadbookAdaptor(getSupportFragmentManager() , FragmentStatePagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT , readbookNames);
         viewPager.setAdapter(readbookAdaptor);
         txt_book.setText("1");
@@ -83,6 +83,7 @@ private List<ReadbookName> readbookNames;
         btn_back = findViewById(R.id.before);
         btn_next  = findViewById(R.id.next);
         txt_book = findViewById(R.id.txt1);
+        read = findViewById(R.id.txtNameBook);
         txt_book_all = findViewById(R.id.txt2);
         viewPager = findViewById(R.id.viewpager);
     }

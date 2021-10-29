@@ -9,8 +9,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app_readbook.R;
 import com.example.app_readbook.Name_book.book.book;
+import com.example.app_readbook.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,7 @@ private NameBookAdaptor nameBookAdaptor;
         recyclerView = findViewById(R.id.rcv_name);
         nameBookAdaptor = new NameBookAdaptor(this);
         statusbar();
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , RecyclerView.VERTICAL , false);
         recyclerView.setLayoutManager(linearLayoutManager);
         nameBookAdaptor.setData(getListName());
@@ -52,5 +53,9 @@ private NameBookAdaptor nameBookAdaptor;
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         getWindow().setStatusBarColor(ContextCompat.getColor(Main_ListSach_Home.this, R.color.white));
+    }
+    public void goToDetailFragments(book book)
+    {
+
     }
 }

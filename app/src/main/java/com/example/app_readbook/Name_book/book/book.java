@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class book implements Serializable {
     private int resourceId;
     private String title;
-
     public book(int resourceId, String title) {
         this.resourceId = resourceId;
         this.title = title;

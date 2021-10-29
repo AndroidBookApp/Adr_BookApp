@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_readbook.DataBookNew.MainChapter;
 import com.example.app_readbook.R;
 import com.example.app_readbook.chapter.Main_Chapter;
 
@@ -59,7 +60,7 @@ private TextView textView_book , next_page;
                 String name = node.getText().toString().trim();
                 String nameBook = textView_nameBook.getText().toString().trim();
                 String img = img_book.getDrawable().toString();
-                Intent intent = new Intent(View_Readbook.this , Main_NodeReadBook.class);
+                Intent intent = new Intent(View_Readbook.this , Main_Chapter.class);
                 intent.putExtra("object" , name);
                 intent.putExtra("object_book" , nameBook);
                 intent.putExtra("img" ,img);
@@ -71,8 +72,8 @@ private TextView textView_book , next_page;
             @Override
             public void onClick(View v) {
                 String book = textView_nameBook.getText().toString().trim();
-                Intent intent = new Intent(View_Readbook.this , Main_Chapter.class);
-                intent.putExtra("name_book", book);
+                Intent intent = new Intent(View_Readbook.this , MainChapter.class);
+                intent.putExtra("nameBook", book);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

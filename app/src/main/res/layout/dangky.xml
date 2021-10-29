@@ -105,7 +105,6 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/color_btn"
                 android:fontFamily="@font/roboto_medium"
-                android:onClick="SignUp"
                 android:text="Đăng Ký"
                 android:textColor="@color/white"
                 android:textSize="18dp"
@@ -146,7 +145,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/dangky"
+            android:id="@+id/dangNhap"
             android:layout_width="280dp"
             android:layout_height="50dp"
             android:layout_below="@id/lo4"

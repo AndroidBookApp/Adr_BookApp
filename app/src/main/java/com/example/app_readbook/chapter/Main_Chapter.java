@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.R;
@@ -21,15 +20,15 @@ private TextView text_name;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_chapter);
-        recyclerView = findViewById(R.id.rcv_chapter);
+//        recyclerView = findViewById(R.id.rcv_chapter);
         text_name = findViewById(R.id.txt_name);
         text_name.setText(getIntent().getStringExtra("name_book"));
         nameChapters = getListChapter();
-        ChapterAdaptor chapterAdaptor = new ChapterAdaptor(this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        chapterAdaptor.setData(getListChapter());
-        recyclerView.setAdapter(chapterAdaptor);
+//        ChapterAdaptor chapterAdaptor = new ChapterAdaptor(this);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        chapterAdaptor.setData(getListChapter());
+//        recyclerView.setAdapter(chapterAdaptor);
 
     }
 
