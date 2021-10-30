@@ -43,7 +43,6 @@ public class dangky  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String mail = email.getText().toString().trim() ;
-
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
                 email.addTextChangedListener(new TextWatcher() {
                     @Override

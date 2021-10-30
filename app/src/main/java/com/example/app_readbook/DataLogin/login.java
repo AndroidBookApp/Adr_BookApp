@@ -13,13 +13,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.app_readbook.R;
-import com.example.app_readbook.home;
 
 public class login extends AppCompatActivity {
     private EditText txt_name, txt_pass;
@@ -45,28 +43,29 @@ public class login extends AppCompatActivity {
             btn_sign_in.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    username = txt_name.getText().toString().trim();
-                    password = txt_pass.getText().toString().trim();
-                    if(username.equals("") && password.equals("")) {
-                        Toast.makeText(login.this, "Không được bỏ trống tài khoản hoặc mật khẩu", Toast.LENGTH_LONG).show();
-                    }
-                    else if (username.equals(user.getUsername()) && password.equals(user.getPass()))
-                    {
-                        Intent intent = new Intent(login.this , home.class);
-                        Toast.makeText(login.this , "Đăng Nhập Thành Công" , Toast.LENGTH_SHORT).show();
-                        startActivity(intent);
-                    }
-                    else if(username.equals(user.getUsername()) && password.equals(""))
-                    {
-                        DiaLog(Gravity.BOTTOM);
-                    }
-                    else if(username.equals("") && password.equals(user.getPass()))
-                    {
-                        DiaLog(Gravity.BOTTOM);
-                    }
-                    else{
-                        DiaLog(Gravity.BOTTOM);
-                    }
+                    DiaLogFail(Gravity.CENTER);
+//                    username = txt_name.getText().toString().trim();
+//                    password = txt_pass.getText().toString().trim();
+//                    if(username.equals("") || password.equals("")) {
+//                        Toast.makeText(login.this, "Không được bỏ trống tài khoản hoặc mật khẩu", Toast.LENGTH_LONG).show();
+//                    }
+//                    else if (username.equals(user.getUsername()) && password.equals(user.getPass()))
+//                    {
+//                        Intent intent = new Intent(login.this , home.class);
+//                        Toast.makeText(login.this , "Đăng Nhập Thành Công" , Toast.LENGTH_SHORT).show();
+//                        startActivity(intent);
+//                    }
+//                    else if(username.equals(user.getUsername()) && password.equals(""))
+//                    {
+//                        DiaLog(Gravity.BOTTOM);
+//                    }
+//                    else if(username.equals("") && password.equals(user.getPass()))
+//                    {
+//                        DiaLog(Gravity.BOTTOM);
+//                    }
+//                    else{
+//                        DiaLog(Gravity.BOTTOM);
+//                    }
 
                 }
             });
@@ -74,7 +73,6 @@ public class login extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(login.this , dangky.class);
-
             startActivity(intent);
         }
     });
@@ -159,12 +157,12 @@ private void statusbar() {
     }
     getWindow().setStatusBarColor(ContextCompat.getColor(login.this, R.color.background_color));
 }
-public void DiaLog(int gravity)
+public void DiaLogFail(int gravity)
 {
     Dialog dialog = new Dialog(this);
+    dialog.setCanceledOnTouchOutside(false);
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
     dialog.setContentView(R.layout.dialog_error);
-    dialog.setCanceledOnTouchOutside(false);
     Button button_signUp = dialog.findViewById(R.id.signUp);
     Button button_cancel = dialog.findViewById(R.id.login);
     Window window = dialog.getWindow();
@@ -174,9 +172,9 @@ public void DiaLog(int gravity)
     }
     window.setLayout(WindowManager.LayoutParams.MATCH_PARENT , WindowManager.LayoutParams.WRAP_CONTENT);
     window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-    WindowManager.LayoutParams windowAttribute = new WindowManager.LayoutParams();
-    windowAttribute.gravity = gravity;
-    window.setAttributes(windowAttribute);
+    WindowManager.LayoutParams windowAttributes = window.getAttributes();
+    windowAttributes.gravity = gravity;
+    window.setAttributes(windowAttributes);
     button_signUp.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
