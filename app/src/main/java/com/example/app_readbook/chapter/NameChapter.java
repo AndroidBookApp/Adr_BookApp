@@ -2,12 +2,13 @@ package com.example.app_readbook.chapter;
 
 public class NameChapter {
     private String chapter;
-    private String book;
+    private String book_min;
+    private String book_max;
 
-
-    public NameChapter(String chapter, String book) {
+    public NameChapter(String chapter, String book_min, String book_max) {
         this.chapter = chapter;
-        this.book = book;
+        this.book_min = book_min;
+        this.book_max = book_max;
     }
 
     public String getChapter() {
@@ -18,11 +19,19 @@ public class NameChapter {
         this.chapter = chapter;
     }
 
-    public String getBook() {
-        return book;
+    public String getBook_min() {
+        return book_min;
     }
 
-    public void setBook(String book) {
-        this.book = book;
+    public void setBook_min(String book_min) {
+        this.book_min = book_min;
+    }
+
+    public String getBook_max() {
+        return book_max;
+    }
+
+    public void setBook_max(String book_max) {
+        this.book_max = book_max;
     }
 }

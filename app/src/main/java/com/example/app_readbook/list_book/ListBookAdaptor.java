@@ -57,6 +57,10 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context , View_Readbook.class);
+                intent.putExtra("img_book" , listBook.getResourceId());
+                intent.putExtra("name" , listBook.getTitle());
+                intent.putExtra("tac_gia" , listBook.getTac_gia());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });

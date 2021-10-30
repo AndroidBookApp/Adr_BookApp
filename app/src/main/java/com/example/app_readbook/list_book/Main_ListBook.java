@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +16,7 @@ public class Main_ListBook extends AppCompatActivity {
 private RecyclerView recyclerView;
 private ListBookAdaptor listBookAdaptor;
 List<list_book> mList;
+private Toolbar toolbar;
 private TextView textView_page;
 
     @Override
@@ -30,6 +31,11 @@ private TextView textView_page;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
         recyclerView.setLayoutManager(linearLayoutManager);
         listBookAdaptor.setData(getListItem() );
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         recyclerView.setAdapter(listBookAdaptor);
 
 

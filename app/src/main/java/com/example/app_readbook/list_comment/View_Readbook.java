@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app_readbook.DataBookNew.MainChapter;
 import com.example.app_readbook.R;
+import com.example.app_readbook.chapter.Main_Chapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,8 @@ private CommentAdaptor commentAdaptor;
 private ImageView img_book;
 private TextView textView_nameBook , node;
 private Button btnRead;
-private TextView textView_book , next_page;
-
+private TextView textView_book , next_page , textView_tacGia;
+private Toolbar toolbar;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,12 +40,19 @@ private TextView textView_book , next_page;
         textView_book  = findViewById(R.id.bookName);
         node = findViewById(R.id.node_textBook);
         btnRead = findViewById(R.id.read);
+        textView_tacGia = findViewById(R.id.txt_tacGiaBook);
+        textView_tacGia.setText(getIntent().getStringExtra("tac_gia"));
         img_book.setImageResource(getIntent().getIntExtra("img_book" , 0));
         textView_nameBook.setText(getIntent().getStringExtra("name"));
         textView_book.setText(getIntent().getStringExtra("name"));
         textView_book.setTextSize(14);
         node.setText(getIntent().getStringExtra("name") +" " +node.getText());
         node.setTextSize(12);
+        toolbar = findViewById(R.id.toolbar_comment);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         next_page = findViewById(R.id.next_pageBook);
         recyclerView = findViewById(R.id.rcv_reabook);
         mlist = getListComment();
@@ -71,12 +79,22 @@ private TextView textView_book , next_page;
             @Override
             public void onClick(View v) {
                 String book = textView_nameBook.getText().toString().trim();
-                Intent intent = new Intent(View_Readbook.this , MainChapter.class);
+                Intent intent = new Intent(View_Readbook.this , Main_Chapter.class);
                 intent.putExtra("nameBook", book);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        toolbar = findViewById(R.id.toolbar_comment);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        super.onBackPressed();
     }
 
     private List<Comment> getListComment() {

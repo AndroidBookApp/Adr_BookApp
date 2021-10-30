@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -181,7 +180,7 @@ private NavigationBarView.OnItemSelectedListener navListener = new NavigationBar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        getWindow().setStatusBarColor(ContextCompat.getColor(home.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(home.this, R.color.background_color));
     }
 
     //    private void toolbarNavigation() {

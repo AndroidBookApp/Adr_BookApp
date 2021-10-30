@@ -23,7 +23,7 @@
             android:name=".list_comment.Main_NodeReadBook"
             android:exported="true" />
         <activity
-            android:name=".home"
+            android:name=".DataLogin.login"
             android:exported="true" />
         <activity
             android:name=".fragment_pager.model_account.Data_edit_account"
@@ -32,25 +32,26 @@
             android:name=".readbook.MainReadbook"
             android:exported="true" />
         <activity
-            android:name=".DataBookNew.MainChapter"
-            android:exported="true" />
-        <activity
             android:name=".Name_book.Main_ListSach_Home"
             android:exported="true" />
         <activity
             android:name=".list_book.Main_ListBook"
+            android:parentActivityName=".home"
             android:exported="true" />
         <activity
             android:name=".fragment_pager.model_account.edit_tt_account"
             android:exported="true" />
         <activity
-            android:name=".onboarding.OnboardingMain"
+            android:name=".home"
             android:exported="true" />
         <activity
             android:name=".chapter.Main_Chapter"
+            android:parentActivityName=".list_comment.View_Readbook"
             android:exported="true" />
         <activity
             android:name=".list_comment.View_Readbook"
+            android:parentActivityName=".list_book.Main_ListBook"
+
             android:exported="true" />
         <activity
             android:name=".DataLogin.dangky"
@@ -59,7 +60,7 @@
             android:name=".list_book.Main_BookNew"
             android:exported="true" />
         <activity
-            android:name=".DataLogin.login"
+            android:name=".onboarding.OnboardingMain"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

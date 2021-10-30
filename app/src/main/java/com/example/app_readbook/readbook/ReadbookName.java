@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class ReadbookName implements Serializable {
     private String name ;
+
     public ReadbookName(String name) {
         this.name = name;
-
     }
 
     public String getName() {

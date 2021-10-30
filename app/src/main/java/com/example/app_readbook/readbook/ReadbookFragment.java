@@ -12,8 +12,10 @@ import com.example.app_readbook.R;
 
 
 public class ReadbookFragment extends Fragment {
+    public static final String TAG =ReadbookFragment.class.getName() ;
 
-private TextView textView;
+
+    private TextView textView , tv_page;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -49,11 +51,13 @@ private TextView textView;
                              Bundle savedInstanceState) {
     View mview = inflater.inflate(R.layout.fragment_readbook, container, false);
     textView = mview.findViewById(R.id.tv_read);
+
     Bundle bundle = getArguments();
     if(bundle != null)
     {
         ReadbookName readbookName = (ReadbookName) bundle.get("readBook_object");
         textView.setText(readbookName.getName());
+
     }
         return mview;
     }

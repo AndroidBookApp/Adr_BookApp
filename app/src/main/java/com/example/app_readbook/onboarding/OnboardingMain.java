@@ -75,7 +75,7 @@ private com.example.app_readbook.onboarding.viewpager_onboarding viewpager_onboa
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        getWindow().setStatusBarColor(ContextCompat.getColor(OnboardingMain.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(OnboardingMain.this, R.color.background_color));
     }
     private void initUI()
     {

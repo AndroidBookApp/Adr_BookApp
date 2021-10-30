@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:elevation="0dp">
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_baseline_navigate_before_24"
