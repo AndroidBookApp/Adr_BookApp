@@ -47,7 +47,10 @@ public class login extends AppCompatActivity {
                 public void onClick(View v) {
                     username = txt_name.getText().toString().trim();
                     password = txt_pass.getText().toString().trim();
-                    if (username.equals(user.getUsername()) && password.equals(user.getPass()))
+                    if(username.equals("") && password.equals("")) {
+                        Toast.makeText(login.this, "Không được bỏ trống tài khoản hoặc mật khẩu", Toast.LENGTH_LONG).show();
+                    }
+                    else if (username.equals(user.getUsername()) && password.equals(user.getPass()))
                     {
                         Intent intent = new Intent(login.this , home.class);
                         Toast.makeText(login.this , "Đăng Nhập Thành Công" , Toast.LENGTH_SHORT).show();
@@ -60,9 +63,6 @@ public class login extends AppCompatActivity {
                     else if(username.equals("") && password.equals(user.getPass()))
                     {
                         DiaLog(Gravity.BOTTOM);
-                    }
-                    else if(username.equals("") || password.equals("")){
-                        Toast.makeText(login.this , "Không được bỏ trống tài khoản hoặc mật khẩu" , Toast.LENGTH_LONG).show();
                     }
                     else{
                         DiaLog(Gravity.BOTTOM);
