@@ -50,6 +50,7 @@ private AppBarLayout toolbar;
     private RelativeLayout main;
     private LinearLayout linearLayout;
     private TextView list_bookNew;
+    private AppBarLayout appBarLayout;
     private BottomNavigationView bottomNavigationView;
     private CircleIndicator3 indicator;
 
@@ -76,9 +77,10 @@ private AppBarLayout toolbar;
         view = findViewById(R.id.view_2);
         scrollView = findViewById(R.id.scv);
         linearLayout = findViewById(R.id.rl);
+        appBarLayout  =findViewById(R.id.bar_footer);
         main = findViewById(R.id.lo6);
         indicator = findViewById(R.id.cr);
-        toolbar = findViewById(R.id.bar_footer);
+
         list_bookNew = findViewById(R.id.all_bookNew);
         mlist = getListphoto();
         bottomNavigationView = findViewById(R.id.btn_navigatione);
@@ -118,35 +120,36 @@ private NavigationBarView.OnItemSelectedListener navListener = new NavigationBar
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
          switch (item.getItemId()){
             case R.id.btn_home:
-                toolbar.setVisibility(View.VISIBLE);
+                appBarLayout.setVisibility(View.VISIBLE);
                 main.setVisibility(View.VISIBLE);
                 showFragment(new Home_fragment());
                 view.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_search:
-                toolbar.setVisibility(View.GONE);
+                appBarLayout.setVisibility(View.GONE);
+
                 showFragment(new Search_fragment());
                 main.setVisibility(View.GONE);
                 view.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 break;
             case R.id.btn_favorite:
-                toolbar.setVisibility(View.GONE);
+                appBarLayout.setVisibility(View.GONE);
                 showFragment(new Favorite_fragment());
                 main.setVisibility(View.GONE);
                 view.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 break;
             case R.id.btn_account:
-                toolbar.setVisibility(View.GONE);
+                appBarLayout.setVisibility(View.GONE);
                 showFragment(new Account_fragment());
                 main.setVisibility(View.GONE);
                 view.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 break;
             default:
-                toolbar.setVisibility(View.VISIBLE);
+                appBarLayout.setVisibility(View.VISIBLE);
                 main.setVisibility(View.GONE);
                 showFragment(new Home_fragment());
                 view.setVisibility(View.VISIBLE);

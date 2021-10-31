@@ -13,11 +13,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.app_readbook.R;
+import com.example.app_readbook.home;
 
 public class login extends AppCompatActivity {
     private EditText txt_name, txt_pass;
@@ -43,29 +45,33 @@ public class login extends AppCompatActivity {
             btn_sign_in.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DiaLogFail(Gravity.CENTER);
-//                    username = txt_name.getText().toString().trim();
-//                    password = txt_pass.getText().toString().trim();
-//                    if(username.equals("") || password.equals("")) {
-//                        Toast.makeText(login.this, "Không được bỏ trống tài khoản hoặc mật khẩu", Toast.LENGTH_LONG).show();
-//                    }
-//                    else if (username.equals(user.getUsername()) && password.equals(user.getPass()))
-//                    {
-//                        Intent intent = new Intent(login.this , home.class);
-//                        Toast.makeText(login.this , "Đăng Nhập Thành Công" , Toast.LENGTH_SHORT).show();
-//                        startActivity(intent);
-//                    }
-//                    else if(username.equals(user.getUsername()) && password.equals(""))
-//                    {
-//                        DiaLog(Gravity.BOTTOM);
-//                    }
-//                    else if(username.equals("") && password.equals(user.getPass()))
-//                    {
-//                        DiaLog(Gravity.BOTTOM);
-//                    }
-//                    else{
-//                        DiaLog(Gravity.BOTTOM);
-//                    }
+
+                    username = txt_name.getText().toString().trim();
+                    password = txt_pass.getText().toString().trim();
+                    if(username.equals("") || password.equals("")) {
+                        Toast.makeText(login.this, "Không được bỏ trống tài khoản hoặc mật khẩu", Toast.LENGTH_LONG).show();
+                    }
+                    else if (username.equals(user.getUsername()) && password.equals(user.getPass()))
+                    {
+                        Intent intent = new Intent(login.this , home.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("objectUser" , username);
+                        bundle.putString("objectPass" , password);
+                        intent.putExtra("duLieu" , bundle);
+                        Toast.makeText(login.this , "Đăng Nhập Thành Công" , Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    }
+                    else if(username.equals(user.getUsername()) && password.equals(""))
+                    {
+                        DiaLogFail(Gravity.CENTER);
+                    }
+                    else if(username.equals("") && password.equals(user.getPass()))
+                    {
+                        DiaLogFail(Gravity.CENTER);
+                    }
+                    else{
+                        DiaLogFail(Gravity.CENTER);
+                    }
 
                 }
             });

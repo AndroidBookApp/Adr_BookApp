@@ -66,11 +66,13 @@ private Toolbar toolbar;
             public void onClick(View v) {
                 String name = node.getText().toString().trim();
                 String nameBook = textView_nameBook.getText().toString().trim();
-                String img = img_book.getDrawable().toString();
+                int img = img_book.getImageAlpha();
                 Intent intent = new Intent(View_Readbook.this , Main_NodeReadBook.class);
-                intent.putExtra("object" , name);
-                intent.putExtra("object_book" , nameBook);
-                intent.putExtra("img" ,img);
+                Bundle bundle = new Bundle();
+                bundle.putInt("img" , img);
+                bundle.putString("object" , name);
+                bundle.putString("object_book" , nameBook);
+                intent.putExtra("object_node" , bundle);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

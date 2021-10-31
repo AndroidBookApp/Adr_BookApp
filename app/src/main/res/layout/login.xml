@@ -179,7 +179,7 @@
                         android:layout_height="50dp"
                         android:background="@drawable/stoker_btn"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="Register"
+                        android:text="ĐĂNG KÝ"
                         android:textColor="@color/btn_color"
                         android:textSize="18dp" />
                 </LinearLayout>

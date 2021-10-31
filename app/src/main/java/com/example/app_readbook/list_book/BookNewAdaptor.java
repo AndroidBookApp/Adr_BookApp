@@ -50,8 +50,6 @@ public class BookNewAdaptor extends RecyclerView.Adapter<BookNewAdaptor.BookNewV
         holder.TrangNew.setText(list_bookNew.getSoTrang());
         holder.icon_favoriteNew.setImageResource(list_bookNew.getIcon_favorite_new());
     }
-
-
     @Override
     public int getItemCount() {
         if(listNew != null)

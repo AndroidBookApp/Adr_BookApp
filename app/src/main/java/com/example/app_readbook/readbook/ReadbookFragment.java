@@ -57,7 +57,6 @@ public class ReadbookFragment extends Fragment {
     {
         ReadbookName readbookName = (ReadbookName) bundle.get("readBook_object");
         textView.setText(readbookName.getName());
-
     }
         return mview;
     }

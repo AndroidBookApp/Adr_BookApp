@@ -110,16 +110,6 @@ public class dangky  extends AppCompatActivity {
         });
     }
 
-//    private  boolean checkemail(CharSequence emailCheck) {
-//        String checkEmail = email.getText().toString().trim();
-//        return (!checkEmail.isEmpty("") && Patterns.EMAIL_ADDRESS.matcher(emailCheck).matches());
-//    }
-
-    //    public boolean checkEmail(CharSequence target)
-//    {
-//        String checkEmail = email.getText().toString().trim();
-//        return (!checkEmail.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
-//    }
 private void statusbar() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -150,10 +140,12 @@ public void DialogSuccess(int gravity)
 
             String user = username.getText().toString().trim();
             String password = pass.getText().toString().trim();
+            String mEmail = email.getText().toString().trim();
                 Toast.makeText(dangky.this , "Đăng ký thành công" , Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(dangky.this , login.class);
                 intent.putExtra("username" ,user );
                 intent.putExtra("pass" ,password );
+                intent.putExtra("email" , mEmail);
                 startActivity(intent);
         }
     });

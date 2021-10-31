@@ -25,7 +25,6 @@ private NameBookAdaptor nameBookAdaptor;
         recyclerView = findViewById(R.id.rcv_name);
         nameBookAdaptor = new NameBookAdaptor(this);
         statusbar();
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , RecyclerView.VERTICAL , false);
         recyclerView.setLayoutManager(linearLayoutManager);
         nameBookAdaptor.setData(getListName());

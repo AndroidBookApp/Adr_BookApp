@@ -20,7 +20,7 @@
         android:theme="@style/Theme.App_ReadBook"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".list_comment.Main_NodeReadBook"
+            android:name=".home"
             android:exported="true" />
         <activity
             android:name=".DataLogin.login"
@@ -42,14 +42,17 @@
             android:name=".fragment_pager.model_account.edit_tt_account"
             android:exported="true" />
         <activity
-            android:name=".home"
+            android:name=".list_comment.View_Readbook"
+            android:exported="true" />
+        <activity
+            android:name=".fragment_pager.model_account.Data_edit_name"
             android:exported="true" />
         <activity
             android:name=".chapter.Main_Chapter"
             android:parentActivityName=".list_comment.View_Readbook"
             android:exported="true" />
         <activity
-            android:name=".list_comment.View_Readbook"
+            android:name=".list_comment.Main_NodeReadBook"
             android:parentActivityName=".list_book.Main_ListBook"
 
             android:exported="true" />
