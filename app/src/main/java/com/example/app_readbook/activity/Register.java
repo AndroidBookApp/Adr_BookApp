@@ -43,7 +43,7 @@ public class Register extends Activity {
 EditText txt_name;
 EditText txt_pass;
 EditText txt_email;
-Button register;
+Button register , login;
 User user;
 TextView tvFocus;
 private ProgressDialog progressDialog;
@@ -53,7 +53,7 @@ private static final String url = "http://192.168.1.6:8888/demo_app/dangky.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.dangky);
+        setContentView(R.layout.dangky);
         ButterKnife.bind(this);
         txt_name = findViewById(R.id.user);
         txt_pass = findViewById(R.id.pass);
@@ -68,6 +68,14 @@ private static final String url = "http://192.168.1.6:8888/demo_app/dangky.php";
         progressBar = findViewById(R.id.load);
         txt_email = findViewById(R.id.email);
         register = findViewById(R.id.btn_dangky);
+        login = findViewById(R.id.dangNhap);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Register.this , SignIn.class);
+                startActivity(intent);
+            }
+        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

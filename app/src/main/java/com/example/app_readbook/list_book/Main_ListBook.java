@@ -48,7 +48,6 @@ public static final String url = "http://192.168.1.6:8888/demo_app/sach.php";
         recyclerView = findViewById(R.id.rcv_book);
         textView_page = findViewById(R.id.name_page);
         txt_searchName = findViewById(R.id.txt_searchBook);
-
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mList = new ArrayList<>();
@@ -87,7 +86,8 @@ public static final String url = "http://192.168.1.6:8888/demo_app/sach.php";
                             for (int i = 0 ; i < response.length() ; i++){
                             JSONObject jsonObject = response.getJSONObject(i);
                             list_book listBook = new list_book(jsonObject.getString("idSach") , jsonObject.getString("Tensach") ,
-                                    "" , "" , jsonObject.getString("Tentacgia") ,0 ,"" ,
+                                    jsonObject.getString("idDanhmuc") , jsonObject.getString("Tendanhmuc") ,
+                                    jsonObject.getString("Tentacgia") ,jsonObject.getInt("NgayXB") ,jsonObject.getString("TomtatND") ,
                                     jsonObject.getString("IMGsach")
                                     , jsonObject.getString("sotrang") , jsonObject.getString("Luotxem")
                                     ,  jsonObject.getString("slfeedback"), jsonObject.getString("slyeuthich"));

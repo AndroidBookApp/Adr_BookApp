@@ -38,6 +38,9 @@
             android:name=".fragment_pager.model_account.Data_edit_account"
             android:exported="true" />
         <activity
+            android:name=".testmain"
+            android:exported="true" />
+        <activity
             android:name=".readbook.MainReadbook"
             android:exported="true" /> <!-- <activity -->
         <!-- android:name=".list_book.Main_ListBook" -->
@@ -63,7 +66,7 @@
             android:name=".DataLogin.dangky"
             android:exported="true" />
         <activity
-            android:name=".home"
+            android:name=".onboarding.Onboarding_View"
             android:exported="true" />
         <activity
             android:name=".list_book.Main_BookNew"
@@ -72,7 +75,7 @@
             android:name=".list_book.Main_ListBook"
             android:exported="true" />
         <activity
-            android:name=".onboarding.Onboarding_View"
+            android:name=".home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

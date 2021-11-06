@@ -8,10 +8,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.app_readbook.R;
+import com.example.app_readbook.list_book.list_book;
 
 public class Main_NodeReadBook extends AppCompatActivity {
-
+private list_book listBook;
 private TextView text_node , text_nameBook;
 private ImageView img_book;
     @SuppressLint("SetTextI18n")
@@ -22,15 +24,16 @@ private ImageView img_book;
         text_nameBook = findViewById(R.id.name_book);
         text_node = findViewById(R.id.text_node);
         img_book = findViewById(R.id.img_node);
+//        listBook = new list_book("" ,text_nameBook.getText().toString().trim(),"" )
         Intent intent = getIntent();
         Bundle mBundle = intent.getBundleExtra("object_node");
-        if(mBundle!= null)
-        {
-            String name = mBundle.getString("object_book");
-            String node = mBundle.getString("object");
-            text_nameBook.setText(name);
-            text_node.setText(node +" " + mBundle.getString("object"));
-        }
+        String img = mBundle.getString("image");
+        String name = mBundle.getString("object_book");
+        String node = mBundle.getString("object");
+        text_nameBook.setText(name);
+        text_node.setText(text_node.getText()+" " + node);
+        Glide.with(this).load(img).into(img_book);
+
 
 
     }
