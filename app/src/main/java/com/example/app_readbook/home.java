@@ -15,7 +15,6 @@ import com.example.app_readbook.fragment_pager.model_account.Account_fragment;
 import com.example.app_readbook.fragment_pager.model_favorite.Favorite_fragment;
 import com.example.app_readbook.fragment_pager.model_home.Home_fragment;
 import com.example.app_readbook.fragment_pager.model_search.Search_fragment;
-import com.example.app_readbook.list_comment.View_Readbook;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -38,7 +37,7 @@ public class home extends AppCompatActivity {
         showFragment(new Home_fragment());
         bottomNavigationView.setSelectedItemId(R.id.btn_home);
         bottomNavigationView.setOnItemSelectedListener(navListener);
-        View_Readbook view_readbook = new View_Readbook();
+        com.example.app_readbook.View_ReadBook view_readbook = new com.example.app_readbook.View_ReadBook();
     }
 private NavigationBarView.OnItemSelectedListener navListener = new NavigationBarView.OnItemSelectedListener() {
     @Override

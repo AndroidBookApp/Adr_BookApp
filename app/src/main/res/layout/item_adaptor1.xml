@@ -6,7 +6,9 @@
     <RelativeLayout
         android:id="@+id/layout_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
 
         <TextView
             android:id="@+id/tv_1Adaptor"
@@ -21,10 +23,11 @@
             android:textStyle="bold" />
 
         <TextView
+            android:layout_toRightOf="@+id/tv_1Adaptor"
             android:id="@+id/tv_2Adaptor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="170dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_bold"
             android:text="(10)"
@@ -33,6 +36,7 @@
             android:textStyle="bold" />
 
         <TextView
+
             android:id="@+id/tv_nextAdaptor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

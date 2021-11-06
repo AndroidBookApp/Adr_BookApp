@@ -38,7 +38,7 @@
             android:name=".fragment_pager.model_account.Data_edit_account"
             android:exported="true" />
         <activity
-            android:name=".testmain"
+            android:name=".View_ReadBook"
             android:exported="true" />
         <activity
             android:name=".readbook.MainReadbook"
@@ -50,21 +50,16 @@
             android:name=".activity.SignIn"
             android:exported="true" />
         <activity
-            android:name=".list_comment.View_Readbook"
-            android:exported="true" />
-        <activity
             android:name=".fragment_pager.model_account.Data_edit_name"
             android:exported="true" />
         <activity
             android:name=".chapter.Main_Chapter"
             android:exported="true"
-            android:parentActivityName=".list_comment.View_Readbook" />
+            android:parentActivityName=".View_ReadBook" />
         <activity
             android:name=".list_comment.Main_NodeReadBook"
             android:exported="true" />
-        <activity
-            android:name=".DataLogin.dangky"
-            android:exported="true" />
+
         <activity
             android:name=".onboarding.Onboarding_View"
             android:exported="true" />

@@ -18,7 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.app_readbook.R;
-import com.example.app_readbook.testmain;
+import com.example.app_readbook.View_ReadBook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         holder.mBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context , testmain.class);
+                Intent intent = new Intent(context , View_ReadBook.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("img_book" , listBook.getIMGsach());
                 bundle.putString("name" , listBook.getTenSach());

@@ -36,7 +36,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.app_readbook.R;
-import com.example.app_readbook.activity.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
@@ -74,7 +73,7 @@ public class edit_tt_account extends AppCompatActivity {
     private LinearLayout layoutEdit , layout_userName , layoutRound , layoutDate;
     private static int SELECT_PHOTO = 100;
     private TextView txt_username , txt_name , txtPass , txtEmail , txt_date , txtRound;
-    User user;
+
     private static final String url = "http://192.168.1.6:8888/demo_app/update_member.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +90,7 @@ public class edit_tt_account extends AppCompatActivity {
         layoutRound = findViewById(R.id.lnl_round);
         layoutDate = findViewById(R.id.lnl_date);
         Intent intent = getIntent();
-        user = (User) intent.getSerializableExtra("object");
+
 //        txtEmail.setText(user.getEmail());
 //        txt_name.setText(user.getUsername());
 //        txtPass.setText(user.getPass());

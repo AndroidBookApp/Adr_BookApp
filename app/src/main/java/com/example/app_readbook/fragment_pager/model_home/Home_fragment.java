@@ -21,10 +21,10 @@ import com.example.app_readbook.fragment_pager.PhotoAdaptor;
 import com.example.app_readbook.fragment_pager.photo;
 import com.example.app_readbook.home;
 import com.example.app_readbook.list_book.Main_BookNew;
-import com.example.app_readbook.testAdaptor.AllItemAdaptor;
-import com.example.app_readbook.testAdaptor.all_item;
-import com.example.app_readbook.testAdaptor.book_item;
-import com.example.app_readbook.testAdaptor.name_item;
+import com.example.app_readbook.test_home.AllItemAdaptor;
+import com.example.app_readbook.test_home.all;
+import com.example.app_readbook.test_home.book_item;
+import com.example.app_readbook.test_home.name_item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +37,16 @@ public class Home_fragment extends Fragment{
     home mHome;
     private CircleIndicator3 indicator;
     private ViewPager2  view;
-    private RecyclerView recyclerView;
+//    private RecyclerView recyclerView;
     private List<photo> mlist;
     private TextView list_bookNew;
     private LinearLayout layout_bookNew;
-    private AllItemAdaptor allItemAdaptor;
+//    private AllItemAdaptor allItemAdaptor;
+    private com.example.app_readbook.test_home.AllItemAdaptor allItemAdaptorr;
+    private RecyclerView recyclerView;
+    List<all> list;
+    List<name_item> name_items;
+    List<book_item> bookItemList;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final Runnable mRunnable = new Runnable() {
         @Override
@@ -71,21 +76,13 @@ public class Home_fragment extends Fragment{
         view.setAdapter(photoAdaptor);
         indicator.setViewPager(view);
         recyclerView = mView.findViewById(R.id.rcv_name);
-        allItemAdaptor = new AllItemAdaptor();
+//        allItemAdaptor = new AllItemAdaptor();
+        allItemAdaptorr = new com.example.app_readbook.test_home.AllItemAdaptor();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        allItemAdaptor.setData(getActivity() , getListData());
-        recyclerView.setAdapter(allItemAdaptor);
-        allItemAdaptor.setOnItemClickListener(new AllItemAdaptor.OnClickListener() {
-            @Override
-            public void IClick(int position) {
-
-                    Intent intent = new Intent(getActivity(), Main_BookNew.class);
-                    getActivity().startActivity(intent);
-
-            }
-        });
-
+//        allItemAdaptor.setData(getActivity() , getListData());
+        allItemAdaptorr.setData(getActivity() , getListData());
+        recyclerView.setAdapter(allItemAdaptorr);
         view.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -102,34 +99,31 @@ public class Home_fragment extends Fragment{
                 context.startActivity(intent);
             }
         });
+        list = new ArrayList<>();
+        bookItemList = new ArrayList<>();
+        name_items = new ArrayList<>();
         return mView;
     }
 
-    private List<all_item> getListData() {
-        List<all_item> list = new ArrayList<>();
-        List<book_item> items = new ArrayList<>();
-        List<name_item> name_items = new ArrayList<>();
-        name_items.add(new name_item("Sách Kinh Doanh" , "10" , "xem tất cả"));
-        items.add(new book_item(R.drawable.sach1, "Kinh Doanh Online"));
-        items.add(new book_item(R.drawable.sach2, "Đắc Nhân Tâm"));
-        items.add(new book_item(R.drawable.sach3, "Cha Giàu Cha.."));
-        items.add(new book_item(R.drawable.sach4, "Nghĩ Giàu .."));
-        items.add(new book_item(R.drawable.sach1, "Không Biết Tên"));
-        items.add(new book_item(R.drawable.sach1, "Giàu Từ Đâu"));
-        items.add(new book_item(R.drawable.sach1, "Giàu Như ..."));
-        items.add(new book_item(R.drawable.sach1, "Cách Làm Giàu"));
-        items.add(new book_item(R.drawable.sach1, "Làm Giàu .."));
-        items.add(new book_item(R.drawable.sach1, "Ngủ Cũng Giàu"));
-        list.add(new all_item(AllItemAdaptor.TYPE_NAME , null , name_items));
-        list.add(new all_item(AllItemAdaptor.TYPE_BOOK , items , null));
-        list.add(new all_item(AllItemAdaptor.TYPE_NAME , null , name_items));
-        list.add(new all_item(AllItemAdaptor.TYPE_BOOK , items , null));
-        list.add(new all_item(AllItemAdaptor.TYPE_NAME , null , name_items));
-        list.add(new all_item(AllItemAdaptor.TYPE_BOOK , items , null));
-        return list;
+//    private List<all_item> getListData() {
+//        List<all_item> list = new ArrayList<>();
+//        List<list_book> list_books = new ArrayList<>();
+//        list.add(new all_item(AllItemAdaptor.TYPE_NAME , list_books));
+//        list.add(new all_item(AllItemAdaptor.TYPE_BOOK , list_books));
+//        return list;
+//
+//
+//    }
+private List<all> getListData() {
+    List<all> list = new ArrayList<>();
+    List<name_item> name_items = new ArrayList<>();
+    List<book_item> bookItemList = new ArrayList<>();
+    list.add(new all(AllItemAdaptor.TYPE_NAME , name_items , null));
+    list.add(new all(AllItemAdaptor.TYPE_BOOK , null , bookItemList));
+    return list;
 
 
-    }
+}
 
     private List<photo> getListphoto() {
         List<photo> list = new ArrayList<>();

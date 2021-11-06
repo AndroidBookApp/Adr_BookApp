@@ -41,7 +41,6 @@ import java.util.Map;
 public class SignIn extends AppCompatActivity {
     EditText txt_username;
     EditText txt_password;
-    User mUser;
     String user , pass;
     private ProgressDialog progressDialog;
     private CheckBox mCheckbox;
@@ -165,7 +164,6 @@ public class SignIn extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String , String> params = new HashMap<>();
-                mUser = new User(null , null , txt_username.getText().toString().trim() , txt_password.getText().toString().trim() , null , null , null);
                 params.put("Username" , txt_username.getText().toString().trim());
                 params.put("Pass" , txt_password.getText().toString().trim());
                 return params;

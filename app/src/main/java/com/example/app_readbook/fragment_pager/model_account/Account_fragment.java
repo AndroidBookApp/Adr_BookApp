@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.example.app_readbook.DataLogin.User;
 import com.example.app_readbook.R;
 import com.example.app_readbook.activity.SignIn;
 import com.example.app_readbook.home;
@@ -32,7 +31,6 @@ private TextView textView ;
 private View view;
 private RecyclerView recyclerView;
 private LinearLayout linearLayout , layout_out;
-User user;
 home mHome;
 
 public static final String url = "http://localhost:8888/demo_app/update_member.php";

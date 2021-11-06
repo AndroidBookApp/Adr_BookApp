@@ -44,7 +44,6 @@ EditText txt_name;
 EditText txt_pass;
 EditText txt_email;
 Button register , login;
-User user;
 TextView tvFocus;
 private ProgressDialog progressDialog;
 String name , email , pass;
@@ -96,142 +95,7 @@ private static final String url = "http://192.168.1.6:8888/demo_app/dangky.php";
         register.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                if((response.trim().equals("Email error") && response.trim().equals("Username error")))
-//                {
-//                    if (response.trim().equals("Email error") || !response.trim().equals("Username error"))
-//                    {
-//                        Toast.makeText(Register.this , "Email đã tồn tại" , Toast.LENGTH_LONG).show();
-//                    }else  if (response.trim().equals("Username error") || !response.trim().equals("Email error") )
-//                    {
-//                        Toast.makeText(Register.this , "Username đã tồn tại" , Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//                 else if((!response.trim().equals("Email error")) && !response.trim().equals("Username error"))
-//                 {
-//
-//                    if (response.trim().equals("success"))
-//                    {
-//                        Toast.makeText(Register.this , "Đăng nhập thành công"  , Toast.LENGTH_LONG).show();
-//                        Intent intent = new Intent(Register.this , SignIn.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("Username" ,name);
-//                        bundle.putString("Pass" , pass);
-//                        bundle.putString("Email" , email);
-//                        intent.putExtra("object", bundle);
-//                        startActivity(intent);
-//                    }else{
-//                        Toast.makeText(Register.this , "Lỗi thêm"  , Toast.LENGTH_LONG).show();
-//                        register.setVisibility(View.VISIBLE);
-//                        progressBar.setVisibility(View.GONE);
-//                    }
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(Register.this , "Xảy ra lỗi" , Toast.LENGTH_LONG).show();
-//                Log.e("AAA" , "Lỗi\n"+ error.toString());
-//                register.setVisibility(View.VISIBLE);
-//                progressBar.setVisibility(View.GONE);
-//            }
-//        }){
-//            @NonNull
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                user = new User(null,null,  txt_name.getText().toString().trim() ,txt_pass.getText().toString().trim() , txt_email.getText().toString().trim() ,"" , "");
-//                Map<String , String> params = new HashMap<>();
-//                params.put("Username" , user.getUsername());
-//                params.put("Pass" , user.getPass());
-//                params.put("Email" , user.getEmail());
-//                return params;
-//            }
-//        };
-//        requestQueue.add(stringRequest);
 
-//        String name = txt_name.getText().toString().trim();
-//        String pass = txt_pass.getText().toString().trim();
-//        String email = txt_email.getText().toString().trim();
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url, null, new Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                try {
-//                    for (int i = 0; i < response.length(); i++) {
-//                        JSONObject jsonObject = response.getJSONObject(i);
-//                        String success = jsonObject.getString("success");
-//                        if (success.equals("1")) {
-//                            Toast.makeText(Register.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(Register.this, "Đăng ký không thành công" + e.toString(), Toast.LENGTH_SHORT).show();
-//                    register.setVisibility(View.VISIBLE);
-//                    progressBar.setVisibility(View.GONE);
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(Register.this, "Có lỗi ! Đăng ký thất bại" + error.getMessage(), Toast.LENGTH_SHORT).show();
-//                Log.e("AAA" , "lỗi"+ error.toString());
-//                register.setVisibility(View.VISIBLE);
-//                progressBar.setVisibility(View.GONE);
-//            }
-//        }) {
-//            @Nullable
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> map = new HashMap<>();
-//                map.put("Username", name);
-//                map.put("Pass", pass);
-//                map.put("Email", email);
-//                return map;
-//            }
-//        }; requestQueue.add(jsonArrayRequest);
-
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                try {
-//                    JSONObject jObj = new JSONObject(response.toString());
-//                    String success = response.getString("success");
-//                    if(success.trim().equals("1"))
-//                    {
-//                        Toast.makeText(Register.this , "Đăng nhập thành công"  , Toast.LENGTH_LONG).show();
-//                        Intent intent = new Intent(Register.this , SignIn.class);
-//                        startActivity(intent);
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    register.setVisibility(View.VISIBLE);
-//                    progressBar.setVisibility(View.GONE);
-//                    Toast.makeText(Register.this , "Sai "  , Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(Register.this , "error "  , Toast.LENGTH_LONG).show();
-//                Log.e("AAA" , "lỗi \n" +error.toString());
-//                register.setVisibility(View.VISIBLE);
-//                progressBar.setVisibility(View.GONE);
-//            }
-//        }){
-//            @Nullable
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String , String> map = new HashMap<>();
-//                map.put("Username" , name);
-//                map.put("Pass", pass);
-//                map.put("Email" , email);
-//                return map;
-//            }
-//        };
-//        requestQueue.add(jsonObjectRequest);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -239,7 +103,6 @@ private static final String url = "http://192.168.1.6:8888/demo_app/dangky.php";
                         JSONObject jsonObject = new JSONObject(response.trim());
                         String result = jsonObject.getString("success");
                         if (result.equals("1")) {
-                            User user = new User("","",txt_name.getText().toString().trim(),txt_pass.getText().toString().trim(),txt_email.getText().toString().trim(),"","");
 //                            SharedPreferences sharedPreferences  = getSharedPreferences("data" , MODE_PRIVATE);
 //                            SharedPreferences.Editor editor = sharedPreferences.edit();
 //                            editor.putString("Username" , user);
@@ -271,10 +134,10 @@ private static final String url = "http://192.168.1.6:8888/demo_app/dangky.php";
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String , String> map = new HashMap<>();
-                User user = new User("","",txt_name.getText().toString().trim(),txt_pass.getText().toString().trim(),txt_email.getText().toString().trim(),"","");
-                map.put("Username" , user.getUsername());
-                map.put("Pass", user.getPass());
-                map.put("Email" , user.getEmail());
+
+                map.put("Username" , txt_name.getText().toString().trim());
+                map.put("Pass", txt_pass.getText().toString().trim());
+                map.put("Email" , txt_email.getText().toString().trim());
                 return map;
             }
         };
