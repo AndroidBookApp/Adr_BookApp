@@ -16,8 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.app_readbook.Name_book.book.BookAdaptor;
 import com.example.app_readbook.Name_book.book.book;
 import com.example.app_readbook.R;
-import com.example.app_readbook.home;
-import com.example.app_readbook.list_book.Main_ListBook;
+import com.example.app_readbook.fragment_pager.model_home.Home_fragment;
 import com.example.app_readbook.list_comment.View_Readbook;
 
 import java.util.List;
@@ -26,13 +25,30 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
     private List<Name> mName;
     private List<book> mBook;
     private Context mcontext;
-    private home home;
-    private book book;
+    private OnClickListener mListItem;
+    Home_fragment home_fragment;
+//
+//    @Override
+//    public void iClickListener(int position) {
+//        if (position != RecyclerView.NO_POSITION) {
+//            iClickListener(position);
+//        }
+//    }
 
+    public interface OnClickListener{
+        void IClick(int position);
+    }
     public NameBookAdaptor(Context mcontext  ) {
-
         this.mcontext = mcontext;
     }
+public void setOnItemClickListener(OnClickListener listener)
+{
+    mListItem = listener;
+}
+    public NameBookAdaptor(Home_fragment home_fragment) {
+        this.home_fragment = home_fragment;
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     public void setData(List<Name> list)
     {
@@ -43,7 +59,7 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
     @Override
     public NameBookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_text , parent , false);
-        return new NameBookViewHolder(view);
+        return new NameBookViewHolder(view , mListItem);
     }
 
 
@@ -54,15 +70,14 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
       {
           return;
       }
-      home = new home();
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mcontext , LinearLayoutManager.HORIZONTAL, false);
+       LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mcontext , LinearLayoutManager.HORIZONTAL, false);
       holder.recyclerView.setLayoutManager(linearLayoutManager);
       holder.tvname.setText(name.getName());
       holder.tv_sl.setText(name.getSl());
       holder.tvnext.setText(name.getAll());
 
-
+      home_fragment = new Home_fragment();
       holder.recyclerView.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -70,27 +85,27 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
 //                intent.putExtra("tac_gia" ,);
           }
       });
-      BookAdaptor bookAdaptor = new BookAdaptor(new IClickItemBook() {
-          @Override
-          public void ClickItem(book book) {
 
-          }
-      } , mcontext);
+        BookAdaptor bookAdaptor = new BookAdaptor(mcontext);
         bookAdaptor.setData(name.getNameBook());
         holder.recyclerView.setAdapter(bookAdaptor);
-
-        holder.tvnext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mcontext , Main_ListBook.class);
-                intent.putExtra("object_nameBook" , name.getName());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mcontext.startActivity(intent);
-            }
-        });
-
+//        holder.recyclerView.addOnItemTouchListener(new );
+//        holder.recyclerView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Intent intent = new Intent(mcontext , View_Readbook.class);
+////                mcontext.startActivity(intent);
+//                IClickItemBook.iClickListener(name);
+//            }
+//        });
+//        bookAdaptor.setOnClick(new IClickItemBook() {
+//            @Override
+//            public void iClickListener(int position) {
+//                Intent intent = new Intent(mcontext , View_Readbook.class);
+//                mcontext.startActivity(intent);
+//            }
+//        });
     }
-
     @Override
     public int getItemCount() {
         if(mName != null)
@@ -106,14 +121,25 @@ private TextView tvname;
 private TextView tv_sl;
 private TextView tvnext;
 private RelativeLayout relativeLayout;
-        public NameBookViewHolder(@NonNull View itemView) {
+        public NameBookViewHolder(@NonNull View itemView , OnClickListener listener) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.ryc_view);
             relativeLayout = itemView.findViewById(R.id.layout_text);
             tvname = itemView.findViewById(R.id.tv_1);
             tv_sl = itemView.findViewById(R.id.tv_2);
             tvnext = itemView.findViewById(R.id.tv_next);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null)
+                    {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.IClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

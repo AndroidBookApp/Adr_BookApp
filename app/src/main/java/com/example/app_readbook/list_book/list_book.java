@@ -1,78 +1,127 @@
 package com.example.app_readbook.list_book;
 
 public class list_book {
-    private int resourceId ;
-    private String title;
-    private String tac_gia;
-    private int icon;
-    private String icon_comment;
-    private String icon_view ;
-    private String icon_book;
+   String idSach;
+   String Tensach;
+   String idDanhmuc;
+   String Tendanhmuc;
+   String Tentacgia ;
+   int  NgayXB;
+   String TomtatND;
+   String IMGsach;
+   String sotrang;
+   String Luotxem;
+   String Feedback;
+   String favorite;
 
-    public list_book(int resourceId, String title, String tac_gia, int icon, String icon_comment, String icon_view, String icon_book) {
-        this.resourceId = resourceId;
-        this.title = title;
-        this.tac_gia = tac_gia;
-        this.icon = icon;
-        this.icon_comment = icon_comment;
-        this.icon_view = icon_view;
-        this.icon_book = icon_book;
+    public list_book(String idSach, String tenSach, String idDanhmuc, String tendanhmuc, String tentacgia, int ngayXB, String tomtatND, String IMGsach, String sotrang, String luotxem, String feedback, String favorite) {
+        this.idSach = idSach;
+        Tensach = tenSach;
+        this.idDanhmuc = idDanhmuc;
+        Tendanhmuc = tendanhmuc;
+        Tentacgia = tentacgia;
+        NgayXB = ngayXB;
+        TomtatND = tomtatND;
+        this.IMGsach = IMGsach;
+        this.sotrang = sotrang;
+        Luotxem = luotxem;
+        Feedback = feedback;
+        this.favorite = favorite;
     }
 
-    public int getResourceId() {
-        return resourceId;
+    public String getIdSach() {
+        return idSach;
     }
 
-    public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
+    public void setIdSach(String idSach) {
+        this.idSach = idSach;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTenSach() {
+        return Tensach;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTenSach(String tenSach) {
+        Tensach = tenSach;
     }
 
-    public String getTac_gia() {
-        return tac_gia;
+    public String getIdDanhmuc() {
+        return idDanhmuc;
     }
 
-    public void setTac_gia(String tac_gia) {
-        this.tac_gia = tac_gia;
+    public void setIdDanhmuc(String idDanhmuc) {
+        this.idDanhmuc = idDanhmuc;
     }
 
-    public int getIcon() {
-        return icon;
+    public String getTendanhmuc() {
+        return Tendanhmuc;
     }
 
-    public void setIcon(int icon) {
-        this.icon = icon;
+    public void setTendanhmuc(String tendanhmuc) {
+        Tendanhmuc = tendanhmuc;
     }
 
-    public String getIcon_comment() {
-        return icon_comment;
+    public String getTentacgia() {
+        return Tentacgia;
     }
 
-    public void setIcon_comment(String icon_comment) {
-        this.icon_comment = icon_comment;
+    public void setTentacgia(String tentacgia) {
+        Tentacgia = tentacgia;
     }
 
-    public String getIcon_view() {
-        return icon_view;
+    public int getNgayXB() {
+        return NgayXB;
     }
 
-    public void setIcon_view(String icon_view) {
-        this.icon_view = icon_view;
+    public void setNgayXB(int ngayXB) {
+        NgayXB = ngayXB;
     }
 
-    public String getIcon_book() {
-        return icon_book;
+    public String getTomtatND() {
+        return TomtatND;
     }
 
-    public void setIcon_book(String icon_book) {
-        this.icon_book = icon_book;
+    public void setTomtatND(String tomtatND) {
+        TomtatND = tomtatND;
     }
 
+    public String getIMGsach() {
+        return IMGsach;
+    }
+
+    public void setIMGsach(String IMGsach) {
+        this.IMGsach = IMGsach;
+    }
+
+    public String getSotrang() {
+        return sotrang;
+    }
+
+    public void setSotrang(String sotrang) {
+        sotrang = sotrang;
+    }
+
+    public String getLuotxem() {
+        return Luotxem;
+    }
+
+    public void setLuotxem(String luotxem) {
+        Luotxem = luotxem;
+    }
+
+    public String getFeedback() {
+        return Feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        Feedback = feedback;
+    }
+
+    public String getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(String favorite) {
+        this.favorite = favorite;
+    }
 }

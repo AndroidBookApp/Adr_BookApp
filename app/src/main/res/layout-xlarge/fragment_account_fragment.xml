@@ -3,15 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@color/background_home"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragment_pager.model_account.Account_fragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-   >
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       >
+        >
         <LinearLayout
             android:id="@+id/layout_one"
             android:layout_width="match_parent"
@@ -38,7 +39,7 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
@@ -66,22 +67,22 @@
             android:layout_below="@+id/cv_1"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
             android:background="@drawable/solid_login"
+            android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp"
             tools:ignore="UnknownId">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="24dp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/lay_out_tt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                  
                     android:orientation="horizontal">
 
                     <ImageView
@@ -89,7 +90,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="@drawable/solid_acount"
-                        android:src="@drawable/ic_baseline_account_24" />
+                        android:src="@drawable/ic_baseline_accountt_24" />
 
                     <TextView
                         android:layout_width="160dp"
@@ -102,17 +103,17 @@
                         android:textColor="@color/black"
                         android:textSize="16dp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_baseline_navigate_next_24" />
+                        android:layout_gravity="left"
+                        android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+                        android:padding="10dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
@@ -135,17 +136,17 @@
                         android:textColor="@color/black"
                         android:textSize="16dp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_baseline_navigate_next_24" />
+                        android:layout_gravity="left"
+                        android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+                        android:padding="10dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
@@ -168,17 +169,17 @@
                         android:textColor="@color/black"
                         android:textSize="16dp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_baseline_navigate_next_24" />
+                        android:layout_gravity="left"
+                        android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+                        android:padding="10dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
@@ -201,12 +202,12 @@
                         android:textColor="@color/black"
                         android:textSize="16dp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_baseline_navigate_next_24" />
+                        android:layout_gravity="left"
+                        android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+                        android:padding="10dp" />
 
                 </LinearLayout>
             </LinearLayout>

@@ -1,5 +1,8 @@
 package com.example.app_readbook.DataLogin;
 
+import android.text.TextUtils;
+import android.util.Patterns;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -35,5 +38,13 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public boolean isValidEmail()
+    {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+    public boolean isValidPass()
+    {
+        return !TextUtils.isEmpty(pass) && pass.length() >=6;
     }
 }

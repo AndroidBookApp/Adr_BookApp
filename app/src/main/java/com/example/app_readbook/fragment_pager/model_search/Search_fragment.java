@@ -1,6 +1,5 @@
 package com.example.app_readbook.fragment_pager.model_search;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,9 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app_readbook.Name_book.Main_ListSach_Home;
 import com.example.app_readbook.R;
-import com.example.app_readbook.fragment_pager.model_account.IClickSearch;
 import com.example.app_readbook.home;
 
 import java.util.ArrayList;
@@ -42,7 +39,6 @@ public class Search_fragment extends Fragment {
         historyList = getlist();
         text = view.findViewById(R.id.txt_search);
         historyAdaptor = new HistoryAdaptor(home);
-
         historyAdaptor.setData(historyList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(home , LinearLayoutManager.VERTICAL , false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -67,13 +63,13 @@ public class Search_fragment extends Fragment {
         return view;
     }
 
-    private void onClickNextPage(history history) {
-        Intent intent = new Intent(getContext(), Main_ListSach_Home.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("object_key" , history);
-//        intent.putExtras(bundle);
-        startActivity(intent);
-    }
+//    private void onClickNextPage(history history) {
+//        Intent intent = new Intent(getContext(), Main_ListSach_Home.class);
+////        Bundle bundle = new Bundle();
+////        bundle.putSerializable("object_key" , history);
+////        intent.putExtras(bundle);
+//        startActivity(intent);
+//    }
 
     @Override
     public void onDestroy() {

@@ -10,8 +10,8 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import com.example.app_readbook.R;
-import com.example.app_readbook.DataLogin.dangky;
-import com.example.app_readbook.DataLogin.login;
+import com.example.app_readbook.activity.Register;
+import com.example.app_readbook.activity.SignIn;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,14 +73,14 @@ private Button btn_dangky;
         btn_dangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity() , login.class);
+                Intent intent = new Intent(getActivity() , SignIn.class);
                 getActivity().startActivity(intent);
             }
         });
         btn_dangky.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity() , dangky.class);
+                Intent intent = new Intent(getActivity() , Register.class);
                 getActivity().startActivity(intent);
             }
         });

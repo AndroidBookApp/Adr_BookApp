@@ -26,6 +26,7 @@ public class Main_BookNew extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
         bookNewAdaptor.setData(getListNew());
         view.setLayoutManager(linearLayoutManager);
+
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         view.setAdapter(bookNewAdaptor);
 

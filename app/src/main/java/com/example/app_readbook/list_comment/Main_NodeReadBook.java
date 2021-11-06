@@ -26,12 +26,10 @@ private ImageView img_book;
         Bundle mBundle = intent.getBundleExtra("object_node");
         if(mBundle!= null)
         {
-//            int img = mBundle.getInt("img");
             String name = mBundle.getString("object_book");
             String node = mBundle.getString("object");
-//            img_book.setImageResource(img);
             text_nameBook.setText(name);
-            text_node.setText(node +" " + text_node.getText());
+            text_node.setText(node +" " + mBundle.getString("object"));
         }
 
 

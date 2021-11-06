@@ -10,34 +10,33 @@
         android:layout_height="match_parent"
         android:background="#EBEBEB"
         android:orientation="vertical">
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_tt"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="16dp"
-            >
-            <LinearLayout
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_navigate_before_24"/>
-
-            </LinearLayout>
-            <TextView
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:elevation="0dp">
+            <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="@font/roboto_bold"
-                android:text="Thông Tin Cá Nhân"
-                android:textColor="@color/black"
-                android:textSize="24dp"
-                />
+                app:navigationIcon="@drawable/ic_baseline_navigate_before_24"
+                >
+                <TextView
+                    android:id="@+id/txtNameBook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:text="Thông tin cá nhân"
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
+            </androidx.appcompat.widget.Toolbar>
 
-        </LinearLayout>
+        </com.google.android.material.appbar.AppBarLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -106,7 +105,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/line"
             android:gravity="right"
             android:orientation="vertical">
             <LinearLayout
@@ -178,13 +177,14 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:background="@color/white"
+            android:background="@drawable/line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
             >
             <LinearLayout
+                android:id="@+id/lnl_round"
                 android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -201,6 +201,7 @@
                     android:layout_gravity="center"
                     />
                 <TextView
+                    android:id="@+id/round"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Thiết Lập Ngay"
@@ -213,13 +214,20 @@
                     />
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"
+                />
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+
                 android:orientation="vertical"
                 >
                 <LinearLayout
+                    android:id="@+id/lnl_date"
                     android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -236,6 +244,7 @@
                         android:layout_gravity="center"
                         />
                     <TextView
+                        android:id="@+id/date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Thiết Lập Ngay"
@@ -248,10 +257,15 @@
                         />
 
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+
                     android:orientation="vertical"
                     >
                     <LinearLayout
@@ -291,11 +305,12 @@
 
         </LinearLayout>
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
-            android:background="@color/white"
+            android:background="@drawable/line"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -328,5 +343,17 @@
 
             </LinearLayout>
         </LinearLayout>
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_marginTop="20dp"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@drawable/color_btn"
+            android:text="Lưu"
+            android:textSize="18dp"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            />
     </LinearLayout>
 </ScrollView>

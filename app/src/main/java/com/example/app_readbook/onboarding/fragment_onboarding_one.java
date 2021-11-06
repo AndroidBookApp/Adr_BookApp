@@ -2,16 +2,15 @@ package com.example.app_readbook.onboarding;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.app_readbook.R;
-import com.example.app_readbook.DataLogin.login;
+import com.example.app_readbook.activity.SignIn;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,7 +70,7 @@ private View mview;
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( getActivity(), login.class);
+                Intent intent = new Intent( getActivity(), SignIn.class);
                 getActivity().startActivity(intent);
             }
         });

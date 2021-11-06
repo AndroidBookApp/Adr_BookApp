@@ -1,7 +1,6 @@
 package com.example.app_readbook.Name_book;
 
-import com.example.app_readbook.Name_book.book.book;
-
 public interface IClickItemBook {
-    void ClickItem(book book);
+    void iClickListener(int position);
+//    void iclicBook(book book);
 }

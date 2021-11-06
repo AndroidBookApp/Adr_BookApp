@@ -7,6 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.app_readbook.fragment_pager.model_account.Account_fragment;
 import com.example.app_readbook.fragment_pager.model_favorite.Favorite_fragment;
+import com.example.app_readbook.fragment_pager.model_home.Home_fragment;
 import com.example.app_readbook.home;
 import com.example.app_readbook.fragment_pager.model_search.Search_fragment;
 

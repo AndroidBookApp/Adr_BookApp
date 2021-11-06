@@ -3,24 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@color/background_home"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragment_pager.model_account.Account_fragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-   >
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       >
+        >
         <LinearLayout
             android:id="@+id/layout_one"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="245dp">
 
             <ImageView
                 android:id="@+id/background_image_account"
                 android:layout_width="match_parent"
-                android:layout_height="292dp"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/sachhome" />
         </LinearLayout>
@@ -33,13 +34,13 @@
             android:background="@color/color_account"
             >
             <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="200dp"
+                android:layout_width="252dp"
+                android:layout_height="161dp"
                 android:layout_gravity="center"
                 android:orientation="vertical">
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:gravity="center"
@@ -49,13 +50,13 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_marginTop="14dp"
                     android:fontFamily="@font/roboto_bold"
                     android:gravity="center"
                     android:text="Nguyễn Văn Quỳnh"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="16dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -66,33 +67,33 @@
             android:layout_below="@+id/cv_1"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
             android:background="@drawable/solid_login"
+            android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp"
             tools:ignore="UnknownId">
 
             <LinearLayout
-                android:layout_width="496dp"
-                android:layout_height="419dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="24dp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/lay_out_tt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="@drawable/solid_acount"
-                        android:src="@drawable/ic_baseline_account_24" />
+                        android:src="@drawable/ic_baseline_accountt_24" />
 
                     <TextView
-                        android:layout_width="270dp"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="22dp"
@@ -100,33 +101,32 @@
                         android:padding="10dp"
                         android:text="Chỉnh sửa thông tin"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="16dp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:padding="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_navigate_next_24" />
+                        android:layout_gravity="left"
+                        android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+                        android:padding="10dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="@drawable/solid_acount"
                         android:src="@drawable/ic_baseline_settings_24" />
 
                     <TextView
-                        android:layout_width="270dp"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="22dp"
@@ -134,34 +134,32 @@
                         android:padding="10dp"
                         android:text="Thiết Lập"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="16dp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:padding="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_navigate_next_24" />
+                        android:layout_gravity="left"
+                        android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+                        android:padding="10dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <ImageView
-
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:background="@drawable/solid_acount"
                         android:src="@drawable/ic_baseline_phone_enabled_24" />
 
                     <TextView
-                        android:layout_width="270dp"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="22dp"
@@ -169,34 +167,32 @@
                         android:padding="10dp"
                         android:text="Hỗ Trợ"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="16dp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:padding="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_navigate_next_24" />
+                        android:layout_gravity="left"
+                        android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+                        android:padding="10dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-
                         android:background="@drawable/solid_acount"
                         android:src="@drawable/ic_baseline_logout_power_24" />
 
                     <TextView
-                        android:layout_width="270dp"
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="22dp"
@@ -204,15 +200,14 @@
                         android:padding="10dp"
                         android:text="Đăng Xuất"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="16dp" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:padding="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_navigate_next_24" />
+                        android:layout_gravity="left"
+                        android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+                        android:padding="10dp" />
 
                 </LinearLayout>
             </LinearLayout>
