@@ -1,6 +1,5 @@
 package com.example.app_readbook.DanhSachBookHome;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,17 +13,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.DanhSachBookHome.book.BookAdaptor;
-import com.example.app_readbook.DanhSachBookHome.book.book;
+import com.example.app_readbook.Model.DanhMucSach;
+import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
-import com.example.app_readbook.View_ReadBook;
+import com.example.app_readbook.Service.ApiInterface;
+import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.fragment_pager.model_home.Home_fragment;
+import com.example.app_readbook.list_book.Main_ListBook;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBookViewHolder> {
-    private List<Name> mName;
-    private List<book> mBook;
+    private ArrayList<DanhMucSach> mDanhmuc;
+    private ArrayList<Sach> saches;
     private Context mcontext;
+    DanhMucSach danhMucSach;
     private OnClickListener mListItem;
     Home_fragment home_fragment;
 //
@@ -38,23 +46,11 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
     public interface OnClickListener{
         void IClick(int position);
     }
-    public NameBookAdaptor(Context mcontext  ) {
+    public NameBookAdaptor(Context mcontext  ,ArrayList<DanhMucSach> listDanhMuc) {
         this.mcontext = mcontext;
-    }
-public void setOnItemClickListener(OnClickListener listener)
-{
-    mListItem = listener;
-}
-    public NameBookAdaptor(Home_fragment home_fragment) {
-        this.home_fragment = home_fragment;
+        this.mDanhmuc = listDanhMuc;
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    public void setData(List<Name> list)
-    {
-        this.mName = list;
-        notifyDataSetChanged();
-    }
     @NonNull
     @Override
     public NameBookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,52 +61,48 @@ public void setOnItemClickListener(OnClickListener listener)
 
     @Override
     public void onBindViewHolder(@NonNull NameBookViewHolder holder, int position) {
-      Name name = mName.get(position);
-      if(name == null)
+      DanhMucSach danhMucSach = mDanhmuc.get(position);
+      if(danhMucSach == null)
       {
           return;
       }
+        ApiInterface apiInterface = ApiService.apiInterface();
+        Call<List<Sach>> mSach = apiInterface.listDanhMuc(danhMucSach.getIdDanhmuc());
+        mSach.enqueue(new Callback<List<Sach>>() {
+            @Override
+            public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
+                saches = (ArrayList<Sach>) response.body();
+                BookAdaptor bookAdaptor = new BookAdaptor( saches ,mcontext);
+                holder.recyclerView.setLayoutManager(new LinearLayoutManager(mcontext , LinearLayoutManager.HORIZONTAL , false));
+                holder.recyclerView.setAdapter(bookAdaptor);
+            }
 
-       LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mcontext , LinearLayoutManager.HORIZONTAL, false);
-      holder.recyclerView.setLayoutManager(linearLayoutManager);
-      holder.tvname.setText(name.getName());
-      holder.tv_sl.setText(name.getSl());
-      holder.tvnext.setText(name.getAll());
+            @Override
+            public void onFailure(Call<List<Sach>> call, Throwable t) {
 
-      home_fragment = new Home_fragment();
-      holder.recyclerView.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-                Intent intent = new Intent(mcontext , View_ReadBook.class);
-//                intent.putExtra("tac_gia" ,);
-          }
-      });
+            }
+        });
 
-        BookAdaptor bookAdaptor = new BookAdaptor(mcontext);
-        bookAdaptor.setData(name.getNameBook());
-        holder.recyclerView.setAdapter(bookAdaptor);
-//        holder.recyclerView.addOnItemTouchListener(new );
-//        holder.recyclerView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Intent intent = new Intent(mcontext , View_Readbook.class);
-////                mcontext.startActivity(intent);
-//                IClickItemBook.iClickListener(name);
-//            }
-//        });
-//        bookAdaptor.setOnClick(new IClickItemBook() {
-//            @Override
-//            public void iClickListener(int position) {
-//                Intent intent = new Intent(mcontext , View_Readbook.class);
-//                mcontext.startActivity(intent);
-//            }
-//        });
+        holder.tvname.setText(danhMucSach.getTendanhmuc());
+        holder.tvnext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mcontext , Main_ListBook.class);
+                intent.putExtra("danhmuc" , mDanhmuc.get(holder.getPosition()));
+
+                mcontext.startActivity(intent);
+            }
+        });
+        holder.tv_sl.setText((danhMucSach.getSosach()));
     }
+
+
+
     @Override
     public int getItemCount() {
-        if(mName != null)
+        if(mDanhmuc != null)
         {
-            return mName.size();
+            return mDanhmuc.size();
         }
         return 0;
     }

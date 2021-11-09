@@ -40,23 +40,10 @@ public class View_ReadBook extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_read);
-
         mlist = getListComment();
         initUI();
-        Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("put_book");
-        textView_nameBook.setText(bundle.getString("name"));
-        textView_tacGia.setText(bundle.getString("tac_gia"));
-//        textView_DanhMuc.setText(bundle.getString("TenDanhMuc"));
-        int NXB = bundle.getInt("NgayXB" , 0);
-        textView_NXB.setText("Năm Xuất Bản " +String.valueOf(NXB));
-        String title = bundle.getString("TenDanhMuc");
-        String image = bundle.getString("img_book");
-        Glide.with(this).load(image).into(img_book);
-//        textView_nameBook.setText(getIntent().getStringExtra("name"));
-//        textView_nameBook.setTextSize(14);
-        node.setText(bundle.getString("TomTatND") +" " +node.getText());
-        node.setTextSize(12);
+        iniUIIntent();
+
         commentAdaptor = new CommentAdaptor(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this ,RecyclerView.VERTICAL , false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -87,6 +74,24 @@ public class View_ReadBook extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void iniUIIntent() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("put_book");
+        textView_nameBook.setText(bundle.getString("name"));
+        textView_tacGia.setText(bundle.getString("tac_gia"));
+//        textView_DanhMuc.setText(bundle.getString("TenDanhMuc"));
+        int NXB = bundle.getInt("NgayXB" , 0);
+        textView_NXB.setText("Năm Xuất Bản " +String.valueOf(NXB));
+        String title = bundle.getString("TenDanhMuc");
+        String image = bundle.getString("img_book");
+        Glide.with(this).load(image).into(img_book);
+//        textView_nameBook.setText(getIntent().getStringExtra("name"));
+//        textView_nameBook.setTextSize(14);
+        node.setText(bundle.getString("TomTatND") +" " +node.getText());
+        node.setTextSize(12);
     }
 
     @Override

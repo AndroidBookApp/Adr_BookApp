@@ -7,39 +7,48 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
+import com.example.app_readbook.Service.ApiInterface;
+import com.example.app_readbook.Service.ApiService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Main_BookNew extends AppCompatActivity {
-    private List<list_bookNew> newList;
+    private ArrayList<Sach> newList;
     private RecyclerView view;
     private BookNewAdaptor bookNewAdaptor;
+    String danhmuc;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_new);
         view = findViewById(R.id.rcv_bookNew);
-        newList = getListNew();
-        bookNewAdaptor = new BookNewAdaptor(this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL , false);
-        bookNewAdaptor.setData(getListNew());
-        view.setLayoutManager(linearLayoutManager);
-
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        view.setAdapter(bookNewAdaptor);
-
+        getDataIMG();
     }
 
-    private List<list_bookNew> getListNew() {
-        List<list_bookNew> list = new ArrayList<>();
-        list.add(new list_bookNew(R.drawable.sach1 , "Tâm Tịnh" , "Nguyễn Văn Quỳnh", R.drawable.ic_baseline_favorite_24,"400 Trang"  ));
-        list.add(new list_bookNew(R.drawable.sach1 , "Tâm Tịnh" , "Nguyễn Văn Quỳnh", R.drawable.ic_baseline_favorite_24,"400 Trang"  ));
-        list.add(new list_bookNew(R.drawable.sach1 , "Tâm Tịnh" , "Nguyễn Văn Quỳnh", R.drawable.ic_baseline_favorite_24,"400 Trang"  ));
-        list.add(new list_bookNew(R.drawable.sach1 , "Tâm Tịnh" , "Nguyễn Văn Quỳnh", R.drawable.ic_baseline_favorite_24,"400 Trang"  ));
-        list.add(new list_bookNew(R.drawable.sach1 , "Tâm Tịnh" , "Nguyễn Văn Quỳnh", R.drawable.ic_baseline_favorite_24,"400 Trang"  ));
-        return list;
+    private void getDataIMG() {
+        ApiInterface apiInterface = ApiService.apiInterface();
+        Call<List<Sach>> mSach = apiInterface.listsach();
+        mSach.enqueue(new Callback<List<Sach>>() {
+            @Override
+            public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
+                newList = (ArrayList<Sach>) response.body();
+                bookNewAdaptor = new BookNewAdaptor(Main_BookNew.this , newList);
+                view.setLayoutManager(new LinearLayoutManager(Main_BookNew.this , LinearLayoutManager.VERTICAL , false));
+                view.setAdapter(bookNewAdaptor);
+            }
+            @Override
+            public void onFailure(Call<List<Sach>> call, Throwable t) {
+
+            }
+        });
     }
+
 
 }

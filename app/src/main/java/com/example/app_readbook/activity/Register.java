@@ -2,7 +2,6 @@ package com.example.app_readbook.activity;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -45,7 +44,7 @@ EditText txt_pass;
 EditText txt_email;
 Button register , login;
 TextView tvFocus;
-private ProgressDialog progressDialog;
+
 String name , email , pass;
 private ProgressBar progressBar;
 private static final String url = "http://192.168.1.6:8888/demo_app/dangky.php";

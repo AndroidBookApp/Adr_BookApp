@@ -32,7 +32,7 @@
             android:name=".fragment_pager.model_account.edit_tt_account"
             android:exported="true" />
         <activity
-            android:name=".DataLogin.login"
+            android:name=".ApiView.dangnhap"
             android:exported="true" />
         <activity
             android:name=".fragment_pager.model_account.Data_edit_account"
@@ -68,6 +68,9 @@
             android:exported="true" />
         <activity
             android:name=".list_book.Main_ListBook"
+            android:exported="true" />
+        <activity
+            android:name=".ApiView.dangky"
             android:exported="true" />
         <activity
             android:name=".home"

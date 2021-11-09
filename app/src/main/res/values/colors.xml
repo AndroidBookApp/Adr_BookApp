@@ -25,4 +25,5 @@
     <color name="focus_btn_navigation">#404040</color>
     <color name="color_chapter">#3B519F</color>
     <color name="color_custom_dialog">#FDB953</color>
+    <color name="name">#DCDCDC</color>
 </resources>

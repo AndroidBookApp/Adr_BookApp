@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.Register"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/start"
             tools:context=".DataLogin.dangky">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="648dp"
-                android:layout_alignParentBottom="true"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/solid_login">
 
@@ -85,6 +84,28 @@
                             android:fontFamily="@font/roboto_regular"
                             android:hint="Mật Khẩu"
                             android:inputType="textWebPassword"
+                            android:paddingStart="10dp"
+                            android:textColorHint="@color/text"
+                            android:textSize="15dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:passwordToggleEnabled="true">
+
+                        <EditText
+                            android:id="@+id/pass_1"
+                            android:layout_width="280dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/color_edittext"
+                            android:drawableStart="@drawable/lock_focused"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:hint="Nhập lại password"
+                            android:inputType="textEmailSubject"
                             android:paddingStart="10dp"
                             android:textColorHint="@color/text"
                             android:textSize="15dp" />
@@ -162,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lo5"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -189,18 +210,26 @@
                         tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/dangNhap"
-                    android:layout_width="280dp"
-                    android:layout_height="50dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_below="@id/lo4"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/stoker_btn"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Bạn Đã Có Tài Khoản"
-                    android:textColor="@color/btn_color"
-                    android:textSize="18dp" />
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/dangNhap"
+                        android:layout_width="280dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+
+                        android:background="@drawable/stoker_btn"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="Bạn Đã Có Tài Khoản"
+                        android:textColor="@color/btn_color"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/lo5"

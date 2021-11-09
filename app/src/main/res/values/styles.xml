@@ -7,7 +7,7 @@
         <item name="android:background">@drawable/custom_search</item>
     </style>
     <style name="AppThemes" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/btn_navigation</item>
+        <item name="colorPrimary">@drawable/sachnew1</item>
         <item name="android:textColorPrimary">@android:color/white</item>
     </style>
 </resources>

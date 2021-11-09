@@ -11,23 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
+import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class BookNewAdaptor extends RecyclerView.Adapter<BookNewAdaptor.BookNewViewHolder>{
-   private List<list_bookNew> listNew;
+   private ArrayList<Sach> saches;
    private Context context;
 
-    public BookNewAdaptor( Context context) {
+    public BookNewAdaptor(Context context, ArrayList<Sach> newList) {
         this.context = context;
+        this.saches = newList;
     }
 
-    public void setData(List<list_bookNew> list)
-   {
-      this.listNew = list;
-      notifyDataSetChanged();
-   }
 
     @NonNull
     @Override
@@ -39,22 +37,22 @@ public class BookNewAdaptor extends RecyclerView.Adapter<BookNewAdaptor.BookNewV
 
     @Override
     public void onBindViewHolder(@NonNull BookNewViewHolder holder, int position) {
-        list_bookNew list_bookNew = listNew.get(position);
+        Sach list_bookNew = saches.get(position);
         if(list_bookNew == null)
         {
             return;
         }
-        holder.bookNew.setImageResource(list_bookNew.getBoo_new());
-        holder.nameBookNew.setText(list_bookNew.getName_new());
-        holder.tacGiaNew.setText(list_bookNew.getTacgia_new());
-        holder.TrangNew.setText(list_bookNew.getSoTrang());
-        holder.icon_favoriteNew.setImageResource(list_bookNew.getIcon_favorite_new());
+        Picasso.get().load(list_bookNew.getImgSach()).into(holder.bookNew);
+        holder.nameBookNew.setText(list_bookNew.getTensach());
+        holder.tacGiaNew.setText(list_bookNew.getTacgia());
+        holder.TrangNew.setText(list_bookNew.getSotrang());
+//        holder.icon_favoriteNew.setImageResource(list_bookNew.getIcon_favorite_new());
     }
     @Override
     public int getItemCount() {
-        if(listNew != null)
+        if(saches != null)
         {
-            return listNew.size();
+            return saches.size();
         }
         return 0;
     }

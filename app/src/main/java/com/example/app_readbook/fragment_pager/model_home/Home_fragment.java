@@ -10,13 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.app_readbook.DanhSachBookHome.NameBookAdaptor;
+import com.example.app_readbook.Model.DanhMucSach;
+import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
+import com.example.app_readbook.Service.ApiInterface;
+import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.fragment_pager.PhotoAdaptor;
 import com.example.app_readbook.fragment_pager.photo;
 import com.example.app_readbook.home;
@@ -30,6 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Home_fragment extends Fragment{
@@ -39,27 +48,21 @@ public class Home_fragment extends Fragment{
     private ViewPager2  view;
 //    private RecyclerView recyclerView;
     private List<photo> mlist;
+    private ArrayList<DanhMucSach> danhMucSaches;
+    private NameBookAdaptor nameBookAdaptor;
     private TextView list_bookNew;
     private LinearLayout layout_bookNew;
+    DanhMucSach danhMucSach;
 //    private AllItemAdaptor allItemAdaptor;
     private com.example.app_readbook.test_home.AllItemAdaptor allItemAdaptorr;
     private RecyclerView recyclerView;
     List<all> list;
+    int currentItem;
+    String danhmuc;
     List<name_item> name_items;
     List<book_item> bookItemList;
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
-    private final Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-
-            int currentPosition = view.getCurrentItem();
-            if (currentPosition == mlist.size() - 1) {
-                view.setCurrentItem(0);
-            } else {
-                view.setCurrentItem(currentPosition + 1);
-            }
-        }
-    };
+    private  Handler mHandler ;
+    private  Runnable mRunnable ;
     public Home_fragment() {
     }
     @Override
@@ -72,17 +75,15 @@ public class Home_fragment extends Fragment{
         list_bookNew = mView.findViewById(R.id.all_bookNew);
         view = mView.findViewById(R.id.view_2);
         layout_bookNew = mView.findViewById(R.id.id3);
-        PhotoAdaptor photoAdaptor = new PhotoAdaptor(mlist);
-        view.setAdapter(photoAdaptor);
-        indicator.setViewPager(view);
         recyclerView = mView.findViewById(R.id.rcv_name);
+        getDataDanhMuc();
 //        allItemAdaptor = new AllItemAdaptor();
-        allItemAdaptorr = new com.example.app_readbook.test_home.AllItemAdaptor();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
-//        allItemAdaptor.setData(getActivity() , getListData());
-        allItemAdaptorr.setData(getActivity() , getListData());
-        recyclerView.setAdapter(allItemAdaptorr);
+//        allItemAdaptorr = new com.example.app_readbook.test_home.AllItemAdaptor();
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+//        recyclerView.setLayoutManager(linearLayoutManager);
+////        allItemAdaptor.setData(getActivity() , getListData());
+//        allItemAdaptorr.setData(getActivity() , getListData());
+//        recyclerView.setAdapter(allItemAdaptorr);
         view.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -102,9 +103,61 @@ public class Home_fragment extends Fragment{
         list = new ArrayList<>();
         bookItemList = new ArrayList<>();
         name_items = new ArrayList<>();
+        getDataImg();
         return mView;
     }
 
+    private void getDataDanhMuc() {
+        ApiInterface apiInterface = ApiService.apiInterface();
+        Call<List<DanhMucSach>> mDanhMuc = apiInterface.TenDanhMuc();
+        mDanhMuc.enqueue(new Callback<List<DanhMucSach>>() {
+            @Override
+            public void onResponse(Call<List<DanhMucSach>> call, Response<List<DanhMucSach>> response) {
+                danhMucSaches = (ArrayList<DanhMucSach>) response.body();
+                nameBookAdaptor = new NameBookAdaptor(getActivity(),danhMucSaches);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(nameBookAdaptor);
+            }
+
+            @Override
+            public void onFailure(Call<List<DanhMucSach>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getDataImg() {
+        ApiInterface apiInterface = ApiService.apiInterface();
+        Call<List<Sach>> listCall = apiInterface.responseSach();
+        listCall.enqueue(new Callback<List<Sach>>() {
+            @Override
+            public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
+                ArrayList<Sach> saches = (ArrayList<Sach>) response.body();
+                PhotoAdaptor photoAdaptor = new PhotoAdaptor(saches , getActivity());
+                view.setAdapter(photoAdaptor);
+                indicator.setViewPager(view);
+                mHandler = new Handler(Looper.getMainLooper());
+                mRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        currentItem = view.getCurrentItem();
+                        currentItem++;
+
+                        if(currentItem >=view.getAdapter().getItemCount())
+                        {
+                            currentItem = 0;
+                        }
+                        view.setCurrentItem(currentItem, true);
+                    }
+                };
+            }
+
+            @Override
+            public void onFailure(Call<List<Sach>> call, Throwable t) {
+                Toast.makeText(mHome, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 //    private List<all_item> getListData() {
 //        List<all_item> list = new ArrayList<>();
 //        List<list_book> list_books = new ArrayList<>();
