@@ -3,11 +3,16 @@ package com.example.app_readbook.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class Sach {
+
+public class Sach implements Serializable {
     @SerializedName("idSach")
     @Expose
     private String idSach;
+    @SerializedName("idDanhmuc")
+    @Expose
+    private String idDanhmuc;
     @SerializedName("imgSach")
     @Expose
     private String imgSach;
@@ -20,9 +25,6 @@ public class Sach {
     @SerializedName("NXB")
     @Expose
     private String nxb;
-    @SerializedName("idDanhmuc")
-    @Expose
-    private String idDanhmuc;
     @SerializedName("NgayDang")
     @Expose
     private String ngayDang;
@@ -45,28 +47,20 @@ public class Sach {
     @Expose
     private String idChitietsach;
 
-    public Sach(String idSach, String imgSach, String tensach, String tacgia, String nxb, String idDanhmuc, String ngayDang, String tomtatND, String luotxem, String feedback, String sotrang, String favorite, String idChitietsach) {
-        this.idSach = idSach;
-        this.imgSach = imgSach;
-        this.tensach = tensach;
-        this.tacgia = tacgia;
-        this.nxb = nxb;
-        this.idDanhmuc = idDanhmuc;
-        this.ngayDang = ngayDang;
-        this.tomtatND = tomtatND;
-        this.luotxem = luotxem;
-        this.feedback = feedback;
-        this.sotrang = sotrang;
-        this.favorite = favorite;
-        this.idChitietsach = idChitietsach;
-    }
-
     public String getIdSach() {
         return idSach;
     }
 
     public void setIdSach(String idSach) {
         this.idSach = idSach;
+    }
+
+    public String getIdDanhmuc() {
+        return idDanhmuc;
+    }
+
+    public void setIdDanhmuc(String idDanhmuc) {
+        this.idDanhmuc = idDanhmuc;
     }
 
     public String getImgSach() {
@@ -99,14 +93,6 @@ public class Sach {
 
     public void setNxb(String nxb) {
         this.nxb = nxb;
-    }
-
-    public String getIdDanhmuc() {
-        return idDanhmuc;
-    }
-
-    public void setIdDanhmuc(String idDanhmuc) {
-        this.idDanhmuc = idDanhmuc;
     }
 
     public String getNgayDang() {

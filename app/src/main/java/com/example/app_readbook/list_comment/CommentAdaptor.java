@@ -10,23 +10,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_readbook.Model.danhgia;
 import com.example.app_readbook.R;
+import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CommentAdaptor extends RecyclerView.Adapter<CommentAdaptor.CommentViewHolder>{
-    private List<Comment> mList;
+    private ArrayList<danhgia> danhgias;
 private Context context;
-    public CommentAdaptor(Context context1) {
-       this.context = context1;
+
+    public CommentAdaptor(ArrayList<danhgia> danhgias, Context context) {
+        this.danhgias = danhgias;
+        this.context = context;
     }
-public void setData(List<Comment> list)
-{
-    this.mList = list;
-    notifyDataSetChanged();
-}
+
     @NonNull
     @Override
     public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,25 +37,25 @@ public void setData(List<Comment> list)
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        Comment comment = mList.get(position);
-        if(mList == null)
+        danhgia danhgia = danhgias.get(position);
+        if(danhgia == null)
         {
             return;
         }
-        holder.imageView.setImageResource(comment.getIdResource());
-        holder.name.setText(comment.getUsername());
-        holder.comment.setText(comment.getUser_chat());
-        holder.like.setText(comment.getIcon_like());
-        holder.feedback.setText(comment.getIcon_feedback());
-        holder.time.setText(comment.getTime());
+        Picasso.get().load(danhgia.getImgAvatar()).into(holder.imageView);
+        holder.name.setText(danhgia.getUsername());
+        holder.comment.setText(danhgia.getNoidung());
+//        holder.like.setText(danhgia.getIcon_like());
+//        holder.feedback.setText(danhgia.getIcon_feedback());
+        holder.time.setText(danhgia.getThoigian());
     }
 
 
     @Override
     public int getItemCount() {
-        if(mList != null)
+        if(danhgias != null)
         {
-            return mList.size();
+            return danhgias.size();
         }
         return 0;
     }

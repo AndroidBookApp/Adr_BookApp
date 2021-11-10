@@ -38,8 +38,6 @@ ArrayList<Sach> danhMucSaches;
 private TextView textView_page;
 private EditText txt_searchName ;
 DanhMucSach danhMucSach;
-public static final String url = "http://192.168.1.6:8888/demo_app/sach.php";
-
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,11 +104,7 @@ public static final String url = "http://192.168.1.6:8888/demo_app/sach.php";
 
             }
         });
-
             }
-
-
-
     public void searchName(String name)
 {
     ArrayList<Sach> arrayList = new ArrayList<>();

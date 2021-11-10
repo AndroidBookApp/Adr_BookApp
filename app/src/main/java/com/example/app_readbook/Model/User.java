@@ -31,6 +31,14 @@ public class User {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("ImgAvatar")
+    @Expose
+    private String imgAvatar;
+    @SerializedName("ImgBia")
+    @Expose
+    private String imgBia;
+
+
 
     public User(String idMember, String username, String memberName, String password, String email, String gioitinh, String ngaysinh, String success, String message) {
         this.idMember = idMember;
@@ -114,5 +122,20 @@ public class User {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+    public String getImgAvatar() {
+        return imgAvatar;
+    }
+
+    public void setImgAvatar(String imgAvatar) {
+        this.imgAvatar = imgAvatar;
+    }
+
+    public String getImgBia() {
+        return imgBia;
+    }
+
+    public void setImgBia(String imgBia) {
+        this.imgBia = imgBia;
     }
 }

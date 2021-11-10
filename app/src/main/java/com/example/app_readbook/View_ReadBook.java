@@ -15,8 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.app_readbook.Model.DanhMucSach;
+import com.example.app_readbook.Model.Sach;
+import com.example.app_readbook.Model.chitietsach;
+import com.example.app_readbook.Model.danhgia;
+import com.example.app_readbook.Service.ApiInterface;
+import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.chapter.Main_Chapter;
-import com.example.app_readbook.list_book.list_book;
 import com.example.app_readbook.list_comment.Comment;
 import com.example.app_readbook.list_comment.CommentAdaptor;
 import com.example.app_readbook.list_comment.Main_NodeReadBook;
@@ -25,14 +30,25 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class View_ReadBook extends AppCompatActivity {
     RecyclerView recyclerView;
     private List<Comment> mlist;
-    private List<list_book> list;
+    private ArrayList<Sach> saches;
+    private ArrayList<chitietsach> chitietsach;
+    private ArrayList<DanhMucSach> danhMucSaches;
+    private ArrayList<danhgia> danhgias;
     private CommentAdaptor commentAdaptor;
     private ImageView img_book;
     private CollapsingToolbarLayout coordinatorLayout;
     private AppCompatButton btnRead ;
+    Sach sach;
+    DanhMucSach danhMucSach;
+    chitietsach chitiet;
+    danhgia danhgia;
     private AppCompatTextView textView_book , next_page , textView_tacGia , textView_DanhMuc , textView_NXB , textView_nameBook , node;
     private Toolbar toolbar;
     @SuppressLint("SetTextI18n")
@@ -40,15 +56,10 @@ public class View_ReadBook extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_read);
-        mlist = getListComment();
+
         initUI();
         iniUIIntent();
-
-        commentAdaptor = new CommentAdaptor(this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this ,RecyclerView.VERTICAL , false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        commentAdaptor.setData(getListComment());
-        recyclerView.setAdapter(commentAdaptor);
+        getDataViewSach();
         next_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,31 +78,64 @@ public class View_ReadBook extends AppCompatActivity {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saches = new ArrayList<>();
                 String book = textView_nameBook.getText().toString().trim();
                 Intent intent = new Intent(View_ReadBook.this , Main_Chapter.class);
-                intent.putExtra("nameBook", book);
+//                intent.putExtra("view_sach" , );
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
     }
 
+    private void getDataViewSach() {
+        ApiInterface apiInterface = ApiService.apiInterface();
+        Call<List<danhgia>> mSach = apiInterface.LoadDanhgia(sach.getIdSach());
+        mSach.enqueue(new Callback<List<danhgia>>() {
+            @Override
+            public void onResponse(Call<List<danhgia>> call, Response<List<danhgia>> response) {
+                danhgias = (ArrayList<com.example.app_readbook.Model.danhgia>) response.body();
+                recyclerView.setLayoutManager(new LinearLayoutManager(View_ReadBook.this , LinearLayoutManager.VERTICAL , false));
+                commentAdaptor = new CommentAdaptor(danhgias , View_ReadBook.this);
+                recyclerView.setAdapter(commentAdaptor);
+            }
+
+            @Override
+            public void onFailure(Call<List<danhgia>> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     @SuppressLint("SetTextI18n")
     private void iniUIIntent() {
         Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("put_book");
-        textView_nameBook.setText(bundle.getString("name"));
-        textView_tacGia.setText(bundle.getString("tac_gia"));
-//        textView_DanhMuc.setText(bundle.getString("TenDanhMuc"));
-        int NXB = bundle.getInt("NgayXB" , 0);
-        textView_NXB.setText("Năm Xuất Bản " +String.valueOf(NXB));
-        String title = bundle.getString("TenDanhMuc");
-        String image = bundle.getString("img_book");
-        Glide.with(this).load(image).into(img_book);
-//        textView_nameBook.setText(getIntent().getStringExtra("name"));
-//        textView_nameBook.setTextSize(14);
-        node.setText(bundle.getString("TomTatND") +" " +node.getText());
-        node.setTextSize(12);
+        if(intent.hasExtra("sach"))
+        {
+            sach = (Sach) intent.getSerializableExtra("sach");
+            textView_nameBook.setText(sach.getTensach());
+            textView_tacGia.setText(sach.getTacgia());
+            textView_NXB.setText(sach.getNxb());
+            Glide.with(this).load(sach.getImgSach()).into(img_book);
+            node.setText(sach.getTomtatND() +" " +node.getText());
+            node.setTextSize(12);
+            coordinatorLayout.setTitle(sach.getIdDanhmuc());
+
+        }
+//        Bundle bundle = intent.getBundleExtra("put_book");
+//        textView_nameBook.setText(bundle.getString("name"));
+//        textView_tacGia.setText(bundle.getString("tac_gia"));
+////        textView_DanhMuc.setText(bundle.getString("TenDanhMuc"));
+//        int NXB = bundle.getInt("NgayXB" , 0);
+//        textView_NXB.setText("Năm Xuất Bản " +String.valueOf(NXB));
+//        String title = bundle.getString("TenDanhMuc");
+//        String image = bundle.getString("img_book");
+//        Glide.with(this).load(image).into(img_book);
+////        textView_nameBook.setText(getIntent().getStringExtra("name"));
+////        textView_nameBook.setTextSize(14);
+//        node.setText(bundle.getString("TomTatND") +" " +node.getText());
+//        node.setTextSize(12);
     }
 
     @Override
@@ -121,21 +165,4 @@ public class View_ReadBook extends AppCompatActivity {
         coordinatorLayout.setTitle(getString(R.string.app_name));
     }
 
-    private List<Comment> getListComment() {
-        List<Comment> list = new ArrayList<>();
-        list.add(new Comment(R.drawable.account, "Nguyễn Văn Quỳnh" ,
-                "Đây là một cuốn sách hay nhất tôi từng đọc" , "thích","Phản hồi ","1 ngày trước") );
-        list.add(new Comment(R.drawable.account, "Nguyễn Văn Vinh" ,
-                "Đây là một cuốn sách hay nhất tôi từng đọc" , "thích","Phản hồi ","1 ngày trước") );
-        list.add(new Comment(R.drawable.account, "Nguyễn Văn Quỳnh" ,
-                "Đây là một cuốn sách hay nhất tôi từng đọc" , "thích","Phản hồi ","1 ngày trước") );
-        list.add(new Comment(R.drawable.account, "Nguyễn Văn Quỳnh" ,
-                "Đây là một cuốn sách hay nhất tôi từng đọc" , "thích","Phản hồi ","1 ngày trước") );
-        list.add(new Comment(R.drawable.account, "Nguyễn Văn Quỳnh" ,
-                "Đây là một cuốn sách hay nhất tôi từng đọc" , "thích","Phản hồi ","1 ngày trước") );
-        list.add(new Comment(R.drawable.account, "Nguyễn Văn Quang" ,
-                "Đây là một cuốn sách hay nhất tôi từng đọc" , "thích","Phản hồi ","1 ngày trước") );
-
-        return  list;
     }
-}

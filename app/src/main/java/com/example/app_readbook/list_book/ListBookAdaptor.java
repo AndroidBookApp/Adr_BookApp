@@ -3,7 +3,6 @@ package com.example.app_readbook.list_book;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -62,23 +62,11 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                 .into(holder.mBook);
 //        Picasso.get().load(listBook.getIMGsach()).into(holder.mBook);
 
-        holder.mBook.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context , View_ReadBook.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("img_book" , sach.getImgSach());
-                bundle.putString("name" , sach.getTensach());
-                bundle.putString("tac_gia" , sach.getTacgia());
-                bundle.putString("feedback" , sach.getFeedback());
-                bundle.putString("page" , sach.getSotrang());
-                bundle.putString("favorite" , sach.getFavorite());
-                bundle.putString("idDanhmuc" , sach.getIdDanhmuc());
-                bundle.putString("TenDanhMuc" , sach.getIdDanhmuc());
-                bundle.putString("TomTatND" , sach.getTomtatND());
-                bundle.putInt("NgayXB" , Integer.parseInt(sach.getNxb()));
-                bundle.putString("idSach" , sach.getIdSach());
-                intent.putExtra("put_book",bundle);
+                intent.putExtra("sach" , mSach.get(holder.getPosition()));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
@@ -113,7 +101,7 @@ public void searchBook(ArrayList<Sach> search)
         private TextView page;
         private ImageView mBook;
         private ImageView mIcon;
-
+        private CardView cardView;
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.txt_tensach);
@@ -123,6 +111,7 @@ public void searchBook(ArrayList<Sach> search)
             page = itemView.findViewById(R.id.icon_book);
             mBook = itemView.findViewById(R.id.bg_sach);
             mIcon = itemView.findViewById(R.id.icon_favorite);
+            cardView = itemView.findViewById(R.id.card_viewBook);
             mIcon.setOnClickListener(new View.OnClickListener() {
 
                 @Override

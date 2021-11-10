@@ -11,22 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.R;
 import com.example.app_readbook.readbook.MainReadbook;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class ChapterAdaptor extends RecyclerView.Adapter<ChapterAdaptor.ChapterViewHolder>{
-    private List<NameChapter> nameChapters;
+    private ArrayList<Chuong> chuongList;
     private Context context;
-    public void setData(List<NameChapter>nameChapterList)
-    {
-        this.nameChapters = nameChapterList;
-        notifyDataSetChanged();
-    }
-    public ChapterAdaptor(Context context) {
+
+    public ChapterAdaptor(ArrayList<Chuong> chuongList, Context context) {
+        this.chuongList = chuongList;
         this.context = context;
     }
+
 
     @NonNull
     @Override
@@ -38,13 +37,13 @@ public class ChapterAdaptor extends RecyclerView.Adapter<ChapterAdaptor.ChapterV
 
     @Override
     public void onBindViewHolder(@NonNull ChapterViewHolder holder, int position) {
-        NameChapter name = nameChapters.get(position);
-        if(nameChapters == null) {
+        Chuong namChuong = chuongList.get(position);
+        if(namChuong == null) {
             return;
         }
-        holder.tv_chaper.setText(name.getChapter());
-        holder.tv_book.setText(name.getBook_min());
-        holder.tv_max.setText(name.getBook_max());
+        holder.tv_chaper.setText(namChuong.getTenChuong());
+        holder.tv_book.setText(namChuong.getSotrang());
+//        holder.tv_max.setText(namChuong.getBook_max());
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,9 +68,9 @@ public class ChapterAdaptor extends RecyclerView.Adapter<ChapterAdaptor.ChapterV
 
     @Override
     public int getItemCount() {
-        if(nameChapters != null)
+        if(chuongList != null)
         {
-            return nameChapters.size();
+            return chuongList.size();
         }
         return 0;
     }

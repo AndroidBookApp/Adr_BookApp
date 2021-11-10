@@ -1,9 +1,12 @@
 package com.example.app_readbook.Service;
 
+import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
+import com.example.app_readbook.Model.danhgia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,6 +25,17 @@ public interface ApiInterface {
     Call<List<Sach>> listDanhMuc(@Field("idDanhmuc") String idDanhmuc);
     @GET("danhmuc.php")
     Call<List<DanhMucSach>> TenDanhMuc();
+//    @FormUrlEncoded
+//    @POST("chitietsach.php")
+//    Call<List<Sach>> Chitietsach(@Field("idSach") String idSach);
+    @GET("chitietsach.php")
+    Call<ArrayList<Sach>> Chitietsach();
+    @FormUrlEncoded
+    @POST("danhgia.php")
+    Call<List<danhgia>> LoadDanhgia(@Field("idSach") String idSach);
+    @FormUrlEncoded
+    @POST("chuong.php")
+    Call<List<Chuong>> LoadChuong(@Field("idSach") String idSach);
     @FormUrlEncoded
     @POST("login.php")
     Call<List<User>> getUser(@Field("username") String username ,@Field("password") String password);

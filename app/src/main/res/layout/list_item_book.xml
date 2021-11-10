@@ -7,6 +7,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         app:cardCornerRadius="8dp"
+        android:id="@+id/card_viewBook"
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
