@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -19,10 +20,16 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
+import com.example.app_readbook.Service.ApiInterface;
+import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.View_ReadBook;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListViewHolder> {
 
@@ -72,7 +79,35 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
 
             }
         });
+        holder.mIcon.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(context, mSach.get(holder.getPosition()).getTensach(), Toast.LENGTH_SHORT).show();
+                holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+                ApiInterface apiInterface = ApiService.apiInterface();
+                Call<String> callback = apiInterface.UpdateFavorite("1" , mSach.get(holder.getPosition()).getIdSach());
+                callback.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String ketqua = response.body();
+                        if(ketqua.equals("Success"))
+                        {
+                            Toast.makeText(context, "Đã thích", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(context, "Thích không thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+                holder.mBook.setEnabled(false);
+            }
+
+        });
     }
 
 public void searchBook(ArrayList<Sach> search)
@@ -112,25 +147,7 @@ public void searchBook(ArrayList<Sach> search)
             mBook = itemView.findViewById(R.id.bg_sach);
             mIcon = itemView.findViewById(R.id.icon_favorite);
             cardView = itemView.findViewById(R.id.card_viewBook);
-            mIcon.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    Sach listBook = mSach.get(position);
-                   if (!mIcon.isClickable())
-                   {
-                       mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
-                       mIcon.isClickable();
-
-
-                   }else if(mIcon.isClickable()){
-                       mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-
-                   }
-                }
-
-            });
 
 
         }

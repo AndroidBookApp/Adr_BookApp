@@ -37,6 +37,9 @@ public interface ApiInterface {
     @POST("chuong.php")
     Call<List<Chuong>> LoadChuong(@Field("idSach") String idSach);
     @FormUrlEncoded
+    @POST("luotthich.php")
+    Call<String> UpdateFavorite(@Field("Favorite") String favorite , @Field("idSach") String idSach);
+    @FormUrlEncoded
     @POST("login.php")
     Call<List<User>> getUser(@Field("username") String username ,@Field("password") String password);
     @FormUrlEncoded

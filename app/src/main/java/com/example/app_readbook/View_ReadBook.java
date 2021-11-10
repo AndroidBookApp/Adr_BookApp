@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import com.example.app_readbook.list_comment.Comment;
 import com.example.app_readbook.list_comment.CommentAdaptor;
 import com.example.app_readbook.list_comment.Main_NodeReadBook;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,7 @@ public class View_ReadBook extends AppCompatActivity {
     DanhMucSach danhMucSach;
     chitietsach chitiet;
     danhgia danhgia;
+    private FloatingActionButton favorite;
     private AppCompatTextView textView_book , next_page , textView_tacGia , textView_DanhMuc , textView_NXB , textView_nameBook , node;
     private Toolbar toolbar;
     @SuppressLint("SetTextI18n")
@@ -123,19 +126,7 @@ public class View_ReadBook extends AppCompatActivity {
             coordinatorLayout.setTitle(sach.getIdDanhmuc());
 
         }
-//        Bundle bundle = intent.getBundleExtra("put_book");
-//        textView_nameBook.setText(bundle.getString("name"));
-//        textView_tacGia.setText(bundle.getString("tac_gia"));
-////        textView_DanhMuc.setText(bundle.getString("TenDanhMuc"));
-//        int NXB = bundle.getInt("NgayXB" , 0);
-//        textView_NXB.setText("Năm Xuất Bản " +String.valueOf(NXB));
-//        String title = bundle.getString("TenDanhMuc");
-//        String image = bundle.getString("img_book");
-//        Glide.with(this).load(image).into(img_book);
-////        textView_nameBook.setText(getIntent().getStringExtra("name"));
-////        textView_nameBook.setTextSize(14);
-//        node.setText(bundle.getString("TomTatND") +" " +node.getText());
-//        node.setTextSize(12);
+
     }
 
     @Override
@@ -160,9 +151,36 @@ public class View_ReadBook extends AppCompatActivity {
         textView_tacGia = findViewById(R.id.txt_tacGiaBook);
         textView_NXB = findViewById(R.id.txt_NXB);
         node = findViewById(R.id.node_textBook);
-//        coordinatorLayout.setTag("TenDanhMuc");
-
-        coordinatorLayout.setTitle(getString(R.string.app_name));
+        favorite = findViewById(R.id.btn_favoriteView);
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDatFavorite();
+            }
+        });
     }
 
+    private void getDatFavorite() {
+        favorite.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+        ApiInterface apiInterface = ApiService.apiInterface();
+        Call<String> callback = apiInterface.UpdateFavorite("1" , String.valueOf(saches.get(Integer.parseInt(sach.getIdSach()))));
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String ketqua = response.body();
+                if(ketqua.equals("Success"))
+                {
+                    Toast.makeText(View_ReadBook.this, "Đã thích", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(View_ReadBook.this, "Thích không thành công", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        favorite.setEnabled(false);
     }
+}

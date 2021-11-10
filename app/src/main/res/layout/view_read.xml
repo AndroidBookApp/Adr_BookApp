@@ -241,15 +241,16 @@
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_favoriteView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_favorite_1_24"
+        android:src="@drawable/ic_baseline_favorite_24"
         android:baselineAlignBottom="false"
         app:fabSize="normal"
         android:clickable="true"
         app:layout_anchorGravity="end|bottom"
         app:layout_anchor="@id/appbarr"
         android:layout_marginRight="30dp"
-        android:backgroundTint="#FF7D7D"
+        android:backgroundTint="#FFFFFF"
         tools:ignore="ContentDescription,KeyboardInaccessibleWidget" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

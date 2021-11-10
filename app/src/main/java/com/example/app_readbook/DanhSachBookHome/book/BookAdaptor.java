@@ -67,17 +67,9 @@ public home home;
         holder.relativeLayoutBookMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-////                String name = nameBook.getClass(); ;
-//                home_fragment = new Home_fragment();
                 Intent intent = new Intent( mContext , View_ReadBook.class);
-//                intent.putExtra("img_book", mBook.getResourceId());
-//                intent.putExtra("name", mBook.getTitle());
-////                intent.putExtra("name_chapter" , name.getBytes());
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-////                home_fragment.startActivity(intent);
+                intent.putExtra("sach" , sachList.get(holder.getPosition()));
                 mContext.startActivity(intent);
-//                IClickItemBook.iClickBook(mBook);
-
             }
         });
         holder.imageBook.setOnClickListener(new View.OnClickListener() {
