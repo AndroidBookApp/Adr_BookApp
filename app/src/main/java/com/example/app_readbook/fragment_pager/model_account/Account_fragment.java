@@ -21,19 +21,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.app_readbook.Model.User;
 import com.example.app_readbook.R;
 import com.example.app_readbook.activity.SignIn;
 import com.example.app_readbook.home;
+import com.example.app_readbook.shareFreferences.DataManager;
 
 
 public class Account_fragment extends Fragment {
-private TextView textView ;
+private TextView textView , name_user;
 private View view;
 private RecyclerView recyclerView;
 private LinearLayout linearLayout , layout_out;
 home mHome;
-
-public static final String url = "http://localhost:8888/demo_app/update_member.php";
     public Account_fragment() {
 
     }
@@ -45,7 +45,11 @@ public static final String url = "http://localhost:8888/demo_app/update_member.p
         view = inflater.inflate(R.layout.fragment_account_fragment , container , false);
         linearLayout = view.findViewById(R.id.lay_out_tt);
         mHome = new home();
-
+        name_user = view.findViewById(R.id.name_username);
+        User user = DataManager.getObjectUser();
+        if (user !=null) {
+            name_user.setText(user.getUsername());
+        }
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

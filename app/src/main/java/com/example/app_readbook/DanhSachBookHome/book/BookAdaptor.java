@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app_readbook.DanhSachBookHome.IClickItemBook;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
 import com.example.app_readbook.View_ReadBook;
@@ -26,7 +25,7 @@ import java.util.ArrayList;
 public class BookAdaptor extends RecyclerView.Adapter<BookAdaptor.BookViewHodel> {
 private ArrayList<Sach> sachList;
 private Context mContext;
-private IClickItemBook iClickItemBook;
+
 public home home;
 
     public BookAdaptor(ArrayList<Sach> sachList, Context mContext) {
@@ -34,10 +33,7 @@ public home home;
         this.mContext = mContext;
     }
 
-    public void setOnClick(IClickItemBook iClickItem)
-{
-    iClickItemBook = iClickItem;
-}
+
 //
 //    public BookAdaptor(Context context , IClickItemBook itemBook) {
 //
@@ -49,7 +45,7 @@ public home home;
     @Override
     public BookViewHodel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listbookmain, parent, false);
-        return new BookViewHodel(view , iClickItemBook);
+        return new BookViewHodel(view );
     }
 
 
@@ -93,25 +89,12 @@ public home home;
         private TextView txtTitle;
         private RelativeLayout relativeLayoutBookMain;
         private CardView cardView;
-        public BookViewHodel(@NonNull View itemView , IClickItemBook itemBook) {
+        public BookViewHodel(@NonNull View itemView) {
             super(itemView);
             imageBook = itemView.findViewById(R.id.book);
             txtTitle = itemView.findViewById(R.id.text_view);
             cardView = itemView.findViewById(R.id.cardView);
             relativeLayoutBookMain = itemView.findViewById(R.id.rlt_bookMain);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(itemBook!=null)
-                    {
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION)
-                        {
-                            itemBook.iClickListener(position);
-                        }
-                    }
-                }
-            });
         }
     }
 

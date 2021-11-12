@@ -33,19 +33,8 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
     private ArrayList<Sach> saches;
     private Context mcontext;
     DanhMucSach danhMucSach;
-    private OnClickListener mListItem;
     Home_fragment home_fragment;
-//
-//    @Override
-//    public void iClickListener(int position) {
-//        if (position != RecyclerView.NO_POSITION) {
-//            iClickListener(position);
-//        }
-//    }
 
-    public interface OnClickListener{
-        void IClick(int position);
-    }
     public NameBookAdaptor(Context mcontext  ,ArrayList<DanhMucSach> listDanhMuc) {
         this.mcontext = mcontext;
         this.mDanhmuc = listDanhMuc;
@@ -55,7 +44,7 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
     @Override
     public NameBookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_text , parent , false);
-        return new NameBookViewHolder(view , mListItem);
+        return new NameBookViewHolder(view);
     }
 
 
@@ -112,25 +101,13 @@ private TextView tvname;
 private TextView tv_sl;
 private TextView tvnext;
 private RelativeLayout relativeLayout;
-        public NameBookViewHolder(@NonNull View itemView , OnClickListener listener) {
+        public NameBookViewHolder(@NonNull View itemView ) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.ryc_view);
             relativeLayout = itemView.findViewById(R.id.layout_text);
             tvname = itemView.findViewById(R.id.tv_1);
             tv_sl = itemView.findViewById(R.id.tv_2);
             tvnext = itemView.findViewById(R.id.tv_next);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener != null)
-                    {
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            listener.IClick(position);
-                        }
-                    }
-                }
-            });
         }
     }
 }

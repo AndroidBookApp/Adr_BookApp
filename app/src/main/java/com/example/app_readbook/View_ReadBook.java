@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
+import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.chitietsach;
 import com.example.app_readbook.Model.danhgia;
 import com.example.app_readbook.Service.ApiInterface;
@@ -54,6 +55,7 @@ public class View_ReadBook extends AppCompatActivity {
     private FloatingActionButton favorite;
     private AppCompatTextView textView_book , next_page , textView_tacGia , textView_DanhMuc , textView_NXB , textView_nameBook , node;
     private Toolbar toolbar;
+    User user;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -163,7 +165,7 @@ public class View_ReadBook extends AppCompatActivity {
     private void getDatFavorite() {
         favorite.setImageResource(R.drawable.ic_baseline_favorite_1_24);
         ApiInterface apiInterface = ApiService.apiInterface();
-        Call<String> callback = apiInterface.UpdateFavorite("1" , String.valueOf(saches.get(Integer.parseInt(sach.getIdSach()))));
+        Call<String> callback = apiInterface.UpdateFavorite(user.getIdMember(),String.valueOf(saches.get(Integer.parseInt(sach.getIdSach()))));
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

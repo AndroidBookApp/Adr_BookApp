@@ -19,6 +19,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.app_readbook.Model.Sach;
+import com.example.app_readbook.Model.User;
 import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
@@ -35,6 +36,8 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
 
   private List<Sach> mSach;
   private Context context;
+  private ArrayList<User> users;
+  private User user;
 
     public ListBookAdaptor( Context context , List<Sach> mList ) {
         this.context = context;
@@ -79,6 +82,8 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
 
             }
         });
+
+
         holder.mIcon.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -86,16 +91,18 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
 //                Toast.makeText(context, mSach.get(holder.getPosition()).getTensach(), Toast.LENGTH_SHORT).show();
                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
                 ApiInterface apiInterface = ApiService.apiInterface();
-                Call<String> callback = apiInterface.UpdateFavorite("1" , mSach.get(holder.getPosition()).getIdSach());
+                Call<String> callback = apiInterface.UpdateFavorite(user.getSuccess(), mSach.get(holder.getPosition()).getIdSach());
                 callback.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         String ketqua = response.body();
-                        if(ketqua.equals("Success"))
+                        if (ketqua.equals("like"))
                         {
+                            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
                             Toast.makeText(context, "Đã thích", Toast.LENGTH_SHORT).show();
                         }else {
-                            Toast.makeText(context, "Thích không thành công", Toast.LENGTH_SHORT).show();
+                            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
+                            Toast.makeText(context, "Bỏ thích", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -104,7 +111,6 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
 
                     }
                 });
-                holder.mBook.setEnabled(false);
             }
 
         });

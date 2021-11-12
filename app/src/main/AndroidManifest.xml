@@ -13,6 +13,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".shareFreferences.MyApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
@@ -32,7 +33,7 @@
             android:name=".fragment_pager.model_account.edit_tt_account"
             android:exported="true" />
         <activity
-            android:name=".ApiView.dangnhap"
+            android:name=".home"
             android:exported="true" />
         <activity
             android:name=".fragment_pager.model_account.Data_edit_account"
@@ -73,7 +74,7 @@
             android:name=".ApiView.dangky"
             android:exported="true" />
         <activity
-            android:name=".home"
+            android:name=".ApiView.dangnhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

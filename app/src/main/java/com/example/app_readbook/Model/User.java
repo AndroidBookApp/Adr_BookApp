@@ -38,9 +38,7 @@ public class User {
     @Expose
     private String imgBia;
 
-
-
-    public User(String idMember, String username, String memberName, String password, String email, String gioitinh, String ngaysinh, String success, String message) {
+    public User(String idMember, String username, String memberName, String password, String email, String gioitinh, String ngaysinh, String success, String message, String imgAvatar, String imgBia) {
         this.idMember = idMember;
         this.username = username;
         MemberName = memberName;
@@ -50,6 +48,8 @@ public class User {
         Ngaysinh = ngaysinh;
         this.success = success;
         this.message = message;
+        this.imgAvatar = imgAvatar;
+        this.imgBia = imgBia;
     }
 
     public String getIdMember() {
@@ -137,5 +137,22 @@ public class User {
 
     public void setImgBia(String imgBia) {
         this.imgBia = imgBia;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "idMember='" + idMember + '\'' +
+                ", username='" + username + '\'' +
+                ", MemberName='" + MemberName + '\'' +
+                ", password='" + password + '\'' +
+                ", Email='" + Email + '\'' +
+                ", Gioitinh='" + Gioitinh + '\'' +
+                ", Ngaysinh='" + Ngaysinh + '\'' +
+                ", success='" + success + '\'' +
+                ", message='" + message + '\'' +
+                ", imgAvatar='" + imgAvatar + '\'' +
+                ", imgBia='" + imgBia + '\'' +
+                '}';
     }
 }

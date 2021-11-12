@@ -77,13 +77,6 @@ public class Home_fragment extends Fragment{
         layout_bookNew = mView.findViewById(R.id.id3);
         recyclerView = mView.findViewById(R.id.rcv_name);
         getDataDanhMuc();
-//        allItemAdaptor = new AllItemAdaptor();
-//        allItemAdaptorr = new com.example.app_readbook.test_home.AllItemAdaptor();
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(linearLayoutManager);
-////        allItemAdaptor.setData(getActivity() , getListData());
-//        allItemAdaptorr.setData(getActivity() , getListData());
-//        recyclerView.setAdapter(allItemAdaptorr);
         view.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
