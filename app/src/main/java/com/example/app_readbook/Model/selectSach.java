@@ -3,10 +3,12 @@ package com.example.app_readbook.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class login {
-    @SerializedName("user")
+import java.util.List;
+
+public class selectSach {
+    @SerializedName("sach")
     @Expose
-    private User user;
+    private List<Sach> sach;
     @SerializedName("success")
     @Expose
     private String success;
@@ -14,16 +16,16 @@ public class login {
     @Expose
     private String message;
 
-    public login(User user) {
-        this.user = user;
+    public selectSach(List<Sach> sach) {
+        this.sach = sach;
     }
 
-    public User getUser() {
-        return user;
+    public List<Sach> getSach() {
+        return sach;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSach(List<Sach> sach) {
+        this.sach = sach;
     }
 
     public String getSuccess() {

@@ -22,6 +22,7 @@
         android:theme="@style/Theme.App_ReadBook"
         android:usesCleartextTraffic="true"
         tools:ignore="Instantiatable,MissingClass"
+
         tools:targetApi="n">
         <activity
             android:name=".onboarding.OnboardingMain"

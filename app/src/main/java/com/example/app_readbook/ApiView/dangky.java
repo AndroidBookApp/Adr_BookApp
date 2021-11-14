@@ -70,7 +70,6 @@ public class dangky extends AppCompatActivity {
                                             }
                                         }
                                     }
-
                                     @Override
                                     public void onFailure(Call<User> call, Throwable t) {
                                         Toast.makeText(dangky.this, "lỗi gì đó", Toast.LENGTH_SHORT).show();

@@ -29,7 +29,7 @@ import retrofit2.Response;
 public class Main_Chapter extends AppCompatActivity {
 private RecyclerView recyclerView;
 private ArrayList<Chuong> chuongs;
-private ArrayList<chitietsach> saches;
+private ArrayList<Sach> saches;
 private TextView text_name;
 Sach sach;
 chitietsach chitietsach;
@@ -43,7 +43,7 @@ private Toolbar toolbar;
         text_name = findViewById(R.id.txt_name);
 //        iniIntent();
 //        text_name.setText(getIntent().getStringExtra("nameBook"));
-
+//        saches = DataManager.loadSach();
             iniIntent();
 //        toolbar = findViewById(R.id.toolbar_chapter);
 //        setSupportActionBar(toolbar);
@@ -62,7 +62,6 @@ private Toolbar toolbar;
         if(intent.hasExtra("sach"))
 
         {
-            sach = (Sach) intent.getSerializableExtra("sach");
             text_name.setText(sach.getTensach());
         }
     }
@@ -74,6 +73,7 @@ private Toolbar toolbar;
             @Override
             public void onResponse(Call<List<Chuong>> call, Response<List<Chuong>> response) {
                 chuongs = (ArrayList<Chuong>) response.body();
+
                 ChapterAdaptor chapterAdaptor = new ChapterAdaptor(chuongs,Main_Chapter.this );
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Main_Chapter.this , LinearLayoutManager.VERTICAL , false);
                 recyclerView.setLayoutManager(linearLayoutManager);

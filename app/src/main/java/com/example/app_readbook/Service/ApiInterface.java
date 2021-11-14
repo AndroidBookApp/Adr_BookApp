@@ -41,14 +41,23 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("thichsach.php")
     Call<String> UpdateFavorite(@Field("idMember") String member,@Field("idSach") String idSach);
-    @FormUrlEncoded
-    @POST("login.php")
-    Call<List<User>> getUser(@Field("username") String username ,@Field("password") String password);
-
+//    @FormUrlEncoded
+//    @POST("login.php")
+//    Call<List<User>> getUser(@Field("username") String username ,@Field("password") String password);
+//    @Headers({
+//        "Accept: application/json",
+//        "Content-Type: application/json"
+//    })
     @FormUrlEncoded
     @POST("loginn.php")
     Call<login> getLogin(@Field("username") String username , @Field("password") String password);
     @FormUrlEncoded
     @POST("dangky.php")
     Call<User> getRegister(@Field("username") String username ,@Field("password") String password , @Field("email") String email);
+    @FormUrlEncoded
+    @POST("update_profile.php")
+    Call<login> getUpdate(@Field("idMember") String idMember ,
+                          @Field("EN_IMAGE") String EN_IMAGE
+                        );
+
 }

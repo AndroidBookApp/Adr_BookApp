@@ -19,8 +19,8 @@ import com.example.app_readbook.Model.login;
 import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
+import com.example.app_readbook.home;
 import com.example.app_readbook.shareFreferences.DataManager;
-import com.example.app_readbook.shareFreferences.MySharePreferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,14 +34,15 @@ public class dangnhap extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private CheckBox mCheckbox;
     private TextView tvForgetPass;
-    MySharePreferences mySharePreferences;
     DataManager dataManager;
-    User mUser;
+    login login;
+    User User;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         anhxa();
+
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,39 +50,23 @@ public class dangnhap extends AppCompatActivity {
                 pass = txt_password.getText().toString().trim();
                 if (user.length() > 0 && pass.length() > 0)
                 {
-//                    ApiInterface apiInterface = ApiService.apiInterface();
-//                    Call<List<User>> userList = apiInterface.getUser(user, pass);
-//                    userList.enqueue(new Callback<List<User>>() {
-//                        @Override
-//                        public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-//                            ArrayList<User> users = (ArrayList<User>) response.body();
-//
-//
-//                            if(users != null) {
-//                                if (users.size() > 0) {
-//                                    Intent intent = new Intent(dangnhap.this, home.class);
-//                                    startActivity(intent);
-////                                    mUser = new User(mUser.getIdMember() ,mUser.getUsername(),mUser.getMemberName(),mUser.getPassword(),mUser.getEmail(),mUser.getGioitinh(),mUser.getNgaysinh(),mUser.getSuccess(),mUser.getMessage());
-////                                    DataManager.setObjectUser(mUser);
-//                                    Toast.makeText(dangnhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        }
-//                        @Override
-//                        public void onFailure(Call<List<User>> call, Throwable t) {
-//                            Toast.makeText(dangnhap.this, "error", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
                     ApiInterface apiInterface = ApiService.apiInterface();
                     Call<login> mUser = apiInterface.getLogin(user,pass);
                     mUser.enqueue(new Callback<login>() {
                         @Override
                         public void onResponse(Call<login> call, Response<login> response) {
-                            login login = response.body();
+                            login logins = response.body();
                                 if (response.isSuccessful()) {
-//                                mySharePreferences.putBooleanUser("", true);
-//                                this.
-                                    Toast.makeText(dangnhap.this, login.getMessage(), Toast.LENGTH_SHORT).show();
+                                    if (logins!=null)
+                                    {
+                                        DataManager.saveUserName(logins.getUser());
+                                        Intent intent = new Intent(dangnhap.this, home.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                        Toast.makeText(dangnhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                    }
+
+//                                    }
                                 }
                         }
 
@@ -115,5 +100,16 @@ public class dangnhap extends AppCompatActivity {
         progressDialog.setMessage("Loading.....");   // load khi bấm btn_login
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mCheckbox = findViewById(R.id.checkbox);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+//        if ((dataManager.isLogin()))
+//        {
+//            Intent intent = new Intent(dangnhap.this, home.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+//        }
     }
 }

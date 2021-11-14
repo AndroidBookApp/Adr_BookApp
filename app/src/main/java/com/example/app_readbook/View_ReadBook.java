@@ -83,7 +83,7 @@ public class View_ReadBook extends AppCompatActivity {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saches = new ArrayList<>();
+//                saches = DataManager.loadSach();
                 String book = textView_nameBook.getText().toString().trim();
                 Intent intent = new Intent(View_ReadBook.this , Main_Chapter.class);
 //                intent.putExtra("view_sach" , );

@@ -17,8 +17,8 @@ public static  final String KEY_NAME_USER = "key_name";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data_edit_name);
-        edit_user = findViewById(R.id.txt_editName);
+        setContentView(R.layout.dialog_edit_username);
+        edit_user = findViewById(R.id.txt_editUsName);
         edit_user.setText(getIntent().getStringExtra("name_userName"));
         btn_back = findViewById(R.id.btn_updateName);
         btn_back.setOnClickListener(new View.OnClickListener() {

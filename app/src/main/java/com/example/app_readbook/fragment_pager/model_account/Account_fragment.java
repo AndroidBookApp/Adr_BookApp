@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,18 +22,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.R;
 import com.example.app_readbook.activity.SignIn;
 import com.example.app_readbook.home;
 import com.example.app_readbook.shareFreferences.DataManager;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class Account_fragment extends Fragment {
 private TextView textView , name_user;
 private View view;
 private RecyclerView recyclerView;
+private ImageView anh_bia;
+private CircleImageView avatar;
 private LinearLayout linearLayout , layout_out;
+private DataManager dataManager;
+private Context context;
 home mHome;
     public Account_fragment() {
 
@@ -44,19 +52,30 @@ home mHome;
 
         view = inflater.inflate(R.layout.fragment_account_fragment , container , false);
         linearLayout = view.findViewById(R.id.lay_out_tt);
+        avatar = view.findViewById(R.id.avatar);
+        anh_bia = view.findViewById(R.id.background_image_account);
+
         mHome = new home();
         name_user = view.findViewById(R.id.name_username);
-        User user = DataManager.getObjectUser();
-        if (user !=null) {
-            name_user.setText(user.getUsername());
+        User user = DataManager.loadUser();
+        if(user != null)
+        {
+            Glide.with(getActivity()).load(user.getImgAvatar()).into(avatar);
+            Glide.with(getActivity()).load(user.getImgBia()).into(anh_bia);
+            String username = user.getMemberName();
+            name_user.setText(username);
+        }else{
+            Glide.with(getActivity()).load(user.getImgBia()).into(anh_bia);
+            String username = user.getMemberName();
+            name_user.setText(username);
         }
+
+
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity() , edit_tt_account.class);
-//                user = new User("" , "" , "");
-                Bundle bundle = intent.getBundleExtra("duLieuUser");
-                intent.putExtra("objectUser" , bundle);
+
                 getActivity().startActivity(intent);
             }
         });

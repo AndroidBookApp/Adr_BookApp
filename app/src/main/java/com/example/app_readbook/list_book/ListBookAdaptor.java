@@ -24,6 +24,7 @@ import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.View_ReadBook;
+import com.example.app_readbook.shareFreferences.DataManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +37,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
 
   private List<Sach> mSach;
   private Context context;
-  private ArrayList<User> users;
-  private User user;
+
 
     public ListBookAdaptor( Context context , List<Sach> mList ) {
         this.context = context;
@@ -85,13 +85,12 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
 
 
         holder.mIcon.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
 //                Toast.makeText(context, mSach.get(holder.getPosition()).getTensach(), Toast.LENGTH_SHORT).show();
-                holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+                User user = DataManager.loadUser();
                 ApiInterface apiInterface = ApiService.apiInterface();
-                Call<String> callback = apiInterface.UpdateFavorite(user.getSuccess(), mSach.get(holder.getPosition()).getIdSach());
+                Call<String> callback = apiInterface.UpdateFavorite(user.getIdMember(), mSach.get(holder.getPosition()).getIdSach());
                 callback.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -100,12 +99,11 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                         {
                             holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
                             Toast.makeText(context, "Đã thích", Toast.LENGTH_SHORT).show();
-                        }else {
+                        }else if(ketqua.equals("unlike")){
                             holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
                             Toast.makeText(context, "Bỏ thích", Toast.LENGTH_SHORT).show();
                         }
                     }
-
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
 

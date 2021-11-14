@@ -15,6 +15,7 @@ import com.example.app_readbook.fragment_pager.model_account.Account_fragment;
 import com.example.app_readbook.fragment_pager.model_favorite.Favorite_fragment;
 import com.example.app_readbook.fragment_pager.model_home.Home_fragment;
 import com.example.app_readbook.fragment_pager.model_search.Search_fragment;
+import com.example.app_readbook.shareFreferences.DataManager;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -46,30 +47,33 @@ private NavigationBarView.OnItemSelectedListener navListener = new NavigationBar
          switch (item.getItemId()){
 
             case R.id.btn_home:
+                DataManager.loadUser();
                 appBarLayout.setVisibility(View.VISIBLE);
                 fragment = new Home_fragment();
                 break;
             case R.id.btn_search:
+                DataManager.loadUser();
                 appBarLayout.setVisibility(View.GONE);
                 fragment = new Search_fragment();
 
                 break;
             case R.id.btn_favorite:
+                DataManager.loadUser();
                 appBarLayout.setVisibility(View.GONE);
                 fragment = new Favorite_fragment();
 
                 break;
             case R.id.btn_account:
+                DataManager.loadUser();
                 appBarLayout.setVisibility(View.GONE);
                 fragment = new Account_fragment();
 
 
                 break;
             default:
+                DataManager.loadUser();
                 appBarLayout.setVisibility(View.VISIBLE);
-
                 fragment = new Home_fragment();
-
                 break;
         }
         return showFragment(fragment);
@@ -79,9 +83,11 @@ private NavigationBarView.OnItemSelectedListener navListener = new NavigationBar
     @Override
     public void onBackPressed() {
         if (bottomNavigationView.getSelectedItemId() == R.id.btn_home) {
+            DataManager.loadUser();
             super.onBackPressed();
             finish();
         }else{
+            DataManager.loadUser();
             bottomNavigationView.setSelectedItemId(R.id.btn_home);
         }
     }
@@ -99,5 +105,4 @@ private NavigationBarView.OnItemSelectedListener navListener = new NavigationBar
         }
         getWindow().setStatusBarColor(ContextCompat.getColor(home.this, R.color.background_color));
     }
-
 }

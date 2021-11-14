@@ -105,7 +105,7 @@
                             android:drawablePadding="10dp"
                             android:fontFamily="@font/roboto_regular"
                             android:hint="Nhập lại password"
-                            android:inputType="textEmailSubject"
+                            android:inputType="textWebPassword"
                             android:paddingStart="10dp"
                             android:textColorHint="@color/text"
                             android:textSize="15dp" />
