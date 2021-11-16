@@ -27,7 +27,6 @@ import com.example.app_readbook.View_ReadBook;
 import com.example.app_readbook.shareFreferences.DataManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,11 +34,12 @@ import retrofit2.Response;
 
 public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListViewHolder> {
 
-  private List<Sach> mSach;
+  private ArrayList<Sach> mSach;
   private Context context;
 
 
-    public ListBookAdaptor( Context context , List<Sach> mList ) {
+
+    public ListBookAdaptor( Context context , ArrayList<Sach> mList ) {
         this.context = context;
         this.mSach = mList;
         notifyDataSetChanged();
@@ -76,7 +76,9 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context , View_ReadBook.class);
-                intent.putExtra("sach" , mSach.get(holder.getPosition()));
+                DataManager.saveSach(mSach);
+                DataManager.saveObjectSach(sach);
+//                intent.putExtra("sach" , mSach.get(holder.getPosition()));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 

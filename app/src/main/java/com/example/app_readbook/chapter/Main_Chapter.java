@@ -1,11 +1,8 @@
 package com.example.app_readbook.chapter;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -14,66 +11,49 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.Sach;
-import com.example.app_readbook.Model.chitietsach;
 import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
-
+import com.example.app_readbook.shareFreferences.DataManager;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class Main_Chapter extends AppCompatActivity {
 private RecyclerView recyclerView;
 private ArrayList<Chuong> chuongs;
-private ArrayList<Sach> saches;
 private TextView text_name;
 Sach sach;
-chitietsach chitietsach;
-String chapter;
 private Toolbar toolbar;
+String idSach;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_chapter);
         recyclerView = findViewById(R.id.rcv_chapter);
         text_name = findViewById(R.id.txt_name);
-//        iniIntent();
-//        text_name.setText(getIntent().getStringExtra("nameBook"));
-//        saches = DataManager.loadSach();
-            iniIntent();
-//        toolbar = findViewById(R.id.toolbar_chapter);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setTitle(getIntent().getStringExtra("tensach"));
+        toolbar = findViewById(R.id.toolbar_chapter);
+        iniIntent();
         getDataChuong();
-
-
-
     }
 
     private void iniIntent() {
-        Intent intent = getIntent();
-        if(intent.hasExtra("sach"))
-
-        {
-            text_name.setText(sach.getTensach());
-        }
+        sach = new Sach();
+        sach = DataManager.loadObjectSach();
+        idSach = sach.getIdSach();
+        text_name.setText(sach.getTensach());
     }
 
     private void getDataChuong() {
         ApiInterface apiInterface = ApiService.apiInterface();
-        Call<List<Chuong>> chapters = apiInterface.LoadChuong(sach.getIdSach());
+        Call<List<Chuong>> chapters = apiInterface.LoadChuong(idSach);
         chapters.enqueue(new Callback<List<Chuong>>() {
             @Override
             public void onResponse(Call<List<Chuong>> call, Response<List<Chuong>> response) {
                 chuongs = (ArrayList<Chuong>) response.body();
-
                 ChapterAdaptor chapterAdaptor = new ChapterAdaptor(chuongs,Main_Chapter.this );
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Main_Chapter.this , LinearLayoutManager.VERTICAL , false);
                 recyclerView.setLayoutManager(linearLayoutManager);
@@ -88,21 +68,12 @@ private Toolbar toolbar;
             }
         });
     }
-
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        return super.onOptionsItemSelected(item);
+    public void onBackPressed() {
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
+        super.onBackPressed();
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setTitle(getIntent().getStringExtra("nameBook"));
-//        super.onBackPressed();
-//    }
 }

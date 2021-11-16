@@ -22,12 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
+import com.example.app_readbook.ApiView.dangnhap;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.R;
-import com.example.app_readbook.activity.SignIn;
 import com.example.app_readbook.home;
 import com.example.app_readbook.shareFreferences.DataManager;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -60,12 +60,12 @@ home mHome;
         User user = DataManager.loadUser();
         if(user != null)
         {
-            Glide.with(getActivity()).load(user.getImgAvatar()).into(avatar);
-            Glide.with(getActivity()).load(user.getImgBia()).into(anh_bia);
+            Picasso.get().load(user.getImgAvatar()).into(avatar);
+            Picasso.get().load(user.getImgBia()).into(anh_bia);
             String username = user.getMemberName();
             name_user.setText(username);
         }else{
-            Glide.with(getActivity()).load(user.getImgBia()).into(anh_bia);
+//            Glide.with(getActivity()).load(user.getImgBia()).into(anh_bia);
             String username = user.getMemberName();
             name_user.setText(username);
         }
@@ -74,8 +74,7 @@ home mHome;
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity() , edit_tt_account.class);
-
+                Intent intent = new Intent(getActivity() , edit_tt_account_test.class);
                 getActivity().startActivity(intent);
             }
         });
@@ -118,7 +117,7 @@ home mHome;
             public void onClick(View v) {
                 Context context = getActivity();
                 if (context!= null) {
-                    Intent intent = new Intent(context, SignIn.class);
+                    Intent intent = new Intent(context, dangnhap.class);
                     context.startActivity(intent);
                 }
             }

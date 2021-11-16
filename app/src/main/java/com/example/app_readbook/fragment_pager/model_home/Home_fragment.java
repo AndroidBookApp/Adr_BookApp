@@ -24,10 +24,8 @@ import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.fragment_pager.PhotoAdaptor;
-import com.example.app_readbook.fragment_pager.photo;
 import com.example.app_readbook.home;
 import com.example.app_readbook.list_book.Main_BookNew;
-import com.example.app_readbook.test_home.AllItemAdaptor;
 import com.example.app_readbook.test_home.all;
 import com.example.app_readbook.test_home.book_item;
 import com.example.app_readbook.test_home.name_item;
@@ -46,15 +44,11 @@ public class Home_fragment extends Fragment{
     home mHome;
     private CircleIndicator3 indicator;
     private ViewPager2  view;
-//    private RecyclerView recyclerView;
-    private List<photo> mlist;
     private ArrayList<DanhMucSach> danhMucSaches;
     private NameBookAdaptor nameBookAdaptor;
     private TextView list_bookNew;
     private LinearLayout layout_bookNew;
     DanhMucSach danhMucSach;
-//    private AllItemAdaptor allItemAdaptor;
-    private com.example.app_readbook.test_home.AllItemAdaptor allItemAdaptorr;
     private RecyclerView recyclerView;
     List<all> list;
     int currentItem;
@@ -71,7 +65,6 @@ public class Home_fragment extends Fragment{
         mView = inflater.inflate(R.layout.fragment_home_fragment, container, false);
         mHome = new home();
         indicator = mView.findViewById(R.id.cr);
-        mlist = getListphoto();
         list_bookNew = mView.findViewById(R.id.all_bookNew);
         view = mView.findViewById(R.id.view_2);
         layout_bookNew = mView.findViewById(R.id.id3);
@@ -160,26 +153,26 @@ public class Home_fragment extends Fragment{
 //
 //
 //    }
-private List<all> getListData() {
-    List<all> list = new ArrayList<>();
-    List<name_item> name_items = new ArrayList<>();
-    List<book_item> bookItemList = new ArrayList<>();
-    list.add(new all(AllItemAdaptor.TYPE_NAME , name_items , null));
-    list.add(new all(AllItemAdaptor.TYPE_BOOK , null , bookItemList));
-    return list;
-
-
-}
-
-    private List<photo> getListphoto() {
-        List<photo> list = new ArrayList<>();
-        list.add(new photo(R.drawable.sachhome));
-        list.add(new photo(R.drawable.sachnew1));
-        list.add(new photo(R.drawable.sachnew2));
-        list.add(new photo(R.drawable.sachnew3));
-        list.add(new photo(R.drawable.sachnew4));
-        return list;
-    }
+//private List<all> getListData() {
+//    List<all> list = new ArrayList<>();
+//    List<name_item> name_items = new ArrayList<>();
+//    List<book_item> bookItemList = new ArrayList<>();
+//    list.add(new all(AllItemAdaptor.TYPE_NAME , name_items , null));
+//    list.add(new all(AllItemAdaptor.TYPE_BOOK , null , bookItemList));
+//    return list;
+//
+//
+//}
+//
+//    private List<photo> getListphoto() {
+//        List<photo> list = new ArrayList<>();
+//        list.add(new photo(R.drawable.sachhome));
+//        list.add(new photo(R.drawable.sachnew1));
+//        list.add(new photo(R.drawable.sachnew2));
+//        list.add(new photo(R.drawable.sachnew3));
+//        list.add(new photo(R.drawable.sachnew4));
+//        return list;
+//    }
 
 
 }

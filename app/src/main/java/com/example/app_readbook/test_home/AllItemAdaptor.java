@@ -17,7 +17,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.app_readbook.R;
-import com.example.app_readbook.list_book.list_book;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +29,6 @@ public class AllItemAdaptor extends RecyclerView.Adapter<AllItemAdaptor.AllViewH
     public static final String url = "http://192.168.1.6:8888/demo_app/sach.php";
 private List<book_item> bookItemList;
 private List<name_item> nameItemList;
-private List<list_book> mList;
 private List<all> allItemList;
 public static final int TYPE_NAME =1;
 public static final int TYPE_BOOK =2;

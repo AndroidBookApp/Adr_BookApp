@@ -4,7 +4,9 @@
     package="com.example.app_readbook">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <supports-screens
         android:largeScreens="true"
         android:normalScreens="true"
@@ -22,16 +24,12 @@
         android:theme="@style/Theme.App_ReadBook"
         android:usesCleartextTraffic="true"
         tools:ignore="Instantiatable,MissingClass"
-
         tools:targetApi="n">
         <activity
             android:name=".onboarding.OnboardingMain"
             android:exported="true" />
         <activity
-            android:name=".activity.Register"
-            android:exported="true" />
-        <activity
-            android:name=".fragment_pager.model_account.edit_tt_account"
+            android:name=".fragment_pager.model_account.edit_tt_account_test"
             android:exported="true" />
         <activity
             android:name=".home"
@@ -44,13 +42,8 @@
             android:exported="true" />
         <activity
             android:name=".readbook.MainReadbook"
-            android:exported="true" /> <!-- <activity -->
-        <!-- android:name=".list_book.Main_ListBook" -->
-        <!-- android:exported="true" -->
-        <!-- android:parentActivityName=".home" /> -->
-        <activity
-            android:name=".activity.SignIn"
             android:exported="true" />
+
         <activity
             android:name=".fragment_pager.model_account.Data_edit_name"
             android:exported="true" />

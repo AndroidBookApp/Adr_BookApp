@@ -20,6 +20,7 @@ import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.fragment_pager.model_home.Home_fragment;
 import com.example.app_readbook.list_book.Main_ListBook;
+import com.example.app_readbook.shareFreferences.DataManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,7 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
             @Override
             public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
                 saches = (ArrayList<Sach>) response.body();
+                DataManager.saveSach(saches);
                 BookAdaptor bookAdaptor = new BookAdaptor( saches ,mcontext);
                 holder.recyclerView.setLayoutManager(new LinearLayoutManager(mcontext , LinearLayoutManager.HORIZONTAL , false));
                 holder.recyclerView.setAdapter(bookAdaptor);

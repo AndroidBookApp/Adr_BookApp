@@ -6,9 +6,13 @@ import android.content.SharedPreferences;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
-import java.lang.reflect.Type;
-import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class DataManager {
 
@@ -31,8 +35,6 @@ public class DataManager {
         }
         return instance;
     }
-
-
     public static void saveUserName(User user)
     {
        Gson gson = new Gson();
@@ -46,18 +48,47 @@ public class DataManager {
         User user = gson.fromJson(strUser , User.class);
         return user;
     }
-    public static void saveSach(List<Sach> sach)
+    public static void saveSach(ArrayList<Sach> sach)
     {
         Gson gson = new Gson();
-        String srtUser = gson.toJson(sach);
-        DataManager.getInstance().mySharePreferences.putSach(OBJECT_BOOK , srtUser);
+        JsonArray jsonArray = gson.toJsonTree(sach).getAsJsonArray();
+        String strSach = jsonArray.toString();
+        DataManager.getInstance().mySharePreferences.putSach(OBJECT_BOOK , strSach);
     }
-    public static List<Sach> loadSach()
+    public static ArrayList<Sach> loadSach()
     {
-        String strUser = DataManager.getInstance().mySharePreferences.getSach(OBJECT_BOOK);
+        String strSach = DataManager.getInstance().mySharePreferences.getSach(OBJECT_BOOK);
         Gson gson = new Gson();
-        List<Sach> sach = gson.fromJson(strUser , (Type) Sach.class);
+        ArrayList<Sach> sach = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(strSach);
+            JSONObject jsonObject;
+            Sach mSach;
+            for(int i = 0 ; i<jsonArray.length() ; i++)
+            {
+                jsonObject = jsonArray.getJSONObject(i);
+                mSach = gson.fromJson(jsonObject.toString(), Sach.class);
+                sach.add(mSach);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return sach ;
+    }
+    public static void saveObjectSach(Sach sach)
+    {
+
+        Gson gson = new Gson();
+        String strUser = gson.toJson(sach);
+        DataManager.getInstance().mySharePreferences.putSach(OBJECT_USER,strUser);
+    }
+    public static Sach loadObjectSach()
+    {
+        String strUser = DataManager.getInstance().mySharePreferences.getSach(OBJECT_USER);
+        Gson gson = new Gson();
+        Sach sach = gson.fromJson(strUser , Sach.class);
+        return sach;
     }
     public boolean isLogin()
     {

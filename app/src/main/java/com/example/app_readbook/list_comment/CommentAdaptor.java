@@ -1,5 +1,6 @@
 package com.example.app_readbook.list_comment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ private Context context;
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
         danhgia danhgia = danhgias.get(position);
@@ -43,7 +45,13 @@ private Context context;
             return;
         }
         Picasso.get().load(danhgia.getImgAvatar()).into(holder.imageView);
-        holder.name.setText(danhgia.getUsername());
+        if(danhgia.getMemberName() == null)
+        {
+            holder.name.setText("chưa thiết lập");
+        }else{
+            holder.name.setText(danhgia.getMemberName());
+        }
+
         holder.comment.setText(danhgia.getNoidung());
 //        holder.like.setText(danhgia.getIcon_like());
 //        holder.feedback.setText(danhgia.getIcon_feedback());

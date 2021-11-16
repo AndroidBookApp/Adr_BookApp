@@ -9,8 +9,9 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.app_readbook.ApiView.dangnhap;
 import com.example.app_readbook.R;
-import com.example.app_readbook.activity.SignIn;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,7 +71,7 @@ private View mview;
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( getActivity(), SignIn.class);
+                Intent intent = new Intent( getActivity(), dangnhap.class);
                 getActivity().startActivity(intent);
             }
         });

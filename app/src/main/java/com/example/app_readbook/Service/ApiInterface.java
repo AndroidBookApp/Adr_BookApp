@@ -9,12 +9,17 @@ import com.example.app_readbook.Model.login;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 
 public interface ApiInterface {
 
@@ -54,10 +59,21 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("dangky.php")
     Call<User> getRegister(@Field("username") String username ,@Field("password") String password , @Field("email") String email);
-    @FormUrlEncoded
-    @POST("update_profile.php")
-    Call<login> getUpdate(@Field("idMember") String idMember ,
-                          @Field("EN_IMAGE") String EN_IMAGE
-                        );
+//    @FormUrlEncoded
+//    @POST("loadimg_server.php")
+//    Call<login> getUpdate(@Field("idMember") String idMember ,
+//                          @Field("ImgAvatar") String ImgAvatar
+//                        );
+//    @Multipart
+//    @POST("loadimg_server.php")
+//    Call<login> getUpdate(@Part("idMember") String idMember,
+//                          @Part MultipartBody.Part ImgAvatar
+//    );
+@Multipart
+@POST("loadimg_server.php")
+Call<login> getUpdate(@Header("idMember") String idMember,
+                      @Header("ImgAvatar") String Avatar,
+                      @PartMap Map<String ,RequestBody> ImgAvatar
+);
 
 }

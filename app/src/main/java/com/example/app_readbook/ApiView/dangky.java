@@ -7,6 +7,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,7 @@ public class dangky extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
+                register.setVisibility(View.GONE);
                 name = txt_name.getText().toString().trim();
                 email = txt_email.getText().toString().trim();
                 pass = txt_pass.getText().toString().trim();
@@ -58,12 +60,13 @@ public class dangky extends AppCompatActivity {
                                 mUser.enqueue(new Callback<User>() {
                                     @Override
                                     public void onResponse(Call<User> call, Response<User> response) {
-                                        User user = (User) response.body();
+                                        User user = response.body();
                                         if (user != null) {
                                             if (response.isSuccessful()) {
                                                 Intent intent = new Intent(dangky.this, dangnhap.class);
                                                 Toast.makeText(dangky.this, user.getMessage(), Toast.LENGTH_SHORT).show();
                                                 progressBar.setVisibility(View.GONE);
+                                                register.setVisibility(View.VISIBLE);
                                                 startActivity(intent);
                                             } else {
                                                 Toast.makeText(dangky.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
@@ -72,8 +75,10 @@ public class dangky extends AppCompatActivity {
                                     }
                                     @Override
                                     public void onFailure(Call<User> call, Throwable t) {
-                                        Toast.makeText(dangky.this, "lỗi gì đó", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(dangky.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Log.e("AAA",t.getMessage());
                                         progressBar.setVisibility(View.GONE);
+                                        register.setVisibility(View.VISIBLE);
                                     }
                                 });
                             }
@@ -82,6 +87,7 @@ public class dangky extends AppCompatActivity {
                 } else {
                     Toast.makeText(dangky.this, "Vui lòng nhập thông tin chính ", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
+                    register.setVisibility(View.VISIBLE);
                 }
             }
         });

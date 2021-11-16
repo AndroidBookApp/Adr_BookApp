@@ -15,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
@@ -27,8 +26,10 @@ import com.example.app_readbook.chapter.Main_Chapter;
 import com.example.app_readbook.list_comment.Comment;
 import com.example.app_readbook.list_comment.CommentAdaptor;
 import com.example.app_readbook.list_comment.Main_NodeReadBook;
+import com.example.app_readbook.shareFreferences.DataManager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,7 @@ public class View_ReadBook extends AppCompatActivity {
     private CollapsingToolbarLayout coordinatorLayout;
     private AppCompatButton btnRead ;
     Sach sach;
+    String id;
     DanhMucSach danhMucSach;
     chitietsach chitiet;
     danhgia danhgia;
@@ -61,32 +63,22 @@ public class View_ReadBook extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_read);
-
         initUI();
-        iniUIIntent();
+
         getDataViewSach();
         next_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = node.getText().toString().trim();
-                String nameBook = textView_nameBook.getText().toString().trim();
                 Intent intent = new Intent(View_ReadBook.this , Main_NodeReadBook.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("object" , name);
-                bundle.putString("object_book" , nameBook);
-                bundle.putString("image" , String.valueOf(img_book));
-                intent.putExtra("object_node" , bundle);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                saches = DataManager.loadSach();
                 String book = textView_nameBook.getText().toString().trim();
                 Intent intent = new Intent(View_ReadBook.this , Main_Chapter.class);
-//                intent.putExtra("view_sach" , );
+
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -95,7 +87,7 @@ public class View_ReadBook extends AppCompatActivity {
 
     private void getDataViewSach() {
         ApiInterface apiInterface = ApiService.apiInterface();
-        Call<List<danhgia>> mSach = apiInterface.LoadDanhgia(sach.getIdSach());
+        Call<List<danhgia>> mSach = apiInterface.LoadDanhgia(id);
         mSach.enqueue(new Callback<List<danhgia>>() {
             @Override
             public void onResponse(Call<List<danhgia>> call, Response<List<danhgia>> response) {
@@ -113,23 +105,7 @@ public class View_ReadBook extends AppCompatActivity {
 
     }
 
-    @SuppressLint("SetTextI18n")
-    private void iniUIIntent() {
-        Intent intent = getIntent();
-        if(intent.hasExtra("sach"))
-        {
-            sach = (Sach) intent.getSerializableExtra("sach");
-            textView_nameBook.setText(sach.getTensach());
-            textView_tacGia.setText(sach.getTacgia());
-            textView_NXB.setText(sach.getNxb());
-            Glide.with(this).load(sach.getImgSach()).into(img_book);
-            node.setText(sach.getTomtatND() +" " +node.getText());
-            node.setTextSize(12);
-            coordinatorLayout.setTitle(sach.getIdDanhmuc());
 
-        }
-
-    }
 
     @Override
     public void onBackPressed() {
@@ -147,6 +123,7 @@ public class View_ReadBook extends AppCompatActivity {
         btnRead = findViewById(R.id.read);
         next_page = findViewById(R.id.next_pageBook);
         coordinatorLayout = findViewById(R.id.collapsingToolbarLayout);
+
         recyclerView = findViewById(R.id.rcv_reabook);
         img_book = findViewById(R.id.image_book);
         textView_nameBook  = findViewById(R.id.txt_nameBook);
@@ -154,6 +131,15 @@ public class View_ReadBook extends AppCompatActivity {
         textView_NXB = findViewById(R.id.txt_NXB);
         node = findViewById(R.id.node_textBook);
         favorite = findViewById(R.id.btn_favoriteView);
+        sach = new Sach();
+        sach = DataManager.loadObjectSach();
+        id = sach.getIdSach();
+        textView_nameBook.setText(sach.getTensach());
+        textView_tacGia.setText(sach.getTacgia());
+        textView_NXB.setText(sach.getNxb());
+        Picasso.get().load(sach.getImgSach()).into(img_book);
+        node.setText(sach.getTomtatND());
+        coordinatorLayout.setTitle(sach.getTensach());
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

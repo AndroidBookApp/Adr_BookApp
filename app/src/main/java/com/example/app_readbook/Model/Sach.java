@@ -150,4 +150,23 @@ public class Sach implements Serializable {
     public void setIdChitietsach(String idChitietsach) {
         this.idChitietsach = idChitietsach;
     }
+
+    @Override
+    public String toString() {
+        return "Sach{" +
+                "idSach='" + idSach + '\'' +
+                ", idDanhmuc='" + idDanhmuc + '\'' +
+                ", imgSach='" + imgSach + '\'' +
+                ", tensach='" + tensach + '\'' +
+                ", tacgia='" + tacgia + '\'' +
+                ", nxb='" + nxb + '\'' +
+                ", ngayDang='" + ngayDang + '\'' +
+                ", tomtatND='" + tomtatND + '\'' +
+                ", luotxem='" + luotxem + '\'' +
+                ", feedback='" + feedback + '\'' +
+                ", sotrang='" + sotrang + '\'' +
+                ", favorite='" + favorite + '\'' +
+                ", idChitietsach='" + idChitietsach + '\'' +
+                '}';
+    }
 }

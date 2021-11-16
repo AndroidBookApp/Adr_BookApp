@@ -10,10 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.app_readbook.R;
-import com.example.app_readbook.list_book.list_book;
 
 public class Main_NodeReadBook extends AppCompatActivity {
-private list_book listBook;
 private TextView text_node , text_nameBook;
 private ImageView img_book;
     @SuppressLint("SetTextI18n")
