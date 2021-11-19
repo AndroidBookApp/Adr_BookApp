@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +21,6 @@ import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.fragment_pager.model_home.Home_fragment;
 import com.example.app_readbook.list_book.Main_ListBook;
-import com.example.app_readbook.shareFreferences.DataManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +34,7 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
     private ArrayList<Sach> saches;
     private Context mcontext;
     DanhMucSach danhMucSach;
+    List<Sach> sach;
     Home_fragment home_fragment;
 
     public NameBookAdaptor(Context mcontext  ,ArrayList<DanhMucSach> listDanhMuc) {
@@ -62,8 +63,11 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
             @Override
             public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
                 saches = (ArrayList<Sach>) response.body();
-                DataManager.saveSach(saches);
-                BookAdaptor bookAdaptor = new BookAdaptor( saches ,mcontext);
+//                sach = (List<Sach>) response.body();
+//                DataManager.saveObjectSach((Sach) sach);
+                BookAdaptor bookAdaptor = new BookAdaptor(saches ,mcontext);
+                DividerItemDecoration itemDecoration = new DividerItemDecoration(mcontext , DividerItemDecoration.HORIZONTAL);
+                holder.recyclerView.addItemDecoration(itemDecoration);
                 holder.recyclerView.setLayoutManager(new LinearLayoutManager(mcontext , LinearLayoutManager.HORIZONTAL , false));
                 holder.recyclerView.setAdapter(bookAdaptor);
             }

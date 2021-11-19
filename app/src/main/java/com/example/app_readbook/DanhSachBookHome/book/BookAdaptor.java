@@ -11,13 +11,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
 import com.example.app_readbook.View_ReadBook;
 import com.example.app_readbook.home;
+import com.example.app_readbook.shareFreferences.DataManager;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -60,10 +60,12 @@ public home home;
         }
         Picasso.get().load(sach.getImgSach()).into(holder.imageBook);
         holder.txtTitle.setText(sach.getTensach());
+        holder.txtTacgia.setText(sach.getTacgia());
         holder.relativeLayoutBookMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( mContext , View_ReadBook.class);
+                DataManager.saveObjectSach(sach);
                 intent.putExtra("sach" , sachList.get(holder.getPosition()));
                 mContext.startActivity(intent);
             }
@@ -86,15 +88,14 @@ public home home;
 
     public class BookViewHodel extends RecyclerView.ViewHolder {
         private ImageView imageBook;
-        private TextView txtTitle;
+        private TextView txtTitle , txtTacgia;
         private RelativeLayout relativeLayoutBookMain;
-        private CardView cardView;
         public BookViewHodel(@NonNull View itemView) {
             super(itemView);
             imageBook = itemView.findViewById(R.id.book);
             txtTitle = itemView.findViewById(R.id.text_view);
-            cardView = itemView.findViewById(R.id.cardView);
-            relativeLayoutBookMain = itemView.findViewById(R.id.rlt_bookMain);
+            txtTacgia = itemView.findViewById(R.id.text_tacgia);
+            relativeLayoutBookMain = itemView.findViewById(R.id.main_rlt);
         }
     }
 

@@ -76,9 +76,7 @@ public class View_ReadBook extends AppCompatActivity {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String book = textView_nameBook.getText().toString().trim();
                 Intent intent = new Intent(View_ReadBook.this , Main_Chapter.class);
-
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -119,11 +117,11 @@ public class View_ReadBook extends AppCompatActivity {
 
 
 
+    @SuppressLint("SetTextI18n")
     private void initUI() {
         btnRead = findViewById(R.id.read);
         next_page = findViewById(R.id.next_pageBook);
         coordinatorLayout = findViewById(R.id.collapsingToolbarLayout);
-
         recyclerView = findViewById(R.id.rcv_reabook);
         img_book = findViewById(R.id.image_book);
         textView_nameBook  = findViewById(R.id.txt_nameBook);
@@ -135,8 +133,8 @@ public class View_ReadBook extends AppCompatActivity {
         sach = DataManager.loadObjectSach();
         id = sach.getIdSach();
         textView_nameBook.setText(sach.getTensach());
-        textView_tacGia.setText(sach.getTacgia());
-        textView_NXB.setText(sach.getNxb());
+        textView_tacGia.setText("Tác Giả :"+sach.getTacgia());
+        textView_NXB.setText("Năm Xuất Bản :" +sach.getNxb());
         Picasso.get().load(sach.getImgSach()).into(img_book);
         node.setText(sach.getTomtatND());
         coordinatorLayout.setTitle(sach.getTensach());

@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
    >
+
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        app:cardCornerRadius="8dp"
         android:id="@+id/card_viewBook"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="8dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <com.makeramen.roundedimageview.RoundedImageView
+            <ImageView
                 android:id="@+id/bg_sach"
-                android:layout_width="60dp"
-                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:layout_height="120dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:scaleType="centerCrop"
@@ -29,31 +31,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="3dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
                 android:layout_toRightOf="@id/bg_sach"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Nghĩ Giàu Làm Giàu"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="20dp" />
 
             <TextView
-                android:layout_toRightOf="@id/bg_sach"
                 android:id="@+id/txt_tacgia"
-                android:layout_marginStart="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="31dp"
-                android:fontFamily="@font/roboto_medium"
+                android:layout_below="@id/txt_tensach"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/bg_sach"
+                android:fontFamily="@font/roboto_light"
                 android:text="Tác giả : Napoleonh Hill"
-                android:textSize="12dp" />
+                android:textSize="14dp" />
 
             <LinearLayout
                 android:id="@+id/lnl_view"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/txt_tacgia"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
@@ -101,6 +102,18 @@
                     android:textColor="@color/text"
                     android:textSize="10dp" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tomtatNDlistBook"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@id/lnl_view"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/bg_sach"
+                android:fontFamily="@font/roboto_light"
+
+                android:textSize="10dp" />
 
             <ImageView
                 android:id="@+id/icon_favorite"

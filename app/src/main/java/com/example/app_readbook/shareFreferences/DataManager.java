@@ -81,11 +81,11 @@ public class DataManager {
 
         Gson gson = new Gson();
         String strUser = gson.toJson(sach);
-        DataManager.getInstance().mySharePreferences.putSach(OBJECT_USER,strUser);
+        DataManager.getInstance().mySharePreferences.putSach(OBJECT_BOOK,strUser);
     }
     public static Sach loadObjectSach()
     {
-        String strUser = DataManager.getInstance().mySharePreferences.getSach(OBJECT_USER);
+        String strUser = DataManager.getInstance().mySharePreferences.getSach(OBJECT_BOOK);
         Gson gson = new Gson();
         Sach sach = gson.fromJson(strUser , Sach.class);
         return sach;
@@ -95,22 +95,22 @@ public class DataManager {
        return DataManager.getInstance().mySharePreferences.saveLogin(OBJECT_USER);
 
     }
-    public User getUserName()
-    {
-         sharedPreferences = mContext.getSharedPreferences(OBJECT_USER , Context.MODE_PRIVATE);
-        return new User(sharedPreferences.getString("idMember" , null),
-                sharedPreferences.getString("username" , null),
-                sharedPreferences.getString("MemberName" , null),
-                sharedPreferences.getString("password" , null),
-                sharedPreferences.getString("Email" , null),
-                sharedPreferences.getString("Gioitinh" , null),
-                sharedPreferences.getString("Ngaysinh" , null),
-                sharedPreferences.getString("Success" , null),
-                sharedPreferences.getString("Message" , null),
-                sharedPreferences.getString("ImgAvatar" , null),
-                sharedPreferences.getString("ImgBia" , null));
-
-    }
+//    public User getUserName()
+//    {
+//         sharedPreferences = mContext.getSharedPreferences(OBJECT_USER , Context.MODE_PRIVATE);
+//        return new User(sharedPreferences.getString("idMember" , null),
+//                sharedPreferences.getString("username" , null),
+//                sharedPreferences.getString("MemberName" , null),
+//                sharedPreferences.getString("password" , null),
+//                sharedPreferences.getString("Email" , null),
+//                sharedPreferences.getString("Gioitinh" , null),
+//                sharedPreferences.getString("Ngaysinh" , null),
+//                sharedPreferences.getString("Success" , null),
+//                sharedPreferences.getString("Message" , null),
+//                sharedPreferences.getString("ImgAvatar" , null),
+//                sharedPreferences.getString("ImgBia" , null));
+//
+//    }
     public void logOut()
     {
         sharedPreferences = mContext.getSharedPreferences(OBJECT_USER , Context.MODE_PRIVATE);

@@ -1,6 +1,7 @@
 package com.example.app_readbook;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class home extends AppCompatActivity {
 
+    public ProgressDialog progressDialog;
     private AppBarLayout appBarLayout;
     private BottomNavigationView bottomNavigationView;
 
@@ -59,6 +61,7 @@ private NavigationBarView.OnItemSelectedListener navListener = new NavigationBar
                 break;
             case R.id.btn_favorite:
                 DataManager.loadUser();
+                DataManager.loadObjectSach();
                 appBarLayout.setVisibility(View.GONE);
                 fragment = new Favorite_fragment();
 

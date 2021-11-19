@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,8 +52,6 @@ private Context context;
         }
 
         holder.comment.setText(danhgia.getNoidung());
-//        holder.like.setText(danhgia.getIcon_like());
-//        holder.feedback.setText(danhgia.getIcon_feedback());
         holder.time.setText(danhgia.getThoigian());
     }
 
@@ -74,7 +71,7 @@ private Context context;
     private TextView like;
     private TextView feedback;
     private TextView time;
-    private EditText comment;
+    private TextView comment;
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.cir_account);

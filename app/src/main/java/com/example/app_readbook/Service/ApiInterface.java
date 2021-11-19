@@ -5,7 +5,9 @@ import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.danhgia;
+import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.Model.login;
+import com.example.app_readbook.Model.testfavorite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,7 @@ public interface ApiInterface {
     Call<List<Chuong>> LoadChuong(@Field("idSach") String idSach);
     @FormUrlEncoded
     @POST("thichsach.php")
-    Call<String> UpdateFavorite(@Field("idMember") String member,@Field("idSach") String idSach);
+    Call<String> UpdateFavorite(@Field("idMember") String idmember,@Field("idSach") String idSach);
 //    @FormUrlEncoded
 //    @POST("login.php")
 //    Call<List<User>> getUser(@Field("username") String username ,@Field("password") String password);
@@ -60,20 +62,19 @@ public interface ApiInterface {
     @POST("dangky.php")
     Call<User> getRegister(@Field("username") String username ,@Field("password") String password , @Field("email") String email);
 //    @FormUrlEncoded
-//    @POST("loadimg_server.php")
-//    Call<login> getUpdate(@Field("idMember") String idMember ,
-//                          @Field("ImgAvatar") String ImgAvatar
-//                        );
-//    @Multipart
-//    @POST("loadimg_server.php")
-//    Call<login> getUpdate(@Part("idMember") String idMember,
-//                          @Part MultipartBody.Part ImgAvatar
-//    );
-@Multipart
+//    @POST("danhsachluotthich.php")
+//    Call<List<favorite>> getListFavorite(@Field("idMember") String idMember);
+    @FormUrlEncoded
+    @POST("danhsachluotthich.php")
+    Call<testfavorite> getListFavorite(@Field("idMember") String idMember);
+    @FormUrlEncoded
+    @POST("xoaluotthich.php")
+    Call<favoriteDeleteData> deleteFavorite(@Field("idMember") String idMember , @Field("idSach") String idSach);
+    @Multipart
 @POST("loadimg_server.php")
 Call<login> getUpdate(@Header("idMember") String idMember,
                       @Header("ImgAvatar") String Avatar,
-                      @PartMap Map<String ,RequestBody> ImgAvatar
-);
+                      @PartMap Map<String ,RequestBody> ImgAvatar);
+
 
 }

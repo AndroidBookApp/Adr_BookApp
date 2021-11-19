@@ -76,6 +76,8 @@ public class dangnhap extends AppCompatActivity {
                             Log.e("AAA" , t.getMessage());
                         }
                     });
+                }else {
+                    Toast.makeText(dangnhap.this,"Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 }
             }
         });

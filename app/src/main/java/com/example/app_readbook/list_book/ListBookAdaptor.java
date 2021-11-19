@@ -67,18 +67,19 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         holder.comment.setText(sach.getFeedback());
         holder.textView.setText(sach.getLuotxem());
         holder.page.setText(sach.getSotrang());
+        holder.tomtatND.setText(sach.getTomtatND());
         Glide.with(context).
                 load(sach.getImgSach()).apply(new RequestOptions().transform(new CenterCrop()).transform(new RoundedCorners(20)))
                 .into(holder.mBook);
 //        Picasso.get().load(listBook.getIMGsach()).into(holder.mBook);
-
+        User user = DataManager.loadUser();
+        String idmember = user.getIdMember();
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context , View_ReadBook.class);
-                DataManager.saveSach(mSach);
+//                DataManager.saveSach(mSach);
                 DataManager.saveObjectSach(sach);
-//                intent.putExtra("sach" , mSach.get(holder.getPosition()));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
@@ -89,20 +90,21 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         holder.mIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
 //                Toast.makeText(context, mSach.get(holder.getPosition()).getTensach(), Toast.LENGTH_SHORT).show();
-                User user = DataManager.loadUser();
+
                 ApiInterface apiInterface = ApiService.apiInterface();
-                Call<String> callback = apiInterface.UpdateFavorite(user.getIdMember(), mSach.get(holder.getPosition()).getIdSach());
+                Call<String> callback = apiInterface.UpdateFavorite(idmember, mSach.get(holder.getPosition()).getIdSach());
                 callback.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         String ketqua = response.body();
                         if (ketqua.equals("like"))
                         {
-                            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+                            holder.mIcon.setBackgroundResource(R.drawable.ic_baseline_favorite_1_24);
                             Toast.makeText(context, "Đã thích", Toast.LENGTH_SHORT).show();
                         }else if(ketqua.equals("unlike")){
-                            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
+                            holder.mIcon.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
                             Toast.makeText(context, "Bỏ thích", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -139,7 +141,7 @@ public void searchBook(ArrayList<Sach> search)
         private TextView tv_tacgia;
         private TextView comment;
         private TextView textView;
-        private TextView page;
+        private TextView page , tomtatND;
         private ImageView mBook;
         private ImageView mIcon;
         private CardView cardView;
@@ -153,7 +155,7 @@ public void searchBook(ArrayList<Sach> search)
             mBook = itemView.findViewById(R.id.bg_sach);
             mIcon = itemView.findViewById(R.id.icon_favorite);
             cardView = itemView.findViewById(R.id.card_viewBook);
-
+            tomtatND = itemView.findViewById(R.id.tomtatNDlistBook);
 
 
         }

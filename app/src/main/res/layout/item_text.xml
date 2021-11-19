@@ -23,11 +23,11 @@
 
         <TextView
             android:id="@+id/tv_2"
-            android:layout_toRightOf="@id/tv_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/tv_1"
             android:fontFamily="@font/roboto_bold"
             android:text="(10)"
             android:textColor="#FF0000"
@@ -45,7 +45,12 @@
             android:fontFamily="@font/roboto_regular"
             android:padding="5dp"
             android:text="Xem tất cả" />
-
+<View
+    android:layout_below="@id/tv_next"
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:background="@color/line"
+    />
 
     </RelativeLayout>
 

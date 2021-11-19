@@ -26,9 +26,6 @@ import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.fragment_pager.PhotoAdaptor;
 import com.example.app_readbook.home;
 import com.example.app_readbook.list_book.Main_BookNew;
-import com.example.app_readbook.test_home.all;
-import com.example.app_readbook.test_home.book_item;
-import com.example.app_readbook.test_home.name_item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +47,9 @@ public class Home_fragment extends Fragment{
     private LinearLayout layout_bookNew;
     DanhMucSach danhMucSach;
     private RecyclerView recyclerView;
-    List<all> list;
     int currentItem;
     String danhmuc;
-    List<name_item> name_items;
-    List<book_item> bookItemList;
+
     private  Handler mHandler ;
     private  Runnable mRunnable ;
     public Home_fragment() {
@@ -86,9 +81,6 @@ public class Home_fragment extends Fragment{
                 context.startActivity(intent);
             }
         });
-        list = new ArrayList<>();
-        bookItemList = new ArrayList<>();
-        name_items = new ArrayList<>();
         getDataImg();
         return mView;
     }
@@ -101,6 +93,7 @@ public class Home_fragment extends Fragment{
             public void onResponse(Call<List<DanhMucSach>> call, Response<List<DanhMucSach>> response) {
                 danhMucSaches = (ArrayList<DanhMucSach>) response.body();
                 nameBookAdaptor = new NameBookAdaptor(getActivity(),danhMucSaches);
+                recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 recyclerView.setAdapter(nameBookAdaptor);
             }
@@ -144,35 +137,6 @@ public class Home_fragment extends Fragment{
             }
         });
     }
-//    private List<all_item> getListData() {
-//        List<all_item> list = new ArrayList<>();
-//        List<list_book> list_books = new ArrayList<>();
-//        list.add(new all_item(AllItemAdaptor.TYPE_NAME , list_books));
-//        list.add(new all_item(AllItemAdaptor.TYPE_BOOK , list_books));
-//        return list;
-//
-//
-//    }
-//private List<all> getListData() {
-//    List<all> list = new ArrayList<>();
-//    List<name_item> name_items = new ArrayList<>();
-//    List<book_item> bookItemList = new ArrayList<>();
-//    list.add(new all(AllItemAdaptor.TYPE_NAME , name_items , null));
-//    list.add(new all(AllItemAdaptor.TYPE_BOOK , null , bookItemList));
-//    return list;
-//
-//
-//}
-//
-//    private List<photo> getListphoto() {
-//        List<photo> list = new ArrayList<>();
-//        list.add(new photo(R.drawable.sachhome));
-//        list.add(new photo(R.drawable.sachnew1));
-//        list.add(new photo(R.drawable.sachnew2));
-//        list.add(new photo(R.drawable.sachnew3));
-//        list.add(new photo(R.drawable.sachnew4));
-//        return list;
-//    }
 
 
 }

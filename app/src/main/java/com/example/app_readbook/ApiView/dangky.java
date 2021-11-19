@@ -53,7 +53,7 @@ public class dangky extends AppCompatActivity {
                 pass_1 = txt_pass_1.getText().toString().trim();
                 if (!name.isEmpty() && !email.isEmpty() && !pass.isEmpty() && !pass_1.isEmpty()) {
                     if (txt_pass_1.getText().toString().trim().length() > 6 && txt_pass.getText().toString().trim().length() > 6) {
-                        if (txt_pass_1.getText().toString().trim().length() == txt_pass.getText().toString().trim().length()) {
+                        if (txt_pass_1.equals(txt_pass)) {
                             if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                                 ApiInterface apiService = ApiService.apiInterface();
                                 Call<User> mUser = apiService.getRegister(name, pass, email);
@@ -82,7 +82,21 @@ public class dangky extends AppCompatActivity {
                                     }
                                 });
                             }
+                            else {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(dangky.this, "Email không chính xác", Toast.LENGTH_SHORT).show();
+                                register.setVisibility(View.VISIBLE);
+                            }
                         }
+                        else {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(dangky.this, "Mật khẩu xác nhận không chính xác", Toast.LENGTH_SHORT).show();
+                            register.setVisibility(View.VISIBLE);
+                        }
+                    }else {
+                        Toast.makeText(dangky.this, "Mật khẩu phải dài hơn 6 ký tự", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        register.setVisibility(View.VISIBLE);
                     }
                 } else {
                     Toast.makeText(dangky.this, "Vui lòng nhập thông tin chính ", Toast.LENGTH_SHORT).show();
