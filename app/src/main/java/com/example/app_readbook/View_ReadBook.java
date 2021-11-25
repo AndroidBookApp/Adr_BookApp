@@ -1,20 +1,38 @@
 package com.example.app_readbook;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_readbook.Model.AddCommentViewModel;
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
@@ -27,18 +45,22 @@ import com.example.app_readbook.list_comment.Comment;
 import com.example.app_readbook.list_comment.CommentAdaptor;
 import com.example.app_readbook.list_comment.Main_NodeReadBook;
 import com.example.app_readbook.shareFreferences.DataManager;
+import com.example.app_readbook.shareFreferences.MyApplication;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class View_ReadBook extends AppCompatActivity {
+    private static final String SHARE_DANHGIA = "SHARE_DANHGIA";
     RecyclerView recyclerView;
     private List<Comment> mlist;
     private ArrayList<Sach> saches;
@@ -46,33 +68,38 @@ public class View_ReadBook extends AppCompatActivity {
     private ArrayList<DanhMucSach> danhMucSaches;
     private ArrayList<danhgia> danhgias;
     private CommentAdaptor commentAdaptor;
-    private ImageView img_book;
+    private ImageView img_book , img_MemberComment;
     private CollapsingToolbarLayout coordinatorLayout;
-    private AppCompatButton btnRead ;
+    private AppCompatButton btnRead , btnSend;
     Sach sach;
     String id;
+    String idUser , memberName , imageAvater;
     DanhMucSach danhMucSach;
     chitietsach chitiet;
     danhgia danhgia;
     private FloatingActionButton favorite;
-    private AppCompatTextView textView_book , next_page , textView_tacGia , textView_DanhMuc , textView_NXB , textView_nameBook , node;
+    private  AppCompatTextView  next_page , textView_tacGia  , textView_NXB , textView_nameBook , node;
     private Toolbar toolbar;
+    private AppCompatEditText comment;
     User user;
+    AddCommentViewModel viewModel ;
+    private int index = 1;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_read);
         initUI();
-
+        DataManager.loadFavorite();
         getDataViewSach();
-        next_page.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(View_ReadBook.this , Main_NodeReadBook.class);
-                startActivity(intent);
-            }
-        });
+
+                next_page.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(View_ReadBook.this, Main_NodeReadBook.class);
+                        startActivity(intent);
+                    }
+                });
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +110,7 @@ public class View_ReadBook extends AppCompatActivity {
         });
     }
 
-    private void getDataViewSach() {
+    public void getDataViewSach() {
         ApiInterface apiInterface = ApiService.apiInterface();
         Call<List<danhgia>> mSach = apiInterface.LoadDanhgia(id);
         mSach.enqueue(new Callback<List<danhgia>>() {
@@ -91,10 +118,12 @@ public class View_ReadBook extends AppCompatActivity {
             public void onResponse(Call<List<danhgia>> call, Response<List<danhgia>> response) {
                 danhgias = (ArrayList<com.example.app_readbook.Model.danhgia>) response.body();
                 recyclerView.setLayoutManager(new LinearLayoutManager(View_ReadBook.this , LinearLayoutManager.VERTICAL , false));
-                commentAdaptor = new CommentAdaptor(danhgias , View_ReadBook.this);
+                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(View_ReadBook.this , DividerItemDecoration.VERTICAL);
+                recyclerView.addItemDecoration(dividerItemDecoration);
+                commentAdaptor = new CommentAdaptor( View_ReadBook.this);
+                commentAdaptor.setData(danhgias);
                 recyclerView.setAdapter(commentAdaptor);
             }
-
             @Override
             public void onFailure(Call<List<danhgia>> call, Throwable t) {
 
@@ -102,21 +131,16 @@ public class View_ReadBook extends AppCompatActivity {
         });
 
     }
-
-
-
     @Override
     public void onBackPressed() {
         toolbar = findViewById(R.id.DanhMuc);
         setSupportActionBar(toolbar);
+        DataManager.loadObjectSach();
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onBackPressed();
     }
-
-
-
     @SuppressLint("SetTextI18n")
     private void initUI() {
         btnRead = findViewById(R.id.read);
@@ -129,7 +153,22 @@ public class View_ReadBook extends AppCompatActivity {
         textView_NXB = findViewById(R.id.txt_NXB);
         node = findViewById(R.id.node_textBook);
         favorite = findViewById(R.id.btn_favoriteView);
+        if(DataManager.loadFavorite() != null)
+        {
+            favorite.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+        }
+        else {
+            favorite.setImageResource(R.drawable.ic_baseline_favorite_24);
+        }
+        btnSend = findViewById(R.id.btn_send);
+        comment = findViewById(R.id.edit_comment);
+        img_MemberComment = findViewById(R.id.comment_avatar);
         sach = new Sach();
+        user = DataManager.loadUser();
+        idUser = user.getIdMember();
+        Picasso.get().load(user.getImgAvatar()).into(img_MemberComment);
+        memberName = user.getMemberName();
+        imageAvater = user.getImgAvatar();
         sach = DataManager.loadObjectSach();
         id = sach.getIdSach();
         textView_nameBook.setText(sach.getTensach());
@@ -142,31 +181,137 @@ public class View_ReadBook extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getDatFavorite();
+                sendNotification();
             }
         });
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addComment();
+                DataManager.saveDanhGia(danhgias);
+                DialogCommemt(Gravity.CENTER);
+
+
+            }
+        });
+    }
+    private void DialogCommemt(int gravity) {
+        Dialog dialog = new Dialog(this);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_comment);
+        Button btn_continue = dialog.findViewById(R.id.comment_continue);
+        Button btn_backHome = dialog.findViewById(R.id.comment_back);
+        Window window = dialog.getWindow();
+        if(window == null)
+        {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT , WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        attributes.gravity = gravity;
+        window.setAttributes(attributes);
+        btn_continue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataManager.loadDanhgia();
+                comment.setText("");
+                getDatFavorite();
+                dialog.dismiss();
+            }
+        });
+        btn_backHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(View_ReadBook.this , home.class);
+                startActivity(intent);
+            }
+        });
+        dialog.show();
+    }
+
+    public void addComment() {
+
+//        ApiInterface apiInterface = ApiService.apiInterface();
+//        Call<AddComment> addCommentCall = apiInterface.AddComment(idUser , id , vietdanhgia);
+//        addCommentCall.enqueue(new Callback<AddComment>() {
+//            @Override
+//            public void onResponse(Call<AddComment> call, Response<AddComment> response) {
+//                AddComment addComment = response.body();
+//                if(response.isSuccessful())
+//                {
+//                    if(addComment.getSuccess().equals("200")) {
+//                        Toast.makeText(View_ReadBook.this, "Đánh Giá Thành Công", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else {
+//
+//                        Toast.makeText(View_ReadBook.this, "Đã có lỗi xảy ra!!!", Toast.LENGTH_SHORT).show();
+//                        Log.e("AAA" , response.message());
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<AddComment> call, Throwable t) {
+//                Toast.makeText(View_ReadBook.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Log.e("AAA" , t.getMessage());
+//            }
+//        });
+        viewModel =  new ViewModelProvider(View_ReadBook.this).get(AddCommentViewModel.class);
+        viewModel.getAddComment().observe(View_ReadBook.this, new Observer<List<com.example.app_readbook.Model.danhgia>>() {
+            @Override
+            public void onChanged(List<com.example.app_readbook.Model.danhgia> danhgias) {
+                commentAdaptor.setData(danhgias);
+                recyclerView.setAdapter(commentAdaptor);
+            }
+        });
+        String danhgia = Objects.requireNonNull(comment.getText()).toString().trim();
+        viewModel.iniAddComment(idUser, id, danhgia);
     }
 
     private void getDatFavorite() {
         favorite.setImageResource(R.drawable.ic_baseline_favorite_1_24);
         ApiInterface apiInterface = ApiService.apiInterface();
-        Call<String> callback = apiInterface.UpdateFavorite(user.getIdMember(),String.valueOf(saches.get(Integer.parseInt(sach.getIdSach()))));
+        Call<String> callback = apiInterface.UpdateFavorite(idUser,id);
         callback.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String ketqua = response.body();
-                if(ketqua.equals("Success"))
+                if(ketqua.equals("Success") && favorite.isClickable())
                 {
+                    DataManager.loadDanhgia();
+                    DataManager.saveFavorite(ketqua);
                     Toast.makeText(View_ReadBook.this, "Đã thích", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(View_ReadBook.this, "Thích không thành công", Toast.LENGTH_SHORT).show();
+                    favorite.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+                }else if(ketqua.equals("Error") && favorite.isClickable()) {
+                    Toast.makeText(View_ReadBook.this, "Bỏ thích", Toast.LENGTH_SHORT).show();
+                    favorite.setImageResource(R.drawable.ic_baseline_favorite_24);
                 }
             }
-
             @Override
             public void onFailure(Call<String> call, Throwable t) {
 
             }
         });
-        favorite.setEnabled(false);
     }
+    private void sendNotification() {
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources() , Picasso.get().load(sach.getImgSach()).hashCode());
+        Notification builder = new NotificationCompat.Builder(this , MyApplication.CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_baseline_favorite_24)
+                .setContentTitle("Bạn vừa thích "+sach.getTensach())
+                .setContentText("Của tác giả" +sach.getTacgia())
+                .setLargeIcon(bitmap)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT).build();
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if(notificationManager !=null)
+        {
+            notificationManager.notify(getNotification(), builder);
+        }
+
+    }
+    private int getNotification() {
+        return (int) new Date().getTime();
+    }
+
 }

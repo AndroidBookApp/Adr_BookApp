@@ -15,12 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
+import com.example.app_readbook.Service.ApiInterface;
+import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.View_ReadBook;
 import com.example.app_readbook.home;
 import com.example.app_readbook.shareFreferences.DataManager;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BookAdaptor extends RecyclerView.Adapter<BookAdaptor.BookViewHodel> {
 private ArrayList<Sach> sachList;
@@ -64,10 +70,26 @@ public home home;
         holder.relativeLayoutBookMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( mContext , View_ReadBook.class);
-                DataManager.saveObjectSach(sach);
-                intent.putExtra("sach" , sachList.get(holder.getPosition()));
-                mContext.startActivity(intent);
+                ApiInterface apiInterface = ApiService.apiInterface();
+                Call<String> strViewBook = apiInterface.ViewReadBook(sach.getIdSach(), sach.getLuotxem());
+                strViewBook.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String view = response.body();
+                        if(view.equals("Success"))
+                        {
+                            Intent intent = new Intent(mContext , View_ReadBook.class);
+                            DataManager.saveObjectSach(sach);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mContext.startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
             }
         });
         holder.imageBook.setOnClickListener(new View.OnClickListener() {

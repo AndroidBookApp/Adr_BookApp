@@ -162,6 +162,7 @@ private final ActivityResultLauncher<Intent> mActivityResultLauncher = registerF
             public void onClick(View v) {
                 if(mUri !=null) {
                     callAPIUPDATE();
+                    DataManager.loadUser();
                 }
             }
         });
@@ -235,7 +236,7 @@ private final ActivityResultLauncher<Intent> mActivityResultLauncher = registerF
         RequestBody requestBodyAVT = RequestBody.create(MediaType.parse("*/*"), file);
         map.put("file\"; filename=\"" +file.getName() +"\"", requestBodyAVT);
 //        MultipartBody.Part partAVT = MultipartBody.Part.createFormData(Const.KEY_ID , file.getName() , requestBodyAVT);
-        Call<login> loginCall = apiInterface.getUpdate(idmember, String.valueOf(avatar),map);
+        Call<login> loginCall = apiInterface.getUpdate(idmember, anhdaidien ,map);
         loginCall.enqueue(new Callback<login>() {
             @Override
             public void onResponse(Call<login> call, Response<login> response) {
@@ -244,7 +245,7 @@ private final ActivityResultLauncher<Intent> mActivityResultLauncher = registerF
                     if(login!=null) {
                         if (login.getSuccess().equals("200")) {
                             DataManager.saveUserName(login.getUser());
-                            DataManager.loadUser();
+
                             Toast.makeText(edit_tt_account_test.this, login.getMessage(), Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         } else {

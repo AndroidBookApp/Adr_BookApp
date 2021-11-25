@@ -14,17 +14,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     public static Retrofit retrofit = null;
-    private static final OkHttpClient.Builder builder = new OkHttpClient.Builder();
+    private static final OkHttpClient.Builder builder = new OkHttpClient.Builder().readTimeout(10000, TimeUnit.MILLISECONDS)
+            .writeTimeout(10000 ,TimeUnit.MILLISECONDS)
+            .connectTimeout(10000 , TimeUnit.MILLISECONDS)
+            .retryOnConnectionFailure(true)
+            .protocols(Arrays.asList(Protocol.HTTP_1_1));
     private static final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
     public static Retrofit getApiClient(String url)
     {
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder().readTimeout(10000, TimeUnit.MILLISECONDS)
-                .writeTimeout(10000 ,TimeUnit.MILLISECONDS)
-                .connectTimeout(10000 , TimeUnit.MILLISECONDS)
-                .retryOnConnectionFailure(true)
-                .protocols(Arrays.asList(Protocol.HTTP_1_1))
-                .build();
-            Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd").setLenient().create();
+            Gson gson = new GsonBuilder().setDateFormat("dd MM yyyy").setLenient().create();
             interceptor.level(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(interceptor);
             retrofit = new Retrofit.Builder()

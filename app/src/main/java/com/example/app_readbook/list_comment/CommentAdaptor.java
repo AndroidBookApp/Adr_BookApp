@@ -2,6 +2,7 @@ package com.example.app_readbook.list_comment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +15,31 @@ import com.example.app_readbook.Model.danhgia;
 import com.example.app_readbook.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CommentAdaptor extends RecyclerView.Adapter<CommentAdaptor.CommentViewHolder>{
-    private ArrayList<danhgia> danhgias;
+    private List<danhgia> danhgias;
 private Context context;
+private Date date;
+private Calendar calendar;
+private SimpleDateFormat dateFormat;
+long  timeDay;
 
-    public CommentAdaptor(ArrayList<danhgia> danhgias, Context context) {
-        this.danhgias = danhgias;
+String mTime , time;
+
+    public CommentAdaptor( Context context) {
+
         this.context = context;
+    }
+    public void setData(List<danhgia> danhgias)
+    {
+        this.danhgias = danhgias;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,7 +50,7 @@ private Context context;
     }
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "ResourceAsColor"})
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
         danhgia danhgia = danhgias.get(position);
@@ -44,15 +59,17 @@ private Context context;
             return;
         }
         Picasso.get().load(danhgia.getImgAvatar()).into(holder.imageView);
-        if(danhgia.getMemberName() == null)
-        {
-            holder.name.setText("chưa thiết lập");
-        }else{
-            holder.name.setText(danhgia.getMemberName());
-        }
-
+        holder.name.setText(danhgia.getMemberName());
         holder.comment.setText(danhgia.getNoidung());
-        holder.time.setText(danhgia.getThoigian());
+        time = danhgia.getThoigian();
+
+        date = Calendar.getInstance().getTime();
+//        dateFormat = new SimpleDateFormat("dd/MM/yy" , Locale.getDefault());
+        Log.e("AAA" , String.valueOf(date.getTime()));
+//        timeDay = (timeReal - time) / 8640000;
+//        mTime = String.valueOf(timeDay);
+////        time = dateFormat.format(date.getTime());
+        holder.time.setText(time);
     }
 
 

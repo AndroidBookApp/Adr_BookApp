@@ -43,18 +43,15 @@ public interface ApiInterface {
     @POST("danhgia.php")
     Call<List<danhgia>> LoadDanhgia(@Field("idSach") String idSach);
     @FormUrlEncoded
+    @POST("comment.php")
+    Call<List<danhgia>> AddComment(@Field("idMember") String idMember , @Field("idSach") String idSach , @Field("Noidung") String Noidung);
+    @FormUrlEncoded
     @POST("chuong.php")
     Call<List<Chuong>> LoadChuong(@Field("idSach") String idSach);
     @FormUrlEncoded
     @POST("thichsach.php")
     Call<String> UpdateFavorite(@Field("idMember") String idmember,@Field("idSach") String idSach);
-//    @FormUrlEncoded
-//    @POST("login.php")
-//    Call<List<User>> getUser(@Field("username") String username ,@Field("password") String password);
-//    @Headers({
-//        "Accept: application/json",
-//        "Content-Type: application/json"
-//    })
+
     @FormUrlEncoded
     @POST("loginn.php")
     Call<login> getLogin(@Field("username") String username , @Field("password") String password);
@@ -70,6 +67,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("xoaluotthich.php")
     Call<favoriteDeleteData> deleteFavorite(@Field("idMember") String idMember , @Field("idSach") String idSach);
+    @FormUrlEncoded
+    @POST("luotxemsach.php")
+    Call<String> ViewReadBook(@Field("idSach") String idSach , @Field("Luotxem") String luotxem);
     @Multipart
 @POST("loadimg_server.php")
 Call<login> getUpdate(@Header("idMember") String idMember,

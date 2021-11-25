@@ -30,7 +30,6 @@ public class danhgia implements Serializable {
     @SerializedName("Thoigian")
     @Expose
     private String thoigian;
-
     public String getIdMember() {
         return idMember;
     }

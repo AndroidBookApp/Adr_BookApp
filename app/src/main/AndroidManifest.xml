@@ -56,7 +56,7 @@
             android:exported="true" />
 
         <activity
-            android:name=".onboarding.Onboarding_View"
+            android:name=".ApiLoginOrRegister.dangnhap"
             android:exported="true" />
         <activity
             android:name=".list_book.Main_BookNew"
@@ -65,10 +65,10 @@
             android:name=".list_book.Main_ListBook"
             android:exported="true" />
         <activity
-            android:name=".ApiView.dangky"
+            android:name=".ApiLoginOrRegister.dangky"
             android:exported="true" />
         <activity
-            android:name=".ApiView.dangnhap"
+            android:name=".onboarding.Onboarding_View"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.app_readbook.ApiView;
+package com.example.app_readbook.ApiLoginOrRegister;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -105,13 +105,14 @@ public class dangnhap extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-//        if ((dataManager.isLogin()))
-//        {
+    protected void onResume() {
+        super.onResume();
+        DataManager.loadUser();
+//        if ((dataManager.isLogin())) {
 //            Intent intent = new Intent(dangnhap.this, home.class);
 //            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //            startActivity(intent);
 //        }
     }
+
 }

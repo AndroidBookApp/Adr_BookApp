@@ -1,7 +1,12 @@
 package com.example.app_readbook.list_book;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,8 +26,10 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
+import com.example.app_readbook.shareFreferences.MyApplication;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,6 +42,7 @@ private RecyclerView recyclerView;
 private ListBookAdaptor bookAdaptor;
 private ArrayList<DanhMucSach> Danhmuc;
 private Toolbar toolbar;
+public Sach sach;
 ArrayList<Sach> danhMucSaches;
 private TextView textView_page;
 private EditText txt_searchName ;
@@ -84,6 +93,7 @@ DanhMucSach danhMucSach;
     }
 
     private void LoadDanhMuc() {
+
         ApiInterface apiInterface = ApiService.apiInterface();
         Call<List<Sach>> mDanhSach = apiInterface.listDanhMuc(danhMucSach.getIdDanhmuc());
         mDanhSach.enqueue(new Callback<List<Sach>>() {
@@ -105,6 +115,28 @@ DanhMucSach danhMucSach;
             }
         });
             }
+
+    public void sendNotification() {
+        sach = new Sach();
+
+        Bitmap bitmap = BitmapFactory.decodeFile(sach.getImgSach());
+        Notification builder = new NotificationCompat.Builder(this  , MyApplication.CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_baseline_favorite_24)
+                .setContentTitle("Bạn vừa thích "+sach.getTensach())
+                .setContentText("Của tác giả" +sach.getTacgia())
+                .setLargeIcon(bitmap)
+                .build();
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if(notificationManager !=null)
+        {
+            notificationManager.notify(getNotification(), builder);
+        }
+    }
+
+    public int getNotification() {
+        return (int) new Date().getTime();
+    }
+
     public void searchName(String name)
 {
     ArrayList<Sach> arrayList = new ArrayList<>();

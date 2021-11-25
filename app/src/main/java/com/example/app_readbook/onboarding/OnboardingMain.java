@@ -23,6 +23,7 @@ private CircleIndicator circleIndicator;
 private LinearLayout relativeLayout1;
 private LinearLayout relativeLayout2;
 private LinearLayout linearLayout;
+public static final String SAVE_OPEN_APP = "SAVE_OPEN_APP";
 private com.example.app_readbook.onboarding.viewpager_onboarding viewpager_onboarding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -33,9 +33,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListViewHolder> {
-
   private ArrayList<Sach> mSach;
   private Context context;
+  public Main_ListBook main_listBook;
+  String key ;
 
 
 
@@ -62,6 +63,15 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         {
             return;
         }
+        DataManager.loadFavorite();
+        key = DataManager.loadFavorite();
+        if(key != null)
+        {
+            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+        }
+        else {
+            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
+        }
         holder.tv_name.setText(sach.getTensach());
         holder.tv_tacgia.setText(sach.getTacgia());
         holder.comment.setText(sach.getFeedback());
@@ -71,18 +81,31 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         Glide.with(context).
                 load(sach.getImgSach()).apply(new RequestOptions().transform(new CenterCrop()).transform(new RoundedCorners(20)))
                 .into(holder.mBook);
-//        Picasso.get().load(listBook.getIMGsach()).into(holder.mBook);
         User user = DataManager.loadUser();
         String idmember = user.getIdMember();
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context , View_ReadBook.class);
-//                DataManager.saveSach(mSach);
-                DataManager.saveObjectSach(sach);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                ApiInterface apiInterface = ApiService.apiInterface();
+                Call<String> strViewBook = apiInterface.ViewReadBook(sach.getIdSach(), sach.getLuotxem());
+                strViewBook.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String view = response.body();
+                        if(view.equals("Success"))
+                        {
+                            Intent intent = new Intent(context , View_ReadBook.class);
+                            DataManager.saveObjectSach(sach);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
@@ -91,20 +114,19 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
             @Override
             public void onClick(View v) {
                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-//                Toast.makeText(context, mSach.get(holder.getPosition()).getTensach(), Toast.LENGTH_SHORT).show();
-
                 ApiInterface apiInterface = ApiService.apiInterface();
                 Call<String> callback = apiInterface.UpdateFavorite(idmember, mSach.get(holder.getPosition()).getIdSach());
                 callback.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         String ketqua = response.body();
-                        if (ketqua.equals("like"))
+                        if (ketqua.equals("Success") && holder.mIcon.isClickable())
                         {
-                            holder.mIcon.setBackgroundResource(R.drawable.ic_baseline_favorite_1_24);
+                            DataManager.saveFavorite(ketqua);
+                            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
                             Toast.makeText(context, "Đã thích", Toast.LENGTH_SHORT).show();
-                        }else if(ketqua.equals("unlike")){
-                            holder.mIcon.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                        }else if(ketqua.equals("Error") && holder.mIcon.isClickable() ){
+                            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
                             Toast.makeText(context, "Bỏ thích", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -117,8 +139,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
 
         });
     }
-
-public void searchBook(ArrayList<Sach> search)
+    public void searchBook(ArrayList<Sach> search)
 {
     if(search !=null)
     {
