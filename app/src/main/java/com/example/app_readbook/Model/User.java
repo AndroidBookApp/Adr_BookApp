@@ -1,5 +1,8 @@
 package com.example.app_readbook.Model;
 
+import android.text.TextUtils;
+import android.util.Patterns;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -138,7 +141,14 @@ public class User {
     public void setImgBia(String imgBia) {
         this.imgBia = imgBia;
     }
-
+    public boolean isValidEmail()
+    {
+        return !TextUtils.isEmpty(Email) && Patterns.EMAIL_ADDRESS.matcher(Email).matches();
+    }
+    public boolean isValidPassword()
+    {
+        return !TextUtils.isEmpty(password) && password.length() >=6 ;
+    }
     @Override
     public String toString() {
         return "User{" +

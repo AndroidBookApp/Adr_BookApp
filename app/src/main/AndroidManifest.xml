@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.app_readbook">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -26,49 +25,49 @@
         tools:ignore="Instantiatable,MissingClass"
         tools:targetApi="n">
         <activity
-            android:name=".onboarding.OnboardingMain"
+            android:name=".View.onboarding.OnboardingMain"
             android:exported="true" />
         <activity
-            android:name=".fragment_pager.model_account.edit_tt_account_test"
+            android:name=".View.fragment_pager.model_account.edit_tt_account_test"
             android:exported="true" />
         <activity
             android:name=".home"
             android:exported="true" />
         <activity
-            android:name=".fragment_pager.model_account.Data_edit_account"
+            android:name=".View.fragment_pager.model_account.Data_edit_account"
             android:exported="true" />
         <activity
             android:name=".View_ReadBook"
             android:exported="true" />
         <activity
-            android:name=".readbook.MainReadbook"
+            android:name=".View.readbook.MainReadbook"
             android:exported="true" />
 
         <activity
-            android:name=".fragment_pager.model_account.Data_edit_name"
+            android:name=".View.fragment_pager.model_account.Data_edit_name"
             android:exported="true" />
         <activity
-            android:name=".chapter.Main_Chapter"
+            android:name=".View.chapter.Main_Chapter"
             android:exported="true"
             android:parentActivityName=".View_ReadBook" />
         <activity
-            android:name=".list_comment.Main_NodeReadBook"
+            android:name=".View.list_comment.Main_NodeReadBook"
             android:exported="true" />
 
         <activity
-            android:name=".ApiLoginOrRegister.dangnhap"
+            android:name=".View.ApiLoginOrRegister.dangnhap"
             android:exported="true" />
         <activity
-            android:name=".list_book.Main_BookNew"
+            android:name=".View.list_book.Main_BookNew"
             android:exported="true" />
         <activity
-            android:name=".list_book.Main_ListBook"
+            android:name=".View.list_book.Main_ListBook"
             android:exported="true" />
         <activity
-            android:name=".ApiLoginOrRegister.dangky"
+            android:name=".View.ApiLoginOrRegister.dangky"
             android:exported="true" />
         <activity
-            android:name=".onboarding.Onboarding_View"
+            android:name=".View.onboarding.Onboarding_View"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

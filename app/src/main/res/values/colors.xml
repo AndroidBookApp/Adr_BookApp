@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_color">#9BAFF8</color>
     <color name="solid_color">#C18EFD</color>
-<color name="btn_color">#4870FF</color>
+    <color name="btn_color">#4870FF</color>
     <color name="start">#9BB1FF</color>
     <color name="text">#838383</color>
     <color name="color_menu">#DCDBDB</color>
@@ -26,4 +26,6 @@
     <color name="color_chapter">#3B519F</color>
     <color name="color_custom_dialog">#FDB953</color>
     <color name="name">#DCDCDC</color>
+    <color name="btn_facebook">#3B519F</color>
+    <color name="btn_google">#FF5B5B</color>
 </resources>

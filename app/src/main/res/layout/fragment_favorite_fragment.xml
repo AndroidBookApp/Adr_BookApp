@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rlt_favorite"
-    tools:context=".fragment_pager.model_home.Home_fragment">
+    tools:context=".View.fragment_pager.model_home.Home_fragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_list"

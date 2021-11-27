@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        tools:context=".onboarding.fragment_onboarding_two">
+        tools:context=".View.onboarding.fragment_onboarding_two">
         <RelativeLayout
             android:layout_width="276dp"
             android:layout_height="265dp"

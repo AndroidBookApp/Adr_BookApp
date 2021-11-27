@@ -41,20 +41,19 @@
             android:background="@color/line" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/btn_navigatione"
-        android:layout_below="@+id/bar_footer">
-
+        android:layout_below="@+id/bar_footer"
+        android:fillViewport="true">
         <FrameLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:ignore="ScrollViewSize">
-        </FrameLayout>
-    </ScrollView>
+            tools:ignore="ScrollViewSize" />
+    </androidx.core.widget.NestedScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/btn_navigatione"
         android:layout_width="match_parent"

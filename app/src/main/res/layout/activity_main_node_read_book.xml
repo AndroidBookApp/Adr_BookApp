@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".list_comment.Main_NodeReadBook">
+    tools:context=".View.list_comment.Main_NodeReadBook">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar_nodeRead"
         android:background="@color/white"

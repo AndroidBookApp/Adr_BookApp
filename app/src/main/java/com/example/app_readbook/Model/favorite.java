@@ -32,6 +32,16 @@ public class favorite {
     @Expose
     private String tomtatND;
 
+    private int clickDelete;
+
+    public int isClickDelete() {
+        return clickDelete;
+    }
+
+    public void setClickDelete(int clickDelete) {
+        this.clickDelete = clickDelete;
+    }
+
     public String getIdMember() {
         return idMember;
     }

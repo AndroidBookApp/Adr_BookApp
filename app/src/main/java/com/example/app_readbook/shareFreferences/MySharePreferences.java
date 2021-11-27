@@ -99,14 +99,23 @@ public class MySharePreferences {
     }
 
     public void SaveFavorite(String key, String value) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SACH_SHARE, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SAVE_FAVORITE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("Favorite", value);
+        editor.putString("idMember", value);
+        editor.putString("Tensach", value);
+        editor.putString("idSach", value);
+        editor.putString("Tacgia", value);
+        editor.putString("NXB", value);
+        editor.putString("NgayDang", value);
+        editor.putString("TomtatND", value);
+        editor.putString("Luotxem", value);
+        editor.putString("Feedback", value);
+        editor.putString("Sotrang", value);
         editor.apply();
     }
 
     public String LoadFavorite(String key) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SAVE_FAVORITE, Context.MODE_PRIVATE);
-        return sharedPreferences.getString("Favorite", null);
+        return sharedPreferences.getString("idMember", null);
     }
 }

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.danhgia;
+import com.example.app_readbook.Model.favorite;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
@@ -21,6 +22,7 @@ import java.util.List;
 public class DataManager {
 
     private static final String OBJECT_USER = "OBJECT_USER";
+
     private static final String OBJECT_BOOK = "OBJECT_BOOK";
     private static final String OBJECT_DANHGIA = "OBJECT_DANHGIA";
     private static final String STRING_FAVORITE = "STRING_FAVORITE";
@@ -46,7 +48,6 @@ public class DataManager {
         String srtUser = gson.toJson(user);
         DataManager.getInstance().mySharePreferences.putStringUser(OBJECT_USER, srtUser);
     }
-
     public static User loadUser() {
         String strUser = DataManager.getInstance().mySharePreferences.getStringUser(OBJECT_USER);
         Gson gson = new Gson();
@@ -54,14 +55,21 @@ public class DataManager {
         return user;
     }
 
-    public static void saveSach(ArrayList<Sach> sach) {
+//    public static void savUser(String user) {
+//        DataManager.getInstance().mySharePreferences.putStringUser(OBJECT_USER, user);
+//    }
+//
+//    public static String loadUsers() {
+//        return DataManager.getInstance().mySharePreferences.getStringUser(OBJECT_USER);
+//    }
+    public static void saveSach(List<Sach> sach) {
         Gson gson = new Gson();
         JsonArray jsonArray = gson.toJsonTree(sach).getAsJsonArray();
         String strSach = jsonArray.toString();
         DataManager.getInstance().mySharePreferences.putSach(OBJECT_BOOK, strSach);
     }
 
-    public static ArrayList<Sach> loadSach() {
+    public static List<Sach> loadSach() {
         String strSach = DataManager.getInstance().mySharePreferences.getSach(OBJECT_BOOK);
         Gson gson = new Gson();
         ArrayList<Sach> sach = new ArrayList<>();
@@ -113,18 +121,43 @@ public class DataManager {
         return DataManager.getInstance().mySharePreferences.saveLogin(OBJECT_USER);
     }
 
-    public static void saveFavorite(String key) {
-        DataManager.getInstance().mySharePreferences.SaveFavorite(STRING_FAVORITE, key);
+    public static void saveFavorite(favorite favorites) {
+        Gson gson = new Gson();
+        String strFavorite = gson.toJson(favorites);
+        DataManager.getInstance().mySharePreferences.SaveFavorite(STRING_FAVORITE, strFavorite);
     }
 
-    public static String loadFavorite() {
-        return DataManager.getInstance().mySharePreferences.LoadFavorite(STRING_FAVORITE);
+    public static List<favorite> loadFavorite() {
+        String strFavorite = DataManager.getInstance().mySharePreferences.LoadFavorite(STRING_FAVORITE);
+        Gson gson = new Gson();
+        List<favorite> mFavorite = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(strFavorite);
+            JSONObject jsonObject;
+            favorite favorite;
+            for(int i = 0 ; i< jsonArray.length() ; i++)
+            {
+                jsonObject = jsonArray.getJSONObject(i);
+                favorite = gson.fromJson(jsonObject.toString(), com.example.app_readbook.Model.favorite.class);
+                mFavorite.add(favorite);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return mFavorite;
     }
-
     public void logOut() {
         sharedPreferences = mContext.getSharedPreferences(OBJECT_USER, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
+    }
+    public static void sFavorite(String key)
+    {
+        DataManager.getInstance().mySharePreferences.SaveFavorite(STRING_FAVORITE , key);
+    }
+    public static String lFavorite()
+    {
+        return DataManager.getInstance().mySharePreferences.LoadFavorite(STRING_FAVORITE);
     }
 }
