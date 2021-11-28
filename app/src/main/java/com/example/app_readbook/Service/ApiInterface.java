@@ -55,7 +55,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("thichsach.php")
-    Call<String> UpdateFavorite(@Field("idSach") String idSach, @Field("idMember") String idmember);
+    Call<String> UpdateFavorite(@Field("idMember") String idMember, @Field("idSach") String idSach);
 
         @FormUrlEncoded
     @POST("thichsach.php")
@@ -77,7 +77,7 @@ public interface ApiInterface {
 //    Call<testfavorite> getListFavorite(@Field("idMember") String idMember);
     @FormUrlEncoded
     @POST("xoaluotthich.php")
-    Call<List<favorite>> deleteFavorite(@Field("idMember") String idMember, @Field("idSach") String idSach);
+    Call<favorite> deleteFavorite(@Field("idMember") String idMember, @Field("idSach") String idSach);
 
     @FormUrlEncoded
     @POST("luotxemsach.php")

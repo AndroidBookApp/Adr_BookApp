@@ -21,6 +21,7 @@ import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.View.DanhSachBookHome.book.BookAdaptor;
 import com.example.app_readbook.View.fragment_pager.model_home.Home_fragment;
 import com.example.app_readbook.View.list_book.Main_ListBook;
+import com.example.app_readbook.shareFreferences.DataManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +82,7 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mcontext , Main_ListBook.class);
-//                DataManager.loadFavorite();
+                DataManager.Favorite(true);
                 intent.putExtra("danhmuc" , mDanhmuc.get(holder.getPosition()));
                 mcontext.startActivity(intent);
             }

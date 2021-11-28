@@ -26,6 +26,7 @@ public class DataManager {
     private static final String OBJECT_BOOK = "OBJECT_BOOK";
     private static final String OBJECT_DANHGIA = "OBJECT_DANHGIA";
     private static final String STRING_FAVORITE = "STRING_FAVORITE";
+    private static final String FAVORITE = "FAVORITE";
     private static DataManager instance;
     private static Context mContext;
     private MySharePreferences mySharePreferences;
@@ -55,13 +56,6 @@ public class DataManager {
         return user;
     }
 
-//    public static void savUser(String user) {
-//        DataManager.getInstance().mySharePreferences.putStringUser(OBJECT_USER, user);
-//    }
-//
-//    public static String loadUsers() {
-//        return DataManager.getInstance().mySharePreferences.getStringUser(OBJECT_USER);
-//    }
     public static void saveSach(List<Sach> sach) {
         Gson gson = new Gson();
         JsonArray jsonArray = gson.toJsonTree(sach).getAsJsonArray();
@@ -159,5 +153,14 @@ public class DataManager {
     public static String lFavorite()
     {
         return DataManager.getInstance().mySharePreferences.LoadFavorite(STRING_FAVORITE);
+    }
+
+    public static void Favorite(boolean key)
+    {
+        DataManager.getInstance().mySharePreferences.like(FAVORITE , key);
+    }
+    public static boolean LFavorite()
+    {
+        return DataManager.getInstance().mySharePreferences.loadLike(FAVORITE);
     }
 }

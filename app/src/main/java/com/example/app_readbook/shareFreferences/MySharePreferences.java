@@ -10,6 +10,7 @@ public class MySharePreferences {
     private static final String DANHGIA_SHARE = "DANHGIA";
     private static final String SAVE_FAVORITE = "SAVE_FAVORITE";
     private static final String MY_OPEN_APP = "MY_OPEN_APP";
+    private static final String LIKE_FAVORITE ="LIKE_FAVORITE" ;
     private Context mContext;
 
     public MySharePreferences(Context mContext) {
@@ -82,7 +83,6 @@ public class MySharePreferences {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(DANHGIA_SHARE, Context.MODE_PRIVATE);
         return sharedPreferences.getString("idMember", null);
     }
-
     public void putDanhGia(String key, String valueDanhGia) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(DANHGIA_SHARE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -111,11 +111,25 @@ public class MySharePreferences {
         editor.putString("Luotxem", value);
         editor.putString("Feedback", value);
         editor.putString("Sotrang", value);
+        editor.putString("like", value);
         editor.apply();
     }
 
     public String LoadFavorite(String key) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SAVE_FAVORITE, Context.MODE_PRIVATE);
         return sharedPreferences.getString("idMember", null);
+    }
+
+    public void like(String key , boolean value)
+    {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(LIKE_FAVORITE , 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.apply();
+    }
+    public boolean loadLike(String key)
+    {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(LIKE_FAVORITE, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(key, false);
     }
 }

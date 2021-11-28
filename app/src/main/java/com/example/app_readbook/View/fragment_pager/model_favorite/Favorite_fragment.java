@@ -1,7 +1,5 @@
 package com.example.app_readbook.View.fragment_pager.model_favorite;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +21,6 @@ import com.example.app_readbook.home;
 import com.example.app_readbook.shareFreferences.DataManager;
 
 import java.util.List;
-import java.util.Objects;
 
 
 public class Favorite_fragment extends Fragment {
@@ -48,7 +45,7 @@ FavoriteAdapter favoriteAdapter ;
         user = DataManager.loadUser();
         DataManager.loadFavorite();
         idMember = user.getIdMember();
-//        idSach = DataManager.loadObjectSach().getIdSach();
+        idSach = DataManager.loadObjectSach().getIdSach();
         return view;
     }
     @Override
@@ -58,34 +55,42 @@ FavoriteAdapter favoriteAdapter ;
         addFavoriteViewModel.getListFavorite().observe(this, new Observer<List<favorite>>() {
             @Override
             public void onChanged(List<favorite> favorites) {
-                 favoriteAdapter = new FavoriteAdapter(getActivity(), new FavoriteAdapter.IClickDeleteFavorite() {
-                    @Override
-                    public void iClickDelete(favorite mFavorite) {
-                        new AlertDialog.Builder(getActivity())
-                                .setTitle("Xóa sách ra khỏi thư mục yêu thích")
-                                .setMessage("Bạn có chắc chắn muốn xóa")
-                                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        deleteFavoriteViewModel = new ViewModelProvider(Objects.requireNonNull(getActivity())).get(DeleteFavoriteViewModel.class);
-                                        deleteFavoriteViewModel.getDeleteFavorite().observe(getActivity(), new Observer<List<favorite>>() {
-                                            @Override
-                                            public void onChanged(List<favorite> favorites) {
-                                                if(favorites != null)
-                                                {
-                                                    favoriteAdapter.setData(favorites);
-                                                    recyclerView.setAdapter(favoriteAdapter);
-                                                }
-                                            }
-                                        });
-//                                        idSach = DataManager.loadSach().get();
-                                        deleteFavoriteViewModel.iniDeleteData(idMember ,idSach);
-                                    }
-                                }).setNegativeButton("Không" , null)
-                                .show();
-
-                    }
-                });
+                 favoriteAdapter = new FavoriteAdapter(getActivity());
+//                 , new FavoriteAdapter.IClickDeleteFavorite() {
+//                    @Override
+//                    public void iClickDelete(favorite mFavorite) {
+//                        new AlertDialog.Builder(getActivity())
+//                                .setTitle("Xóa sách ra khỏi thư mục yêu thích")
+//                                .setMessage("Bạn có chắc chắn muốn xóa")
+//                                .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        deleteFavoriteViewModel = new ViewModelProvider(Objects.requireNonNull(getActivity())).get(DeleteFavoriteViewModel.class);
+//                                        deleteFavoriteViewModel.getDeleteFavorite().observe(getActivity(), new Observer<String>() {
+//                                            @Override
+//                                            public void onChanged(String favorite) {
+//                                                if(favorite !=null)
+//                                                {
+//                                                    user = DataManager.loadUser();
+//                                                    DataManager.loadFavorite();
+//                                                    idMember = user.getIdMember();
+//                                                    idSach = DataManager.loadObjectSach().getIdSach();
+//                                                    favoriteAdapter.setData(favorites);
+//                                                    recyclerView.setAdapter(favoriteAdapter);
+//
+//                                                }
+//                                                deleteFavoriteViewModel.iniDeleteData(idMember ,idSach);
+//                                            }
+//                                        });
+//
+//                                    }
+//                                }).setNegativeButton("Không" , null)
+//                                .show();
+//
+//
+//
+//                    }
+//                });
                 favoriteAdapter.setData(favorites);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(home, LinearLayoutManager.VERTICAL, false);
                 recyclerView.setHasFixedSize(true);

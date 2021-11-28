@@ -3,11 +3,13 @@ package com.example.app_readbook.View.list_book;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -37,7 +39,8 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
   private List<Sach> mSach;
   private Context context;
   public Main_ListBook main_listBook;
-  String key ;
+  String  idmember , idBook;
+  boolean favorite = false;
     AddFavoriteViewModel favoriteViewModel;
     public IClickAddFavorite iClickAddFavorite;
   public interface IClickAddFavorite{
@@ -62,19 +65,21 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_book , parent , false);
       return new ListViewHolder(view);
     }
 
-
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Sach sach = mSach.get(position);
         if(sach == null)
         {
             return;
         }
+
+        // truyền các dữ liệu từ db vào list thông qua các hàm getter
         holder.tv_name.setText(sach.getTensach());
         holder.tv_tacgia.setText(sach.getTacgia());
         holder.comment.setText(sach.getFeedback());
@@ -85,12 +90,23 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                 load(sach.getImgSach()).apply(new RequestOptions().transform(new CenterCrop()).transform(new RoundedCorners(20)))
                 .into(holder.mBook);
         User user = DataManager.loadUser();
-        String idmember = user.getIdMember();
+         idmember = user.getIdMember();
+        favorite = DataManager.LFavorite();
+        idBook =mSach.get(position).getIdSach();
+            if(favorite = true  && idBook != null && idmember !=null)
+            {
+                holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+            }else if(favorite = false && idBook ==null && idmember ==null){
+                holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
+            }
+
+
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ApiInterface apiInterface = ApiService.apiInterface();
-                Call<String> strViewBook = apiInterface.ViewReadBook(sach.getIdSach(), sach.getLuotxem());
+                Call<String> strViewBook = apiInterface.ViewReadBook(mSach.get(position).getIdSach(), sach.getLuotxem());
                 strViewBook.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -132,6 +148,43 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
 //                    }
 //                });
 //                favoriteViewModel.iniAddFavorite(idUser , id);
+                ApiInterface apiInterface = ApiService.apiInterface();
+                Call<String> callFavorite = apiInterface.UpdateFavorite(idmember , mSach.get(position).getIdSach());
+                callFavorite.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String favorite = response.body();
+                        if(response.isSuccessful())
+                        {
+                            if(favorite.equals("like"))
+                            {
+                                holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+                                DataManager.Favorite(true);
+                                DataManager.saveUserName(user);
+                                Log.e("AAA" , mSach.get(position).getIdSach());
+                                Log.e("AAA" , idmember);
+                                Log.e("AAA" , favorite);
+                                Toast.makeText(context, "Thích", Toast.LENGTH_SHORT).show();
+                            }
+                            else if(favorite.equals("unlike"))
+                            {
+                                DataManager.Favorite(true);
+                                Log.e("AAA" , mSach.get(position).getIdSach());
+                                Log.e("AAA" , idmember);
+                                DataManager.saveUserName(user);
+                                holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
+                                Log.e("AAA" , favorite);
+                                Toast.makeText(context, "Bỏ Thích", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+
             }
 
         });
@@ -175,6 +228,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
             mIcon = itemView.findViewById(R.id.icon_favorite);
             cardView = itemView.findViewById(R.id.card_viewBook);
             tomtatND = itemView.findViewById(R.id.tomtatNDlistBook);
+
         }
 
   }

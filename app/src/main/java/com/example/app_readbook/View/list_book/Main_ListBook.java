@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
+import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
 import com.example.app_readbook.shareFreferences.MyApplication;
 
 import java.util.ArrayList;
@@ -47,12 +49,19 @@ List<Sach> danhMucSaches;
 private TextView textView_page;
 private EditText txt_searchName ;
 DanhMucSach danhMucSach;
+AddFavoriteViewModel addFavoriteViewModel;
 
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_list_book);
+        iniAnhXa();
+        LoadDanhMuc();
+        addFavoriteViewModel = new ViewModelProvider(this).get(AddFavoriteViewModel.class);
+    }
+
+    private void iniAnhXa() {
         recyclerView = findViewById(R.id.rcv_book);
         textView_page = findViewById(R.id.name_page);
         txt_searchName = findViewById(R.id.txt_searchBook);
@@ -62,7 +71,6 @@ DanhMucSach danhMucSach;
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        LoadDanhMuc();
         txt_searchName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -79,8 +87,6 @@ DanhMucSach danhMucSach;
                 searchName(s.toString());
             }
         });
-
-
     }
 
     private void getIntents() {

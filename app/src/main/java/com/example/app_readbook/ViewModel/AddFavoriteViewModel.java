@@ -1,5 +1,7 @@
 package com.example.app_readbook.ViewModel;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -29,15 +31,14 @@ public class AddFavoriteViewModel extends ViewModel {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 AddFavorite = response.body();
-                if (AddFavorite!=null) {
-                    if (AddFavorite.equals("like")) {
+                if (response.isSuccessful() ) {
                         DataManager.sFavorite(AddFavorite);
                         mAddFavorite.setValue(response.body());
-                    } else if (AddFavorite.equals("unlike")){
-//                        DataManager.sFavorite(AddFavorite);
-                        mAddFavorite.setValue(null);
-                    }
+                        Log.e("AAA", AddFavorite);
+                    } else{
+                        mAddFavorite.setValue(response.body());
 
+                    Log.e("AAA", AddFavorite);
                 }
             }
             @Override
