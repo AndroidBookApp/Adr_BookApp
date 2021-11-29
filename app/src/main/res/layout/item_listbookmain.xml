@@ -14,8 +14,9 @@
         android:layout_marginEnd="10dp"
         app:cardCornerRadius="8dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
+            android:orientation="vertical"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -31,12 +32,13 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/book"
-                android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
+
                 android:text="Kinh Doanh Online"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
@@ -44,14 +46,12 @@
                 android:id="@+id/text_tacgia"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/text_view"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
                 android:text="tác giả"
                 android:textColor="#808080"
                 android:textSize="14dp" />
-        </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

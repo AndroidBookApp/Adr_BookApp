@@ -104,7 +104,6 @@ public class Home_fragment extends Fragment{
             }
         });
     }
-
     private void getDataImg() {
         ApiInterface apiInterface = ApiService.apiInterface();
         Call<List<Sach>> listCall = apiInterface.responseSach();

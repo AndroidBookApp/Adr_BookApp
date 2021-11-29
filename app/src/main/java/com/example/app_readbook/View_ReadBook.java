@@ -57,7 +57,7 @@ public class View_ReadBook extends AppCompatActivity {
     private static final String SHARE_DANHGIA = "SHARE_DANHGIA";
     RecyclerView recyclerView;
     private List<Comment> mlist;
-    private ArrayList<Sach> saches;
+    private List<Sach> saches;
     private ArrayList<chitietsach> chitietsach;
     private ArrayList<DanhMucSach> danhMucSaches;
     private ArrayList<danhgia> danhgias;
@@ -96,15 +96,16 @@ public class View_ReadBook extends AppCompatActivity {
         getDataViewSach();
     }
     private void checkFavorite() {
-        if(idUser.equals(user.getIdMember()) && idSach.equals(sach.getIdSach()))
-        {
-            if (load != null && load.equals("like")) {
-                favorites.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-            }
-            else if (load != null && !load.equals("like") ) {
-                favorites.setImageResource(R.drawable.ic_baseline_favorite_24);
-            }
-        }
+//        if(idUser.equals(user.getIdMember()) && idSach.equals(sach.getIdSach()))
+//        {
+//            if (load != null && load.equals("like")) {
+//                favorites.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+//            }
+//            else if (load != null && !load.equals("like") ) {
+//                favorites.setImageResource(R.drawable.ic_baseline_favorite_24);
+//            }
+//        }
+//        favorites = (FloatingActionButton) getIntent().getExtras().get("favorite");
     }
 
     @SuppressLint("SetTextI18n")
@@ -137,7 +138,6 @@ public class View_ReadBook extends AppCompatActivity {
                 commentAdaptor.setData(danhgias);
                 recyclerView.setAdapter(commentAdaptor);
             }
-
             @Override
             public void onFailure(Call<List<danhgia>> call, Throwable t) {
 

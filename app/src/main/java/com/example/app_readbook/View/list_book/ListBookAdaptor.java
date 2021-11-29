@@ -40,7 +40,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
   private Context context;
   public Main_ListBook main_listBook;
   String  idmember , idBook;
-  boolean favorite = false;
+  String favorite ;
     AddFavoriteViewModel favoriteViewModel;
     public IClickAddFavorite iClickAddFavorite;
   public interface IClickAddFavorite{
@@ -91,22 +91,14 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                 .into(holder.mBook);
         User user = DataManager.loadUser();
          idmember = user.getIdMember();
-        favorite = DataManager.LFavorite();
+        favorite = mSach.get(position).getFavorite();
         idBook =mSach.get(position).getIdSach();
-            if(favorite = true  && idBook != null && idmember !=null)
-            {
-                holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-            }else if(favorite = false && idBook ==null && idmember ==null){
-                holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
-            }
-
-
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ApiInterface apiInterface = ApiService.apiInterface();
-                Call<String> strViewBook = apiInterface.ViewReadBook(mSach.get(position).getIdSach(), sach.getLuotxem());
+                Call<String> strViewBook = apiInterface.ViewReadBook(mSach.get(position).getIdSach(), "1");
                 strViewBook.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -119,7 +111,6 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                             context.startActivity(intent);
                         }
                     }
-
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
 
@@ -131,23 +122,6 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         holder.mIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-//                favoriteViewModel = new ViewModelProvider().get(AddFavoriteViewModel.class);
-//                favoriteViewModel.getAddFavorite().observe(this, new Observer<String>() {
-//                    @Override
-//                    public void onChanged(String s) {
-//                        if(s.equals("Success"))
-//                        {
-//                            DataManager.saveFavorite(s);
-//                            favorite.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-//                        }else {
-//                            favorite.setImageResource(R.drawable.ic_baseline_favorite_24);
-//                            DataManager.saveFavorite(s);
-//                        }
-//
-//                    }
-//                });
-//                favoriteViewModel.iniAddFavorite(idUser , id);
                 ApiInterface apiInterface = ApiService.apiInterface();
                 Call<String> callFavorite = apiInterface.UpdateFavorite(idmember , mSach.get(position).getIdSach());
                 callFavorite.enqueue(new Callback<String>() {
@@ -159,8 +133,6 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                             if(favorite.equals("like"))
                             {
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-                                DataManager.Favorite(true);
-                                DataManager.saveUserName(user);
                                 Log.e("AAA" , mSach.get(position).getIdSach());
                                 Log.e("AAA" , idmember);
                                 Log.e("AAA" , favorite);
@@ -168,10 +140,8 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                             }
                             else if(favorite.equals("unlike"))
                             {
-                                DataManager.Favorite(true);
                                 Log.e("AAA" , mSach.get(position).getIdSach());
                                 Log.e("AAA" , idmember);
-                                DataManager.saveUserName(user);
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
                                 Log.e("AAA" , favorite);
                                 Toast.makeText(context, "Bỏ Thích", Toast.LENGTH_SHORT).show();

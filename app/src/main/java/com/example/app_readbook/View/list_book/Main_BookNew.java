@@ -23,7 +23,6 @@ public class Main_BookNew extends AppCompatActivity {
     private ArrayList<Sach> newList;
     private RecyclerView view;
     private BookNewAdaptor bookNewAdaptor;
-    String danhmuc;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
