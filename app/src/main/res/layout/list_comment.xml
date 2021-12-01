@@ -24,6 +24,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="0dp"
+        android:hint="Chưa thiết lập"
+        android:textColorHint="@color/line"
         android:layout_toEndOf="@+id/cir_account"
         android:layout_toRightOf="@id/cir_account"
         android:fontFamily="@font/roboto_bold"

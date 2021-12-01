@@ -3,21 +3,23 @@
     android:layout_height="wrap_content"
     android:id="@+id/rlt_bookMain"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <RelativeLayout
-        android:layout_width="150dp"
+
+    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_rlt"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="#ACE4FB"
         app:cardCornerRadius="8dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/book"
@@ -27,31 +29,38 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/sach1" />
 
-            <TextView
-                android:id="@+id/text_view"
-                android:layout_width="150dp"
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/book"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center"
+                android:layout_below="@id/book">
 
-                android:text="Kinh Doanh Online"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/text_tacgia"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hindsiliguri_medium"
+                    android:gravity="center"
+                    android:text="tác giả"
+                    android:textColor="#808080"
+                    android:textSize="16dp" />
 
-            <TextView
-                android:id="@+id/text_tacgia"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center"
-                android:text="tác giả"
-                android:textColor="#808080"
-                android:textSize="14dp" />
+                <TextView
+                    android:id="@+id/text_view"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/text_tacgia"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/hindsiliguri_bold"
+
+                    android:text="Kinh Doanh Online"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+
+            </RelativeLayout>
+
         </LinearLayout>
-    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

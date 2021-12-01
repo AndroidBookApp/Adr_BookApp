@@ -36,7 +36,6 @@
 
         <TextView
             android:id="@+id/tv_next"
-            android:textColor="#1E80EC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -44,13 +43,14 @@
             android:drawableEnd="@drawable/ic_baseline_navigate_next_2_24"
             android:fontFamily="@font/roboto_regular"
             android:padding="5dp"
-            android:text="Xem tất cả" />
-<View
-    android:layout_below="@id/tv_next"
-    android:layout_width="match_parent"
-    android:layout_height="2dp"
-    android:background="@color/line"
-    />
+            android:text="Xem tất cả"
+            android:textColor="#1E80EC" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/tv_next"
+            android:background="@color/line" />
 
     </RelativeLayout>
 

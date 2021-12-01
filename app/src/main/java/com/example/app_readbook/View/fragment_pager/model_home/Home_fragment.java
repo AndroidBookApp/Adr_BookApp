@@ -48,7 +48,7 @@ public class Home_fragment extends Fragment{
     DanhMucSach danhMucSach;
     private RecyclerView recyclerView;
     int currentItem;
-    String danhmuc;
+
 
     private  Handler mHandler ;
     private  Runnable mRunnable ;

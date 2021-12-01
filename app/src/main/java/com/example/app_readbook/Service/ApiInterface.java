@@ -59,7 +59,7 @@ public interface ApiInterface {
 
         @FormUrlEncoded
     @POST("thichsach.php")
-    Call<favorite> UpdateFavorites(@Field("idSach") String idSach, @Field("idMember") String idmember);
+    Call<favorite> UpdateFavorites(@Field("idMember") String idMember, @Field("idSach") String idSach);
     @FormUrlEncoded
     @POST("loginn.php")
     Call<login> getLogin(@Field("username") String username, @Field("password") String password);

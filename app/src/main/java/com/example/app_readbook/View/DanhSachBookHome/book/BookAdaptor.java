@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.Model.Sach;
@@ -111,7 +111,7 @@ public home home;
     public class BookViewHodel extends RecyclerView.ViewHolder {
         private ImageView imageBook;
         private TextView txtTitle , txtTacgia;
-        private RelativeLayout relativeLayoutBookMain;
+        private CardView relativeLayoutBookMain;
         public BookViewHodel(@NonNull View itemView) {
             super(itemView);
             imageBook = itemView.findViewById(R.id.book);

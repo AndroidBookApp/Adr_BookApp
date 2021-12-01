@@ -1,5 +1,6 @@
 package com.example.app_readbook.View.DanhSachBookHome;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,9 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
@@ -51,6 +51,7 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull NameBookViewHolder holder, int position) {
       DanhMucSach danhMucSach = mDanhmuc.get(position);
@@ -65,9 +66,10 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
             public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
                 saches = (ArrayList<Sach>) response.body();
                 BookAdaptor bookAdaptor = new BookAdaptor(saches ,mcontext);
-                DividerItemDecoration itemDecoration = new DividerItemDecoration(mcontext , DividerItemDecoration.HORIZONTAL);
-                holder.recyclerView.addItemDecoration(itemDecoration);
-                holder.recyclerView.setLayoutManager(new LinearLayoutManager(mcontext , LinearLayoutManager.HORIZONTAL , false));
+//                DividerItemDecoration itemDecoration = new DividerItemDecoration(mcontext , DividerItemDecoration.HORIZONTAL);
+//                holder.recyclerView.addItemDecoration(itemDecoration);
+                holder.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
+//                holder.recyclerView.setLayoutManager(new LinearLayoutManager(mcontext , LinearLayoutManager.HORIZONTAL , false));
                 holder.recyclerView.setAdapter(bookAdaptor);
             }
 
@@ -87,7 +89,7 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
                 mcontext.startActivity(intent);
             }
         });
-        holder.tv_sl.setText((danhMucSach.getSosach()));
+        holder.tv_sl.setText("("+danhMucSach.getSosach()+")");
     }
 
 

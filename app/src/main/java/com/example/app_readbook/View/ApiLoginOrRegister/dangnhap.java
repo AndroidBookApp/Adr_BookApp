@@ -45,6 +45,7 @@ public class dangnhap extends AppCompatActivity {
     User User;
     LoginViewModel loginViewModel;
     GoogleSignInClient googleSignInClient;
+    public boolean check_login = false ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +53,17 @@ public class dangnhap extends AppCompatActivity {
         setContentView(R.layout.login);
         anhxa();
         iniLoginViewModel();
+        check_login = DataManager.isLogin();
+        if(check_login = true)
+        {
+            Intent intent = new Intent(dangnhap.this , home.class);
+            startActivity(intent);
+            mCheckbox.setChecked(true);
+        }else  if(check_login = false){
+            DataManager.isSaveLogin(false);
+            check_login = false;
+            mCheckbox.setChecked(false);
+        }
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -62,7 +74,6 @@ public class dangnhap extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 switch (v.getId()) {
                     case R.id.sign_in_button:
                         signIn();
@@ -81,7 +92,6 @@ public class dangnhap extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
@@ -90,7 +100,6 @@ public class dangnhap extends AppCompatActivity {
             handleSignInResult(task);
         }
     }
-
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -142,12 +151,20 @@ public class dangnhap extends AppCompatActivity {
         progressDialog.setMessage("Loading.....");   // load khi bấm btn_login
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mCheckbox = findViewById(R.id.checkbox);
+
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressDialog.show();
                 user = txt_username.getText().toString().trim();
                 pass = txt_password.getText().toString().trim();
+                if(mCheckbox.isChecked())
+                {
+                    DataManager.isSaveLogin(true);
+                }
+                else  if(!mCheckbox.isChecked()){
+                    DataManager.isSaveLogin(false);
+                }
                 iniLogin();
 
             }
@@ -168,12 +185,6 @@ public class dangnhap extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        DataManager.loadUser();
-//        if ((dataManager.isLogin())) {
-//            Intent intent = new Intent(dangnhap.this, home.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(intent);
-//        }
     }
 
 }

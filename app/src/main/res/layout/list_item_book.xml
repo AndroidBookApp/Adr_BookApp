@@ -48,7 +48,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@id/bg_sach"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/hindsiliguri_medium"
                 android:text="Tác giả : Napoleonh Hill"
                 android:textSize="14dp" />
 
@@ -107,14 +107,14 @@
             <TextView
                 android:id="@+id/tomtatNDlistBook"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginEnd="20dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/lnl_view"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:layout_toEndOf="@id/bg_sach"
-                android:fontFamily="@font/roboto_light"
-
+                android:fontFamily="@font/hindsiliguri_regular"
+                android:maxLength="150"
                 android:textSize="10dp" />
 
             <ImageView

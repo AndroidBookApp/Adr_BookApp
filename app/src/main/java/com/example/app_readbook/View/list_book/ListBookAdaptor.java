@@ -21,6 +21,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
+import com.example.app_readbook.Model.favorite;
 import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
@@ -40,7 +41,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
   private Context context;
   public Main_ListBook main_listBook;
   String  idmember , idBook;
-  String favorite ;
+  boolean favorite = false;
     AddFavoriteViewModel favoriteViewModel;
     public IClickAddFavorite iClickAddFavorite;
   public interface IClickAddFavorite{
@@ -79,19 +80,25 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
             return;
         }
 
-        // truyền các dữ liệu từ db vào list thông qua các hàm getter
+        // truyền các dữ liệu từ db vào list thông qua các hàm setter
         holder.tv_name.setText(sach.getTensach());
         holder.tv_tacgia.setText(sach.getTacgia());
         holder.comment.setText(sach.getFeedback());
         holder.textView.setText(sach.getLuotxem());
         holder.page.setText(sach.getSotrang());
-        holder.tomtatND.setText(sach.getTomtatND());
+        holder.tomtatND.setText(sach.getTomtatND()+".....");
+        if(!favorite)
+        {
+            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+        }else {
+            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
+        }
         Glide.with(context).
                 load(sach.getImgSach()).apply(new RequestOptions().transform(new CenterCrop()).transform(new RoundedCorners(20)))
                 .into(holder.mBook);
         User user = DataManager.loadUser();
          idmember = user.getIdMember();
-        favorite = mSach.get(position).getFavorite();
+//        favorite = mSach.get(position).getFavorite();
         idBook =mSach.get(position).getIdSach();
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -123,34 +130,33 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
             @Override
             public void onClick(View v) {
                 ApiInterface apiInterface = ApiService.apiInterface();
-                Call<String> callFavorite = apiInterface.UpdateFavorite(idmember , mSach.get(position).getIdSach());
-                callFavorite.enqueue(new Callback<String>() {
+                Call<com.example.app_readbook.Model.favorite> callFavorite = apiInterface.UpdateFavorites(idmember , mSach.get(position).getIdSach());
+                callFavorite.enqueue(new Callback<com.example.app_readbook.Model.favorite>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        String favorite = response.body();
+                    public void onResponse(Call<favorite> call, Response<favorite> response) {
                         if(response.isSuccessful())
                         {
-                            if(favorite.equals("like"))
+                            if(response.message().equals("like"))
                             {
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
                                 Log.e("AAA" , mSach.get(position).getIdSach());
                                 Log.e("AAA" , idmember);
-                                Log.e("AAA" , favorite);
+                                favorite = true;
                                 Toast.makeText(context, "Thích", Toast.LENGTH_SHORT).show();
                             }
-                            else if(favorite.equals("unlike"))
+                            else if(response.message().equals("unlike"))
                             {
                                 Log.e("AAA" , mSach.get(position).getIdSach());
                                 Log.e("AAA" , idmember);
+                                favorite = false;
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
-                                Log.e("AAA" , favorite);
                                 Toast.makeText(context, "Bỏ Thích", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<favorite> call, Throwable t) {
 
                     }
                 });

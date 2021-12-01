@@ -14,7 +14,6 @@
         android:normalScreens="true"
         android:smallScreens="true"
         android:xlargeScreens="true" />
-
     <application
         android:name=".shareFreferences.MyApplication"
         android:allowBackup="true"
@@ -40,6 +39,9 @@
             android:exported="true" />
         <activity
             android:name=".home"
+            android:exported="true" />
+        <activity
+            android:name=".home_header"
             android:exported="true" />
         <activity
             android:name=".View.fragment_pager.model_account.Data_edit_account"
