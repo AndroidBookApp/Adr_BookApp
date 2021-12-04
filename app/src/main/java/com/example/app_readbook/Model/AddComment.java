@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class AddComment {
     @SerializedName("success")
     @Expose
+    //
     private String success;
     @SerializedName("message")
     @Expose
