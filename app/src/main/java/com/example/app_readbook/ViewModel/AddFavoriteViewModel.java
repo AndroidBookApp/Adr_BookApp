@@ -32,7 +32,7 @@ public class AddFavoriteViewModel extends ViewModel {
             public void onResponse(Call<String> call, Response<String> response) {
                 AddFavorite = response.body();
                 if (response.isSuccessful() ) {
-                        DataManager.sFavorite(AddFavorite);
+
                         mAddFavorite.setValue(response.body());
                         Log.e("AAA", AddFavorite);
                     } else{

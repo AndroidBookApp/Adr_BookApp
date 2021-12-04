@@ -48,7 +48,7 @@ public class Home_fragment extends Fragment{
     DanhMucSach danhMucSach;
     private RecyclerView recyclerView;
     int currentItem;
-    String danhmuc;
+
 
     private  Handler mHandler ;
     private  Runnable mRunnable ;
@@ -104,7 +104,6 @@ public class Home_fragment extends Fragment{
             }
         });
     }
-
     private void getDataImg() {
         ApiInterface apiInterface = ApiService.apiInterface();
         Call<List<Sach>> listCall = apiInterface.responseSach();

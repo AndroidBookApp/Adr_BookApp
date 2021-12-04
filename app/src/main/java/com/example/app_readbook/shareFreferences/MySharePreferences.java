@@ -11,6 +11,7 @@ public class MySharePreferences {
     private static final String SAVE_FAVORITE = "SAVE_FAVORITE";
     private static final String MY_OPEN_APP = "MY_OPEN_APP";
     private static final String LIKE_FAVORITE ="LIKE_FAVORITE" ;
+    private static final String SHARE_LOGIN = "SHARE_LOGIN";
     private Context mContext;
 
     public MySharePreferences(Context mContext) {
@@ -36,13 +37,20 @@ public class MySharePreferences {
         editor.putString("Message", valueUser);
         editor.putString("ImgAvatar", valueUser);
         editor.putString("ImgBia", valueUser);
-        editor.putBoolean("login", true);
+//        editor.putBoolean("login", false);
         editor.apply();
     }
 
     public boolean saveLogin(String key) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_USER, Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("login", true);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("login", false);
+    }
+    public void putBooleanValueLogin(String key , boolean value)
+    {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN , 0);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key ,value);
+        editor.apply();
     }
     public void putBooleanValue(String key , boolean value)
     {
@@ -111,7 +119,7 @@ public class MySharePreferences {
         editor.putString("Luotxem", value);
         editor.putString("Feedback", value);
         editor.putString("Sotrang", value);
-        editor.putString("like", value);
+        editor.putBoolean(key, false);
         editor.apply();
     }
 

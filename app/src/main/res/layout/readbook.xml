@@ -4,15 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-<ImageView
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/page_book_old"
-    android:scaleType="centerCrop"
-
-    />
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar_readBook"
         android:background="@color/white"

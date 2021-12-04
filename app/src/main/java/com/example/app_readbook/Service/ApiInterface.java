@@ -59,7 +59,7 @@ public interface ApiInterface {
 
         @FormUrlEncoded
     @POST("thichsach.php")
-    Call<favorite> UpdateFavorites(@Field("idSach") String idSach, @Field("idMember") String idmember);
+    Call<favorite> UpdateFavorites(@Field("idMember") String idMember, @Field("idSach") String idSach);
     @FormUrlEncoded
     @POST("loginn.php")
     Call<login> getLogin(@Field("username") String username, @Field("password") String password);
@@ -72,12 +72,9 @@ public interface ApiInterface {
     @POST("danhsachluotthich.php")
     Call<List<favorite>> getListFavorite(@Field("idMember") String idMember);
 
-    //    @FormUrlEncoded
-//    @POST("danhsachluotthich.php")
-//    Call<testfavorite> getListFavorite(@Field("idMember") String idMember);
     @FormUrlEncoded
     @POST("xoaluotthich.php")
-    Call<favorite> deleteFavorite(@Field("idMember") String idMember, @Field("idSach") String idSach);
+    Call<String> deleteFavorite(@Field("idSach") String idSach, @Field("idMember") String idMember);
 
     @FormUrlEncoded
     @POST("luotxemsach.php")
@@ -95,18 +92,6 @@ public interface ApiInterface {
                                 @Field("ImgAvatar") String ImgAvatar,
                                 @Field("ImgBia") String ImgBia
                                 );
-//    @FormUrlEncoded
-//    @POST("update_member.php")
-//    Call<String> getUpdateMember(@Field("idMember") String idMember,
-//                                @Field("username") String username,
-//                                @Field("memberName") String memberName,
-//                                @Field("password") String password,
-//                                @Field("email") String email,
-//                                @Field("Gioitinh") String Gioitinh,
-//                                @Field("Ngaysinh") String Ngaysinh,
-//                                @Field("ImgAvatar") String ImgAvatar,
-//                                @Field("ImgBia") String ImgBia
-//    );
     @Multipart
     @POST("update_profile.php")
     Call<String> UploadPhoto(@Part MultipartBody.Part avatar, @Part MultipartBody.Part image_page);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/btn_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/btn_home" />
+        <item
+            android:id="@+id/btn_search"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="@string/btn_search" />
+        <item
+            android:id="@+id/btn_favorite"
+            android:icon="@drawable/ic_baseline_favorite_24"
+            android:title="@string/btn_favorite" />
+        <item
+            android:id="@+id/btn_account"
+            android:icon="@drawable/ic_baseline_account_24"
+            android:title="@string/btn_account" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="Tài Khoản">
+            <menu>
+                <item
+                    android:id="@+id/btn_signOut"
+                    android:icon="@drawable/ic_baseline_logout_power_24"
+                    android:title="@string/Log_Out" />
+            </menu>
+        </item>
+    </group>
+</menu>

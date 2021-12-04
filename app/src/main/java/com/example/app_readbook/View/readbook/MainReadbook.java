@@ -74,8 +74,7 @@ private List<ReadbookName> readbookNames;
 
     private List<ReadbookName> getReadbook(int min, int max) {
         List<ReadbookName> list = new ArrayList<>();
-//        int page_min = Integer.parseInt(txt_book.getText().toString().trim());
-//        int page_max = Integer.parseInt(txt_book_all.getText().toString().trim());
+
         for(int i = min ; i <= max ; i++)
         {
             list.add(new ReadbookName("Trang" +i ));

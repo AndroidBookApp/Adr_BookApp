@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/btn_home" android:title="@string/btn_home" android:icon="@drawable/ic_baseline_home_24"/>
-    <item android:id="@+id/btn_search" android:title="@string/btn_search" android:icon="@drawable/ic_baseline_search_24"/>
-    <item android:id="@+id/btn_favorite" android:title="@string/btn_favorite" android:icon="@drawable/ic_baseline_favorite_24"/>
-    <item android:id="@+id/btn_account" android:title="@string/btn_account" android:icon="@drawable/ic_baseline_account_24"/>
+    <item
+        android:id="@+id/btn_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/btn_home" />
+    <item
+        android:id="@+id/btn_search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/btn_search" />
+    <item
+        android:id="@+id/btn_favorite"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="@string/btn_favorite" />
+    <item
+        android:id="@+id/btn_account"
+        android:icon="@drawable/ic_baseline_account_24"
+        android:title="@string/btn_account" />
 
 </menu>

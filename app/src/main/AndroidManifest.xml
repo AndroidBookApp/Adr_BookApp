@@ -2,19 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.app_readbook">
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+
     <supports-screens
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true"
         android:xlargeScreens="true" />
-
     <application
-        android:allowBackup="true"
         android:name=".shareFreferences.MyApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
@@ -24,6 +26,11 @@
         android:usesCleartextTraffic="true"
         tools:ignore="Instantiatable,MissingClass"
         tools:targetApi="n">
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+        <activity
+            android:name=".SecondActivity"
+            android:exported="true" />
         <activity
             android:name=".View.onboarding.OnboardingMain"
             android:exported="true" />
@@ -34,26 +41,27 @@
             android:name=".home"
             android:exported="true" />
         <activity
+            android:name=".home_header"
+            android:exported="true" />
+        <activity
             android:name=".View.fragment_pager.model_account.Data_edit_account"
             android:exported="true" />
         <activity
-            android:name=".View_ReadBook"
+            android:name=".View.View_Readbook.View_ReadBook"
             android:exported="true" />
         <activity
             android:name=".View.readbook.MainReadbook"
             android:exported="true" />
-
         <activity
             android:name=".View.fragment_pager.model_account.Data_edit_name"
             android:exported="true" />
         <activity
             android:name=".View.chapter.Main_Chapter"
             android:exported="true"
-            android:parentActivityName=".View_ReadBook" />
+            android:parentActivityName=".View.View_Readbook.View_ReadBook" />
         <activity
             android:name=".View.list_comment.Main_NodeReadBook"
             android:exported="true" />
-
         <activity
             android:name=".View.ApiLoginOrRegister.dangnhap"
             android:exported="true" />

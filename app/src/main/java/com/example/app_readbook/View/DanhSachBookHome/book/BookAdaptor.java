@@ -17,7 +17,7 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
-import com.example.app_readbook.View_ReadBook;
+import com.example.app_readbook.View.View_Readbook.View_ReadBook;
 import com.example.app_readbook.home;
 import com.example.app_readbook.shareFreferences.DataManager;
 import com.squareup.picasso.Picasso;
@@ -71,7 +71,7 @@ public home home;
             @Override
             public void onClick(View v) {
                 ApiInterface apiInterface = ApiService.apiInterface();
-                Call<String> strViewBook = apiInterface.ViewReadBook(sach.getIdSach(), sach.getLuotxem());
+                Call<String> strViewBook = apiInterface.ViewReadBook(sach.getIdSach(),"1");
                 strViewBook.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -117,7 +117,7 @@ public home home;
             imageBook = itemView.findViewById(R.id.book);
             txtTitle = itemView.findViewById(R.id.text_view);
             txtTacgia = itemView.findViewById(R.id.text_tacgia);
-            relativeLayoutBookMain = itemView.findViewById(R.id.main_rlt);
+            relativeLayoutBookMain = itemView.findViewById(R.id.rlt_bookMain);
         }
     }
 

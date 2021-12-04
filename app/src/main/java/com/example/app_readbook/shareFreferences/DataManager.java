@@ -27,6 +27,7 @@ public class DataManager {
     private static final String OBJECT_DANHGIA = "OBJECT_DANHGIA";
     private static final String STRING_FAVORITE = "STRING_FAVORITE";
     private static final String FAVORITE = "FAVORITE";
+    private static final String OBJECT_LOGIN = "OBJECT_LOGIN";
     private static DataManager instance;
     private static Context mContext;
     private MySharePreferences mySharePreferences;
@@ -110,11 +111,14 @@ public class DataManager {
         List<danhgia> mDanhgia = gson.fromJson(strDanhgia, type);
         return mDanhgia;
     }
-
-    public boolean isLogin() {
-        return DataManager.getInstance().mySharePreferences.saveLogin(OBJECT_USER);
+//Save login
+    public static boolean isLogin() {
+        return DataManager.getInstance().mySharePreferences.saveLogin(OBJECT_LOGIN);
     }
+    public static void isSaveLogin(boolean login) {
 
+        DataManager.getInstance().mySharePreferences.putBooleanValueLogin(OBJECT_LOGIN , login);
+    }
     public static void saveFavorite(favorite favorites) {
         Gson gson = new Gson();
         String strFavorite = gson.toJson(favorites);
