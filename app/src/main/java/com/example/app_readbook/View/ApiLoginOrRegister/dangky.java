@@ -38,7 +38,7 @@ public class dangky extends AppCompatActivity {
     ProgressDialog progressDialog;
     User user;
     @Override
-    //
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dangky);
