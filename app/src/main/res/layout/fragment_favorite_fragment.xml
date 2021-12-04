@@ -14,4 +14,13 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_thongbao"
+        android:visibility="gone"
+        android:textSize="50dp"
+        android:text="Yêu Thích Rỗng"
+        android:layout_centerInParent="true"
+        />
 </RelativeLayout>

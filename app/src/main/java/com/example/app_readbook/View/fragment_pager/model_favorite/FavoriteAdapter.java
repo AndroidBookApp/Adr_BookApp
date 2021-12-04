@@ -56,6 +56,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
     public void onBindViewHolder(@NonNull SearchViewHodel holder, @SuppressLint("RecyclerView") int position) {
         listFavorite = mlist.get(position);
         if (listFavorite == null) {
+
             return;
         }
         Picasso.get().load(listFavorite.getImgSach()).into(holder.mBook);
@@ -116,7 +117,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
         private TextView tv_2;
         private ImageButton mIcon;
         private ImageView mBook;
-        private TextView tomtat;
+        private TextView tomtat , thongbao;
 
         public SearchViewHodel(@NonNull View itemView) {
             super(itemView);
@@ -125,6 +126,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
             mBook = itemView.findViewById(R.id.sach);
             mIcon = itemView.findViewById(R.id.icon_clear);
             tomtat = itemView.findViewById(R.id.tomtatND);
+            thongbao = itemView.findViewById(R.id.tv_thongbao);
         }
     }
 

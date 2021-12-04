@@ -26,7 +26,7 @@ public class FavoriteViewModel extends ViewModel {
     {
         return mListFavorite;
     }
-    public void iniDataFavorite( String idMember) {
+    public void iniDataFavorite(String idMember) {
         ApiInterface apiInterface = ApiService.apiInterface();
         Call<List<favorite>> listCall = apiInterface.getListFavorite(idMember);
         listCall.enqueue(new Callback<List<favorite>>() {

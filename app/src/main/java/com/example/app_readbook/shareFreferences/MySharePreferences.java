@@ -119,7 +119,7 @@ public class MySharePreferences {
         editor.putString("Luotxem", value);
         editor.putString("Feedback", value);
         editor.putString("Sotrang", value);
-        editor.putString("like", value);
+        editor.putBoolean(key, false);
         editor.apply();
     }
 

@@ -66,10 +66,9 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
             public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
                 saches = (ArrayList<Sach>) response.body();
                 BookAdaptor bookAdaptor = new BookAdaptor(saches ,mcontext);
-//                DividerItemDecoration itemDecoration = new DividerItemDecoration(mcontext , DividerItemDecoration.HORIZONTAL);
-//                holder.recyclerView.addItemDecoration(itemDecoration);
-                holder.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
-//                holder.recyclerView.setLayoutManager(new LinearLayoutManager(mcontext , LinearLayoutManager.HORIZONTAL , false));
+
+                holder.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+
                 holder.recyclerView.setAdapter(bookAdaptor);
             }
 

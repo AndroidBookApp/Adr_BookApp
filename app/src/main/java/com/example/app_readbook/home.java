@@ -37,6 +37,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     String idMember, idSach;
+
     private AppBarLayout appBarLayout;
     private BottomNavigationView bottomNavigationView;
     private DrawerLayout drawerLayout;
@@ -47,7 +48,6 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     private static final int FRAGMENTS_FAVORITE = 3;
     private static final int FRAGMENTS_ACCOUNT = 4;
     private int currentFragments = FRAGMENTS_HOME;
-    public static final String SAVE_LOGIN = "SAVE_LOGIN";
 
     @SuppressLint({"WrongViewCast", "ResourceAsColor"})
     @Override
@@ -89,7 +89,6 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
                     break;
                 case R.id.btn_favorite:
                     DataManager.loadUser();
-                    DataManager.loadFavorite();
                     OpenFavoriteFragments();
                     navigationView.setCheckedItem(R.id.btn_favorite);
                     break;

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -40,6 +41,7 @@ public class Favorite_fragment extends Fragment {
     User user;
     String idMember, idSach;
     home home;
+    private TextView tv_thongbao;
     FavoriteViewModel addFavoriteViewModel;
     DeleteFavoriteViewModel deleteFavoriteViewModel;
     FavoriteAdapter favoriteAdapter;
@@ -53,9 +55,9 @@ public class Favorite_fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_fragment, container, false);
         recyclerView = view.findViewById(R.id.rcv_list);
+        tv_thongbao = view.findViewById(R.id.tv_thongbao);
         home = new home();
         user = DataManager.loadUser();
-//        DataManager.loadFavorite();
         idMember = user.getIdMember();
         idSach = DataManager.loadObjectSach().getIdSach();
         return view;
@@ -90,6 +92,7 @@ public class Favorite_fragment extends Fragment {
 
                                                     Log.e("AAAA", ketqua);
                                                     Toast.makeText(getActivity(), "Xóa Thành công", Toast.LENGTH_SHORT).show();
+
                                                 } else {
                                                     Log.e("AAAA", ketqua);
                                                     Toast.makeText(getActivity(), "Xóa Không Thành công", Toast.LENGTH_SHORT).show();
@@ -103,26 +106,54 @@ public class Favorite_fragment extends Fragment {
                                                 Log.e("AAAA", t.getMessage());
                                             }
                                         });
+//                                        deleteFavoriteViewModel = new ViewModelProvider(Objects.requireNonNull(getActivity())).get(DeleteFavoriteViewModel.class);
+//                                        deleteFavoriteViewModel.getDeleteFavorite().observe(getActivity(), new Observer<String>() {
+//                                            @Override
+//                                            public void onChanged(String s) {
+//                                                if (s.equals("success")) {
+//                                                    Log.e("AAAA", s);
+//                                                    Toast.makeText(getActivity(), "Xóa Thành công", Toast.LENGTH_SHORT).show();
+//
+//                                                } else {
+//                                                    Log.e("AAAA", s);
+//                                                    Toast.makeText(getActivity(), "Xóa Không Thành công", Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            }
+//                                        });
+//                                        deleteFavoriteViewModel.iniDeleteData(idMember, idSach);
+                                        loadData(favorites);
                                     }
                                 })
                                 .setNegativeButton("Không", null)
                                 .show();
-                        favoriteAdapter.setData(favorites);
-                        favoriteAdapter.notifyDataSetChanged();
-                        recyclerView.setAdapter(favoriteAdapter);
+
+
                     }
 
+
                 });
-                favoriteAdapter.setData(favorites);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(home, LinearLayoutManager.VERTICAL, false);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                favoriteAdapter.notifyDataSetChanged();
-                recyclerView.setAdapter(favoriteAdapter);
+                loadData(favorites);
             }
         });
         addFavoriteViewModel.iniDataFavorite(idMember);
+        if(addFavoriteViewModel.getListFavorite() == null)
+        {
+            tv_thongbao.setText("Yêu Thích Rỗng");
+            tv_thongbao.setVisibility(View.VISIBLE);
+        }else{
 
+            tv_thongbao.setVisibility(View.GONE);
+        }
     }
+
+    public void loadData(List<favorite> favorite) {
+        favoriteAdapter.setData(favorite);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(home, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(favoriteAdapter);
+
+        }
+
 
 }

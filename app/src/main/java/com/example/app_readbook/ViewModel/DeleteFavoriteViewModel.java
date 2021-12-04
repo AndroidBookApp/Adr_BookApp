@@ -31,15 +31,15 @@ public class DeleteFavoriteViewModel extends ViewModel {
             public void onResponse(Call<String> call, Response<String> response) {
                 success = response.body();
                 if (success.equals("success")) {
-                    mDeleteFavorite.setValue(response.body());
+                    mDeleteFavorite.postValue(response.body());
                 } else {
-                    mDeleteFavorite.setValue(null);
+                    mDeleteFavorite.postValue(null);
                 }
 
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                mDeleteFavorite.setValue(null);
+                mDeleteFavorite.postValue(null);
             }
         });
     }

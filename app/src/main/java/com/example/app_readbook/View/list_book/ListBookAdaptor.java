@@ -26,7 +26,7 @@ import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
-import com.example.app_readbook.View_ReadBook;
+import com.example.app_readbook.View.View_Readbook.View_ReadBook;
 import com.example.app_readbook.shareFreferences.DataManager;
 
 import java.util.ArrayList;
@@ -87,6 +87,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         holder.textView.setText(sach.getLuotxem());
         holder.page.setText(sach.getSotrang());
         holder.tomtatND.setText(sach.getTomtatND()+".....");
+        favorite = DataManager.LFavorite();
         if(!favorite)
         {
             holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
@@ -98,7 +99,6 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                 .into(holder.mBook);
         User user = DataManager.loadUser();
          idmember = user.getIdMember();
-//        favorite = mSach.get(position).getFavorite();
         idBook =mSach.get(position).getIdSach();
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +142,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                                 Log.e("AAA" , mSach.get(position).getIdSach());
                                 Log.e("AAA" , idmember);
                                 favorite = true;
+                                DataManager.Favorite(favorite);
                                 Toast.makeText(context, "Thích", Toast.LENGTH_SHORT).show();
                             }
                             else if(response.message().equals("unlike"))
@@ -149,6 +150,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                                 Log.e("AAA" , mSach.get(position).getIdSach());
                                 Log.e("AAA" , idmember);
                                 favorite = false;
+                                DataManager.Favorite(favorite);
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
                                 Toast.makeText(context, "Bỏ Thích", Toast.LENGTH_SHORT).show();
                             }
