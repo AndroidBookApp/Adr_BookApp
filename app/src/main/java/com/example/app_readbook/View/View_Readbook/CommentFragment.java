@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
@@ -57,25 +58,19 @@ public class CommentFragment extends Fragment {
     private AppCompatEditText comment;
     User user;
     String load;
-    View_ReadBook view_readBook;
     AddCommentViewModel viewModel;
-
     public CommentFragment() {
         // Required empty public constructor
     }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_comment, container, false);
-        view_readBook = new View_ReadBook();
         sach = new Sach();
         user = DataManager.loadUser();
         sach = DataManager.loadObjectSach();
@@ -85,19 +80,33 @@ public class CommentFragment extends Fragment {
         getDataViewSach();
         return mView;
     }
-
     private void iniUI() {
         recyclerView = mView.findViewById(R.id.rcv_reabook);
         btnSend = mView.findViewById(R.id.btn_send);
         comment = mView.findViewById(R.id.edit_comment);
         img_MemberComment = mView.findViewById(R.id.comment_avatar);
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String comments = comment.getText().toString().trim();
+                if(comments.isEmpty())
+                {
+                    Toast.makeText(getActivity(), "Bạn chưa nhập nhận xét", Toast.LENGTH_SHORT).show();
+                }else {
+                    addComment();
+                    DataManager.saveDanhGia(danhgias);
+                    DialogCommemt(Gravity.CENTER);
+                }
+
+            }
+        });
 
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        addComment();
+        viewModel = new ViewModelProvider(this).get(AddCommentViewModel.class);
     }
 
     public void loadData(List<com.example.app_readbook.Model.danhgia> danhgias) {
@@ -115,14 +124,7 @@ public class CommentFragment extends Fragment {
         idSach = sach.getIdSach();
         imageAvater = user.getImgAvatar();
         Picasso.get().load(user.getImgAvatar()).into(img_MemberComment);
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addComment();
-                DataManager.saveDanhGia(danhgias);
-                DialogCommemt(Gravity.CENTER);
-            }
-        });
+
     }
 
     public void getDataViewSach() {
@@ -134,17 +136,13 @@ public class CommentFragment extends Fragment {
                 danhgias = (ArrayList<com.example.app_readbook.Model.danhgia>) response.body();
                 loadData(danhgias);
             }
-
             @Override
             public void onFailure(Call<List<danhgia>> call, Throwable t) {
-
             }
         });
 
     }
-
-    public void addComment() {
-        viewModel = new ViewModelProvider(this).get(AddCommentViewModel.class);
+    private void addComment() {
         viewModel.getAddComment().observe(this, new Observer<List<com.example.app_readbook.Model.danhgia>>() {
             @Override
             public void onChanged(List<com.example.app_readbook.Model.danhgia> danhgias) {
@@ -153,7 +151,6 @@ public class CommentFragment extends Fragment {
         });
         String danhgia = Objects.requireNonNull(comment.getText()).toString().trim();
         viewModel.iniAddComment(idUser, idSach, danhgia);
-        loadData(danhgias);
     }
 
     private void DialogCommemt(int gravity) {
@@ -183,7 +180,7 @@ public class CommentFragment extends Fragment {
         btn_backHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(view_readBook, home.class);
+                Intent intent = new Intent(getActivity(), home.class);
                 startActivity(intent);
             }
         });

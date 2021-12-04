@@ -15,6 +15,7 @@ public class ViewPagerAdaptor extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
+        //
         switch (position)
         {
             case 0 :
@@ -28,12 +29,14 @@ public class ViewPagerAdaptor extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
+        //có bao nhiêu tab sẽ return ngần ấy giá trị bắt đầu từ 0
         return 2;
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
+        // set title cho tablelayout
         String title = "";
         switch (position)
         {

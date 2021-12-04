@@ -83,7 +83,6 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mcontext , Main_ListBook.class);
-                DataManager.Favorite(true);
                 intent.putExtra("danhmuc" , mDanhmuc.get(holder.getPosition()));
                 mcontext.startActivity(intent);
             }

@@ -1,106 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/solid_login"
     tools:context=".View.View_Readbook.MainFragment">
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/layout_2"
 
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_nameBook"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layout_2"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="@color/black"
-            android:textSize="40dp" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_tacGiaBook"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_nameBook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/black"
+                android:textSize="40dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_tacGiaBook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="#575757"
+                android:textSize="24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_NXB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="#5C5C5C"
+                android:textSize="14dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="#575757"
-            android:textSize="24dp" />
+            android:layout_below="@+id/layout_2"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="23dp"
+            android:layout_marginBottom="23dp"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_NXB"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="#5C5C5C"
-            android:textSize="14dp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/bookName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Sơ lược nội dung "
+                android:textColor="#404040"
+                android:textSize="24dp" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/node_textBook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="#8F8F8F"
+                android:textSize="18dp" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_2"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="23dp"
-        android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/next_pageBook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:drawableEnd="@drawable/ic_baseline_navigate_next_2_24"
+                android:text="Đọc Tiếp"
+                android:textColor="@color/btn_color" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/bookName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Sơ lược nội dung "
-            android:textColor="#404040"
-            android:textSize="24dp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/node_textBook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
-            android:textColor="#8F8F8F"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/read_book"
+            android:layout_width="157dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/next"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="23dp"
+            android:layout_marginBottom="23dp"
+            android:background="@drawable/color_btn"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Đọc Sách"
+            android:textColor="@color/white"
             android:textSize="18dp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/next_pageBook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:drawableEnd="@drawable/ic_baseline_navigate_next_2_24"
-            android:text="Đọc Tiếp"
-            android:textColor="@color/btn_color" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/read_book"
-        android:layout_width="157dp"
-        android:layout_height="48dp"
-        android:layout_below="@id/next"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="23dp"
-        android:background="@drawable/color_btn"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Đọc Sách"
-        android:textColor="@color/white"
-        android:textSize="18dp" />
+    </RelativeLayout>
 
 
-
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>

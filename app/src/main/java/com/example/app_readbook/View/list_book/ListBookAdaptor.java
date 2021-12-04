@@ -21,12 +21,12 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
-import com.example.app_readbook.Model.favorite;
+import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
-import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
 import com.example.app_readbook.View.View_Readbook.View_ReadBook;
+import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
 import com.example.app_readbook.shareFreferences.DataManager;
 
 import java.util.ArrayList;
@@ -130,10 +130,10 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
             @Override
             public void onClick(View v) {
                 ApiInterface apiInterface = ApiService.apiInterface();
-                Call<com.example.app_readbook.Model.favorite> callFavorite = apiInterface.UpdateFavorites(idmember , mSach.get(position).getIdSach());
-                callFavorite.enqueue(new Callback<com.example.app_readbook.Model.favorite>() {
+                Call<favoriteDeleteData> callFavorite = apiInterface.UpdateFavorites(idmember , mSach.get(position).getIdSach());
+                callFavorite.enqueue(new Callback<favoriteDeleteData>() {
                     @Override
-                    public void onResponse(Call<favorite> call, Response<favorite> response) {
+                    public void onResponse(Call<favoriteDeleteData> call, Response<favoriteDeleteData> response) {
                         if(response.isSuccessful())
                         {
                             if(response.message().equals("like"))
@@ -142,7 +142,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                                 Log.e("AAA" , mSach.get(position).getIdSach());
                                 Log.e("AAA" , idmember);
                                 favorite = true;
-                                DataManager.Favorite(favorite);
+                                DataManager.Favorite(favorite ,idmember);
                                 Toast.makeText(context, "Thích", Toast.LENGTH_SHORT).show();
                             }
                             else if(response.message().equals("unlike"))
@@ -150,7 +150,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                                 Log.e("AAA" , mSach.get(position).getIdSach());
                                 Log.e("AAA" , idmember);
                                 favorite = false;
-                                DataManager.Favorite(favorite);
+                                DataManager.Favorite(favorite , idmember);
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
                                 Toast.makeText(context, "Bỏ Thích", Toast.LENGTH_SHORT).show();
                             }
@@ -158,7 +158,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                     }
 
                     @Override
-                    public void onFailure(Call<favorite> call, Throwable t) {
+                    public void onFailure(Call<favoriteDeleteData> call, Throwable t) {
 
                     }
                 });

@@ -107,7 +107,6 @@ public class Account_fragment extends Fragment {
                 Context context = getActivity();
                 if (context != null) {
                     Intent intent = new Intent(context, dangnhap.class);
-                    DataManager.isSaveLogin(false);
                     context.startActivity(intent);
                 }
             }

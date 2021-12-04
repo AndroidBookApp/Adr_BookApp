@@ -18,13 +18,9 @@ import retrofit2.Response;
 public class AddCommentViewModel extends ViewModel {
     public MutableLiveData<List<danhgia>> mAddComment;
     public List<danhgia> comment;
-    public String mIdUser, mId, mComment;
-
     public AddCommentViewModel() {
         mAddComment = new MutableLiveData<>();
-        iniAddComment(mIdUser, mId, mComment);
     }
-
     public MutableLiveData<List<danhgia>> getAddComment() {
         return mAddComment;
     }
@@ -37,7 +33,6 @@ public class AddCommentViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     mAddComment.setValue(response.body());
                 } else {
-
                     mAddComment.setValue(response.body());
                     Log.e("AAA", response.message());
                 }

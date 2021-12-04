@@ -11,7 +11,8 @@ public class MySharePreferences {
     private static final String SAVE_FAVORITE = "SAVE_FAVORITE";
     private static final String MY_OPEN_APP = "MY_OPEN_APP";
     private static final String LIKE_FAVORITE ="LIKE_FAVORITE" ;
-    private static final String SHARE_LOGIN = "SHARE_LOGIN";
+    private static final String SHARE_LOGIN_PASS = "SHARE_LOGIN_PASS";
+    private static final String SHARE_LOGIN_USER = "SHARE_LOGIN_USER";
     private Context mContext;
 
     public MySharePreferences(Context mContext) {
@@ -41,15 +42,26 @@ public class MySharePreferences {
         editor.apply();
     }
 
-    public boolean saveLogin(String key) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN, Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("login", false);
+    public String saveLoginUser(String key) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN_USER, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(key, "");
     }
-    public void putBooleanValueLogin(String key , boolean value)
+    public String saveLoginPass(String key) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN_PASS, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(key, "");
+    }
+    public void putValueLoginUser(String key )
     {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN , 0);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN_USER , 0);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(key ,value);
+        editor.putString("username" ,key);
+        editor.apply();
+    }
+    public void putBooleanValueLogin(String key )
+    {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN_PASS , 0);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("password" ,key);
         editor.apply();
     }
     public void putBooleanValue(String key , boolean value)
@@ -128,11 +140,13 @@ public class MySharePreferences {
         return sharedPreferences.getString("idMember", null);
     }
 
-    public void like(String key , boolean value)
+    public void like(String key ,boolean value , String keyyy)
     {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(LIKE_FAVORITE , 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(key, value);
+        editor.putString("idMember", keyyy);
+        editor.putString("idSach", keyyy);
         editor.apply();
     }
     public boolean loadLike(String key)

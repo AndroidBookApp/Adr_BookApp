@@ -112,13 +112,13 @@ public class DataManager {
         return mDanhgia;
     }
 //Save login
-    public static boolean isLogin() {
-        return DataManager.getInstance().mySharePreferences.saveLogin(OBJECT_LOGIN);
-    }
-    public static void isSaveLogin(boolean login) {
-
-        DataManager.getInstance().mySharePreferences.putBooleanValueLogin(OBJECT_LOGIN , login);
-    }
+//    public static String isLogin() {
+//        return DataManager.getInstance().mySharePreferences.saveLoginPass(OBJECT_LOGIN);
+//    }
+//    public static void isSaveLogin(String key , String pass) {
+//
+//        DataManager.getInstance().mySharePreferences.putBooleanValueLogin(OBJECT_LOGIN , pass);
+//    }
     public static void saveFavorite(favorite favorites) {
         Gson gson = new Gson();
         String strFavorite = gson.toJson(favorites);
@@ -159,9 +159,9 @@ public class DataManager {
         return DataManager.getInstance().mySharePreferences.LoadFavorite(STRING_FAVORITE);
     }
 
-    public static void Favorite(boolean key)
+    public static void Favorite(boolean key , String value)
     {
-        DataManager.getInstance().mySharePreferences.like(FAVORITE , key);
+        DataManager.getInstance().mySharePreferences.like(FAVORITE , key , value);
     }
     public static boolean LFavorite()
     {

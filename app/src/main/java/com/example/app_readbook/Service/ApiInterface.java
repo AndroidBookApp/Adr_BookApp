@@ -6,6 +6,7 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.danhgia;
 import com.example.app_readbook.Model.favorite;
+import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.Model.login;
 
 import java.util.ArrayList;
@@ -56,10 +57,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("thichsach.php")
     Call<String> UpdateFavorite(@Field("idMember") String idMember, @Field("idSach") String idSach);
-
-        @FormUrlEncoded
+    @FormUrlEncoded
     @POST("thichsach.php")
-    Call<favorite> UpdateFavorites(@Field("idMember") String idMember, @Field("idSach") String idSach);
+    Call<favoriteDeleteData> UpdateFavorites(@Field("idMember") String idMember, @Field("idSach") String idSach);
     @FormUrlEncoded
     @POST("loginn.php")
     Call<login> getLogin(@Field("username") String username, @Field("password") String password);
