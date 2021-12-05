@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.R;
 import com.example.app_readbook.View.readbook.MainReadbook;
+import com.example.app_readbook.shareFreferences.DataManager;
 
 import java.util.ArrayList;
 
@@ -25,8 +26,6 @@ public class ChapterAdaptor extends RecyclerView.Adapter<ChapterAdaptor.ChapterV
         this.chuongList = chuongList;
         this.context = context;
     }
-
-
     @NonNull
     @Override
     public ChapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,8 +51,10 @@ public class ChapterAdaptor extends RecyclerView.Adapter<ChapterAdaptor.ChapterV
                 intent.putExtra("value" , holder.tv_chaper.getText());
                 intent.putExtra("page_min" , holder.tv_book.getText());
                 intent.putExtra("page_max" , holder.tv_max.getText());
+                DataManager.sChapter(namChuong);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
+
             }
         });
 //            holder.tv_chaper.setOnClickListener(new View.OnClickListener() {

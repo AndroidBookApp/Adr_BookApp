@@ -11,7 +11,9 @@ public class MySharePreferences {
     private static final String SAVE_FAVORITE = "SAVE_FAVORITE";
     private static final String MY_OPEN_APP = "MY_OPEN_APP";
     private static final String LIKE_FAVORITE ="LIKE_FAVORITE" ;
-    private static final String SHARE_LOGIN = "SHARE_LOGIN";
+    private static final String SHARE_LOGIN_PASS = "SHARE_LOGIN_PASS";
+    private static final String SHARE_LOGIN_USER = "SHARE_LOGIN_USER";
+    private static final String SHARE_CHAPTER = "SHARE_CHAPTER";
     private Context mContext;
 
     public MySharePreferences(Context mContext) {
@@ -37,19 +39,46 @@ public class MySharePreferences {
         editor.putString("Message", valueUser);
         editor.putString("ImgAvatar", valueUser);
         editor.putString("ImgBia", valueUser);
-//        editor.putBoolean("login", false);
         editor.apply();
     }
-
-    public boolean saveLogin(String key) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN, Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("login", false);
-    }
-    public void putBooleanValueLogin(String key , boolean value)
+    // lưu danh sách chương vào dữ liệu
+    public void setChapter(String key , String value)
     {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN , 0);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_CHAPTER , Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("idChuong" , value);
+        editor.putString("TenChuong" , value);
+        editor.putString("idSach" , value);
+        editor.putString("IdChitietsach" , value);
+        editor.putString("Sotrang" , value);
+        editor.apply();
+    }
+    //Lấy dữ liệu ra khi đã lưu vào
+    public String getChapter(String key)
+    {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_CHAPTER , Context.MODE_PRIVATE);
+        return sharedPreferences.getString("idChuong" , "");
+    }
+    public String saveLoginUser(String key) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN_USER, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(key, "");
+    }
+    public String saveLoginPass(String key) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN_PASS, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(key, "");
+    }
+    public void putValueLoginUser(String key )
+    {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN_USER , 0);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(key ,value);
+        editor.putString("username" ,key);
+        editor.apply();
+    }
+    public void putBooleanValueLogin(String key )
+    {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN_PASS , 0);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("password" ,key);
         editor.apply();
     }
     public void putBooleanValue(String key , boolean value)
@@ -128,11 +157,13 @@ public class MySharePreferences {
         return sharedPreferences.getString("idMember", null);
     }
 
-    public void like(String key , boolean value)
+    public void like(String key ,boolean value , String keyyy)
     {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(LIKE_FAVORITE , 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(key, value);
+        editor.putString("idMember", keyyy);
+        editor.putString("idSach", keyyy);
         editor.apply();
     }
     public boolean loadLike(String key)

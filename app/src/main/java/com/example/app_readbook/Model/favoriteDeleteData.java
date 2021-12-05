@@ -9,7 +9,8 @@ public class favoriteDeleteData {
     private String success;
     @SerializedName("message")
     @Expose
-    private String message;
+    private Boolean message;
+
     public String getSuccess() {
         return success;
     }
@@ -18,11 +19,11 @@ public class favoriteDeleteData {
         this.success = success;
     }
 
-    public String getMessage() {
+    public Boolean getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(Boolean message) {
         this.message = message;
     }
 }

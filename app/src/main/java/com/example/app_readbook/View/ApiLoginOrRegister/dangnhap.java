@@ -23,6 +23,7 @@ import com.example.app_readbook.SecondActivity;
 import com.example.app_readbook.ViewModel.LoginViewModel;
 import com.example.app_readbook.home;
 import com.example.app_readbook.shareFreferences.DataManager;
+import com.example.app_readbook.shareFreferences.MySharePreferences;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -45,7 +46,7 @@ public class dangnhap extends AppCompatActivity {
     User User;
     LoginViewModel loginViewModel;
     GoogleSignInClient googleSignInClient;
-    public boolean check_login = false ;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,17 +54,6 @@ public class dangnhap extends AppCompatActivity {
         setContentView(R.layout.login);
         anhxa();
         iniLoginViewModel();
-        check_login = DataManager.isLogin();
-        if(check_login = true)
-        {
-            Intent intent = new Intent(dangnhap.this , home.class);
-            startActivity(intent);
-            mCheckbox.setChecked(true);
-        }else  if(check_login = false){
-            DataManager.isSaveLogin(false);
-            check_login = false;
-            mCheckbox.setChecked(false);
-        }
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -100,18 +90,19 @@ public class dangnhap extends AppCompatActivity {
             handleSignInResult(task);
         }
     }
+
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
             Toast.makeText(this, "Login success", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(dangnhap.this , SecondActivity.class);
+            Intent intent = new Intent(dangnhap.this, SecondActivity.class);
             startActivity(intent);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.e("AAA" , e.toString());
+            Log.e("AAA", e.toString());
 
         }
     }
@@ -142,28 +133,29 @@ public class dangnhap extends AppCompatActivity {
     }
 
     private void anhxa() {
+        final MySharePreferences mySharePreferences = new MySharePreferences(this);
         txt_username = findViewById(R.id.user);
         txt_password = findViewById(R.id.txt_pass);
         tvForgetPass = findViewById(R.id.tv_forgetPass);
         signup = findViewById(R.id.dangky);
         signin = findViewById(R.id.btn_login);
+        mCheckbox = findViewById(R.id.checkbox);
+        user = mySharePreferences.saveLoginUser("username");
+        pass = mySharePreferences.saveLoginPass("password");
+        txt_username.setText(user);
+        txt_password.setText(pass);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading.....");   // load khi bấm btn_login
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mCheckbox = findViewById(R.id.checkbox);
-
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressDialog.show();
                 user = txt_username.getText().toString().trim();
                 pass = txt_password.getText().toString().trim();
-                if(mCheckbox.isChecked())
-                {
-                    DataManager.isSaveLogin(true);
-                }
-                else  if(!mCheckbox.isChecked()){
-                    DataManager.isSaveLogin(false);
+                if (mCheckbox.isChecked()) {
+                    mySharePreferences.putBooleanValueLogin(pass);
+                    mySharePreferences.putValueLoginUser(user);
                 }
                 iniLogin();
 

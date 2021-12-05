@@ -1,48 +1,47 @@
 package com.example.app_readbook.ViewModel;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
-import com.example.app_readbook.shareFreferences.DataManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddFavoriteViewModel extends ViewModel {
-    public MutableLiveData<String> mAddFavorite;
-    public String AddFavorite;
-
+    public MutableLiveData<favoriteDeleteData> mAddFavorite;
+    public favoriteDeleteData AddFavorite;
+    public boolean check;
     public AddFavoriteViewModel() {
         mAddFavorite = new MutableLiveData<>();
     }
 
-    public MutableLiveData<String> getAddFavorite() {
+    public MutableLiveData<favoriteDeleteData> getAddFavorite() {
         return mAddFavorite;
     }
+
     public void iniAddFavorite(String idBook, String idMember) {
         ApiInterface apiInterface = ApiService.apiInterface();
-        Call<String> callback = apiInterface.UpdateFavorite(idBook, idMember);
-        callback.enqueue(new Callback<String>() {
+        Call<favoriteDeleteData> callback = apiInterface.UpdateFavorites(idBook, idMember);
+        callback.enqueue(new Callback<favoriteDeleteData>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<favoriteDeleteData> call, Response<favoriteDeleteData> response) {
                 AddFavorite = response.body();
-                if (response.isSuccessful() ) {
-
+                if (response.isSuccessful() && AddFavorite != null && AddFavorite.getMessage() !=null) {
+                    check  = AddFavorite.getMessage();
+                    if (AddFavorite.getSuccess().equals("like") && check) {
                         mAddFavorite.setValue(response.body());
-                        Log.e("AAA", AddFavorite);
-                    } else{
+                    } else if (AddFavorite.getSuccess().equals("unlike") && !check) {
                         mAddFavorite.setValue(response.body());
-
-                    Log.e("AAA", AddFavorite);
+                    }
                 }
             }
+
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<favoriteDeleteData> call, Throwable t) {
                 mAddFavorite.setValue(null);
             }
         });
