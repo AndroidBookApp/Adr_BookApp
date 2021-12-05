@@ -60,8 +60,6 @@
                 android:layout_height="match_parent"
                 />
         </LinearLayout>
-
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_favoriteView"
         android:layout_width="wrap_content"

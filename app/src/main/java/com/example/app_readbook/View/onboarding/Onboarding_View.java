@@ -44,4 +44,5 @@ LottieAnimationView lottieAnimationView;
         startActivity(intent);
         finish();
     }
+
 }

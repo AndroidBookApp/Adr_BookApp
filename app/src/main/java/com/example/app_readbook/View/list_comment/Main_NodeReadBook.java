@@ -2,6 +2,8 @@ package com.example.app_readbook.View.list_comment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,10 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.app_readbook.R;
+import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 
 public class Main_NodeReadBook extends AppCompatActivity {
 private TextView text_node , text_nameBook;
 private ImageView img_book;
+NextWorkConnect nextWorkConnect = new NextWorkConnect();
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +38,18 @@ private ImageView img_book;
 
 
 
+    }
+    @Override
+    protected void onStart() {
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(nextWorkConnect , intentFilter);
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(nextWorkConnect);
+        super.onStop();
     }
 }

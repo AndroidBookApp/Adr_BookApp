@@ -2,7 +2,9 @@ package com.example.app_readbook.View.ApiLoginOrRegister;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -23,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.R;
+import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 import com.example.app_readbook.ViewModel.RegisterViewModel;
 
 public class dangky extends AppCompatActivity {
@@ -37,6 +40,7 @@ public class dangky extends AppCompatActivity {
     RegisterViewModel registerViewModel;
     ProgressDialog progressDialog;
     User user;
+    NextWorkConnect nextWorkConnect = new NextWorkConnect();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,38 +61,6 @@ public class dangky extends AppCompatActivity {
                     if (pass.length() > 6 && pass_1.length() > 6) {
                         if (pass.equals(pass_1)) {
                             if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//                                ApiInterface apiService = ApiService.apiInterface();
-//                                Call<User> mUser = apiService.getRegister(name, pass, email);
-//                                mUser.enqueue(new Callback<User>() {
-//                                    @Override
-//                                    public void onResponse(Call<User> call, Response<User> response) {
-//                                        User user = response.body();
-//                                        if (user != null) {
-//                                            if (response.isSuccessful()) {
-//                                                if (user.getMessage().equals("success")) {
-//                                                    Intent intent = new Intent(dangky.this, dangnhap.class);
-//                                                    Toast.makeText(dangky.this, user.getMessage(), Toast.LENGTH_SHORT).show();
-//                                                    Toast.makeText(dangky.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-//                                                    progressBar.setVisibility(View.GONE);
-//                                                    register.setVisibility(View.VISIBLE);
-//                                                    startActivity(intent);
-//                                                }
-//                                            }
-//                                        }
-//                                        else {
-//                                            Toast.makeText(dangky.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
-//                                            progressBar.setVisibility(View.GONE);
-//                                            register.setVisibility(View.VISIBLE);
-//                                        }
-//                                    }
-//                                    @Override
-//                                    public void onFailure(Call<User> call, Throwable t) {
-//                                        Toast.makeText(dangky.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-//                                        Log.e("AAA",t.getMessage());
-//                                        progressBar.setVisibility(View.GONE);
-//                                        register.setVisibility(View.VISIBLE);
-//                                    }
-//                                });
                                 registerViewModel.initRegister(name  ,pass, email);
                             }
                             else {
@@ -161,5 +133,18 @@ public class dangky extends AppCompatActivity {
         txt_email = findViewById(R.id.email);
         register = findViewById(R.id.btn_dangky);
         login = findViewById(R.id.dangNhap);
+    }
+    @Override
+    protected void onStart() {
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(nextWorkConnect , intentFilter);
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(nextWorkConnect);
+        super.onStop();
     }
 }

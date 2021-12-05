@@ -1,5 +1,7 @@
 package com.example.app_readbook.View.list_book;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -11,6 +13,7 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
 import com.example.app_readbook.Service.ApiInterface;
 import com.example.app_readbook.Service.ApiService;
+import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,7 @@ public class Main_BookNew extends AppCompatActivity {
     private ArrayList<Sach> newList;
     private RecyclerView view;
     private BookNewAdaptor bookNewAdaptor;
+    NextWorkConnect nextWorkConnect = new NextWorkConnect();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,18 @@ public class Main_BookNew extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onStart() {
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(nextWorkConnect , intentFilter);
+        super.onStart();
 
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(nextWorkConnect);
+        super.onStop();
+    }
 
 }

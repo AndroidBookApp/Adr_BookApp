@@ -97,6 +97,9 @@ public interface ApiInterface {
                                 );
     @Multipart
     @POST("update_profile.php")
-    Call<String> UploadPhoto(@Part MultipartBody.Part avatar, @Part MultipartBody.Part image_page);
+    Call<String> UploadPhoto(@Part MultipartBody.Part avatar);
+    @Multipart
+    @POST("update_profile_anhbia.php")
+    Call<String> UploadPhotoIMGPAGE(@Part MultipartBody.Part img_page);
 
 }

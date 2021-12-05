@@ -2,6 +2,8 @@ package com.example.app_readbook.View.ApiLoginOrRegister;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.login;
 import com.example.app_readbook.R;
 import com.example.app_readbook.SecondActivity;
+import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 import com.example.app_readbook.ViewModel.LoginViewModel;
 import com.example.app_readbook.home;
 import com.example.app_readbook.shareFreferences.DataManager;
@@ -46,7 +49,7 @@ public class dangnhap extends AppCompatActivity {
     User User;
     LoginViewModel loginViewModel;
     GoogleSignInClient googleSignInClient;
-
+    NextWorkConnect nextWorkConnect = new NextWorkConnect();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -177,6 +180,19 @@ public class dangnhap extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+    @Override
+    protected void onStart() {
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(nextWorkConnect , intentFilter);
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(nextWorkConnect);
+        super.onStop();
     }
 
 }

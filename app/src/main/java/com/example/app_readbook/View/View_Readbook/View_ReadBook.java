@@ -1,6 +1,8 @@
 package com.example.app_readbook.View.View_Readbook;
 
 import android.annotation.SuppressLint;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,6 +20,7 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.R;
+import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
 import com.example.app_readbook.shareFreferences.DataManager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -26,7 +30,7 @@ import com.squareup.picasso.Picasso;
 
 public class View_ReadBook extends AppCompatActivity {
 
-
+    private Toolbar toolbar;
     private TabLayout tableLayout;
     private ViewPager viewPager;
     private ImageView img_book;
@@ -39,7 +43,7 @@ public class View_ReadBook extends AppCompatActivity {
     User user;
     boolean like ;
     AddFavoriteViewModel favoriteViewModel;
-
+    NextWorkConnect nextWorkConnect = new NextWorkConnect();
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +55,7 @@ public class View_ReadBook extends AppCompatActivity {
         idUser = DataManager.loadUser().getIdMember();
         idSach = DataManager.loadObjectSach().getIdSach();
         initUI();
+        BackView();
         loadFavorite();
         favoriteViewModel = new ViewModelProvider(this).get(AddFavoriteViewModel.class);
         favoriteViewModel.getAddFavorite().observe(this, new Observer<favoriteDeleteData>() {
@@ -71,6 +76,12 @@ public class View_ReadBook extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void BackView() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
     @SuppressLint("SetTextI18n")
     private void loadFavorite() {
@@ -93,6 +104,7 @@ public class View_ReadBook extends AppCompatActivity {
         viewPagerAdaptor = new ViewPagerAdaptor(getSupportFragmentManager() , FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdaptor);
         tableLayout.setupWithViewPager(viewPager);
+        toolbar = findViewById(R.id.DanhMuc);
         coordinatorLayout = findViewById(R.id.collapsingToolbarLayout);
         img_book = findViewById(R.id.image_book);
         favorites = findViewById(R.id.btn_favoriteView);
@@ -106,8 +118,18 @@ public class View_ReadBook extends AppCompatActivity {
         });
     }
 
-    private void DataFavorite() {
+    @Override
+    protected void onStart() {
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(nextWorkConnect , intentFilter);
+        super.onStart();
 
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(nextWorkConnect);
+        super.onStop();
     }
 
 }

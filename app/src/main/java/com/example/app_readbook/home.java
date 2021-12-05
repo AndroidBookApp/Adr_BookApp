@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -25,6 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.app_readbook.View.ApiLoginOrRegister.dangnhap;
+import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 import com.example.app_readbook.View.fragment_pager.model_account.Account_fragment;
 import com.example.app_readbook.View.fragment_pager.model_favorite.Favorite_fragment;
 import com.example.app_readbook.View.fragment_pager.model_home.Home_fragment;
@@ -48,7 +51,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     private static final int FRAGMENTS_FAVORITE = 3;
     private static final int FRAGMENTS_ACCOUNT = 4;
     private int currentFragments = FRAGMENTS_HOME;
-
+    NextWorkConnect nextWorkConnect = new NextWorkConnect();
     @SuppressLint({"WrongViewCast", "ResourceAsColor"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,5 +217,18 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
         dialog.show();
+    }
+    @Override
+    protected void onStart() {
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(nextWorkConnect , intentFilter);
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(nextWorkConnect);
+        super.onStop();
     }
 }

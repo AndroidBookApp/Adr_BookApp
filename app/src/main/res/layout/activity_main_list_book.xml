@@ -64,7 +64,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
        >
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_book"
             android:layout_width="match_parent"
@@ -76,7 +75,6 @@
             android:layout_marginEnd="23dp"
             android:layout_marginBottom="23dp"
             tools:ignore="MissingConstraints" />
-
     </RelativeLayout>
 </ScrollView>
 </RelativeLayout>
