@@ -3,6 +3,7 @@ package com.example.app_readbook.shareFreferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.danhgia;
@@ -28,6 +29,7 @@ public class DataManager {
     private static final String STRING_FAVORITE = "STRING_FAVORITE";
     private static final String FAVORITE = "FAVORITE";
     private static final String OBJECT_LOGIN = "OBJECT_LOGIN";
+    private static final String CHAPTER = "CHAPTER";
     private static DataManager instance;
     private static Context mContext;
     private MySharePreferences mySharePreferences;
@@ -111,14 +113,6 @@ public class DataManager {
         List<danhgia> mDanhgia = gson.fromJson(strDanhgia, type);
         return mDanhgia;
     }
-//Save login
-//    public static String isLogin() {
-//        return DataManager.getInstance().mySharePreferences.saveLoginPass(OBJECT_LOGIN);
-//    }
-//    public static void isSaveLogin(String key , String pass) {
-//
-//        DataManager.getInstance().mySharePreferences.putBooleanValueLogin(OBJECT_LOGIN , pass);
-//    }
     public static void saveFavorite(favorite favorites) {
         Gson gson = new Gson();
         String strFavorite = gson.toJson(favorites);
@@ -166,5 +160,21 @@ public class DataManager {
     public static boolean LFavorite()
     {
         return DataManager.getInstance().mySharePreferences.loadLike(FAVORITE);
+    }
+
+    //Lưu Chương
+    public static void sChapter(Chuong key)
+    {
+        Gson gson = new Gson();
+        String strFavorite = gson.toJson(key);
+        DataManager.getInstance().mySharePreferences.setChapter(CHAPTER , strFavorite);
+    }
+    // Load ra dữ liệu chương
+    public static Chuong lChapter()
+    {
+        String strUser = DataManager.getInstance().mySharePreferences.getChapter(CHAPTER);
+        Gson gson = new Gson();
+        Chuong chuong = gson.fromJson(strUser, Chuong.class);
+        return chuong;
     }
 }

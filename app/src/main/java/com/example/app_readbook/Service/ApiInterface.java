@@ -1,5 +1,6 @@
 package com.example.app_readbook.Service;
 
+import com.example.app_readbook.Model.Chapter;
 import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
@@ -79,7 +80,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("luotxemsach.php")
     Call<String> ViewReadBook(@Field("idSach") String idSach, @Field("Luotxem") String luotxem);
-
+    @FormUrlEncoded
+    @POST("noidungchuong.php")
+    Call<List<Chapter>> SelectChapter(@Field("idChuong") String idChuong , @Field("idSach") String idSach);
     @FormUrlEncoded
     @POST("update_member.php")
     Call<login> getUpdateMember(@Field("idMember") String idMember,

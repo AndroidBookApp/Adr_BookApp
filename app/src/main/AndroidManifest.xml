@@ -26,8 +26,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="Instantiatable,MissingClass"
         tools:targetApi="n">
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".SecondActivity"
             android:exported="true" />
@@ -51,7 +53,10 @@
             android:exported="true" />
         <activity
             android:name=".View.readbook.MainReadbook"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".View.chapter.Main_Chapter">
+
+        </activity>
         <activity
             android:name=".View.fragment_pager.model_account.Data_edit_name"
             android:exported="true" />

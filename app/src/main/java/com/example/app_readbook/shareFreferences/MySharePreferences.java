@@ -13,6 +13,7 @@ public class MySharePreferences {
     private static final String LIKE_FAVORITE ="LIKE_FAVORITE" ;
     private static final String SHARE_LOGIN_PASS = "SHARE_LOGIN_PASS";
     private static final String SHARE_LOGIN_USER = "SHARE_LOGIN_USER";
+    private static final String SHARE_CHAPTER = "SHARE_CHAPTER";
     private Context mContext;
 
     public MySharePreferences(Context mContext) {
@@ -38,10 +39,26 @@ public class MySharePreferences {
         editor.putString("Message", valueUser);
         editor.putString("ImgAvatar", valueUser);
         editor.putString("ImgBia", valueUser);
-//        editor.putBoolean("login", false);
         editor.apply();
     }
-
+    // lưu danh sách chương vào dữ liệu
+    public void setChapter(String key , String value)
+    {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_CHAPTER , Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("idChuong" , value);
+        editor.putString("TenChuong" , value);
+        editor.putString("idSach" , value);
+        editor.putString("IdChitietsach" , value);
+        editor.putString("Sotrang" , value);
+        editor.apply();
+    }
+    //Lấy dữ liệu ra khi đã lưu vào
+    public String getChapter(String key)
+    {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_CHAPTER , Context.MODE_PRIVATE);
+        return sharedPreferences.getString("idChuong" , "");
+    }
     public String saveLoginUser(String key) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN_USER, Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, "");

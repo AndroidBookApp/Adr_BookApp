@@ -7,13 +7,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.example.app_readbook.Model.Chapter;
+
 import java.util.List;
 
 public class ReadbookAdaptor extends FragmentStatePagerAdapter {
-  private List<ReadbookName> readbookNames ;
+  private List<Chapter> readbookNames ;
 
 
-    public ReadbookAdaptor(@NonNull FragmentManager fm, int behavior , List<ReadbookName> nameList) {
+    public ReadbookAdaptor(@NonNull FragmentManager fm, int behavior , List<Chapter> nameList) {
         super(fm, behavior);
         this.readbookNames = nameList;
     }
@@ -25,7 +27,7 @@ public class ReadbookAdaptor extends FragmentStatePagerAdapter {
         {
             return null;
         }
-        ReadbookName readbookName = readbookNames.get(position);
+        Chapter readbookName = readbookNames.get(position);
         ReadbookFragment readbookFragment = new ReadbookFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("readBook_object", readbookName);
