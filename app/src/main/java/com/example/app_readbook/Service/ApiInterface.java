@@ -84,6 +84,9 @@ public interface ApiInterface {
     @POST("noidungchuong.php")
     Call<List<Chapter>> SelectChapter(@Field("idChuong") String idChuong , @Field("idSach") String idSach);
     @FormUrlEncoded
+    @POST("showchuong.php")
+    Call<List<Chuong>> SelectChapters(@Field("idSach") String idSach);
+    @FormUrlEncoded
     @POST("update_member.php")
     Call<login> getUpdateMember(@Field("idMember") String idMember,
                                 @Field("username") String username,

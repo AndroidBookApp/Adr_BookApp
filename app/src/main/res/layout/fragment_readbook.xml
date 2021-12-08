@@ -6,16 +6,15 @@
 
     tools:context=".View.readbook.ReadbookFragment">
 
-    <TextView
-        android:id="@+id/tv_read"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:text="Trang 1"
-        android:textSize="50dp" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_readBook"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.core.widget.NestedScrollView>
 
 
 </RelativeLayout>

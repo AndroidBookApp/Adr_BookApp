@@ -1,7 +1,9 @@
 package com.example.app_readbook.View.View_Readbook;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +32,7 @@ import com.squareup.picasso.Picasso;
 
 public class View_ReadBook extends AppCompatActivity {
 
+    private static final String SAVE_FAVORITE ="SAVE_FAVORITE" ;
     private Toolbar toolbar;
     private TabLayout tableLayout;
     private ViewPager viewPager;
@@ -41,7 +44,8 @@ public class View_ReadBook extends AppCompatActivity {
     String idUser ;
     private FloatingActionButton favorites;
     User user;
-    boolean like ;
+    String dataLike = "";
+    boolean like  = false;
     AddFavoriteViewModel favoriteViewModel;
     NextWorkConnect nextWorkConnect = new NextWorkConnect();
     @SuppressLint("SetTextI18n")
@@ -57,26 +61,45 @@ public class View_ReadBook extends AppCompatActivity {
         initUI();
         BackView();
         loadFavorite();
+        dataLike = loadFavorites();
+        if(idSach==null && idUser==null && dataLike.equals("like"))
+        {
+            favorites.setImageResource(R.drawable.ic_baseline_favorite_24);
+        }else if(dataLike.equals("unlike"))
+        {
+            favorites.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+        }
         favoriteViewModel = new ViewModelProvider(this).get(AddFavoriteViewModel.class);
         favoriteViewModel.getAddFavorite().observe(this, new Observer<favoriteDeleteData>() {
             @Override
             public void onChanged(favoriteDeleteData favoriteDeleteData) {
-                like = favoriteDeleteData.getMessage();
-                if(like && favoriteDeleteData.getSuccess().equals("like"))
+                if(favoriteDeleteData.getSuccess().equals("like"))
                 {
                     Toast.makeText(View_ReadBook.this, "Thích", Toast.LENGTH_SHORT).show();
                     favorites.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-                    like = true;
-                    DataManager.Favorite(true , idUser);
-                }else if(!like){
+                    saveFavorite(dataLike);
+
+                }else if(favoriteDeleteData.getSuccess().equals("unlike")){
                     Toast.makeText(View_ReadBook.this, "Bỏ Thích", Toast.LENGTH_SHORT).show();
                     favorites.setImageResource(R.drawable.ic_baseline_favorite_24);
-                    like = false;
-                    DataManager.Favorite(false , idUser);
+                    saveFavorite(dataLike);
+
                 }
             }
         });
     }
+    public void saveFavorite(String idMember)
+    {
+        SharedPreferences sharedPreferences = this.getSharedPreferences(SAVE_FAVORITE , Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(dataLike , "");
+        editor.apply();
+    }
+    public String loadFavorites(){
+        SharedPreferences sharedPreferences = this.getSharedPreferences(SAVE_FAVORITE , Context.MODE_PRIVATE);
+        return sharedPreferences.getString(dataLike, "");
+    }
+
     private void BackView() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -86,17 +109,10 @@ public class View_ReadBook extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void loadFavorite() {
         //load dữ liệu đã lưu trong sharedPreferences ra
-//        idUser = user.getIdMember();
-//        idSach = sach.getIdSach();
         Picasso.get().load(sach.getImgSach()).into(img_book);
         coordinatorLayout.setTitle(sach.getTensach());
-        like = DataManager.LFavorite();
-        if(like && idUser.equals(user.getIdMember()) && idSach.equals(sach.getIdSach()))
-        {
-            favorites.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-        }else {
-            favorites.setImageResource(R.drawable.ic_baseline_favorite_24);
-        }
+
+
     }
     private void initUI() {
         tableLayout = findViewById(R.id.table_view);
@@ -113,6 +129,7 @@ public class View_ReadBook extends AppCompatActivity {
             public void onClick(View v) {
 //                idUser = user.getIdMember();
 //                idSach = sach.getIdSach();
+                loadFavorite();
                 favoriteViewModel.iniAddFavorite(idUser, idSach);
             }
         });

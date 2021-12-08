@@ -10,17 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app_readbook.Model.Chapter;
+import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class AdaptorReadBook extends RecyclerView.Adapter<AdaptorReadBook.ReadBookViewHoled>{
-    private List<Chapter> chaptersl;
+    private List<Chuong> chaptersl;
     @SuppressLint("NotifyDataSetChanged")
 
-    public void setData(List<Chapter> chaptersl)
+    public void setData(List<Chuong> chaptersl)
     {
         this.chaptersl = chaptersl;
         notifyDataSetChanged();
@@ -35,7 +35,7 @@ public class AdaptorReadBook extends RecyclerView.Adapter<AdaptorReadBook.ReadBo
 
     @Override
     public void onBindViewHolder(@NonNull ReadBookViewHoled holder, int position) {
-        Chapter chapter = chaptersl.get(position);
+        Chuong chapter = chaptersl.get(position);
         if(chapter == null)
         {
             return;

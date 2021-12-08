@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.R;
-import com.example.app_readbook.View.chapter.Main_Chapter;
+import com.example.app_readbook.View.readbook.MainReadbook;
 import com.example.app_readbook.shareFreferences.DataManager;
 
 
@@ -72,7 +72,7 @@ public class MainFragment extends Fragment {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Main_Chapter.class);
+                Intent intent = new Intent(getActivity(), MainReadbook.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

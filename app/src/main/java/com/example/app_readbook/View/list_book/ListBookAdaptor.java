@@ -45,7 +45,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
     private boolean isLoading;
     AddFavoriteViewModel favoriteViewModel;
     public IClickAddFavorite iClickAddFavorite;
-
+    private favoriteDeleteData favoriteDeleteData;
     public interface IClickAddFavorite {
         void AddItemFavorite(Sach book);
     }
@@ -85,12 +85,12 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         }
 
         // truyền các dữ liệu từ db vào list thông qua các hàm setter
-        holder.tv_name.setText(sach.getTensach() + "" + (position + 1));
-        holder.tv_tacgia.setText(sach.getTacgia() + "" + (position + 1));
-        holder.comment.setText(sach.getFeedback() + "" + (position + 1));
-        holder.textView.setText(sach.getLuotxem() + "" + (position + 1));
+        holder.tv_name.setText(sach.getTensach());
+        holder.tv_tacgia.setText(sach.getTacgia());
+        holder.comment.setText(sach.getFeedback());
+        holder.textView.setText(sach.getLuotxem());
         holder.page.setText(sach.getSotrang());
-        holder.tomtatND.setText(sach.getTomtatND() + "....." + "" + (position + 1));
+        holder.tomtatND.setText(sach.getTomtatND());
         favorite = DataManager.LFavorite();
         if (!favorite) {
             holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
@@ -137,15 +137,14 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                 callFavorite.enqueue(new Callback<favoriteDeleteData>() {
                     @Override
                     public void onResponse(Call<favoriteDeleteData> call, Response<favoriteDeleteData> response) {
-                        if (response.isSuccessful()) {
-                            if (response.message().equals("like")) {
+                        favoriteDeleteData = response.body();
+                        if (response.isSuccessful() && favoriteDeleteData!=null) {
+                            if (favoriteDeleteData.getSuccess().equals("like")) {
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-                                Log.e("AAA", mSach.get(position).getIdSach());
-                                Log.e("AAA", idmember);
                                 favorite = true;
                                 DataManager.Favorite(favorite, idmember);
                                 Toast.makeText(context, "Thích", Toast.LENGTH_SHORT).show();
-                            } else if (response.message().equals("unlike")) {
+                            } else if (favoriteDeleteData.getSuccess().equals("unlike")) {
                                 Log.e("AAA", mSach.get(position).getIdSach());
                                 Log.e("AAA", idmember);
                                 favorite = false;
@@ -206,7 +205,6 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
             mIcon = itemView.findViewById(R.id.icon_favorite);
             cardView = itemView.findViewById(R.id.card_viewBook);
             tomtatND = itemView.findViewById(R.id.tomtatNDlistBook);
-
         }
 
     }

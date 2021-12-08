@@ -47,6 +47,8 @@ public class BookNewAdaptor extends RecyclerView.Adapter<BookNewAdaptor.BookNewV
         holder.tacGiaNew.setText(list_bookNew.getTacgia());
         holder.TrangNew.setText(list_bookNew.getSotrang());
         holder.tomtatND.setText(list_bookNew.getTomtatND());
+        holder.view_new.setText(list_bookNew.getLuotxem());
+        holder.comment_new.setText(list_bookNew.getFeedback());
 //        holder.icon_favoriteNew.setImageResource(list_bookNew.getIcon_favorite_new());
     }
     @Override
@@ -62,7 +64,7 @@ public class BookNewAdaptor extends RecyclerView.Adapter<BookNewAdaptor.BookNewV
        private ImageView bookNew;
        private TextView nameBookNew;
        private TextView tacGiaNew;
-       private TextView TrangNew , tomtatND;
+       private TextView TrangNew , tomtatND , comment_new , view_new ;
        private ImageView icon_favoriteNew;
         @SuppressLint("CutPasteId")
         public BookNewViewHolder(@NonNull View itemView) {
@@ -73,6 +75,8 @@ public class BookNewAdaptor extends RecyclerView.Adapter<BookNewAdaptor.BookNewV
             TrangNew = itemView.findViewById(R.id.icon_book_new);
             icon_favoriteNew = itemView.findViewById(R.id.icon_favorite_new);
             tomtatND = itemView.findViewById(R.id.tomtatNDBookNew);
+            comment_new = itemView.findViewById(R.id.comment_new);
+            view_new = itemView.findViewById(R.id.ic_view_new);
         }
     }
 }

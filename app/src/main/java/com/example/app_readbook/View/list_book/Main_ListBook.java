@@ -24,6 +24,7 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
 import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
+import com.example.app_readbook.ViewModel.AddViewBookViewModel;
 import com.example.app_readbook.ViewModel.MainListBookViewModel;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class Main_ListBook extends AppCompatActivity {
     public NextWorkConnect nextWorkConnect = new NextWorkConnect();
     AddFavoriteViewModel addFavoriteViewModel;
     MainListBookViewModel mainListBookViewModel;
-
+    AddViewBookViewModel addViewBookViewModel;
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

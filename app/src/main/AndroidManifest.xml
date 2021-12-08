@@ -20,7 +20,6 @@
         android:name=".shareFreferences.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/backgoundapp"
-
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"

@@ -38,15 +38,6 @@ public home home;
         this.sachList = sachList;
         this.mContext = mContext;
     }
-
-
-//
-//    public BookAdaptor(Context context , IClickItemBook itemBook) {
-//
-//        this.mContext  = context;
-//        this.iClickItemBook = itemBook;
-//    }
-
     @NonNull
     @Override
     public BookViewHodel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

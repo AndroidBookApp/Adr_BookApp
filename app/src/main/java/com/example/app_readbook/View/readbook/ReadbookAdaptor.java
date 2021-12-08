@@ -32,6 +32,7 @@ public class ReadbookAdaptor extends FragmentStatePagerAdapter {
         Bundle bundle = new Bundle();
         bundle.putSerializable("readBook_object", readbookName);
         readbookFragment.setArguments(bundle);
+
         return readbookFragment;
     }
 

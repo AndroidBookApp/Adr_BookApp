@@ -106,21 +106,6 @@ public class Favorite_fragment extends Fragment {
                                                 Log.e("AAAA", t.getMessage());
                                             }
                                         });
-//                                        deleteFavoriteViewModel = new ViewModelProvider(Objects.requireNonNull(getActivity())).get(DeleteFavoriteViewModel.class);
-//                                        deleteFavoriteViewModel.getDeleteFavorite().observe(getActivity(), new Observer<String>() {
-//                                            @Override
-//                                            public void onChanged(String s) {
-//                                                if (s.equals("success")) {
-//                                                    Log.e("AAAA", s);
-//                                                    Toast.makeText(getActivity(), "Xóa Thành công", Toast.LENGTH_SHORT).show();
-//
-//                                                } else {
-//                                                    Log.e("AAAA", s);
-//                                                    Toast.makeText(getActivity(), "Xóa Không Thành công", Toast.LENGTH_SHORT).show();
-//                                                }
-//                                            }
-//                                        });
-//                                        deleteFavoriteViewModel.iniDeleteData(idMember, idSach);
                                         loadData(favorites);
                                     }
                                 })
