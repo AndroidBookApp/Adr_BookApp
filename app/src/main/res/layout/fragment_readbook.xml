@@ -2,19 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    tools:context=".View.readbook.ReadbookFragment">
-
-    <androidx.core.widget.NestedScrollView
+    android:layout_height="match_parent">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_readBook"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </androidx.core.widget.NestedScrollView>
+            android:layout_height="match_parent"
+            android:background="@drawable/sach"
+            tools:ignore="ScrollViewSize">
 
 
+            <ImageView
+                android:id="@+id/img_sach"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/txt_readBook"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/img_sach"
+                android:layout_marginStart="30sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/helveticaneue"
+                android:gravity="fill"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                tools:ignore="UnusedAttribute" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
