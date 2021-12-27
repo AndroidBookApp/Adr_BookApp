@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/bg_category"
+        android:layout_width="100sp"
+        android:layout_height="150sp"
+        android:scaleType="center"
+        android:src="@drawable/sach1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_editor_absoluteX="4sp"
+        app:layout_editor_absoluteY="40sp"
+        app:riv_corner_radius="10sp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/title_tac_gia"
+        android:background="@drawable/cumstom_tacgia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Nguyễn Văn Quỳnh"
+        android:singleLine="true"
+        android:textSize="14sp"
+        android:fontFamily="@font/helveticaneue_bold"
+        android:textColor="@color/white"
+        android:padding="5sp"
+        app:layout_constraintTop_toBottomOf="@+id/bg_category"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

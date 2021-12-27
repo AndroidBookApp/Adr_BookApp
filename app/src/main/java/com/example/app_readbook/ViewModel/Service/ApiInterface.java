@@ -38,12 +38,6 @@ public interface ApiInterface {
     @GET("danhmuc.php")
     Call<List<DanhMucSach>> TenDanhMuc();
 
-    //    @FormUrlEncoded
-//    @POST("chitietsach.php")
-//    Call<List<Sach>> Chitietsach(@Field("idSach") String idSach);
-    @GET("chitietsach.php")
-    Call<ArrayList<Sach>> Chitietsach();
-
     @FormUrlEncoded
     @POST("danhgia.php")
     Call<List<danhgia>> LoadDanhgia(@Field("idSach") String idSach);

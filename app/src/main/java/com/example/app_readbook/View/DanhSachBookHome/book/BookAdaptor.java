@@ -69,11 +69,13 @@ public class BookAdaptor extends RecyclerView.Adapter<BookAdaptor.BookViewHodel>
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         String view = response.body();
-                        if (view.equals("Success")) {
-                            Intent intent = new Intent(mContext, View_ReadBook.class);
-                            DataManager.saveObjectSach(sach);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            mContext.startActivity(intent);
+                        if(view!=null) {
+                            if (view.equals("Success")) {
+                                Intent intent = new Intent(mContext, View_ReadBook.class);
+                                DataManager.saveObjectSach(sach);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                mContext.startActivity(intent);
+                            }
                         }
                     }
 
