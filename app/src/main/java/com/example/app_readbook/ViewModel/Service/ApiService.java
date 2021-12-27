@@ -1,4 +1,4 @@
-package com.example.app_readbook.Service;
+package com.example.app_readbook.ViewModel.Service;
 
 public class ApiService {
     public static String base_URL = "https://androidbookapp.000webhostapp.com/Server/";

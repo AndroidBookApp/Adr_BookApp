@@ -1,4 +1,4 @@
-package com.example.app_readbook.Service;
+package com.example.app_readbook.ViewModel.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

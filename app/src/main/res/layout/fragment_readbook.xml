@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/layout_dark"
     android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
@@ -10,10 +11,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/sach"
             tools:ignore="ScrollViewSize">
-
-
             <ImageView
                 android:id="@+id/img_sach"
                 android:layout_width="150dp"

@@ -13,11 +13,12 @@ import java.util.List;
 
 public class ReadbookAdaptor extends FragmentStatePagerAdapter {
   private List<Chuong> chuongList ;
+  private boolean isDark;
 
-
-    public ReadbookAdaptor(@NonNull FragmentManager fm, int behavior , List<Chuong> nameList) {
+    public ReadbookAdaptor(@NonNull FragmentManager fm, int behavior , List<Chuong> nameList ,boolean isDark) {
         super(fm, behavior);
         this.chuongList = nameList;
+        this.isDark = isDark;
     }
 
     @NonNull
@@ -31,6 +32,7 @@ public class ReadbookAdaptor extends FragmentStatePagerAdapter {
         ReadbookFragment readbookFragment = new ReadbookFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("readBook_object", Chuong);
+        bundle.putBoolean("dark" , isDark);
         readbookFragment.setArguments(bundle);
 
         return readbookFragment;

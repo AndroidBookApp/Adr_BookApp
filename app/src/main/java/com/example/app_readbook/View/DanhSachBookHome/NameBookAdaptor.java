@@ -10,18 +10,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
-import com.example.app_readbook.Service.ApiInterface;
-import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.View.DanhSachBookHome.book.BookAdaptor;
 import com.example.app_readbook.View.fragment_pager.model_home.Home_fragment;
 import com.example.app_readbook.View.list_book.Main_ListBook;
-import com.example.app_readbook.shareFreferences.DataManager;
+import com.example.app_readbook.ViewModel.Service.ApiInterface;
+import com.example.app_readbook.ViewModel.Service.ApiService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,9 +65,7 @@ public class NameBookAdaptor extends RecyclerView.Adapter<NameBookAdaptor.NameBo
             public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
                 saches = (ArrayList<Sach>) response.body();
                 BookAdaptor bookAdaptor = new BookAdaptor(saches ,mcontext);
-
-                holder.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-
+                holder.recyclerView.setLayoutManager(new LinearLayoutManager(mcontext  , LinearLayoutManager.HORIZONTAL , false));
                 holder.recyclerView.setAdapter(bookAdaptor);
             }
 

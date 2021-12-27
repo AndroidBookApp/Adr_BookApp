@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activityRoot"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar_readBook"
         android:background="@color/white"
@@ -17,6 +17,7 @@
         app:elevation="0dp">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_baseline_navigate_before_24"
@@ -30,22 +31,19 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="24dp" />
+            <Switch
+                android:id="@+id/switch_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:thumb="@drawable/thumbar"
+                android:layout_marginEnd="5sp"
+                android:padding="5sp"
+                android:track="@drawable/track_selector"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-<!--    <androidx.core.widget.NestedScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_above="@id/lo2"-->
-<!--        android:layout_below="@id/toolbar_readBook">-->
-
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/rcv_readBook"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
-<!--    </androidx.core.widget.NestedScrollView>-->
-
 
     <com.example.app_readbook.View.readbook.VerticalViewPager
         android:id="@+id/view_pager_read"
@@ -67,7 +65,6 @@
       <RelativeLayout
           android:layout_width="match_parent"
           android:orientation="horizontal"
-
           android:layout_height="match_parent">
 
           <TextView
@@ -85,10 +82,7 @@
               android:layout_height="wrap_content"
               android:layout_centerInParent="true"
               android:layout_centerHorizontal="true"
-
               android:fontFamily="@font/roboto_bold"
-
-
               android:textColor="@color/black"
               android:textSize="15sp" />
 
@@ -102,4 +96,5 @@
               android:background="@drawable/ic_baseline_navigate_next1_24" />
       </RelativeLayout>
     </LinearLayout>
+
 </RelativeLayout>

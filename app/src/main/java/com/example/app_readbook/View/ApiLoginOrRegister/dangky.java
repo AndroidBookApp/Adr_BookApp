@@ -35,7 +35,7 @@ public class dangky extends AppCompatActivity {
     EditText txt_pass_1;
     Button register , login;
     TextView tvFocus;
-    String name , email , pass , pass_1;
+    String name , email , pass , pass_1 , quyen;
     private ProgressBar progressBar;
     RegisterViewModel registerViewModel;
     ProgressDialog progressDialog;
@@ -61,7 +61,9 @@ public class dangky extends AppCompatActivity {
                     if (pass.length() > 6 && pass_1.length() > 6) {
                         if (pass.equals(pass_1)) {
                             if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                                registerViewModel.initRegister(name  ,pass, email);
+                                // mặc định quyền use = 2
+                                quyen = "2";
+                                registerViewModel.initRegister(name  ,pass, email , quyen);
                             }
                             else {
                                 progressDialog.dismiss();

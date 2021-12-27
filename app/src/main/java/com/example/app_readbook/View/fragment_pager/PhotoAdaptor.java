@@ -5,13 +5,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class PhotoAdaptor extends RecyclerView.Adapter<PhotoAdaptor.PhotoViewHol
 
     public class PhotoViewHolder extends RecyclerView.ViewHolder
     {
-        private ImageView imageView;
+        private RoundedImageView imageView;
         public PhotoViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView  = itemView.findViewById(R.id.image_view);

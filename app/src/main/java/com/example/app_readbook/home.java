@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -39,12 +40,14 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    String idMember, idSach;
+    String idMember, username;
 
     private AppBarLayout appBarLayout;
     private BottomNavigationView bottomNavigationView;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private TextView txt_username;
+
     private androidx.appcompat.widget.Toolbar toolbar;
     private static final int FRAGMENTS_HOME = 1;
     private static final int FRAGMENTS_SEARCH = 2;
@@ -59,6 +62,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.scroll_home);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
+
         toolbar = findViewById(R.id.toolbar);
         appBarLayout = findViewById(R.id.appbar);
         setSupportActionBar(toolbar);

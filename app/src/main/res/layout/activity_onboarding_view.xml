@@ -18,8 +18,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon_logo"
+        app:srcCompat="@drawable/image_book"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <ProgressBar
+        android:id="@+id/bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="203dp" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -33,9 +43,9 @@
         android:layout_marginBottom="20dp"
 
         android:drawablePadding="20dp"
-        android:fontFamily="@font/roboto_bold"
+        android:fontFamily="@font/helveticaneue_bold"
         android:gravity="center"
         android:text="ANDROID APP"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="25dp" />
 </RelativeLayout>

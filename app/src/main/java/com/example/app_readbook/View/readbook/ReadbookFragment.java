@@ -5,38 +5,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
-import com.example.app_readbook.ViewModel.ReadBookViewModel;
 import com.example.app_readbook.shareFreferences.DataManager;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 
 public class ReadbookFragment extends Fragment {
-    public static final String TAG = ReadbookFragment.class.getName();
-    private TextView btn_back, btn_next, txt_book, txt_book_all, read;
-    private ViewPager viewPager;
-    private List<Chuong> chapters;
+    public boolean isDark;
     private Chuong chuongList;
     private Sach sach;
-    private Toolbar toolbar;
+    private RelativeLayout layout;
     String idChuong, idSach;
-    private RecyclerView rcv_readbook;
-    private AdaptorReadBook adaptorReadBook;
-    private ReadBookViewModel readBookViewModel;
-    private TextView textView, tv_page;
+    private TextView textView ;
     private ImageView img_book;
-
     public ReadbookFragment() {
 
     }
@@ -48,6 +36,7 @@ public class ReadbookFragment extends Fragment {
         View mview = inflater.inflate(R.layout.fragment_readbook, container, false);
         textView = mview.findViewById(R.id.txt_readBook);
         img_book = mview.findViewById(R.id.img_sach);
+        layout = mview.findViewById(R.id.layout_dark);
         sach = DataManager.loadObjectSach();
         chuongList = DataManager.lChapter();
         idChuong = chuongList.getIdChuong();
@@ -57,7 +46,17 @@ public class ReadbookFragment extends Fragment {
             Chuong chapters = (Chuong) bundle.get("readBook_object");
             textView.setText(chapters.getNoidung());
             Picasso.get().load(chapters.getImgSach()).into(img_book);
+            isDark = bundle.getBoolean("dark");
+            if(isDark)
+            {
+                setDarkTheme();
+            }
         }
         return mview;
+    }
+
+    private void setDarkTheme() {
+        layout.setBackgroundResource(R.color.background__dark_color);
+        textView.setTextColor(getResources().getColor(R.color.white));
     }
 }

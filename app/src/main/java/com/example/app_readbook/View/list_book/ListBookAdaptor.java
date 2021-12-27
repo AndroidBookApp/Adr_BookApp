@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,12 +21,14 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.favoriteDeleteData;
+import com.example.app_readbook.Model.listFavorite;
 import com.example.app_readbook.R;
-import com.example.app_readbook.Service.ApiInterface;
-import com.example.app_readbook.Service.ApiService;
 import com.example.app_readbook.View.View_Readbook.View_ReadBook;
 import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
+import com.example.app_readbook.ViewModel.Service.ApiInterface;
+import com.example.app_readbook.ViewModel.Service.ApiService;
 import com.example.app_readbook.shareFreferences.DataManager;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,22 +41,13 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
     private List<Sach> mSach;
     private Context context;
     public Main_ListBook main_listBook;
-    String idmember, idBook;
+    String idmember, idBook , iduser , idsach;
     boolean favorite = false;
-    private boolean isLoading;
+    private List<com.example.app_readbook.Model.favorite> mListFavorite;
     AddFavoriteViewModel favoriteViewModel;
-    public IClickAddFavorite iClickAddFavorite;
     private favoriteDeleteData favoriteDeleteData;
-    public interface IClickAddFavorite {
-        void AddItemFavorite(Sach book);
-    }
-
     public ListBookAdaptor(Context context) {
         this.context = context;
-    }
-
-    public void ListBookAdaptor(IClickAddFavorite iClickAddFavorite) {
-        this.iClickAddFavorite = iClickAddFavorite;
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -68,13 +60,9 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_book, parent, false);
         return new ListViewHolder(view);
-
-
     }
-
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, @SuppressLint("RecyclerView") int position) {
@@ -91,18 +79,41 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         holder.textView.setText(sach.getLuotxem());
         holder.page.setText(sach.getSotrang());
         holder.tomtatND.setText(sach.getTomtatND());
-        favorite = DataManager.LFavorite();
-        if (!favorite) {
-            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-        } else {
-            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
-        }
+//        favorite = DataManager.LFavorite();
+        //load dữ liệu vào icon
+        ApiInterface apiInterface = ApiService.apiInterface();
         Glide.with(context).
                 load(sach.getImgSach()).apply(new RequestOptions().transform(new CenterCrop()).transform(new RoundedCorners(20)))
                 .into(holder.mBook);
         User user = DataManager.loadUser();
         idmember = user.getIdMember();
         idBook = mSach.get(position).getIdSach();
+        Log.e("AAA" , idBook);
+        Call<ArrayList<listFavorite>> listCall = apiInterface.loadFavorite(idmember);
+        listCall.enqueue(new Callback<ArrayList<listFavorite>>() {
+            @Override
+            public void onResponse(Call<ArrayList<listFavorite>> call, Response<ArrayList<listFavorite>> response) {
+                List<listFavorite> favorite = response.body();
+                if(favorite!=null)
+                {
+                String idSach = sach.getIdSach();
+                    for (listFavorite listFavorite: favorite) {
+                        String id  = listFavorite.getIdSach();
+                        if(idSach.equals(id))
+                        {
+                            Log.e("AAA" , id);
+                            holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<listFavorite>> call, Throwable t) {
+
+            }
+        });
+
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,13 +152,9 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                         if (response.isSuccessful() && favoriteDeleteData!=null) {
                             if (favoriteDeleteData.getSuccess().equals("like")) {
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-                                favorite = true;
                                 DataManager.Favorite(favorite, idmember);
                                 Toast.makeText(context, "Thích", Toast.LENGTH_SHORT).show();
                             } else if (favoriteDeleteData.getSuccess().equals("unlike")) {
-                                Log.e("AAA", mSach.get(position).getIdSach());
-                                Log.e("AAA", idmember);
-                                favorite = false;
                                 DataManager.Favorite(favorite, idmember);
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
                                 Toast.makeText(context, "Bỏ Thích", Toast.LENGTH_SHORT).show();
@@ -190,9 +197,9 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         private TextView comment;
         private TextView textView;
         private TextView page, tomtatND;
-        private ImageView mBook;
+        private RoundedImageView mBook;
         private ImageView mIcon;
-        private CardView cardView;
+        private ImageView cardView;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -203,8 +210,10 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
             page = itemView.findViewById(R.id.icon_book);
             mBook = itemView.findViewById(R.id.bg_sach);
             mIcon = itemView.findViewById(R.id.icon_favorite);
-            cardView = itemView.findViewById(R.id.card_viewBook);
+            cardView = itemView.findViewById(R.id.imageView2);
             tomtatND = itemView.findViewById(R.id.tomtatNDlistBook);
+
+
         }
 
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -26,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-
             android:fontFamily="@font/hindsiliguri_bold"
             android:text="Nguyễn Văn Quỳnh"
             android:textColor="@color/black"

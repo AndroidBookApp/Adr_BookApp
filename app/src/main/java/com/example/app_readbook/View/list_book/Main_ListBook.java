@@ -8,16 +8,15 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
@@ -37,7 +36,7 @@ public class Main_ListBook extends AppCompatActivity {
     private Toolbar toolbar;
     public Sach sach;
     List<Sach> danhMucSaches;
-    private TextView textView_page;
+    private SwipeRefreshLayout layout;
     private EditText txt_searchName;
     DanhMucSach danhMucSach;
     public NextWorkConnect nextWorkConnect = new NextWorkConnect();
@@ -63,7 +62,14 @@ public class Main_ListBook extends AppCompatActivity {
     }
     private void iniAnhXa() {
         recyclerView = findViewById(R.id.rcv_book);
-        textView_page = findViewById(R.id.name_page);
+        layout  = findViewById(R.id.refest_main);
+        layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                LoadDanhMuc();
+                layout.setRefreshing(false);
+            }
+        });
         txt_searchName = findViewById(R.id.txt_searchBook);
         toolbar = findViewById(R.id.toolbar);
         getIntents();
@@ -101,7 +107,7 @@ public class Main_ListBook extends AppCompatActivity {
             public void onChanged(List<Sach> saches) {
                 danhMucSaches = saches;
                 if (danhMucSaches != null) {
-                    loadData(danhMucSaches);
+                    loadData();
                 }
             }
         });
@@ -110,14 +116,12 @@ public class Main_ListBook extends AppCompatActivity {
 
     }
 
-    private void loadData(List<Sach> saches) {
+    private void loadData() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Main_ListBook.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         bookAdaptor = new ListBookAdaptor(this);
-        bookAdaptor.setData(saches);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
+        bookAdaptor.setData(danhMucSaches);
         recyclerView.setAdapter(bookAdaptor);
     }
 

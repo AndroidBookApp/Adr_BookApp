@@ -1,4 +1,4 @@
-package com.example.app_readbook.Service;
+package com.example.app_readbook.ViewModel.Service;
 
 import com.example.app_readbook.Model.Chapter;
 import com.example.app_readbook.Model.Chuong;
@@ -8,6 +8,7 @@ import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.danhgia;
 import com.example.app_readbook.Model.favorite;
 import com.example.app_readbook.Model.favoriteDeleteData;
+import com.example.app_readbook.Model.listFavorite;
 import com.example.app_readbook.Model.login;
 
 import java.util.ArrayList;
@@ -63,11 +64,11 @@ public interface ApiInterface {
     Call<favoriteDeleteData> UpdateFavorites(@Field("idMember") String idMember, @Field("idSach") String idSach);
     @FormUrlEncoded
     @POST("loginn.php")
-    Call<login> getLogin(@Field("username") String username, @Field("password") String password);
+    Call<login> getLogin(@Field("username") String username, @Field("password") String password ,  @Field("idquyen") String idquyen);
 
     @FormUrlEncoded
     @POST("dangky.php")
-    Call<User> getRegister(@Field("username") String username, @Field("password") String password, @Field("email") String email);
+    Call<User> getRegister(@Field("username") String username, @Field("password") String password, @Field("email") String email , @Field("idquyen") String idquyen);
 
     @FormUrlEncoded
     @POST("danhsachluotthich.php")
@@ -76,6 +77,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("xoaluotthich.php")
     Call<String> deleteFavorite(@Field("idSach") String idSach, @Field("idMember") String idMember);
+    @FormUrlEncoded
+    @POST("loadfavorite.php")
+    Call<ArrayList<listFavorite>> loadFavorite(@Field("idMember") String idMember );
 
     @FormUrlEncoded
     @POST("luotxemsach.php")

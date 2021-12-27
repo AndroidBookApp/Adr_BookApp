@@ -8,6 +8,7 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.danhgia;
 import com.example.app_readbook.Model.favorite;
+import com.example.app_readbook.Model.listFavorite;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
@@ -113,31 +114,47 @@ public class DataManager {
         List<danhgia> mDanhgia = gson.fromJson(strDanhgia, type);
         return mDanhgia;
     }
-    public static void saveFavorite(favorite favorites) {
+    /* Favorite*/
+    public static void saveFavorite(List<favorite> mDanhgia) {
         Gson gson = new Gson();
-        String strFavorite = gson.toJson(favorites);
-        DataManager.getInstance().mySharePreferences.SaveFavorite(STRING_FAVORITE, strFavorite);
+        String strDanhgia = gson.toJson(mDanhgia);
+        DataManager.getInstance().mySharePreferences.getFavorite(OBJECT_DANHGIA, strDanhgia);
     }
 
     public static List<favorite> loadFavorite() {
-        String strFavorite = DataManager.getInstance().mySharePreferences.LoadFavorite(STRING_FAVORITE);
+        String strDanhgia = DataManager.getInstance().mySharePreferences.setFavorite(OBJECT_DANHGIA);
         Gson gson = new Gson();
-        List<favorite> mFavorite = new ArrayList<>();
-        try {
-            JSONArray jsonArray = new JSONArray(strFavorite);
-            JSONObject jsonObject;
-            favorite favorite;
-            for(int i = 0 ; i< jsonArray.length() ; i++)
-            {
-                jsonObject = jsonArray.getJSONObject(i);
-                favorite = gson.fromJson(jsonObject.toString(), com.example.app_readbook.Model.favorite.class);
-                mFavorite.add(favorite);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Type type = new TypeToken<ArrayList<listFavorite>>() {
+        }.getType();
+        List<favorite> mFavorite = gson.fromJson(strDanhgia, type);
         return mFavorite;
     }
+    /*end favorite*/
+//    public static void saveFavorite(favorite favorites) {
+//        Gson gson = new Gson();
+//        String strFavorite = gson.toJson(favorites);
+//        DataManager.getInstance().mySharePreferences.SaveFavorite(STRING_FAVORITE, strFavorite);
+//    }
+//
+//    public static List<favorite> loadFavorite() {
+//        String strFavorite = DataManager.getInstance().mySharePreferences.LoadFavorite(STRING_FAVORITE);
+//        Gson gson = new Gson();
+//        List<favorite> mFavorite = new ArrayList<>();
+//        try {
+//            JSONArray jsonArray = new JSONArray(strFavorite);
+//            JSONObject jsonObject;
+//            favorite favorite;
+//            for(int i = 0 ; i< jsonArray.length() ; i++)
+//            {
+//                jsonObject = jsonArray.getJSONObject(i);
+//                favorite = gson.fromJson(jsonObject.toString(), com.example.app_readbook.Model.favorite.class);
+//                mFavorite.add(favorite);
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        return mFavorite;
+//    }
     public void logOut() {
         sharedPreferences = mContext.getSharedPreferences(OBJECT_USER, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

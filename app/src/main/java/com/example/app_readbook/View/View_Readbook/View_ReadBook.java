@@ -1,11 +1,10 @@
 package com.example.app_readbook.View.View_Readbook;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,18 +20,27 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.favoriteDeleteData;
+import com.example.app_readbook.Model.listFavorite;
 import com.example.app_readbook.R;
 import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
+import com.example.app_readbook.ViewModel.Service.ApiInterface;
+import com.example.app_readbook.ViewModel.Service.ApiService;
 import com.example.app_readbook.shareFreferences.DataManager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class View_ReadBook extends AppCompatActivity {
 
-    private static final String SAVE_FAVORITE ="SAVE_FAVORITE" ;
     private Toolbar toolbar;
     private TabLayout tableLayout;
     private ViewPager viewPager;
@@ -41,13 +49,12 @@ public class View_ReadBook extends AppCompatActivity {
     private CollapsingToolbarLayout coordinatorLayout;
     Sach sach;
     String idSach;
-    String idUser ;
+    String idUser;
     private FloatingActionButton favorites;
     User user;
-    String dataLike = "";
-    boolean like  = false;
     AddFavoriteViewModel favoriteViewModel;
     NextWorkConnect nextWorkConnect = new NextWorkConnect();
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,44 +68,48 @@ public class View_ReadBook extends AppCompatActivity {
         initUI();
         BackView();
         loadFavorite();
-        dataLike = loadFavorites();
-        if(idSach==null && idUser==null && dataLike.equals("like"))
-        {
-            favorites.setImageResource(R.drawable.ic_baseline_favorite_24);
-        }else if(dataLike.equals("unlike"))
-        {
-            favorites.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-        }
+        saveFavorite();
         favoriteViewModel = new ViewModelProvider(this).get(AddFavoriteViewModel.class);
         favoriteViewModel.getAddFavorite().observe(this, new Observer<favoriteDeleteData>() {
             @Override
             public void onChanged(favoriteDeleteData favoriteDeleteData) {
-                if(favoriteDeleteData.getSuccess().equals("like"))
-                {
+                if (favoriteDeleteData.getSuccess().equals("like")) {
                     Toast.makeText(View_ReadBook.this, "Thích", Toast.LENGTH_SHORT).show();
                     favorites.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-                    saveFavorite(dataLike);
 
-                }else if(favoriteDeleteData.getSuccess().equals("unlike")){
+                } else if (favoriteDeleteData.getSuccess().equals("unlike")) {
                     Toast.makeText(View_ReadBook.this, "Bỏ Thích", Toast.LENGTH_SHORT).show();
                     favorites.setImageResource(R.drawable.ic_baseline_favorite_24);
-                    saveFavorite(dataLike);
-
                 }
             }
         });
     }
-    public void saveFavorite(String idMember)
-    {
-        SharedPreferences sharedPreferences = this.getSharedPreferences(SAVE_FAVORITE , Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(dataLike , "");
-        editor.apply();
+
+    public void saveFavorite() {
+        ApiInterface apiInterface = ApiService.apiInterface();
+        Call<ArrayList<listFavorite>> listCall = apiInterface.loadFavorite(idUser);
+        listCall.enqueue(new Callback<ArrayList<listFavorite>>() {
+            @Override
+            public void onResponse(Call<ArrayList<listFavorite>> call, Response<ArrayList<listFavorite>> response) {
+                List<listFavorite> favorite = response.body();
+                if (favorite != null) {
+                    for (listFavorite listFavorite : favorite) {
+                        String id = listFavorite.getIdSach();
+                        if (idSach.equals(id)) {
+                            Log.e("AAAA", id);
+                            favorites.setImageResource(R.drawable.ic_baseline_favorite_1_24);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<listFavorite>> call, Throwable t) {
+
+            }
+        });
     }
-    public String loadFavorites(){
-        SharedPreferences sharedPreferences = this.getSharedPreferences(SAVE_FAVORITE , Context.MODE_PRIVATE);
-        return sharedPreferences.getString(dataLike, "");
-    }
+
 
     private void BackView() {
         setSupportActionBar(toolbar);
@@ -106,6 +117,7 @@ public class View_ReadBook extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
+
     @SuppressLint("SetTextI18n")
     private void loadFavorite() {
         //load dữ liệu đã lưu trong sharedPreferences ra
@@ -114,10 +126,11 @@ public class View_ReadBook extends AppCompatActivity {
 
 
     }
+
     private void initUI() {
         tableLayout = findViewById(R.id.table_view);
         viewPager = findViewById(R.id.viewpager_view_book);
-        viewPagerAdaptor = new ViewPagerAdaptor(getSupportFragmentManager() , FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        viewPagerAdaptor = new ViewPagerAdaptor(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdaptor);
         tableLayout.setupWithViewPager(viewPager);
         toolbar = findViewById(R.id.DanhMuc);
@@ -138,7 +151,7 @@ public class View_ReadBook extends AppCompatActivity {
     @Override
     protected void onStart() {
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(nextWorkConnect , intentFilter);
+        registerReceiver(nextWorkConnect, intentFilter);
         super.onStart();
 
     }

@@ -2,10 +2,10 @@ package com.example.app_readbook.View.fragment_pager.model_favorite;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +16,16 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.favorite;
 import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.R;
+import com.example.app_readbook.View.View_Readbook.View_ReadBook;
+import com.example.app_readbook.ViewModel.Service.ApiInterface;
+import com.example.app_readbook.ViewModel.Service.ApiService;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.SearchViewHodel> {
     private List<favorite> mlist;
@@ -52,6 +59,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull SearchViewHodel holder, @SuppressLint("RecyclerView") int position) {
         listFavorite = mlist.get(position);
@@ -59,6 +67,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
 
             return;
         }
+        if(mlist.size() == 0)
+        {
+            holder.thongbao.setText("Không Có Sách Nào Trong Thư Viện");
+            holder.thongbao.setVisibility(View.VISIBLE);
+        }
+        holder.thongbao.setVisibility(View.GONE);
         Picasso.get().load(listFavorite.getImgSach()).into(holder.mBook);
         holder.tv_1.setText(listFavorite.getTensach());
         holder.tv_2.setText(listFavorite.getTacgia());
@@ -68,37 +82,31 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
         holder.mIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ApiInterface apiInterface = ApiService.apiInterface();
-//                Call<String> favoriteCall = apiInterface.deleteFavorite(idMember, idSach);
-//                favoriteCall.enqueue(new Callback<String>() {
-//                    @SuppressLint("NotifyDataSetChanged")
-//                    @Override
-//                    public void onResponse(Call<String> call, Response<String> response) {
-//                        String ketqua = response.body();
-//                        if (ketqua.equals("success")) {
-//                            setData(mlist);
-//                            Log.e("AAAA", ketqua);
-//                            notifyDataSetChanged();
-//                            Toast.makeText(context, "Xóa Thành công", Toast.LENGTH_SHORT).show();
-//
-//                        } else {
-//                            setData(mlist);
-//                            Log.e("AAAA", ketqua);
-//                            Toast.makeText(context, "Xóa Không Thành công", Toast.LENGTH_SHORT).show();
-//                            notifyDataSetChanged();
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<String> call, Throwable t) {
-//                        setData(mlist);
-//                        Toast.makeText(context, "lỗi" + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                        Log.e("AAAA", t.getMessage());
-//                    }
-//                });
-
                 iClickDeleteFavorite.iClickDelete(mlist.get(position));
+            }
+        });
+        holder.bg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApiInterface apiInterface = ApiService.apiInterface();
+                Call<String> strViewBook = apiInterface.ViewReadBook(mlist.get(position).getIdSach(), "1");
+                strViewBook.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        String view = response.body();
+                        if (view.equals("Success")) {
+                            Intent intent = new Intent(context, View_ReadBook.class);
+
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
             }
         });
     }
@@ -115,7 +123,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
     public class SearchViewHodel extends RecyclerView.ViewHolder {
         private TextView tv_1;
         private TextView tv_2;
-        private ImageButton mIcon;
+        private ImageView mIcon , bg;
         private ImageView mBook;
         private TextView tomtat , thongbao;
 
@@ -127,6 +135,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
             mIcon = itemView.findViewById(R.id.icon_clear);
             tomtat = itemView.findViewById(R.id.tomtatND);
             thongbao = itemView.findViewById(R.id.tv_thongbao);
+            bg = itemView.findViewById(R.id.imageView2);
         }
     }
 

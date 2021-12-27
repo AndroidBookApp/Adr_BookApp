@@ -1,8 +1,12 @@
 package com.example.app_readbook.View.readbook;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
+import com.example.app_readbook.View.View_Readbook.View_ReadBook;
 import com.example.app_readbook.ViewModel.SelectChapterViewModel;
 import com.example.app_readbook.shareFreferences.DataManager;
 
@@ -22,12 +27,15 @@ import java.util.List;
 
 public class MainReadbook extends AppCompatActivity {
     private TextView btn_back, btn_next, txt_book, read;
-    private ViewPager viewPager;
     private List<Chuong> chapters;
     private Chuong chuongList;
     private Sach sach;
     private Toolbar toolbar;
     String idChuong, idSach ;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    Switch aSwitch;
+    boolean isDark;
+    private RelativeLayout layout;
     private VerticalViewPager verticalViewPager;
     private SelectChapterViewModel selectChapterViewModel;
 
@@ -50,7 +58,8 @@ public class MainReadbook extends AppCompatActivity {
 
                 if (chapters!=null)
                 {
-                    DataReadBook(chapters);
+                    DataReadBook(isDark);
+                    txt_book.setText(chuongList.getTenChuong());
                 }
 
             }
@@ -58,16 +67,6 @@ public class MainReadbook extends AppCompatActivity {
         selectChapterViewModel.iniData(idSach);
 
     }
-//
-//    private List<Chapter> getReadbook(int min, int max) {
-//        List<Chapter> list = new ArrayList<>();
-//
-//        for(int i = min ; i <= list.size() ; i++)
-//        {
-//            list.add(new Chapter());
-//        }
-//        return  list;
-
     private void BackView() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -80,14 +79,28 @@ public class MainReadbook extends AppCompatActivity {
         btn_next = findViewById(R.id.next);
         txt_book = findViewById(R.id.txt1);
         read = findViewById(R.id.txtNameBook);
-
         toolbar = findViewById(R.id.toolbar);
         verticalViewPager = findViewById(R.id.view_pager_read);
+        layout = findViewById(R.id.activityRoot);
+        aSwitch = findViewById(R.id.switch_dark);
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isDark = !isDark;
+                if(isDark)
+                {
+                    layout.setBackgroundColor(getResources().getColor(R.color.black));
+                }else{
+                    layout.setBackgroundColor(getResources().getColor(R.color.white));
+                }
+                    DataReadBook(isDark);
+
+            }
+        });
 
     }
-
-    private void DataReadBook(List<Chuong> chapters) {
-        ReadbookAdaptor readbookAdaptor = new ReadbookAdaptor(getSupportFragmentManager() , FragmentStatePagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT , chapters);
+    private void DataReadBook(boolean isDark) {
+        ReadbookAdaptor readbookAdaptor = new ReadbookAdaptor(getSupportFragmentManager() , FragmentStatePagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT , chapters , isDark);
         verticalViewPager.setAdapter(readbookAdaptor);
         verticalViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -101,7 +114,7 @@ public class MainReadbook extends AppCompatActivity {
                 {
                     btn_back.setVisibility(View.GONE);
                     btn_next.setVisibility(View.VISIBLE);
-                } else if (position == chapters.size() - 1 )
+                } else if (position == chapters.size() - 1)
                 {
                     btn_back.setVisibility(View.VISIBLE);
                     btn_next.setVisibility(View.GONE);
@@ -133,7 +146,7 @@ public class MainReadbook extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(MainReadbook.this , MainReadbook.class);
+        Intent intent = new Intent(MainReadbook.this , View_ReadBook.class);
         startActivity(intent);
         finish();
         super.onBackPressed();

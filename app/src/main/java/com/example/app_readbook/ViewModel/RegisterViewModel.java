@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.app_readbook.Model.User;
-import com.example.app_readbook.Service.ApiInterface;
-import com.example.app_readbook.Service.ApiService;
+import com.example.app_readbook.ViewModel.Service.ApiInterface;
+import com.example.app_readbook.ViewModel.Service.ApiService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,10 +21,10 @@ public class RegisterViewModel extends ViewModel {
     {
         return mUser;
     }
-    public void initRegister(String username , String password , String email)
+    public void initRegister(String username , String password , String email , String quyen)
     {
         ApiInterface apiInterface = ApiService.apiInterface();
-        Call<User> Register = apiInterface.getRegister(username , password , email);
+        Call<User> Register = apiInterface.getRegister(username , password , email , quyen);
         Register.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
