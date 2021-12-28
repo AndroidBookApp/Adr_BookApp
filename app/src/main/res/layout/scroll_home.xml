@@ -15,6 +15,9 @@
         android:id="@+id/navigation_view"
         app:headerLayout="@layout/home_header"
         android:layout_gravity="start"
+        app:itemIconTint="@color/custom_color_btn_navigation"
+        app:itemTextColor="@color/custom_color_btn_navigation"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_drawer"
         />
 
@@ -37,29 +40,30 @@
             app:popupTheme="@style/Theme.Design.NoActionBar" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:id="@+id/scv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/btn_navigatione"
         android:layout_below="@id/appbar"
         tools:ignore="NotSibling,RedundantNamespace,ScrollViewCount">
-
         <FrameLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="ScrollViewSize" />
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/btn_navigatione"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/btn_navigation"
-        app:itemIconTint="@color/custom_color_btn_navigation"
+        android:background="@drawable/custom_nav"
         app:itemTextColor="@color/custom_color_btn_navigation"
-        app:labelVisibilityMode="labeled"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconSize="32dp"
+        app:itemIconTint="@drawable/custom_icon"
         app:menu="@menu/menu_navigation"
         tools:ignore="InvalidId,MissingConstraints,NotSibling" />
 </RelativeLayout>

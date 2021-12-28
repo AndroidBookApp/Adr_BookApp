@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.app_readbook.Model.login;
-import com.example.app_readbook.Service.ApiInterface;
-import com.example.app_readbook.Service.ApiService;
+import com.example.app_readbook.ViewModel.Service.ApiInterface;
+import com.example.app_readbook.ViewModel.Service.ApiService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,9 +22,9 @@ public class LoginViewModel extends ViewModel {
         return mLogin;
     }
 
-    public void iniLogin(String username, String password) {
+    public void iniLogin(String username, String password , String quyen) {
         ApiInterface apiInterface = ApiService.apiInterface();
-        Call<login> mUser = apiInterface.getLogin(username, password);
+        Call<login> mUser = apiInterface.getLogin(username, password , quyen);
         mUser.enqueue(new Callback<login>() {
             @Override
             public void onResponse(Call<login> call, Response<login> response) {

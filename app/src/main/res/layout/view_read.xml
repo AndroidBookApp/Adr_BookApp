@@ -43,6 +43,7 @@
 
         <LinearLayout
             android:orientation="vertical"
+            android:id="@+id/lnl_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
@@ -52,27 +53,37 @@
                 android:id="@+id/table_view"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:tabSelectedTextColor="@color/purple_200" />
+                app:tabGravity="fill"
+                android:elevation="3sp"
+                app:tabIndicatorHeight="2dp"
+                app:tabMode="fixed"
+                android:background="@drawable/custom_table_layout"
+                app:tabIndicatorColor="@color/start"
+                app:tabRippleColor="@color/start"
+                app:tabTextColor="@color/start"
+                app:tabTextAppearance="@style/TabLayout"
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabSelectedTextColor="@color/start" />
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewpager_view_book"
+               android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 />
         </LinearLayout>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_favoriteView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:backgroundTint="#FFFFFF"
-        android:baselineAlignBottom="false"
+        android:layout_marginRight="20sp"
+        android:baselineAlignBottom="true"
         android:clickable="true"
         android:src="@drawable/ic_baseline_favorite_24"
         app:fabSize="normal"
-        app:layout_anchor="@id/appbarr"
+        app:layout_anchor="@id/lnl_view"
+        app:backgroundTint="@color/white"
+        android:layout_marginBottom="30sp"
         app:layout_anchorGravity="end|bottom"
-        tools:ignore="ContentDescription,KeyboardInaccessibleWidget" />
+        tools:ignore="ContentDescription,KeyboardInaccessibleWidget,RtlHardcoded,SpeakableTextPresentCheck" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

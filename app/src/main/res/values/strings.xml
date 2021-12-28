@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">App_ReadBook</string>
+    <string name="app_name">eBook</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn">BototmNavViewPager2</string>
     <string name="btn_home">Trang Chủ</string>

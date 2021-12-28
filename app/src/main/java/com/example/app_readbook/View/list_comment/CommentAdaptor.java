@@ -2,7 +2,6 @@ package com.example.app_readbook.View.list_comment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,11 +63,6 @@ String mTime , time;
         time = danhgia.getThoigian();
 
         date = Calendar.getInstance().getTime();
-//        dateFormat = new SimpleDateFormat("dd/MM/yy" , Locale.getDefault());
-        Log.e("AAA" , String.valueOf(date.getTime()));
-//        timeDay = (timeReal - time) / 8640000;
-//        mTime = String.valueOf(timeDay);
-////        time = dateFormat.format(date.getTime());
         holder.time.setText(time);
     }
 

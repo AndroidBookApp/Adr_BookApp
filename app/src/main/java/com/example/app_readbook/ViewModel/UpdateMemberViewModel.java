@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.app_readbook.Model.login;
-import com.example.app_readbook.Service.ApiInterface;
-import com.example.app_readbook.Service.ApiService;
+import com.example.app_readbook.ViewModel.Service.ApiInterface;
+import com.example.app_readbook.ViewModel.Service.ApiService;
 import com.example.app_readbook.shareFreferences.DataManager;
 
 import retrofit2.Call;

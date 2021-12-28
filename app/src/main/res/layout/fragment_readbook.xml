@@ -2,20 +2,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_dark"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="ScrollViewSize">
 
-    tools:context=".View.readbook.ReadbookFragment">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_sach"
+                android:layout_width="wrap_content"
+                android:layout_height="160sp"
+                app:riv_corner_radius="10sp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sach3"
+                tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/tv_read"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:text="Trang 1"
-        android:textSize="50dp" />
-
-
-
-
+            <TextView
+                android:id="@+id/txt_readBook"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/img_sach"
+                android:layout_marginStart="30sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/helveticaneue"
+                android:gravity="fill"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                tools:ignore="UnusedAttribute" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

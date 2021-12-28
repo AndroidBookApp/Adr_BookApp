@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_readbook.R;
-import com.example.app_readbook.View.fragment_pager.model_account.IClickSearch;
 import com.example.app_readbook.home;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import java.util.List;
 
 public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.HistoryViewHolder>{
     private List<history> mList;
-    private IClickSearch iClicksearch;
     private Context context;
 
     public void setData(List<history> mList ) {

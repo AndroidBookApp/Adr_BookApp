@@ -63,7 +63,7 @@ public class Account_fragment extends Fragment {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), edit_tt_account_test.class);
+                Intent intent = new Intent(getActivity(), edit_tt_account.class);
                 getActivity().startActivity(intent);
             }
         });

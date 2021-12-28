@@ -1,5 +1,7 @@
 package com.example.app_readbook.View.chapter;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -12,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
-import com.example.app_readbook.Service.ApiInterface;
-import com.example.app_readbook.Service.ApiService;
+import com.example.app_readbook.ViewModel.Service.ApiInterface;
+import com.example.app_readbook.ViewModel.Service.ApiService;
+import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 import com.example.app_readbook.shareFreferences.DataManager;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +32,7 @@ private TextView text_name;
 Sach sach;
 private Toolbar toolbar;
 String idSach;
-
+NextWorkConnect nextWorkConnect = new NextWorkConnect();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +40,17 @@ String idSach;
         recyclerView = findViewById(R.id.rcv_chapter);
         text_name = findViewById(R.id.txt_name);
         toolbar = findViewById(R.id.toolbar_chapter);
+
         iniIntent();
+        BackView();
         getDataChuong();
     }
-
+    private void BackView() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
     private void iniIntent() {
         sach = new Sach();
         sach = DataManager.loadObjectSach();
@@ -70,10 +81,20 @@ String idSach;
     }
     @Override
     public void onBackPressed() {
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+
         super.onBackPressed();
+    }
+    @Override
+    protected void onStart() {
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(nextWorkConnect , intentFilter);
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(nextWorkConnect);
+        super.onStop();
     }
 }

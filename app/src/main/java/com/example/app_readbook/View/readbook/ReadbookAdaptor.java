@@ -7,40 +7,42 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.app_readbook.Model.Chapter;
+import com.example.app_readbook.Model.Chuong;
 
 import java.util.List;
 
 public class ReadbookAdaptor extends FragmentStatePagerAdapter {
-  private List<Chapter> readbookNames ;
+  private List<Chuong> chuongList ;
+  private boolean isDark;
 
-
-    public ReadbookAdaptor(@NonNull FragmentManager fm, int behavior , List<Chapter> nameList) {
+    public ReadbookAdaptor(@NonNull FragmentManager fm, int behavior , List<Chuong> nameList ,boolean isDark) {
         super(fm, behavior);
-        this.readbookNames = nameList;
+        this.chuongList = nameList;
+        this.isDark = isDark;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        if(readbookNames == null || readbookNames.isEmpty())
+        if(chuongList == null || chuongList.isEmpty())
         {
             return null;
         }
-        Chapter readbookName = readbookNames.get(position);
+        Chuong Chuong = chuongList.get(position);
         ReadbookFragment readbookFragment = new ReadbookFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("readBook_object", readbookName);
+        bundle.putSerializable("readBook_object", Chuong);
+        bundle.putBoolean("dark" , isDark);
         readbookFragment.setArguments(bundle);
+
         return readbookFragment;
     }
 
-
     @Override
     public int getCount() {
-        if (readbookNames != null)
+        if (chuongList != null)
         {
-            return  readbookNames.size();
+            return  chuongList.size();
         }
         return 0;
     }

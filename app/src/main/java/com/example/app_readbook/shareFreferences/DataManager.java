@@ -7,14 +7,8 @@ import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.danhgia;
-import com.example.app_readbook.Model.favorite;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -59,32 +53,7 @@ public class DataManager {
         return user;
     }
 
-    public static void saveSach(List<Sach> sach) {
-        Gson gson = new Gson();
-        JsonArray jsonArray = gson.toJsonTree(sach).getAsJsonArray();
-        String strSach = jsonArray.toString();
-        DataManager.getInstance().mySharePreferences.putSach(OBJECT_BOOK, strSach);
-    }
 
-    public static List<Sach> loadSach() {
-        String strSach = DataManager.getInstance().mySharePreferences.getSach(OBJECT_BOOK);
-        Gson gson = new Gson();
-        ArrayList<Sach> sach = new ArrayList<>();
-        try {
-            JSONArray jsonArray = new JSONArray(strSach);
-            JSONObject jsonObject;
-            Sach mSach;
-            for (int i = 0; i < jsonArray.length(); i++) {
-                jsonObject = jsonArray.getJSONObject(i);
-                mSach = gson.fromJson(jsonObject.toString(), Sach.class);
-                sach.add(mSach);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return sach;
-    }
 
     public static void saveObjectSach(Sach sach) {
         Gson gson = new Gson();
@@ -112,54 +81,6 @@ public class DataManager {
         }.getType();
         List<danhgia> mDanhgia = gson.fromJson(strDanhgia, type);
         return mDanhgia;
-    }
-    public static void saveFavorite(favorite favorites) {
-        Gson gson = new Gson();
-        String strFavorite = gson.toJson(favorites);
-        DataManager.getInstance().mySharePreferences.SaveFavorite(STRING_FAVORITE, strFavorite);
-    }
-
-    public static List<favorite> loadFavorite() {
-        String strFavorite = DataManager.getInstance().mySharePreferences.LoadFavorite(STRING_FAVORITE);
-        Gson gson = new Gson();
-        List<favorite> mFavorite = new ArrayList<>();
-        try {
-            JSONArray jsonArray = new JSONArray(strFavorite);
-            JSONObject jsonObject;
-            favorite favorite;
-            for(int i = 0 ; i< jsonArray.length() ; i++)
-            {
-                jsonObject = jsonArray.getJSONObject(i);
-                favorite = gson.fromJson(jsonObject.toString(), com.example.app_readbook.Model.favorite.class);
-                mFavorite.add(favorite);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return mFavorite;
-    }
-    public void logOut() {
-        sharedPreferences = mContext.getSharedPreferences(OBJECT_USER, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-    }
-    public static void sFavorite(String key)
-    {
-        DataManager.getInstance().mySharePreferences.SaveFavorite(STRING_FAVORITE , key);
-    }
-    public static String lFavorite()
-    {
-        return DataManager.getInstance().mySharePreferences.LoadFavorite(STRING_FAVORITE);
-    }
-
-    public static void Favorite(boolean key , String value)
-    {
-        DataManager.getInstance().mySharePreferences.like(FAVORITE , key , value);
-    }
-    public static boolean LFavorite()
-    {
-        return DataManager.getInstance().mySharePreferences.loadLike(FAVORITE);
     }
 
     //Lưu Chương

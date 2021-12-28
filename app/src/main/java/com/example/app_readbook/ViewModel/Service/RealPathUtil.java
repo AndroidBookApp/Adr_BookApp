@@ -1,4 +1,4 @@
-package com.example.app_readbook.Service;
+package com.example.app_readbook.ViewModel.Service;
 
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
@@ -76,7 +76,7 @@ public class RealPathUtil {
     @SuppressLint("NewApi")
     public static String getRealPathFromURI_API19(final Context context, final Uri uri) {
 
-        @SuppressLint("ObsoleteSdkInt") final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        @SuppressLint("ObsoleteSdkInt") final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
 
         // DocumentProvider
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
@@ -126,7 +126,6 @@ public class RealPathUtil {
         }
         // MediaStore (and general)
         else if ("content".equalsIgnoreCase(uri.getScheme())) {
-
             // Return the remote address
             if (isGooglePhotosUri(uri))
                 return uri.getLastPathSegment();
@@ -140,8 +139,6 @@ public class RealPathUtil {
 
         return null;
     }
-
-
     public static String getDataColumn(Context context, Uri uri, String selection,
                                        String[] selectionArgs) {
 

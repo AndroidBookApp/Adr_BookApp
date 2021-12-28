@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
@@ -15,36 +16,38 @@
         android:layout_height="32dp"
         android:background="@drawable/custom_circleavatar"
         android:scaleType="centerCrop"
-        android:src="@drawable/account" />
+        android:src="@drawable/account"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_comment"
+        app:layout_constraintTop_toBottomOf="@+id/name_user"
+        app:layout_constraintVertical_bias="0.875"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="7dp" />
 
     <TextView
         android:id="@+id/name_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="0dp"
-        android:hint="Chưa thiết lập"
-        android:textColorHint="@color/line"
         android:layout_toEndOf="@+id/cir_account"
         android:layout_toRightOf="@id/cir_account"
         android:fontFamily="@font/roboto_bold"
+        android:hint="Chưa thiết lập"
         android:text="Nguyễn Văn Quỳnh"
         android:textColor="@color/black"
+        android:textColorHint="@color/line"
         android:textSize="12dp"
-        tools:ignore="HardcodedText" />
-<LinearLayout
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:id="@+id/lnl_text_comment"
-    android:layout_below="@id/name_user"
-    android:layout_marginTop="5dp"
-    android:layout_toRightOf="@id/cir_account"
-    android:orientation="vertical"
-    >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+
     <TextView
+        android:layout_marginTop="10sp"
         android:id="@+id/txt_comment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginStart="10sp"
+        android:maxLines="2"
         android:layout_height="40dp"
         android:background="@drawable/color_edittext"
         android:fontFamily="@font/roboto_regular"
@@ -53,50 +56,55 @@
         android:paddingEnd="10dp"
         android:text="Đây là một cuốn sách hay nhất tôi từng đọc "
         android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toEndOf="@+id/cir_account"
+        app:layout_constraintTop_toBottomOf="@+id/name_user"
         tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry,SpUsage" />
-</LinearLayout>
 
-<LinearLayout
-    android:id="@+id/lo8"
-    android:layout_marginTop="10dp"
-    android:layout_below="@+id/lnl_text_comment"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-
-    android:orientation="horizontal">
-    <TextView
-        android:id="@+id/like"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_comment"
-      android:layout_gravity="center"
-        android:drawableStart="@drawable/ic_like"
-        android:text="Thích"
-        android:textColor="#BFBABA"
-        android:textSize="10dp" />
-
-    <TextView
-        android:id="@+id/feedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_gravity="center"
-        android:layout_toRightOf="@id/like"
-        android:drawableStart="@drawable/ic_feedback"
-        android:text="Phản hồi"
-        android:textColor="#BFBABA"
-        android:textSize="10dp" />
-
-    <TextView
-        android:id="@+id/txt_time"
+    <LinearLayout
+        android:id="@+id/lo8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_gravity="center"
-        android:layout_toRightOf="@id/feedback"
-        android:fontFamily="@font/roboto_regular"
-        android:text="1 ngày trước"
-        android:textSize="12dp" />
+        android:layout_below="@+id/txt_comment"
+        android:layout_marginTop="5sp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/txt_comment"
+        tools:ignore="MissingConstraints">
 
-</LinearLayout>
-</RelativeLayout>
+        <TextView
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_comment"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_like"
+            android:text="Thích"
+            android:textColor="#BFBABA"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_toRightOf="@id/like"
+            android:drawableStart="@drawable/ic_feedback"
+            android:text="Phản hồi"
+            android:textColor="#BFBABA"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/txt_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_toRightOf="@id/feedback"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="right"
+            android:text="1 ngày trước"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

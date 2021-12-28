@@ -6,8 +6,14 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="title_book">#232323</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_white">#FFFFFFFF</color>
+    <color name="darK_black">#0000</color>
     <color name="background_color">#9BAFF8</color>
+    <color name="color_dark">#E3E3E3</color>
+    <color name="color_cardView">#F4F4F4</color>
+    <color name="background__dark_color">#363636</color>
     <color name="solid_color">#C18EFD</color>
     <color name="btn_color">#4870FF</color>
     <color name="start">#9BB1FF</color>
@@ -18,6 +24,7 @@
     <color name="focused_account">#8EA6FD</color>
     <color name="attribute">#9AB0FF</color>
     <color name="line">#D3D3D3</color>
+    <color name="color_tint_icon">#9C9C9C</color>
     <color name="search">#F0F3FF</color>
     <color name="background_home">#F5F8FF</color>
     <color name="btn_navigation">#ADBFFF</color>
@@ -25,7 +32,7 @@
     <color name="focus_btn_navigation">#404040</color>
     <color name="color_chapter">#3B519F</color>
     <color name="color_custom_dialog">#FDB953</color>
-    <color name="name">#DCDCDC</color>
+    <color name="name">#3D6C4B</color>
     <color name="btn_facebook">#3B519F</color>
     <color name="btn_google">#FF5B5B</color>
 </resources>

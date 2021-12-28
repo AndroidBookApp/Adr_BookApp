@@ -3,21 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/img_sach"
-        android:layout_centerHorizontal="true"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        />
-    <TextView
-        android:layout_below="@id/img_sach"
-        android:id="@+id/txt_readBook"
-        android:textSize="25dp"
-        android:gravity="fill"
-        android:textColor="@color/black"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/helveticaneue"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="UnusedAttribute" />
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="ScrollViewSize">
+            <ImageView
+                android:id="@+id/img_sach"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/txt_readBook"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/img_sach"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/helveticaneue"
+                android:gravity="fill"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                tools:ignore="UnusedAttribute" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

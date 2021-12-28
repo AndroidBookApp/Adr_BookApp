@@ -40,8 +40,11 @@ public class User {
     @SerializedName("ImgBia")
     @Expose
     private String imgBia;
+    @SerializedName("idquyen")
+    @Expose
+    private String idquyen;
 
-    public User(String idMember, String username, String memberName, String password, String email, String gioitinh, String ngaysinh, String success, String message, String imgAvatar, String imgBia) {
+    public User(String idMember, String username, String memberName, String password, String email, String gioitinh, String ngaysinh, String success, String message, String imgAvatar, String imgBia, String idquyen) {
         this.idMember = idMember;
         this.username = username;
         MemberName = memberName;
@@ -53,6 +56,15 @@ public class User {
         this.message = message;
         this.imgAvatar = imgAvatar;
         this.imgBia = imgBia;
+        this.idquyen = idquyen;
+    }
+
+    public String getIdquyen() {
+        return idquyen;
+    }
+
+    public void setIdquyen(String idquyen) {
+        this.idquyen = idquyen;
     }
 
     public String getIdMember() {

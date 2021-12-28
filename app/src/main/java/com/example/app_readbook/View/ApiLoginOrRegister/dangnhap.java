@@ -2,6 +2,8 @@ package com.example.app_readbook.View.ApiLoginOrRegister;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.login;
 import com.example.app_readbook.R;
 import com.example.app_readbook.SecondActivity;
+import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 import com.example.app_readbook.ViewModel.LoginViewModel;
 import com.example.app_readbook.home;
 import com.example.app_readbook.shareFreferences.DataManager;
@@ -36,7 +39,7 @@ public class dangnhap extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     EditText txt_username;
     EditText txt_password;
-    String user, pass;
+    String user, pass , quyen = "2";
     Button signup, signin;
     private ProgressDialog progressDialog;
     private CheckBox mCheckbox;
@@ -44,9 +47,10 @@ public class dangnhap extends AppCompatActivity {
     DataManager dataManager;
     login login;
     User User;
+
     LoginViewModel loginViewModel;
     GoogleSignInClient googleSignInClient;
-
+    NextWorkConnect nextWorkConnect = new NextWorkConnect();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,7 +116,7 @@ public class dangnhap extends AppCompatActivity {
         loginViewModel.getLogin().observe(dangnhap.this, new Observer<com.example.app_readbook.Model.login>() {
             @Override
             public void onChanged(com.example.app_readbook.Model.login login) {
-                if (!user.isEmpty() || !pass.isEmpty()) {
+                if (!user.isEmpty() || !pass.isEmpty() || !quyen.equals("2")) {
                     if (login == null) {
                         Toast.makeText(dangnhap.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
@@ -171,12 +175,25 @@ public class dangnhap extends AppCompatActivity {
     }
 
     private void iniLogin() {
-        loginViewModel.iniLogin(user, pass);
+        loginViewModel.iniLogin(user, pass , quyen);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+    }
+    @Override
+    protected void onStart() {
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(nextWorkConnect , intentFilter);
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(nextWorkConnect);
+        super.onStop();
     }
 
 }

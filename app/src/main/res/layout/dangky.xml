@@ -138,9 +138,10 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/radio_btn"
+                        <CheckBox
+                            android:button="@null"
+                            android:drawableStart="@drawable/custom_checkbox"
+                            android:id="@+id/check_box"
                             android:layout_width="wrap_content"
                             android:layout_height="48dp"
                             android:layout_gravity="center"
@@ -164,12 +165,26 @@
                         android:visibility="gone" />
 
                     <Button
+                        android:visibility="gone"
                         android:id="@+id/btn_dangky"
                         android:layout_width="280dp"
                         android:layout_height="50dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="30dp"
                         android:background="@drawable/color_btn"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Đăng Ký"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                    <Button
+                        android:id="@+id/btn_no_dangky"
+                        android:layout_width="280dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="30dp"
+
+                        android:background="@drawable/color_no_btn"
                         android:fontFamily="@font/roboto_medium"
                         android:text="Đăng Ký"
                         android:textColor="@color/white"
@@ -187,11 +202,9 @@
                     android:gravity="center"
                     android:orientation="horizontal">
                     <Button
-
                         android:id="@+id/btn_google"
                         android:layout_width="135dp"
                         android:layout_height="44dp"
-
                         android:layout_marginEnd="5dp"
                         android:background="@drawable/custom_btn_google"
                         android:drawableStart="@drawable/ic_icon_google"

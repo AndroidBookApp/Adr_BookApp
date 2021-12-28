@@ -21,8 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.favorite;
 import com.example.app_readbook.R;
-import com.example.app_readbook.Service.ApiInterface;
-import com.example.app_readbook.Service.ApiService;
+import com.example.app_readbook.ViewModel.Service.ApiInterface;
+import com.example.app_readbook.ViewModel.Service.ApiService;
 import com.example.app_readbook.ViewModel.DeleteFavoriteViewModel;
 import com.example.app_readbook.ViewModel.FavoriteViewModel;
 import com.example.app_readbook.home;
@@ -92,7 +92,8 @@ public class Favorite_fragment extends Fragment {
 
                                                     Log.e("AAAA", ketqua);
                                                     Toast.makeText(getActivity(), "Xóa Thành công", Toast.LENGTH_SHORT).show();
-
+                                                    loadData(favorites);
+                                                    addFavoriteViewModel.iniDataFavorite(idMember);
                                                 } else {
                                                     Log.e("AAAA", ketqua);
                                                     Toast.makeText(getActivity(), "Xóa Không Thành công", Toast.LENGTH_SHORT).show();
@@ -106,22 +107,7 @@ public class Favorite_fragment extends Fragment {
                                                 Log.e("AAAA", t.getMessage());
                                             }
                                         });
-//                                        deleteFavoriteViewModel = new ViewModelProvider(Objects.requireNonNull(getActivity())).get(DeleteFavoriteViewModel.class);
-//                                        deleteFavoriteViewModel.getDeleteFavorite().observe(getActivity(), new Observer<String>() {
-//                                            @Override
-//                                            public void onChanged(String s) {
-//                                                if (s.equals("success")) {
-//                                                    Log.e("AAAA", s);
-//                                                    Toast.makeText(getActivity(), "Xóa Thành công", Toast.LENGTH_SHORT).show();
-//
-//                                                } else {
-//                                                    Log.e("AAAA", s);
-//                                                    Toast.makeText(getActivity(), "Xóa Không Thành công", Toast.LENGTH_SHORT).show();
-//                                                }
-//                                            }
-//                                        });
-//                                        deleteFavoriteViewModel.iniDeleteData(idMember, idSach);
-                                        loadData(favorites);
+
                                     }
                                 })
                                 .setNegativeButton("Không", null)
@@ -136,14 +122,7 @@ public class Favorite_fragment extends Fragment {
             }
         });
         addFavoriteViewModel.iniDataFavorite(idMember);
-        if(addFavoriteViewModel.getListFavorite() == null)
-        {
-            tv_thongbao.setText("Yêu Thích Rỗng");
-            tv_thongbao.setVisibility(View.VISIBLE);
-        }else{
 
-            tv_thongbao.setVisibility(View.GONE);
-        }
     }
 
     public void loadData(List<favorite> favorite) {

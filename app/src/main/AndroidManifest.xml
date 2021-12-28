@@ -5,9 +5,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+
 
     <supports-screens
         android:largeScreens="true"
@@ -17,7 +19,7 @@
     <application
         android:name=".shareFreferences.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/backgoundapp"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -37,7 +39,7 @@
             android:name=".View.onboarding.OnboardingMain"
             android:exported="true" />
         <activity
-            android:name=".View.fragment_pager.model_account.edit_tt_account_test"
+            android:name=".View.fragment_pager.model_account.edit_tt_account"
             android:exported="true" />
         <activity
             android:name=".home"
@@ -55,7 +57,6 @@
             android:name=".View.readbook.MainReadbook"
             android:exported="true"
             android:parentActivityName=".View.chapter.Main_Chapter">
-
         </activity>
         <activity
             android:name=".View.fragment_pager.model_account.Data_edit_name"
@@ -88,6 +89,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".View.BroadCastRecivice.NextWorkConnect"
+            />
     </application>
 
 </manifest>

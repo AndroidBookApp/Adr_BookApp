@@ -29,8 +29,8 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.danhgia;
 import com.example.app_readbook.R;
-import com.example.app_readbook.Service.ApiInterface;
-import com.example.app_readbook.Service.ApiService;
+import com.example.app_readbook.ViewModel.Service.ApiInterface;
+import com.example.app_readbook.ViewModel.Service.ApiService;
 import com.example.app_readbook.View.list_comment.CommentAdaptor;
 import com.example.app_readbook.ViewModel.AddCommentViewModel;
 import com.example.app_readbook.home;
@@ -74,7 +74,6 @@ public class CommentFragment extends Fragment {
         sach = new Sach();
         user = DataManager.loadUser();
         sach = DataManager.loadObjectSach();
-        load = DataManager.lFavorite();
         iniUI();
         loadFavorite();
         getDataViewSach();

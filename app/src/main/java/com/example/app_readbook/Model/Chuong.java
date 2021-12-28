@@ -9,18 +9,32 @@ public class Chuong  implements Serializable {
     @SerializedName("idChuong")
     @Expose
     private String idChuong;
-    @SerializedName("TenChuong")
-    @Expose
-    private String tenChuong;
     @SerializedName("idSach")
     @Expose
     private String idSach;
-    @SerializedName("IdChitietsach")
+    @SerializedName("TenChuong")
     @Expose
-    private String idChitietsach;
+    private String tenChuong;
     @SerializedName("Sotrang")
     @Expose
     private String sotrang;
+    @SerializedName("IdChitietsach")
+    @Expose
+    private String idChitietsach;
+    @SerializedName("Noidung")
+    @Expose
+    private String noidung;
+    @SerializedName("imgSach")
+    @Expose
+    private String imgSach;
+
+    public String getImgSach() {
+        return imgSach;
+    }
+
+    public void setImgSach(String imgSach) {
+        this.imgSach = imgSach;
+    }
 
     public String getIdChuong() {
         return idChuong;
@@ -28,14 +42,6 @@ public class Chuong  implements Serializable {
 
     public void setIdChuong(String idChuong) {
         this.idChuong = idChuong;
-    }
-
-    public String getTenChuong() {
-        return tenChuong;
-    }
-
-    public void setTenChuong(String tenChuong) {
-        this.tenChuong = tenChuong;
     }
 
     public String getIdSach() {
@@ -46,12 +52,12 @@ public class Chuong  implements Serializable {
         this.idSach = idSach;
     }
 
-    public String getIdChitietsach() {
-        return idChitietsach;
+    public String getTenChuong() {
+        return tenChuong;
     }
 
-    public void setIdChitietsach(String idChitietsach) {
-        this.idChitietsach = idChitietsach;
+    public void setTenChuong(String tenChuong) {
+        this.tenChuong = tenChuong;
     }
 
     public String getSotrang() {
@@ -60,5 +66,21 @@ public class Chuong  implements Serializable {
 
     public void setSotrang(String sotrang) {
         this.sotrang = sotrang;
+    }
+
+    public String getIdChitietsach() {
+        return idChitietsach;
+    }
+
+    public void setIdChitietsach(String idChitietsach) {
+        this.idChitietsach = idChitietsach;
+    }
+
+    public String getNoidung() {
+        return noidung;
+    }
+
+    public void setNoidung(String noidung) {
+        this.noidung = noidung;
     }
 }

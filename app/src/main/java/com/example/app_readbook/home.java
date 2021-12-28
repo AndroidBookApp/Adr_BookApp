@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -25,6 +28,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.app_readbook.View.ApiLoginOrRegister.dangnhap;
+import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 import com.example.app_readbook.View.fragment_pager.model_account.Account_fragment;
 import com.example.app_readbook.View.fragment_pager.model_favorite.Favorite_fragment;
 import com.example.app_readbook.View.fragment_pager.model_home.Home_fragment;
@@ -36,19 +40,21 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    String idMember, idSach;
+    String idMember, username;
 
     private AppBarLayout appBarLayout;
     private BottomNavigationView bottomNavigationView;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private TextView txt_username;
+
     private androidx.appcompat.widget.Toolbar toolbar;
     private static final int FRAGMENTS_HOME = 1;
     private static final int FRAGMENTS_SEARCH = 2;
     private static final int FRAGMENTS_FAVORITE = 3;
     private static final int FRAGMENTS_ACCOUNT = 4;
     private int currentFragments = FRAGMENTS_HOME;
-
+    NextWorkConnect nextWorkConnect = new NextWorkConnect();
     @SuppressLint({"WrongViewCast", "ResourceAsColor"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.scroll_home);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
+
         toolbar = findViewById(R.id.toolbar);
         appBarLayout = findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
@@ -214,5 +221,18 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
         dialog.show();
+    }
+    @Override
+    protected void onStart() {
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(nextWorkConnect , intentFilter);
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(nextWorkConnect);
+        super.onStop();
     }
 }
