@@ -3,7 +3,6 @@ package com.example.app_readbook.View.View_Readbook;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +36,7 @@ public class MainFragment extends Fragment {
     private AppCompatButton btnRead;
     private View mView;
     User user;
-    String load , danhmuc;
+    String  danhmuc;
     Sach sach;
     String idSach;
     private List<DanhMucSach> danhMucSaches;
@@ -56,49 +55,7 @@ public class MainFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-    private void loadDataCategory()
-    {
-        ApiInterface apiInterface = ApiService.apiInterface();
-        Call<List<Sach>> listCall = apiInterface.listDanhMuc(danhmuc);
-        listCall.enqueue(new Callback<List<Sach>>() {
-            @Override
-            public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
-                saches = response.body();
-                if(saches!=null)
-                {
-                    categoryAdaptor = new CategoryAdaptor(saches , getContext());
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setAdapter(categoryAdaptor);
-                }
-            }
 
-            @Override
-            public void onFailure(Call<List<Sach>> call, Throwable t) {
-
-            }
-        });
-    }
-    private void getDataDanhMuc() {
-        ApiInterface apiInterface = ApiService.apiInterface();
-        Call<List<DanhMucSach>> mDanhMuc = apiInterface.TenDanhMuc();
-        mDanhMuc.enqueue(new Callback<List<DanhMucSach>>() {
-            @Override
-            public void onResponse(Call<List<DanhMucSach>> call, Response<List<DanhMucSach>> response) {
-                danhMucSaches = response.body();
-                assert danhMucSaches != null;
-                for (DanhMucSach danhMucSach : danhMucSaches) {
-                    String danhmuc   =danhMucSach.getIdDanhmuc();
-                    Log.e("AAAA" , danhmuc );
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<DanhMucSach>> call, Throwable t) {
-
-            }
-        });
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -107,10 +64,9 @@ public class MainFragment extends Fragment {
         sach = new Sach();
         user = DataManager.loadUser();
         sach = DataManager.loadObjectSach();
-        load = DataManager.lFavorite();
         danhmuc = DataManager.loadObjectSach().getIdDanhmuc();
         iniUI();
-        getDataDanhMuc();
+        loadDataCategory();
         loadFavorite();
         return mView;
     }
@@ -145,6 +101,28 @@ public class MainFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), MainReadbook.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+            }
+        });
+    }
+    private void loadDataCategory()
+    {
+        ApiInterface apiInterface = ApiService.apiInterface();
+        Call<List<Sach>> listCall = apiInterface.listDanhMuc(danhmuc);
+        listCall.enqueue(new Callback<List<Sach>>() {
+            @Override
+            public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
+                saches = response.body();
+                if(saches!=null)
+                {
+                    categoryAdaptor = new CategoryAdaptor(saches , getContext());
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext() , LinearLayoutManager.HORIZONTAL , false));
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setAdapter(categoryAdaptor);
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Sach>> call, Throwable t) {
+
             }
         });
     }

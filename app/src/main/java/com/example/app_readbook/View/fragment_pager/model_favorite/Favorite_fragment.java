@@ -71,7 +71,6 @@ public class Favorite_fragment extends Fragment {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChanged(List<favorite> favorites) {
-                DataManager.saveFavorite(favorites);
                 favoriteAdapter = new FavoriteAdapter(getActivity(), new FavoriteAdapter.IClickDeleteFavorite() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override

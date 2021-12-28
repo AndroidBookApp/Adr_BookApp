@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,6 +13,7 @@ import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
 import com.example.app_readbook.shareFreferences.DataManager;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 
@@ -24,7 +24,7 @@ public class ReadbookFragment extends Fragment {
     private RelativeLayout layout;
     String idChuong, idSach;
     private TextView textView ;
-    private ImageView img_book;
+    private RoundedImageView img_book;
     public ReadbookFragment() {
 
     }

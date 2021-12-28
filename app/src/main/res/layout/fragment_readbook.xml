@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_dark"
     android:layout_height="match_parent">
     <ScrollView
@@ -12,11 +13,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="ScrollViewSize">
-            <ImageView
+
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/img_sach"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
+                android:layout_width="wrap_content"
+                android:layout_height="160sp"
+                app:riv_corner_radius="10sp"
                 android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sach3"
                 tools:ignore="ContentDescription" />
 
             <TextView

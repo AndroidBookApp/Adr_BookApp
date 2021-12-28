@@ -117,21 +117,6 @@ public class MySharePreferences {
         editor.apply();
 
     }
-// lưu danh sách yêu thích
-    public void getFavorite(String key ,String value)
-    {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(FAVORITE , Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("idMember" , value);
-        editor.putString("idSach" , value);
-        editor.apply();
-    }
-    // load danh sách yêu thích
-    public String setFavorite(String key)
-    {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(FAVORITE , Context.MODE_PRIVATE);
-        return sharedPreferences.getString("idMember" , null);
-    }
     public String getDanhGia(String key) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(DANHGIA_SHARE, Context.MODE_PRIVATE);
         return sharedPreferences.getString("idMember", null);
@@ -151,40 +136,5 @@ public class MySharePreferences {
 
     }
 
-    public void SaveFavorite(String key, String value) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SAVE_FAVORITE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("idMember", value);
-        editor.putString("Tensach", value);
-        editor.putString("idSach", value);
-        editor.putString("Tacgia", value);
-        editor.putString("NXB", value);
-        editor.putString("NgayDang", value);
-        editor.putString("TomtatND", value);
-        editor.putString("Luotxem", value);
-        editor.putString("Feedback", value);
-        editor.putString("Sotrang", value);
-        editor.putBoolean(key, false);
-        editor.apply();
-    }
 
-    public String LoadFavorite(String key) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SAVE_FAVORITE, Context.MODE_PRIVATE);
-        return sharedPreferences.getString("idMember", null);
-    }
-
-    public void like(String key ,boolean value , String keyyy)
-    {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(LIKE_FAVORITE , 0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(key, value);
-        editor.putString("idMember", keyyy);
-        editor.putString("idSach", keyyy);
-        editor.apply();
-    }
-    public boolean loadLike(String key)
-    {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(LIKE_FAVORITE, Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean(key, false);
-    }
 }

@@ -74,7 +74,6 @@ public class CommentFragment extends Fragment {
         sach = new Sach();
         user = DataManager.loadUser();
         sach = DataManager.loadObjectSach();
-        load = DataManager.lFavorite();
         iniUI();
         loadFavorite();
         getDataViewSach();

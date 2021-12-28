@@ -1,106 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".View.fragment_pager.model_account.Account_fragment">
-
-    <LinearLayout
-        android:id="@+id/layout_one"
-        android:layout_width="match_parent"
-        android:layout_height="245dp"
-        android:layout_alignBottom="@+id/cv_1"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="60dp">
-
         <ImageView
+            android:layout_alignParentStart="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/background_image_account"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="245dp"
             android:background="@drawable/color_btn"
             android:scaleType="centerCrop"
             android:src="@drawable/sachnew1" />
-    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="252dp"
+        android:layout_height="161dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="144dp"
-        android:background="@color/color_account">
+        android:layout_marginTop="50sp"
+        android:background="@color/color_account"
 
-        <LinearLayout
-            android:layout_width="252dp"
-            android:layout_height="161dp"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/custom_circleavatar"
-                android:gravity="center"
-                android:src="@drawable/account"
-                app:civ_border_color="@color/attribute"
-                app:civ_border_width="2dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/name_username"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_marginTop="14dp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
                 android:hint="Chưa thiết lập"
                 android:text="Nguyễn Văn Quỳnh"
                 android:textColor="@color/black"
                 android:textColorHint="@color/line"
-                android:textSize="16dp" />
-        </LinearLayout>
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/avatar" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_circleavatar"
+                android:gravity="center"
+                android:src="@drawable/account"
+                app:civ_border_color="@color/attribute"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
-    <RelativeLayout
-        android:id="@+id/layout_two"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/cv_1"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="24sp"
         android:background="@drawable/solid_login"
-        android:gravity="center"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="450sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:orientation="vertical"
-        android:padding="10dp"
-        tools:ignore="UnknownId">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
-        <LinearLayout
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="33dp"
-            android:gravity="center"
-            android:orientation="vertical">
+
+            android:layout_marginTop="72dp"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+
                 android:id="@+id/lay_out_tt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="10">
+                android:weightSum="10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5sp"
                     android:layout_gravity="center"
                     android:background="@drawable/solid_acount"
                     android:src="@drawable/ic_baseline_accountt_24" />
@@ -128,15 +136,19 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="20sp"
                 android:orientation="horizontal"
-                android:weightSum="10">
+                android:weightSum="10"
+                app:layout_constraintTop_toBottomOf="@+id/lay_out_tt"
+                tools:layout_editor_absoluteX="24dp">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5sp"
                     android:layout_gravity="center"
                     android:background="@drawable/solid_acount"
                     android:src="@drawable/ic_baseline_settings_24" />
@@ -164,15 +176,19 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="20sp"
                 android:orientation="horizontal"
-                android:weightSum="10">
+                android:weightSum="10"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                tools:layout_editor_absoluteX="24dp">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5sp"
                     android:layout_gravity="center"
                     android:background="@drawable/solid_acount"
                     android:src="@drawable/ic_baseline_phone_enabled_24" />
@@ -203,13 +219,16 @@
                 android:id="@+id/lnl_out"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="20sp"
                 android:orientation="horizontal"
-                android:weightSum="10">
+                android:weightSum="10"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                tools:layout_editor_absoluteX="24dp">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5sp"
                     android:layout_gravity="center"
                     android:background="@drawable/solid_acount"
                     android:src="@drawable/ic_baseline_logout_power_24" />
@@ -233,10 +252,9 @@
                     android:layout_weight="8"
                     android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
                     android:padding="10dp" />
-
             </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
-</RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 

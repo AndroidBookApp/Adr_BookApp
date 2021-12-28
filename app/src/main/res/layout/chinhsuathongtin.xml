@@ -87,18 +87,13 @@
                             android:orientation="horizontal"
                             android:weightSum="10">
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                app:cardCornerRadius="28dp">
-
-                                <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/custom_ten"
-                                    android:src="@drawable/ic_tennguoidung" />
-                            </androidx.cardview.widget.CardView>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/solid_edit_acount"
+                                android:layout_gravity="center"
+                                android:padding="10sp"
+                                android:src="@drawable/ic_tennguoidung" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -160,18 +155,16 @@
                             android:orientation="horizontal"
                             android:weightSum="10">
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                app:cardCornerRadius="28dp">
+
 
                                 <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/solid_edit_acount"
                                     android:layout_gravity="center"
-                                    android:background="@drawable/custom_ten"
+                                    android:padding="10sp"
                                     android:src="@drawable/ic_username" />
-                            </androidx.cardview.widget.CardView>
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -233,18 +226,16 @@
                             android:orientation="horizontal"
                             android:weightSum="10">
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                app:cardCornerRadius="28dp">
+
 
                                 <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/solid_edit_acount"
                                     android:layout_gravity="center"
-                                    android:background="@drawable/custom_ten"
+                                    android:padding="10sp"
                                     android:src="@drawable/ic_giotinh" />
-                            </androidx.cardview.widget.CardView>
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -305,19 +296,13 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:weightSum="10">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                app:cardCornerRadius="28dp">
-
                                 <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/solid_edit_acount"
                                     android:layout_gravity="center"
-                                    android:background="@drawable/custom_ten"
+                                    android:padding="10sp"
                                     android:src="@drawable/ic_ngaysinh" />
-                            </androidx.cardview.widget.CardView>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -380,18 +365,16 @@
                             android:orientation="horizontal"
                             android:weightSum="10">
 
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                app:cardCornerRadius="28dp">
+
 
                                 <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/solid_edit_acount"
                                     android:layout_gravity="center"
-                                    android:background="@drawable/custom_ten"
+                                    android:padding="10sp"
                                     android:src="@drawable/ic_email" />
-                            </androidx.cardview.widget.CardView>
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -454,20 +437,13 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:weightSum="10">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                app:cardCornerRadius="28dp">
-
                                 <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/solid_edit_acount"
                                     android:layout_gravity="center"
-                                    android:background="@drawable/custom_ten"
+                                    android:padding="10sp"
                                     android:src="@drawable/ic_password" />
-                            </androidx.cardview.widget.CardView>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -557,10 +533,8 @@
                 android:layout_marginBottom="70dp"
                 android:background="@drawable/custom_circleavatar"
                 android:scaleType="centerCrop"
-
                 app:civ_border_width="2dp"
                 app:civ_circle_background_color="@color/color_chapter" />
-
             <ImageButton
                 android:id="@+id/picture_anhdaidien"
                 android:layout_width="48dp"

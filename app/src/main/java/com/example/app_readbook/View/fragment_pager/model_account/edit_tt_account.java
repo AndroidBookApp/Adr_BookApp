@@ -23,7 +23,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -68,7 +67,6 @@ public class edit_tt_account extends AppCompatActivity {
     private CircleImageView avatar;
     private ImageButton btnAnhDaiDien, btnAnhBia;
     private Button button;
-    private LinearLayout layoutEdit, layout_userName, layoutRound, layoutDate;
     private static int SELECT_PHOTO = 100;
     private ImageView IMGPAGE, edit_username, edit_name, edit_password, edit_round, edit_date, edit_email;
     private Uri mUri, mUri1;

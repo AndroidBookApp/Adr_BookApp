@@ -152,10 +152,8 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                         if (response.isSuccessful() && favoriteDeleteData!=null) {
                             if (favoriteDeleteData.getSuccess().equals("like")) {
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-                                DataManager.Favorite(favorite, idmember);
                                 Toast.makeText(context, "Thích", Toast.LENGTH_SHORT).show();
                             } else if (favoriteDeleteData.getSuccess().equals("unlike")) {
-                                DataManager.Favorite(favorite, idmember);
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
                                 Toast.makeText(context, "Bỏ Thích", Toast.LENGTH_SHORT).show();
                             }

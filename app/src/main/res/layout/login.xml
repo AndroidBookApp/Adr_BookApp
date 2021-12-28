@@ -139,6 +139,8 @@
                         <CheckBox
                             android:id="@+id/checkbox"
                             android:layout_width="273dp"
+                            android:button="@null"
+                            android:drawableStart="@drawable/custom_checkbox"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Lưu mật khẩu" />

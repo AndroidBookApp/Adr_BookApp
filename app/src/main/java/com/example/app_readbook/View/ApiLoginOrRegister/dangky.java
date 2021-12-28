@@ -13,6 +13,8 @@ import android.text.style.UnderlineSpan;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,8 +35,9 @@ public class dangky extends AppCompatActivity {
     EditText txt_pass;
     EditText txt_email;
     EditText txt_pass_1;
-    Button register , login;
+    Button register , login , no_register;
     TextView tvFocus;
+    private CheckBox check_box;
     String name , email , pass , pass_1 , quyen;
     private ProgressBar progressBar;
     RegisterViewModel registerViewModel;
@@ -45,49 +48,9 @@ public class dangky extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dangky);
-        AnhXa();
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
+        AnhXa();
         iniViewModel();
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog.show();
-//                register.setVisibility(View.GONE);
-                name = txt_name.getText().toString().trim();
-                email = txt_email.getText().toString().trim();
-                pass = txt_pass.getText().toString().trim();
-                pass_1 = txt_pass_1.getText().toString().trim();
-                if (!name.isEmpty() && !email.isEmpty() && !pass.isEmpty() && !pass_1.isEmpty()) {
-                    if (pass.length() > 6 && pass_1.length() > 6) {
-                        if (pass.equals(pass_1)) {
-                            if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                                // mặc định quyền use = 2
-                                quyen = "2";
-                                registerViewModel.initRegister(name  ,pass, email , quyen);
-                            }
-                            else {
-                                progressDialog.dismiss();
-                                Toast.makeText(dangky.this, "Email không chính xác", Toast.LENGTH_SHORT).show();
-
-                            }
-                        }
-                        else {
-                            progressDialog.dismiss();
-                            Toast.makeText(dangky.this, "Mật khẩu xác nhận không chính xác", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }else {
-                        Toast.makeText(dangky.this, "Mật khẩu phải dài hơn 6 ký tự", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                } else {
-                    Toast.makeText(dangky.this, "Vui lòng nhập thông tin chính ", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
-
-            }
-        });
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +59,6 @@ public class dangky extends AppCompatActivity {
             }
         });
     }
-
     private void iniViewModel() {
         registerViewModel.getUser().observe(this, new Observer<User>() {
             @Override
@@ -135,6 +97,60 @@ public class dangky extends AppCompatActivity {
         txt_email = findViewById(R.id.email);
         register = findViewById(R.id.btn_dangky);
         login = findViewById(R.id.dangNhap);
+        no_register = findViewById(R.id.btn_no_dangky);
+        check_box = findViewById(R.id.check_box);
+        check_box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (check_box.isChecked())
+                {
+                    register.setVisibility(View.VISIBLE);
+                    no_register.setVisibility(View.GONE);
+                    register.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            progressDialog.show();
+//                register.setVisibility(View.GONE);
+                            name = txt_name.getText().toString().trim();
+                            email = txt_email.getText().toString().trim();
+                            pass = txt_pass.getText().toString().trim();
+                            pass_1 = txt_pass_1.getText().toString().trim();
+                            if (!name.isEmpty() && !email.isEmpty() && !pass.isEmpty() && !pass_1.isEmpty()) {
+                                if (pass.length() > 6 && pass_1.length() > 6) {
+                                    if (pass.equals(pass_1)) {
+                                        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                                            // mặc định quyền use = 2
+                                            quyen = "2";
+                                            registerViewModel.initRegister(name  ,pass, email , quyen);
+                                        }
+                                        else {
+                                            progressDialog.dismiss();
+                                            Toast.makeText(dangky.this, "Email không chính xác", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                    else {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(dangky.this, "Mật khẩu xác nhận không chính xác", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }else {
+                                    Toast.makeText(dangky.this, "Mật khẩu phải dài hơn 6 ký tự", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                }
+                            } else {
+                                Toast.makeText(dangky.this, "Vui lòng nhập thông tin chính ", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                            }
+                        }
+                    });
+                }
+                else  if (!check_box.isChecked()){
+                    register.setVisibility(View.GONE);
+                    no_register.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
     @Override
     protected void onStart() {
