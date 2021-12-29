@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
+import com.example.app_readbook.Class.TachText;
 import com.example.app_readbook.View.View_Readbook.View_ReadBook;
 import com.example.app_readbook.ViewModel.Service.ApiInterface;
 import com.example.app_readbook.ViewModel.Service.ApiService;
@@ -32,9 +33,9 @@ import retrofit2.Response;
 public class BookAdaptor extends RecyclerView.Adapter<BookAdaptor.BookViewHodel> {
     private ArrayList<Sach> sachList;
     private Context mContext;
-
+    private TachText tachText;
     public home home;
-
+String text;
     public BookAdaptor(ArrayList<Sach> sachList, Context mContext) {
         this.sachList = sachList;
         this.mContext = mContext;
@@ -46,8 +47,6 @@ public class BookAdaptor extends RecyclerView.Adapter<BookAdaptor.BookViewHodel>
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_listbookmain, parent, false);
         return new BookViewHodel(view);
     }
-
-
     @SuppressLint("CheckResult")
     @Override
     public void onBindViewHolder(@NonNull BookViewHodel holder, int position) {
@@ -55,11 +54,17 @@ public class BookAdaptor extends RecyclerView.Adapter<BookAdaptor.BookViewHodel>
         if (sach == null) {
             return;
         }
-
         Glide.with(mContext).load(sach.getImgSach()).into(holder.imageBook);
         holder.txtTitle.setText(sach.getTensach());
         holder.txtTacgia.setText(sach.getTacgia());
-        holder.tomtat.setText(sach.getTomtatND());
+        // tóm tắt nội dung
+        tachText = new TachText();
+        // truyền vô
+        text = sach.getTomtatND();
+        // gán giá trị
+        text = tachText.tach(text);
+        // truyền giá trị vừa gán vào text
+        holder.tomtat.setText(text);
         holder.img_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

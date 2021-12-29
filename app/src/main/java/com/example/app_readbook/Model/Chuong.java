@@ -15,26 +15,12 @@ public class Chuong  implements Serializable {
     @SerializedName("TenChuong")
     @Expose
     private String tenChuong;
-    @SerializedName("Sotrang")
-    @Expose
-    private String sotrang;
-    @SerializedName("IdChitietsach")
-    @Expose
-    private String idChitietsach;
-    @SerializedName("Noidung")
+    @SerializedName("noidung")
     @Expose
     private String noidung;
     @SerializedName("imgSach")
     @Expose
     private String imgSach;
-
-    public String getImgSach() {
-        return imgSach;
-    }
-
-    public void setImgSach(String imgSach) {
-        this.imgSach = imgSach;
-    }
 
     public String getIdChuong() {
         return idChuong;
@@ -60,22 +46,6 @@ public class Chuong  implements Serializable {
         this.tenChuong = tenChuong;
     }
 
-    public String getSotrang() {
-        return sotrang;
-    }
-
-    public void setSotrang(String sotrang) {
-        this.sotrang = sotrang;
-    }
-
-    public String getIdChitietsach() {
-        return idChitietsach;
-    }
-
-    public void setIdChitietsach(String idChitietsach) {
-        this.idChitietsach = idChitietsach;
-    }
-
     public String getNoidung() {
         return noidung;
     }
@@ -83,4 +53,13 @@ public class Chuong  implements Serializable {
     public void setNoidung(String noidung) {
         this.noidung = noidung;
     }
+
+    public String getImgSach() {
+        return imgSach;
+    }
+
+    public void setImgSach(String imgSach) {
+        this.imgSach = imgSach;
+    }
+
 }

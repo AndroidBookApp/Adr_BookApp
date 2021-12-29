@@ -1,6 +1,5 @@
 package com.example.app_readbook.View.onboarding;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.app_readbook.View.ApiLoginOrRegister.dangnhap;
 import com.example.app_readbook.R;
 
 
@@ -68,14 +66,7 @@ private View mview;
                              Bundle savedInstanceState) {
 
        mview = inflater.inflate(R.layout.fragment_onboarding_one, container , false);
-       btnstart = mview.findViewById(R.id.btn_start);
-        btnstart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent( getActivity(), dangnhap.class);
-                getActivity().startActivity(intent);
-            }
-        });
+
         return mview;
     }
 }

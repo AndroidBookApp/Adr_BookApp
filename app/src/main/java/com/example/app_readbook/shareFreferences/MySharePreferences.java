@@ -51,15 +51,14 @@ public class MySharePreferences {
         editor.putString("idChuong" , value);
         editor.putString("TenChuong" , value);
         editor.putString("idSach" , value);
-        editor.putString("IdChitietsach" , value);
-        editor.putString("Sotrang" , value);
+        editor.putString("noidung" , value);
         editor.apply();
     }
     //Lấy dữ liệu ra khi đã lưu vào
     public String getChapter(String key)
     {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_CHAPTER , Context.MODE_PRIVATE);
-        return sharedPreferences.getString("idChuong" , "");
+        return sharedPreferences.getString("idChuong" , null);
     }
     public String saveLoginUser(String key) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(SHARE_LOGIN_USER, Context.MODE_PRIVATE);
@@ -111,7 +110,7 @@ public class MySharePreferences {
         editor.putString("TomtatND", valueSach);
         editor.putString("Luotxem", valueSach);
         editor.putString("Feedback", valueSach);
-        editor.putString("Sotrang", valueSach);
+        editor.putString("sochuong", valueSach);
         editor.putString("Favorite", valueSach);
         editor.putString("IdChitietsach", valueSach);
         editor.apply();

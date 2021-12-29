@@ -4,7 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -20,21 +20,15 @@ private Button button;
 private ViewPager viewPager;
 private View view;
 private CircleIndicator circleIndicator;
-private LinearLayout relativeLayout1;
-private LinearLayout relativeLayout2;
-private LinearLayout linearLayout;
+private ImageView img_bg;
 public static final String SAVE_OPEN_APP = "SAVE_OPEN_APP";
 private com.example.app_readbook.View.onboarding.viewpager_onboarding viewpager_onboarding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initUI();
         viewpager_onboarding = new viewpager_onboarding(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        relativeLayout1 = findViewById(R.id.background_1);
-        relativeLayout2 = findViewById(R.id.background_2);
-        linearLayout = findViewById(R.id.logo);
         viewPager.setAdapter(viewpager_onboarding);
         circleIndicator.setViewPager(viewPager);
         statusbar();
@@ -49,18 +43,11 @@ private com.example.app_readbook.View.onboarding.viewpager_onboarding viewpager_
                 if(position == 2)
                 {
                     button.setVisibility(View.GONE);
-                    relativeLayout1.setVisibility(View.GONE);
-                    relativeLayout2.setVisibility(View.GONE);
-                    linearLayout.setVisibility(View.GONE);
-
-
                 }
                 else
                 {
                     button.setVisibility(View.VISIBLE);
-                    relativeLayout1.setVisibility(View.VISIBLE);
-                    relativeLayout2.setVisibility(View.VISIBLE);
-                    linearLayout.setVisibility(View.VISIBLE);
+
 
                 }
             }

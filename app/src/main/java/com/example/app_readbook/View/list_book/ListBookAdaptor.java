@@ -23,6 +23,7 @@ import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.Model.listFavorite;
 import com.example.app_readbook.R;
+import com.example.app_readbook.Class.TachText;
 import com.example.app_readbook.View.View_Readbook.View_ReadBook;
 import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
 import com.example.app_readbook.ViewModel.Service.ApiInterface;
@@ -41,7 +42,8 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
     private List<Sach> mSach;
     private Context context;
     public Main_ListBook main_listBook;
-    String idmember, idBook , iduser , idsach;
+    String idmember, idBook , text;
+    private TachText tachText;
     boolean favorite = false;
     private List<com.example.app_readbook.Model.favorite> mListFavorite;
     AddFavoriteViewModel favoriteViewModel;
@@ -77,9 +79,15 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         holder.tv_tacgia.setText(sach.getTacgia());
         holder.comment.setText(sach.getFeedback());
         holder.textView.setText(sach.getLuotxem());
-        holder.page.setText(sach.getSotrang());
-        holder.tomtatND.setText(sach.getTomtatND());
-//        favorite = DataManager.LFavorite();
+        holder.page.setText(sach.getSochuong());
+        //
+        tachText = new TachText();
+        // truyền vô
+        text = sach.getTomtatND();
+        // gán giá trị
+        text = tachText.tach(text);
+        // truyền vào tách
+        holder.tomtatND.setText(text);
         //load dữ liệu vào icon
         ApiInterface apiInterface = ApiService.apiInterface();
         Glide.with(context).
@@ -101,7 +109,6 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                         String id  = listFavorite.getIdSach();
                         if(idSach.equals(id))
                         {
-                            Log.e("AAA" , id);
                             holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
 
                         }

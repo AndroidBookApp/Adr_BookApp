@@ -34,10 +34,11 @@
                 android:layout_marginEnd="20sp"
                 android:layout_marginBottom="20dp"
                 android:autoSizeTextType="uniform"
-                android:fontFamily="@font/helveticaneue"
+                android:fontFamily="@font/nunitosansbold"
                 android:gravity="fill"
+                android:text="igigiggi"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 tools:ignore="UnusedAttribute" />
         </RelativeLayout>
     </ScrollView>

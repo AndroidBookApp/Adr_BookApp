@@ -1,35 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/btn_navigation"
+    android:background="@color/white"
     tools:context=".View.onboarding.Onboarding_View">
+
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/bar"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/btn_navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.084"
+        tools:ignore="MissingConstraints" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:elevation="5dp"
-        app:lottie_autoPlay="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image_book"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ProgressBar
-        android:id="@+id/bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:layout_marginBottom="203dp" />
+        android:layout_centerInParent="true"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.244"
+        app:lottie_autoPlay="true"
+        app:srcCompat="@drawable/image_book"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -37,15 +45,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+
 
         android:drawablePadding="20dp"
         android:fontFamily="@font/helveticaneue_bold"
         android:gravity="center"
         android:text="ANDROID APP"
-        android:textColor="@color/white"
-        android:textSize="25dp" />
-</RelativeLayout>
+        android:textColor="@color/title_book"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bar"
+        app:layout_constraintVertical_bias="0.764" />
+</androidx.constraintlayout.widget.ConstraintLayout>

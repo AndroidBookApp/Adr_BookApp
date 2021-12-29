@@ -16,9 +16,9 @@ public class chitietsach {
     @SerializedName("Feedback")
     @Expose
     private String feedback;
-    @SerializedName("Sotrang")
+    @SerializedName("sochuong")
     @Expose
-    private String sotrang;
+    private String sochuong;
     @SerializedName("Favorite")
     @Expose
     private String favorite;
@@ -55,12 +55,12 @@ public class chitietsach {
         this.feedback = feedback;
     }
 
-    public String getSotrang() {
-        return sotrang;
+    public String getSochuong() {
+        return sochuong;
     }
 
-    public void setSotrang(String sotrang) {
-        this.sotrang = sotrang;
+    public void setSochuong(String sochuong) {
+        this.sochuong = sochuong;
     }
 
     public String getFavorite() {

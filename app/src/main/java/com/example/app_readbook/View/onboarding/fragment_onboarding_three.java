@@ -47,7 +47,6 @@ private Button btn_dangky;
         mview = inflater.inflate(R.layout.fragment_onboarding_three, container, false);
         btn_dangnhap=mview.findViewById(R.id.btn_login);
         btn_dangky = mview.findViewById(R.id.btn_dki);
-
         btn_dangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

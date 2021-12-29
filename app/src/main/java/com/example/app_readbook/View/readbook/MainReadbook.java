@@ -8,6 +8,7 @@ import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,7 +16,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
-
+import com.example.app_readbook.Class.CustomProgessDialog;
 import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
@@ -31,35 +32,42 @@ public class MainReadbook extends AppCompatActivity {
     private Chuong chuongList;
     private Sach sach;
     private Toolbar toolbar;
-    String idChuong, idSach ;
+    String tenChuong, idSach ;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch aSwitch;
     boolean isDark;
     private RelativeLayout layout;
     private VerticalViewPager verticalViewPager;
     private SelectChapterViewModel selectChapterViewModel;
-
+    private CustomProgessDialog customProgessDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.readbook_chapter);
         iniU();
-        sach = DataManager.loadObjectSach();
+        customProgessDialog = new CustomProgessDialog(MainReadbook.this);
+        customProgessDialog.show();
+        selectChapterViewModel = new ViewModelProvider(this).get(SelectChapterViewModel.class);
         chuongList = DataManager.lChapter();
-        idChuong = chuongList.getIdChuong();
+        if(chuongList!=null)
+        {
+            txt_book.setText(chuongList.getTenChuong());
+        }
+        sach = DataManager.loadObjectSach();
         idSach = sach.getIdSach();
         read.setText(sach.getTensach());
         BackView();
-        selectChapterViewModel = new ViewModelProvider(this).get(SelectChapterViewModel.class);
         selectChapterViewModel.getListChuong().observe(this, new Observer<List<Chuong>>() {
             @Override
             public void onChanged(List<Chuong> chuongs) {
-                chapters = chuongs;
-
+                chapters =  chuongs;
                 if (chapters!=null)
                 {
-                    DataReadBook(isDark);
-                    txt_book.setText(chuongList.getTenChuong());
+                    customProgessDialog.dismiss();
+                    DataReadBook();
+                }
+                else {
+                    Toast.makeText(MainReadbook.this, "Sách chưa có dữ liệu", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -93,14 +101,15 @@ public class MainReadbook extends AppCompatActivity {
                 }else{
                     layout.setBackgroundColor(getResources().getColor(R.color.white));
                 }
-                    DataReadBook(isDark);
+                    DataReadBook();
 
             }
         });
 
+
     }
-    private void DataReadBook(boolean isDark) {
-        ReadbookAdaptor readbookAdaptor = new ReadbookAdaptor(getSupportFragmentManager() , FragmentStatePagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT , chapters , isDark);
+    private void DataReadBook() {
+        ReadbookAdaptor readbookAdaptor = new ReadbookAdaptor(getSupportFragmentManager() , FragmentStatePagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT , chapters , isDark ,tenChuong);
         verticalViewPager.setAdapter(readbookAdaptor);
         verticalViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -114,10 +123,11 @@ public class MainReadbook extends AppCompatActivity {
                 {
                     btn_back.setVisibility(View.GONE);
                     btn_next.setVisibility(View.VISIBLE);
+                    btn_back.setBackgroundColor(getResources().getColor(R.color.line));
                 } else if (position == chapters.size() - 1)
                 {
                     btn_back.setVisibility(View.VISIBLE);
-                    btn_next.setVisibility(View.GONE);
+                    btn_next.setBackgroundColor(getResources().getColor(R.color.line));
                 } else {
                     btn_back.setVisibility(View.VISIBLE);
                     btn_next.setVisibility(View.VISIBLE);

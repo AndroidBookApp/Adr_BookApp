@@ -37,9 +37,9 @@ public class Sach implements Serializable {
     @SerializedName("Feedback")
     @Expose
     private String feedback;
-    @SerializedName("Sotrang")
+    @SerializedName("sochuong")
     @Expose
-    private String sotrang;
+    private String sochuong;
     @SerializedName("Favorite")
     @Expose
     private String favorite;
@@ -127,12 +127,12 @@ public class Sach implements Serializable {
         this.feedback = feedback;
     }
 
-    public String getSotrang() {
-        return sotrang;
+    public String getSochuong() {
+        return sochuong;
     }
 
-    public void setSotrang(String sotrang) {
-        this.sotrang = sotrang;
+    public void setSochuong(String sochuong) {
+        this.sochuong = sochuong;
     }
 
     public String getFavorite() {
@@ -149,24 +149,5 @@ public class Sach implements Serializable {
 
     public void setIdChitietsach(String idChitietsach) {
         this.idChitietsach = idChitietsach;
-    }
-
-    @Override
-    public String toString() {
-        return "Sach{" +
-                "idSach='" + idSach + '\'' +
-                ", idDanhmuc='" + idDanhmuc + '\'' +
-                ", imgSach='" + imgSach + '\'' +
-                ", tensach='" + tensach + '\'' +
-                ", tacgia='" + tacgia + '\'' +
-                ", nxb='" + nxb + '\'' +
-                ", ngayDang='" + ngayDang + '\'' +
-                ", tomtatND='" + tomtatND + '\'' +
-                ", luotxem='" + luotxem + '\'' +
-                ", feedback='" + feedback + '\'' +
-                ", sotrang='" + sotrang + '\'' +
-                ", favorite='" + favorite + '\'' +
-                ", idChitietsach='" + idChitietsach + '\'' +
-                '}';
     }
 }

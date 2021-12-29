@@ -1,259 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/start"
     tools:context=".View.ApiLoginOrRegister.dangnhap">
 
-    <ScrollView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:fitsSystemWindows="true"
-        >
+        android:layout_height="0dp"
+        android:src="@drawable/solid_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt" />
 
-        <RelativeLayout
-            android:id="@+id/rlt"
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="230dp"
+        android:layout_height="152dp"
+        android:layout_marginEnd="-15dp"
+        android:background="@drawable/img_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="112dp"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:text="Đăng Nhập"
+        android:textColor="@color/black"
+        android:textSize="32dp"
+        android:textStyle="bold"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:id="@+id/lo2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt">
+
+        <EditText
+            android:id="@id/user"
+            android:layout_width="280dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/color_edittext"
+            android:drawableStart="@drawable/ic_account_focused"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="Tài Khoản"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:textColorHint="@color/text"
+            android:textSize="15dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lo_txt"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/start">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:passwordToggleEnabled="true">
 
-            <LinearLayout
-                android:id="@+id/lo10"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_pass"
+                android:layout_width="280dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/color_edittext"
+                android:drawableStart="@drawable/lock_focused"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Mật Khẩu"
+                android:inputType="textPassword"
+                android:paddingStart="10dp"
+                android:textColorHint="@color/text"
+                android:textSize="15dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/tv_forgetPass"
+                android:layout_width="275dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
 
-                <ImageView
-                    android:id="@+id/img_1"
-                    android:layout_width="230dp"
-                    android:layout_height="152dp"
-                    android:background="@drawable/icon_bgg" />
+                android:layout_marginTop="5dp"
 
-            </LinearLayout>
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="right"
+                android:text="Quên mật khẩu?"
+                android:textColor="@color/btn_navigation" />
 
-            <RelativeLayout
-                android:id="@+id/lo1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/lo10"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="0dp"
-                android:background="@drawable/solid_login">
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="273dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:button="@null"
+                android:drawableStart="@drawable/custom_checkbox"
+                android:text="Lưu mật khẩu" />
 
 
-                <TextView
-                    android:id="@+id/txt"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginEnd="0dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:text="Đăng Nhập"
-                    android:textColor="@color/black"
-                    android:textSize="32dp"
-                    android:textStyle="bold" />
+        </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/lo2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/txt"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="40dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/color_btn"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Đăng Nhập"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@id/user"
-                        android:layout_width="280dp"
-                        android:layout_height="48dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/color_edittext"
-                        android:drawableStart="@drawable/ic_account_focused"
-                        android:drawablePadding="10dp"
-                        android:fontFamily="@font/roboto_regular"
-                        android:hint="Tài Khoản"
-                        android:inputType="text"
-                        android:paddingStart="10dp"
-                        android:textColorHint="@color/text"
-                        android:textSize="15dp"
-                        tools:ignore="SpeakableTextPresentCheck" />
+    </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/lo_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        app:passwordToggleEnabled="true">
+    <LinearLayout
+        android:id="@+id/lo3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lo5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lo5">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txt_pass"
-                            android:layout_width="280dp"
-                            android:layout_height="48dp"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="20dp"
-                            android:background="@drawable/color_edittext"
-                            android:drawableStart="@drawable/lock_focused"
-                            android:drawablePadding="10dp"
-                            android:fontFamily="@font/roboto_regular"
-                            android:hint="Mật Khẩu"
-                            android:inputType="textPassword"
-                            android:paddingStart="10dp"
-                            android:textColorHint="@color/text"
-                            android:textSize="15dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="135dp"
+            android:layout_height="44dp" />
 
+        <Button
+            android:id="@+id/btn_facebook"
+            android:layout_width="135dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/custom_btn_facebook"
+            android:drawableStart="@drawable/ic_icon_facebook"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Facebook"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:weightSum="10">
+    <LinearLayout
+        android:id="@+id/lo9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lo3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:padding="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lo3"
+        app:layout_constraintVertical_bias="0.202">
 
-                        <TextView
-                            android:id="@+id/tv_forgetPass"
-                            android:layout_width="275dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
+        <Button
+            android:id="@+id/dangky"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:background="@drawable/stoker_btn"
+            android:fontFamily="@font/roboto_medium"
+            android:text="ĐĂNG KÝ"
+            android:textColor="@color/btn_color"
+            android:textSize="18dp" />
+    </LinearLayout>
 
-                            android:layout_marginTop="5dp"
+    <LinearLayout
+        android:id="@+id/lo5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lo2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lo2">
 
-                            android:fontFamily="@font/roboto_bold"
-                            android:gravity="right"
-                            android:text="Quên mật khẩu?"
-                            android:textColor="@color/btn_navigation" />
+        <View
 
-                        <CheckBox
-                            android:id="@+id/checkbox"
-                            android:layout_width="273dp"
-                            android:button="@null"
-                            android:drawableStart="@drawable/custom_checkbox"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Lưu mật khẩu" />
+            android:layout_width="112dp"
+            android:layout_height="1.5dp"
+            android:layout_gravity="center"
+            android:background="@color/line" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Hoặc"
+            android:textColor="@color/line"
+            android:textSize="14dp" />
 
-                    </LinearLayout>
+        <View
+            android:layout_width="112dp"
+            android:layout_height="1.5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:background="@color/line" />
+    </LinearLayout>
 
-                    <Button
-                        android:id="@+id/btn_login"
-                        android:layout_width="280dp"
-                        android:layout_height="50dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="30dp"
-                        android:background="@drawable/color_btn"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="Đăng Nhập"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lo3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/lo5"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:weightSum="10"
-                    android:orientation="horizontal">
-
-                    <com.google.android.gms.common.SignInButton
-                        android:id="@+id/sign_in_button"
-                        android:layout_width="135dp"
-                        android:layout_height="44dp" />
-                    <Button
-                        android:id="@+id/btn_facebook"
-                        android:layout_width="135dp"
-                        android:layout_height="44dp"
-                        android:layout_marginStart="5dp"
-                        android:background="@drawable/custom_btn_facebook"
-                        android:drawableStart="@drawable/ic_icon_facebook"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:textSize="16dp"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="Facebook"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lo9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/lo3"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginBottom="-2dp"
-                    android:gravity="center"
-                    android:padding="20dp">
-
-                    <Button
-                        android:id="@+id/dangky"
-                        android:layout_width="280dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/stoker_btn"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="ĐĂNG KÝ"
-                        android:textColor="@color/btn_color"
-                        android:textSize="18dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lo5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/lo2"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <View
-
-                        android:layout_width="112dp"
-                        android:layout_height="1.5dp"
-                        android:layout_gravity="center"
-                        android:background="@color/line" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
-                        android:text="Hoặc"
-                        android:textColor="@color/line"
-                        android:textSize="14dp" />
-
-                    <View
-                        android:layout_width="112dp"
-                        android:layout_height="1.5dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="2dp"
-                        android:background="@color/line" />
-                </LinearLayout>
-            </RelativeLayout>
-        </RelativeLayout>
-
-    </ScrollView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

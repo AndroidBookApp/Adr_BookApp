@@ -16,6 +16,7 @@ import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.favorite;
 import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.R;
+import com.example.app_readbook.Class.TachText;
 import com.example.app_readbook.View.View_Readbook.View_ReadBook;
 import com.example.app_readbook.ViewModel.Service.ApiInterface;
 import com.example.app_readbook.ViewModel.Service.ApiService;
@@ -33,7 +34,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
     private Sach sach;
     favorite listFavorite;
     private favoriteDeleteData favoriteDeleteData;
-    String idMember, idSach;
+    String idMember, idSach , text;
+    private TachText tachText;
     String success;
     private IClickDeleteFavorite iClickDeleteFavorite;
 
@@ -67,16 +69,18 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
 
             return;
         }
-        if(mlist.size() == 0)
-        {
-            holder.thongbao.setText("Không Có Sách Nào Trong Thư Viện");
-            holder.thongbao.setVisibility(View.VISIBLE);
-        }
-        holder.thongbao.setVisibility(View.GONE);
+
         Picasso.get().load(listFavorite.getImgSach()).into(holder.mBook);
         holder.tv_1.setText(listFavorite.getTensach());
         holder.tv_2.setText(listFavorite.getTacgia());
         holder.tomtat.setText(listFavorite.getTomtatND());
+        tachText = new TachText();
+        // truyền vô
+        text = listFavorite.getTomtatND();
+        // gán giá trị
+        text = tachText.tach(text);
+        // truyền vào tách
+        holder.tomtat.setText(text);
         idSach = mlist.get(position).getIdSach();
         idMember = mlist.get(position).getIdMember();
         holder.mIcon.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +129,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
         private TextView tv_2;
         private ImageView mIcon , bg;
         private ImageView mBook;
-        private TextView tomtat , thongbao;
+        private TextView tomtat ;
 
         public SearchViewHodel(@NonNull View itemView) {
             super(itemView);
@@ -134,7 +138,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Search
             mBook = itemView.findViewById(R.id.sach);
             mIcon = itemView.findViewById(R.id.icon_clear);
             tomtat = itemView.findViewById(R.id.tomtatND);
-            thongbao = itemView.findViewById(R.id.tv_thongbao);
+
             bg = itemView.findViewById(R.id.imageView2);
         }
     }

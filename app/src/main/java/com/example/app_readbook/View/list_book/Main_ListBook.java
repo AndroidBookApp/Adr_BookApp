@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.app_readbook.Class.CustomProgessDialog;
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
@@ -43,11 +44,14 @@ public class Main_ListBook extends AppCompatActivity {
     AddFavoriteViewModel addFavoriteViewModel;
     MainListBookViewModel mainListBookViewModel;
     AddViewBookViewModel addViewBookViewModel;
+    private CustomProgessDialog customProgessDialog;
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_list_book);
+        customProgessDialog = new CustomProgessDialog(Main_ListBook.this);
+        customProgessDialog.show();
         iniAnhXa();
         BackView();
         LoadDanhMuc();
@@ -66,6 +70,7 @@ public class Main_ListBook extends AppCompatActivity {
         layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 LoadDanhMuc();
                 layout.setRefreshing(false);
             }
@@ -107,6 +112,7 @@ public class Main_ListBook extends AppCompatActivity {
             public void onChanged(List<Sach> saches) {
                 danhMucSaches = saches;
                 if (danhMucSaches != null) {
+                    customProgessDialog.dismiss();
                     loadData();
                 }
             }

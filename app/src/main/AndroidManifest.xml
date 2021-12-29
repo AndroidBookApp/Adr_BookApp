@@ -62,10 +62,6 @@
             android:name=".View.fragment_pager.model_account.Data_edit_name"
             android:exported="true" />
         <activity
-            android:name=".View.chapter.Main_Chapter"
-            android:exported="true"
-            android:parentActivityName=".View.View_Readbook.View_ReadBook" />
-        <activity
             android:name=".View.list_comment.Main_NodeReadBook"
             android:exported="true" />
         <activity
