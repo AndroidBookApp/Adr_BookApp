@@ -67,6 +67,7 @@ public class MainReadbook extends AppCompatActivity {
                     DataReadBook();
                 }
                 else {
+                    customProgessDialog.dismiss();
                     Toast.makeText(MainReadbook.this, "Sách chưa có dữ liệu", Toast.LENGTH_SHORT).show();
                 }
 
@@ -123,11 +124,10 @@ public class MainReadbook extends AppCompatActivity {
                 {
                     btn_back.setVisibility(View.GONE);
                     btn_next.setVisibility(View.VISIBLE);
-                    btn_back.setBackgroundColor(getResources().getColor(R.color.line));
                 } else if (position == chapters.size() - 1)
                 {
                     btn_back.setVisibility(View.VISIBLE);
-                    btn_next.setBackgroundColor(getResources().getColor(R.color.line));
+                    btn_next.setVisibility(View.GONE);
                 } else {
                     btn_back.setVisibility(View.VISIBLE);
                     btn_next.setVisibility(View.VISIBLE);
