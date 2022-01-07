@@ -1,5 +1,6 @@
 package com.example.app_readbook.View.fragment_pager.model_home;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,18 +18,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.app_readbook.View.DanhSachBookHome.NameBookAdaptor;
+import com.example.app_readbook.Class.CustomProgessDialog;
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
+import com.example.app_readbook.View.DanhSachBookHome.NameBookAdaptor;
+import com.example.app_readbook.View.fragment_pager.PhotoAdaptor;
+import com.example.app_readbook.View.list_book.Main_BookNew;
 import com.example.app_readbook.ViewModel.Service.ApiInterface;
 import com.example.app_readbook.ViewModel.Service.ApiService;
-import com.example.app_readbook.View.fragment_pager.PhotoAdaptor;
 import com.example.app_readbook.home;
-import com.example.app_readbook.View.list_book.Main_BookNew;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import me.relex.circleindicator.CircleIndicator3;
 import retrofit2.Call;
@@ -45,13 +48,13 @@ public class Home_fragment extends Fragment{
     private NameBookAdaptor nameBookAdaptor;
     private TextView list_bookNew;
     private LinearLayout layout_bookNew;
-    DanhMucSach danhMucSach;
     private RecyclerView recyclerView;
     int currentItem;
 
-
+    private ProgressDialog dialog;
     private  Handler mHandler ;
     private  Runnable mRunnable ;
+    CustomProgessDialog customProgessDialog;
     public Home_fragment() {
     }
     @Override
@@ -59,6 +62,8 @@ public class Home_fragment extends Fragment{
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_home_fragment, container, false);
         mHome = new home();
+        customProgessDialog = new CustomProgessDialog(Objects.requireNonNull(getContext()));
+        customProgessDialog.show();
         indicator = mView.findViewById(R.id.cr);
         list_bookNew = mView.findViewById(R.id.all_bookNew);
         view = mView.findViewById(R.id.view_2);
@@ -91,6 +96,7 @@ public class Home_fragment extends Fragment{
         mDanhMuc.enqueue(new Callback<List<DanhMucSach>>() {
             @Override
             public void onResponse(Call<List<DanhMucSach>> call, Response<List<DanhMucSach>> response) {
+                customProgessDialog.dismiss();
                 danhMucSaches = (ArrayList<DanhMucSach>) response.body();
                 nameBookAdaptor = new NameBookAdaptor(getActivity(),danhMucSaches);
                 recyclerView.setHasFixedSize(true);
@@ -106,10 +112,11 @@ public class Home_fragment extends Fragment{
     }
     private void getDataImg() {
         ApiInterface apiInterface = ApiService.apiInterface();
-        Call<List<Sach>> listCall = apiInterface.responseSach();
+        Call<List<Sach>> listCall = apiInterface.listsach();
         listCall.enqueue(new Callback<List<Sach>>() {
             @Override
             public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {
+
                 ArrayList<Sach> saches = (ArrayList<Sach>) response.body();
                 PhotoAdaptor photoAdaptor = new PhotoAdaptor(saches , getActivity());
                 view.setAdapter(photoAdaptor);

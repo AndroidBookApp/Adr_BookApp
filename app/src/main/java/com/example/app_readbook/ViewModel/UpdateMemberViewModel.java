@@ -15,40 +15,19 @@ import retrofit2.Response;
 public class UpdateMemberViewModel extends ViewModel {
     // khai báo
     public MutableLiveData<login> mUpdate;
-    public MutableLiveData<String> loadImage;
+
     public login mLogin;
-    public String upLoadImageService;
+
     public UpdateMemberViewModel() {
         mUpdate = new MutableLiveData<>();
-        loadImage = new MutableLiveData<>();
     }
     public MutableLiveData<login> getUpdate()
     {
         return mUpdate;
     }
-    public MutableLiveData<String> getLoadImage()
-    {
-        return loadImage;
-    }
-    public  void iniLoadImage(String anhdaidien , String anhbia)
-    {
-        ApiInterface apiInterface = ApiService.apiInterface();
-        Call<String> upLoad = apiInterface.UpdateFavorite(anhdaidien, anhbia);
-        upLoad.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if(response.isSuccessful())
-                {
 
-                }
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
 
-            }
-        });
-    }
     public void iniUpdateMember(String idMember , String username , String MemberName , String password , String email, String gioitinh , String ngaysinh , String anhdaidien ,String anhbia )
     {
         ApiInterface apiInterface = ApiService.apiInterface();

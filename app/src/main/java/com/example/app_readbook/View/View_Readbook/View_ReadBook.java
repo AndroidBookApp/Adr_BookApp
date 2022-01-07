@@ -140,8 +140,6 @@ public class View_ReadBook extends AppCompatActivity {
         favorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                idUser = user.getIdMember();
-//                idSach = sach.getIdSach();
                 loadFavorite();
                 favoriteViewModel.iniAddFavorite(idUser, idSach);
             }

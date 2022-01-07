@@ -1,50 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/roundedImageView3"
+        android:layout_width="150sp"
+        android:layout_height="200sp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sach_obr_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.272"
+        app:riv_corner_radius="20sp"
+        tools:ignore="MissingConstraints" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/roundedImageView"
+        android:layout_width="150sp"
+        android:layout_height="200sp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sach_obr_2_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.366"
+        app:riv_corner_radius="20sp"
+        tools:ignore="MissingConstraints" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/roundedImageView2"
+        android:layout_width="150sp"
+        android:layout_height="200sp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sach_onbr_2_3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.472"
+        app:riv_corner_radius="20sp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="168dp"
+        android:fontFamily="@font/hindsiliguri_bold"
         android:gravity="center"
-        tools:context=".View.onboarding.fragment_onboarding_two">
-        <RelativeLayout
-            android:layout_width="276dp"
-            android:layout_height="265dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/bg_rangle_3"
-           >
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_tab_onboarding" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center"
-                android:text="Android Book"
-                android:textColor="@color/white"
-                android:textSize="48dp" />
-
-            <TextView
-                android:layout_width="216dp"
-                android:layout_height="59dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="150dp"
-                android:fontFamily="@font/roboto_medium"
-                android:gravity="center"
-                android:text="Hệ thống đọc sách onlie
+        android:padding="20sp"
+        android:text="Hệ thống đọc sách onlie
 với hơn 1000 cuốn sách nổi tiếng
 đang đợi bạn khám phá"
-                android:textColor="@color/white" />
-        </RelativeLayout>
+        android:textColor="@color/color_text_onbrd"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roundedImageView2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
 
-
-    </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

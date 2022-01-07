@@ -23,6 +23,7 @@ import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.Model.listFavorite;
 import com.example.app_readbook.R;
+import com.example.app_readbook.Class.TachText;
 import com.example.app_readbook.View.View_Readbook.View_ReadBook;
 import com.example.app_readbook.ViewModel.Service.ApiInterface;
 import com.example.app_readbook.ViewModel.Service.ApiService;
@@ -38,7 +39,8 @@ import retrofit2.Response;
 public class BookNewAdaptor extends RecyclerView.Adapter<BookNewAdaptor.BookNewViewHolder>{
    private ArrayList<Sach> saches;
    private Context context;
-    String idmember , idBook;
+    String text , idmember , idBook;
+    private TachText tachText;
     private favoriteDeleteData favoriteDeleteData;
     public BookNewAdaptor(Context context, ArrayList<Sach> newList) {
         this.context = context;
@@ -66,10 +68,17 @@ public class BookNewAdaptor extends RecyclerView.Adapter<BookNewAdaptor.BookNewV
                 .into(holder.bookNew);
         holder.nameBookNew.setText(list_bookNew.getTensach());
         holder.tacGiaNew.setText(list_bookNew.getTacgia());
-        holder.TrangNew.setText(list_bookNew.getSotrang());
-        holder.tomtatND.setText(list_bookNew.getTomtatND());
+        holder.TrangNew.setText(list_bookNew.getSochuong());
         holder.view_new.setText(list_bookNew.getLuotxem());
         holder.comment_new.setText(list_bookNew.getFeedback());
+        //
+        tachText = new TachText();
+        // truyền vô
+        text = list_bookNew.getTomtatND();
+        // gán giá trị
+        text = tachText.tach(text);
+        // truyền vào tách
+        holder.tomtatND.setText(text);
         User user = DataManager.loadUser();
         idmember = user.getIdMember();
         idBook = saches.get(position).getIdSach();

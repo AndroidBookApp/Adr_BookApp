@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_readbook.Class.CustomProgessDialog;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.danhgia;
@@ -59,6 +60,7 @@ public class CommentFragment extends Fragment {
     User user;
     String load;
     AddCommentViewModel viewModel;
+    CustomProgessDialog customProgessDialog;
     public CommentFragment() {
         // Required empty public constructor
     }
@@ -72,6 +74,7 @@ public class CommentFragment extends Fragment {
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_comment, container, false);
         sach = new Sach();
+        customProgessDialog = new CustomProgessDialog(getActivity());
         user = DataManager.loadUser();
         sach = DataManager.loadObjectSach();
         iniUI();
@@ -87,12 +90,15 @@ public class CommentFragment extends Fragment {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                customProgessDialog.show();
                 String comments = comment.getText().toString().trim();
                 if(comments.isEmpty())
                 {
+                    customProgessDialog.dismiss();
                     Toast.makeText(getActivity(), "Bạn chưa nhập nhận xét", Toast.LENGTH_SHORT).show();
                 }else {
                     addComment();
+                    customProgessDialog.dismiss();
                     DataManager.saveDanhGia(danhgias);
                     DialogCommemt(Gravity.CENTER);
                 }
@@ -145,7 +151,9 @@ public class CommentFragment extends Fragment {
         viewModel.getAddComment().observe(this, new Observer<List<com.example.app_readbook.Model.danhgia>>() {
             @Override
             public void onChanged(List<com.example.app_readbook.Model.danhgia> danhgias) {
-                loadData(danhgias);
+                if(danhgias!=null) {
+                    loadData(danhgias);
+                }
             }
         });
         String danhgia = Objects.requireNonNull(comment.getText()).toString().trim();

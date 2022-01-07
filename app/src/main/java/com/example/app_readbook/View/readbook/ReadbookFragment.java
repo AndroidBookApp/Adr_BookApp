@@ -1,35 +1,36 @@
 package com.example.app_readbook.View.readbook;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.app_readbook.Model.Chuong;
-import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.R;
-import com.example.app_readbook.shareFreferences.DataManager;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 
 public class ReadbookFragment extends Fragment {
     public boolean isDark;
-    private Chuong chuongList;
-    private Sach sach;
+    public String name;
     private RelativeLayout layout;
-    String idChuong, idSach;
     private TextView textView ;
     private RoundedImageView img_book;
+    private ScrollView scrollView;
     public ReadbookFragment() {
 
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,10 +38,8 @@ public class ReadbookFragment extends Fragment {
         textView = mview.findViewById(R.id.txt_readBook);
         img_book = mview.findViewById(R.id.img_sach);
         layout = mview.findViewById(R.id.layout_dark);
-        sach = DataManager.loadObjectSach();
-        chuongList = DataManager.lChapter();
-        idChuong = chuongList.getIdChuong();
-        idSach = sach.getIdSach();
+
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             Chuong chapters = (Chuong) bundle.get("readBook_object");

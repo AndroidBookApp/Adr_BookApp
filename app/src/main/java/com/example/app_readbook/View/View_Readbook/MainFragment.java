@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
@@ -57,17 +58,22 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_main, container, false);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         view_readBook = new View_ReadBook();
         sach = new Sach();
         user = DataManager.loadUser();
         sach = DataManager.loadObjectSach();
         danhmuc = DataManager.loadObjectSach().getIdDanhmuc();
         iniUI();
-        loadDataCategory();
         loadFavorite();
+        loadDataCategory();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        mView = inflater.inflate(R.layout.fragment_main, container, false);
         return mView;
     }
     @SuppressLint("SetTextI18n")
@@ -100,6 +106,7 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MainReadbook.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                DataManager.saveObjectSach(sach);
                 startActivity(intent);
             }
         });

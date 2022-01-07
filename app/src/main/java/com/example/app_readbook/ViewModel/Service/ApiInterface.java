@@ -1,6 +1,5 @@
 package com.example.app_readbook.ViewModel.Service;
 
-import com.example.app_readbook.Model.Chapter;
 import com.example.app_readbook.Model.Chuong;
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
@@ -26,9 +25,6 @@ import retrofit2.http.Part;
 public interface ApiInterface {
 
     @GET("sach.php")
-    Call<List<Sach>> responseSach();
-
-    @GET("sach.php")
     Call<List<Sach>> listsach();
 
     @FormUrlEncoded
@@ -45,14 +41,6 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("comment.php")
     Call<List<danhgia>> AddComment(@Field("idMember") String idMember, @Field("idSach") String idSach, @Field("Noidung") String Noidung);
-
-    @FormUrlEncoded
-    @POST("chuong.php")
-    Call<List<Chuong>> LoadChuong(@Field("idSach") String idSach);
-
-    @FormUrlEncoded
-    @POST("thichsach.php")
-    Call<String> UpdateFavorite(@Field("idMember") String idMember, @Field("idSach") String idSach);
     @FormUrlEncoded
     @POST("thichsach.php")
     Call<favoriteDeleteData> UpdateFavorites(@Field("idMember") String idMember, @Field("idSach") String idSach);
@@ -78,9 +66,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("luotxemsach.php")
     Call<String> ViewReadBook(@Field("idSach") String idSach, @Field("Luotxem") String luotxem);
-    @FormUrlEncoded
-    @POST("noidungchuong.php")
-    Call<List<Chapter>> SelectChapter(@Field("idChuong") String idChuong , @Field("idSach") String idSach);
+
     @FormUrlEncoded
     @POST("showchuong.php")
     Call<List<Chuong>> SelectChapters(@Field("idSach") String idSach);

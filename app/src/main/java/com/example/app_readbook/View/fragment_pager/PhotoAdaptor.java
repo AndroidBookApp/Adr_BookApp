@@ -26,7 +26,6 @@ public class PhotoAdaptor extends RecyclerView.Adapter<PhotoAdaptor.PhotoViewHol
         this.context = context;
         notifyDataSetChanged();
     }
-
     public class PhotoViewHolder extends RecyclerView.ViewHolder
     {
         private RoundedImageView imageView;
@@ -42,10 +41,6 @@ public class PhotoAdaptor extends RecyclerView.Adapter<PhotoAdaptor.PhotoViewHol
         return new PhotoViewHolder(view);
 
     }
-
-
-
-
     @Override
     public void onBindViewHolder(@NonNull PhotoAdaptor.PhotoViewHolder holder, int position) {
         Sach pt = mList.get(position);

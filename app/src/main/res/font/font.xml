@@ -35,11 +35,26 @@
         tools:ignore="UnusedAttribute" />
     <font
         android:font="@font/helveticaneue"
-
         android:fontWeight="500"
         tools:ignore="UnusedAttribute" />
     <font
         android:font="@font/helveticaneue_bold"
+        android:fontWeight="700"
+        tools:ignore="UnusedAttribute" />
+    <font
+        android:font="@font/sourcesanspro_regular"
+        android:fontWeight="500"
+        tools:ignore="UnusedAttribute" />
+    <font
+        android:font="@font/sourcesanspro_bold"
+        android:fontWeight="700"
+        tools:ignore="UnusedAttribute" />
+    <font
+        android:font="@font/nunitosansregular"
+        android:fontWeight="500"
+        tools:ignore="UnusedAttribute" />
+    <font
+        android:font="@font/nunitosansbold"
         android:fontWeight="700"
         tools:ignore="UnusedAttribute" />
 </font-family>

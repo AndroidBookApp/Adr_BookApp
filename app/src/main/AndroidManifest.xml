@@ -2,14 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.app_readbook">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-
 
     <supports-screens
         android:largeScreens="true"
@@ -56,15 +53,11 @@
         <activity
             android:name=".View.readbook.MainReadbook"
             android:exported="true"
-            android:parentActivityName=".View.chapter.Main_Chapter">
+            android:parentActivityName=".View.View_Readbook.View_ReadBook">
         </activity>
         <activity
             android:name=".View.fragment_pager.model_account.Data_edit_name"
             android:exported="true" />
-        <activity
-            android:name=".View.chapter.Main_Chapter"
-            android:exported="true"
-            android:parentActivityName=".View.View_Readbook.View_ReadBook" />
         <activity
             android:name=".View.list_comment.Main_NodeReadBook"
             android:exported="true" />

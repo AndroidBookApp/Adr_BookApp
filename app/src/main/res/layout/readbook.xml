@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activityRoot"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar_readBook"
         android:background="@color/white"
@@ -14,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:elevation="0dp">
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_baseline_navigate_before_24"
@@ -23,70 +26,83 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:singleLine="true"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="24dp" />
+                android:textSize="18sp" />
+            <Switch
+                android:id="@+id/switch_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:thumb="@drawable/thumbar"
+                android:layout_marginEnd="5sp"
+                android:padding="5sp"
+                android:track="@drawable/track_selector"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
+    <com.example.app_readbook.View.readbook.VerticalViewPager
+        android:id="@+id/view_pager_read"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/lo2"
-        android:layout_below="@id/toolbar_readBook" />
+
+        android:layout_below="@id/toolbar_readBook"
+        tools:ignore="ScrollViewSize" />
 
     <LinearLayout
         android:id="@+id/lo2"
         android:layout_width="match_parent"
         android:layout_height="83dp"
+        android:layout_marginBottom="20sp"
         android:layout_alignParentBottom="true"
-        android:background="@color/background_color"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:background="@drawable/color_btn"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/before"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/ic_baseline_navigate_before1_24" />
+        <RelativeLayout
+            android:padding="5sp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txt1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bold"
+            <ImageView
+                android:id="@+id/before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10sp"
 
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+                android:src="@drawable/ic_baseline_navigate_before1_24" />
 
-        <TextView
-            android:id="@+id/txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bold"
-            android:padding="5dp"
-            android:text="/"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/next"
 
-        <TextView
-            android:id="@+id/txt2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bold"
+                android:layout_toEndOf="@+id/before"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
-            android:textColor="@color/black"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:background="@drawable/ic_baseline_navigate_next1_24" />
+            <ImageView
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10sp"
+                android:src="@drawable/ic_baseline_navigate_next1_24" />
+        </RelativeLayout>
     </LinearLayout>
+
 </RelativeLayout>
