@@ -16,11 +16,15 @@ public class ReadbookAdaptor extends FragmentStatePagerAdapter {
   private boolean isDark;
 private String name;
 
-    public ReadbookAdaptor(@NonNull FragmentManager fm, int behavior , List<Chuong> nameList ,boolean isDark , String name) {
+    public ReadbookAdaptor(@NonNull FragmentManager fm, int behavior , List<Chuong> nameList  , boolean isDark, String name) {
         super(fm, behavior);
         this.chuongList = nameList;
-        this.isDark = isDark;
         this.name = name;
+        this.isDark = isDark;
+    }
+    public void setData(@NonNull FragmentManager fm, int behavior , boolean isDark)
+    {
+        this.isDark = isDark;
     }
 
     @NonNull

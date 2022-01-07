@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,74 +31,111 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
+
             <Switch
                 android:id="@+id/switch_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:thumb="@drawable/thumbar"
                 android:layout_marginEnd="5sp"
+                android:minHeight="48dp"
                 android:padding="5sp"
+                android:thumb="@drawable/thumbar"
                 android:track="@drawable/track_selector"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <com.example.app_readbook.View.readbook.VerticalViewPager
         android:id="@+id/view_pager_read"
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/lo2"
+        android:layout_height="0dp"
         android:layout_below="@id/toolbar_readBook"
-        tools:ignore="ScrollViewSize" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_readBook"
+        tools:ignore="ScrollViewSize,SpeakableTextPresentCheck" />
+
 
     <LinearLayout
-        android:id="@+id/lo2"
+        android:id="@+id/lil_02"
         android:layout_width="match_parent"
-        android:layout_height="83dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/background_color"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:background="@drawable/color_btn"
+        android:baselineAlignBottom="false"
+        android:onClick="show"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        app:layout_anchor="@id/view_pager_read"
+        android:layout_marginBottom="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_pager_read"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
 
-      <RelativeLayout
-          android:layout_width="match_parent"
-          android:orientation="horizontal"
-          android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5sp">
 
-          <TextView
-              android:id="@+id/before"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_centerVertical="true"
-              android:layout_marginStart="10sp"
+            <ImageView
+                android:id="@+id/before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
 
-              android:background="@drawable/ic_baseline_navigate_before1_24" />
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_baseline_navigate_before1_24" />
 
-          <TextView
-              android:id="@+id/txt1"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_centerVertical="true"
-              android:layout_toStartOf="@+id/next"
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/next"
+                android:layout_toEndOf="@+id/before"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
-              android:layout_toEndOf="@+id/before"
-              android:fontFamily="@font/roboto_bold"
-              android:gravity="center"
-              android:maxLines="2"
-              android:textColor="@color/black"
-              android:textSize="15sp" />
-
-          <TextView
-              android:id="@+id/next"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignParentEnd="true"
-              android:layout_centerVertical="true"
-              android:layout_marginEnd="10sp"
-              android:background="@drawable/ic_baseline_navigate_next1_24" />
-      </RelativeLayout>
+            <ImageView
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10sp"
+                android:src="@drawable/ic_baseline_navigate_next1_24" />
+        </RelativeLayout>
     </LinearLayout>
 
-</RelativeLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_showView"
+        android:visibility="gone"
+        android:onClick="show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="200sp"
+        android:layout_marginBottom="36dp"
+        android:baselineAlignBottom="true"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_navigate_next1_24"
+        app:backgroundTint="@color/btn_navigation"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.129"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription,KeyboardInaccessibleWidget,MissingConstraints,RtlHardcoded,SpeakableTextPresentCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

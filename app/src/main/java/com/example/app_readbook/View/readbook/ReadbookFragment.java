@@ -1,12 +1,15 @@
 package com.example.app_readbook.View.readbook;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.app_readbook.Model.Chuong;
@@ -21,11 +24,13 @@ public class ReadbookFragment extends Fragment {
     private RelativeLayout layout;
     private TextView textView ;
     private RoundedImageView img_book;
+    private ScrollView scrollView;
     public ReadbookFragment() {
 
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,13 +38,14 @@ public class ReadbookFragment extends Fragment {
         textView = mview.findViewById(R.id.txt_readBook);
         img_book = mview.findViewById(R.id.img_sach);
         layout = mview.findViewById(R.id.layout_dark);
+
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             Chuong chapters = (Chuong) bundle.get("readBook_object");
             textView.setText(chapters.getNoidung());
             Picasso.get().load(chapters.getImgSach()).into(img_book);
             isDark = bundle.getBoolean("dark");
-            name = bundle.getString("name");
             if(isDark)
             {
                 setDarkTheme();

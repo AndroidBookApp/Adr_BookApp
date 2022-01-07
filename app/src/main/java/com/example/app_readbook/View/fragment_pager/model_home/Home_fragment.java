@@ -112,7 +112,7 @@ public class Home_fragment extends Fragment{
     }
     private void getDataImg() {
         ApiInterface apiInterface = ApiService.apiInterface();
-        Call<List<Sach>> listCall = apiInterface.responseSach();
+        Call<List<Sach>> listCall = apiInterface.listsach();
         listCall.enqueue(new Callback<List<Sach>>() {
             @Override
             public void onResponse(Call<List<Sach>> call, Response<List<Sach>> response) {

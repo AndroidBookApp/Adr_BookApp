@@ -25,9 +25,6 @@ import retrofit2.http.Part;
 public interface ApiInterface {
 
     @GET("sach.php")
-    Call<List<Sach>> responseSach();
-
-    @GET("sach.php")
     Call<List<Sach>> listsach();
 
     @FormUrlEncoded
@@ -44,10 +41,6 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("comment.php")
     Call<List<danhgia>> AddComment(@Field("idMember") String idMember, @Field("idSach") String idSach, @Field("Noidung") String Noidung);
-
-    @FormUrlEncoded
-    @POST("thichsach.php")
-    Call<String> UpdateFavorite(@Field("idMember") String idMember, @Field("idSach") String idSach);
     @FormUrlEncoded
     @POST("thichsach.php")
     Call<favoriteDeleteData> UpdateFavorites(@Field("idMember") String idMember, @Field("idSach") String idSach);

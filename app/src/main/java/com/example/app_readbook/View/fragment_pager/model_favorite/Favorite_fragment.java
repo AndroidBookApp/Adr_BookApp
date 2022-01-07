@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.app_readbook.Class.CustomProgessDialog;
 import com.example.app_readbook.Model.User;
@@ -42,10 +43,12 @@ public class Favorite_fragment extends Fragment {
     User user;
     String idMember;
     home home;
+    private List<favorite> mFavorite;
     private ImageView tv_thongbao;
     FavoriteViewModel addFavoriteViewModel;
     FavoriteAdapter favoriteAdapter;
     CustomProgessDialog customProgessDialog;
+    private SwipeRefreshLayout refreshLayout;
     public Favorite_fragment() {
         // Required empty public constructor
     }
@@ -56,6 +59,14 @@ public class Favorite_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favorite_fragment, container, false);
         recyclerView = view.findViewById(R.id.rcv_list);
         tv_thongbao = view.findViewById(R.id.img_rong);
+//        refreshLayout = view.findViewById(R.id.refresh_favorite);
+//        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                loadData(mFavorite);
+//                refreshLayout.setRefreshing(false);
+//            }
+//        });
         home = new home();
         user = DataManager.loadUser();
         idMember = user.getIdMember();
@@ -73,8 +84,6 @@ public class Favorite_fragment extends Fragment {
             @Override
             public void onChanged(List<favorite> favorites) {
                 if (favorites!=null) {
-                    recyclerView.setVisibility(View.VISIBLE);
-                    tv_thongbao.setVisibility(View.GONE);
                     favoriteAdapter = new FavoriteAdapter(getActivity(), new FavoriteAdapter.IClickDeleteFavorite() {
                         @SuppressLint("NotifyDataSetChanged")
                         @Override
@@ -116,14 +125,13 @@ public class Favorite_fragment extends Fragment {
                                     })
                                     .setNegativeButton("Không", null)
                                     .show();
-
-
                         }
 
-
                     });
-                    customProgessDialog.dismiss();
+                    recyclerView.setVisibility(View.VISIBLE);
+                    tv_thongbao.setVisibility(View.GONE);
                     loadData(favorites);
+                    customProgessDialog.dismiss();
                 }else {
                     customProgessDialog.dismiss();
                     recyclerView.setVisibility(View.GONE);
@@ -134,10 +142,11 @@ public class Favorite_fragment extends Fragment {
         });
         addFavoriteViewModel.iniDataFavorite(idMember);
 
+
     }
 
-    public void loadData(List<favorite> favorite) {
-        favoriteAdapter.setData(favorite);
+    public void loadData(List<favorite>favorites) {
+        favoriteAdapter.setData(favorites);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(home, LinearLayoutManager.VERTICAL, false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);

@@ -73,7 +73,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/nunitosansbold"
             android:gravity="center"
-            android:text="Android Book Đăng Nhập"
+            android:text="Android Book"
             android:textColor="@color/color_text_onbrd"
             android:textSize="38dp"
             app:layout_constraintEnd_toEndOf="parent"
