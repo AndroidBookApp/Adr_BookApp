@@ -166,9 +166,6 @@ public class MainReadbook extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                if(state == 1) {
-
-                }
             }
         });
         btn_back.setOnClickListener(new View.OnClickListener() {

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -16,6 +15,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -38,6 +38,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.app_readbook.Class.CustomProgessDialog;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.login;
 import com.example.app_readbook.R;
@@ -67,26 +68,31 @@ public class edit_tt_account extends AppCompatActivity {
     private CircleImageView avatar;
     private ImageButton btnAnhDaiDien, btnAnhBia;
     private Button button;
-    private static int SELECT_PHOTO = 100;
     private ImageView IMGPAGE, edit_username, edit_name, edit_password, edit_round, edit_date, edit_email;
     private Uri mUri, mUri1;
     String idmember, username, pass, email, name, ngaysinh, gioitinh, imgAVT, updateanhbia;
-    private ProgressDialog progressDialog;
+    String anhdaidien, anhbia;
     private TextView txt_username, txt_name, txtPass, txtEmail, txt_date, txtRound;
     private Bitmap bitmap, bitmap1;
     User user;
+    CustomProgessDialog customProgessDialog;
+    String strRealPath, strRealPath1;
+    File file, file1;
+    ApiInterface apiInterface;
+    RequestBody requestBody, requestBody1;
     UpdateMemberViewModel updateMemberViewModel;
-
+    MultipartBody.Part body, body1;
+    private Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chinhsuathongtin);
+        customProgessDialog = new CustomProgessDialog(this);
+        toast = new Toast(this);
         iniAnhXa();
         loadUser();
         ActivityCompat.requestPermissions(edit_tt_account.this,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading....");
         iniUpdateMember();
     }
 
@@ -97,13 +103,13 @@ public class edit_tt_account extends AppCompatActivity {
             public void onChanged(login login) {
                 if (login != null) {
                     DataManager.saveUserName(login.getUser());
-                    Toast.makeText(edit_tt_account.this, "Update Thành Công", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                    Toast( "Update Thành Công");
+                    customProgessDialog.dismiss();
                     loadUser();
 
                 } else {
-                    Toast.makeText(edit_tt_account.this, "Update Không Thành Công", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                    Toast("Update Không Thành Công");
+                    customProgessDialog.dismiss();
                 }
             }
         });
@@ -114,15 +120,29 @@ public class edit_tt_account extends AppCompatActivity {
         user = DataManager.loadUser();
         imgAVT = user.getImgAvatar();
         updateanhbia = user.getImgBia();
-        Picasso.get().load(user.getImgAvatar()).into(avatar);
-        Picasso.get().load(user.getImgBia()).into(IMGPAGE);
         txt_name.setText(user.getMemberName());
         txt_date.setText(user.getNgaysinh());
         txtRound.setText(user.getGioitinh());
         txtEmail.setText(user.getEmail());
         txtPass.setText(user.getPassword());
         txt_username.setText(user.getUsername());
+        if(user.getImgAvatar() !=null || user.getImgBia()!=null)
+        {
+        if (!user.getImgAvatar().equals("") && !user.getImgBia().equals("")) {
+            Log.e("AAA", imgAVT);
+            Log.e("AAA", updateanhbia);
+            Picasso.get().load(user.getImgAvatar()).into(avatar);
+            Picasso.get().load(user.getImgBia()).into(IMGPAGE);
+            }
+        else if(!user.getImgAvatar().equals(""))
+        {
+            Picasso.get().load(user.getImgAvatar()).into(avatar);
+        }else  if(!user.getImgBia().equals("") )
+        {
+            Picasso.get().load(user.getImgBia()).into(IMGPAGE);
 
+        }
+        }
     }
 
     private final ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
@@ -271,56 +291,43 @@ public class edit_tt_account extends AppCompatActivity {
     }
 
     private void callAPIUPDATE() {
-        progressDialog.show();
-        String strRealPath = RealPathUtil.getRealPath(edit_tt_account.this, mUri);
-        String strRealPath1 = RealPathUtil.getRealPath(edit_tt_account.this, mUri1);
-        assert strRealPath != null;
-        File file = new File(strRealPath);
-        assert strRealPath1 != null;
-        File file1 = new File(strRealPath1);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        RequestBody requestBody1 = RequestBody.create(MediaType.parse("multipart/form-data"), file1);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("upload_file", "anhdaidien" + System.currentTimeMillis() + "_" + file.getName(), requestBody);
-        MultipartBody.Part body1 = MultipartBody.Part.createFormData("upload_file", "anhbia" + System.currentTimeMillis() + "_" + file1.getName(), requestBody1);
-        ApiInterface apiInterface = ApiService.apiInterface();
-        Call<String> loginCall = apiInterface.UploadPhoto(body);
-        loginCall.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.body() != null) {
+        customProgessDialog.show();
+        checkUrl();
+        checkString();
+//        checkFile();
+        requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        requestBody1 = RequestBody.create(MediaType.parse("multipart/form-data"), file1);
+        body = MultipartBody.Part.createFormData("upload_file", "anhdaidien" + System.currentTimeMillis() + "_" + file.getName(), requestBody);
+        body1 = MultipartBody.Part.createFormData("upload_file", "anhbia" + System.currentTimeMillis() + "_" + file1.getName(), requestBody1);
+        idmember = DataManager.loadUser().getIdMember();
+        ngaysinh = txt_date.getText().toString().trim();
+        gioitinh = txtRound.getText().toString().trim();
+        username = txt_username.getText().toString().trim();
+        pass = txtPass.getText().toString().trim();
+        email = txtEmail.getText().toString().trim();
+        name = txt_name.getText().toString().trim();
+        apiInterface = ApiService.apiInterface();
+        if (mUri1 !=null && mUri!=null) {
+            Call<String> loginCall = apiInterface.UploadPhoto(body);
+            loginCall.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    anhdaidien = response.body();
                     if (response.isSuccessful()) {
-                        String anhdaidien = response.body();
-                        ApiInterface apiInterface1 = ApiService.apiInterface();
-                        Call<String> callIMG_PAGE = apiInterface1.UploadPhotoIMGPAGE(body1);
+                        Call<String> callIMG_PAGE = apiInterface.UploadPhotoIMGPAGE(body1);
                         callIMG_PAGE.enqueue(new Callback<String>() {
                             @Override
                             public void onResponse(Call<String> call, Response<String> response1) {
-                                if (response1.body() != null) {
-                                    if (response1.isSuccessful()) {
-                                        String anhbia = response1.body();
-                                        idmember = DataManager.loadUser().getIdMember();
-                                        ngaysinh = txt_date.getText().toString().trim();
-                                        gioitinh = txtRound.getText().toString().trim();
-                                        username = txt_username.getText().toString().trim();
-                                        pass = txtPass.getText().toString().trim();
-                                        email = txtEmail.getText().toString().trim();
-                                        name = txt_name.getText().toString().trim();
-                                        if (anhdaidien.length() > 0 && anhbia.length() > 0) {
-                                            if (mUri != null && mUri1 != null)
-                                            //khai báo cả biến string và cho chúng bằng các edittext ...
-                                            {
-                                                progressDialog.dismiss();
-                                                updateMemberViewModel.iniUpdateMember(idmember,
-                                                        username, name, pass, email
-                                                        , gioitinh, ngaysinh
-                                                        , ApiService.base_URL + "images/" + anhdaidien,
-                                                        ApiService.base_URL + "image_anhbia/" + anhbia);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                                anhbia = response1.body();
 
+                                    //khai báo cả biến string và cho chúng bằng các edittext ...
+                                    customProgessDialog.dismiss();
+                                    updateMemberViewModel.iniUpdateMember(idmember,
+                                            username, name, pass, email
+                                            , gioitinh, ngaysinh
+                                            , ApiService.base_URL + "images/" + anhdaidien,
+                                            ApiService.base_URL + "image_anhbia/" + anhbia);
+                            }
                             @Override
                             public void onFailure(Call<String> call, Throwable t) {
 
@@ -329,18 +336,116 @@ public class edit_tt_account extends AppCompatActivity {
 
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(edit_tt_account.this, "Lỗi gì đó", Toast.LENGTH_SHORT).show();
-                Log.e("AAA", t.getMessage());
-                progressDialog.dismiss();
-            }
-        });
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(edit_tt_account.this, "Lỗi gì ", Toast.LENGTH_SHORT).show();
+                    Log.e("AAA", t.getMessage());
+                    customProgessDialog.dismiss();
+                }
+            });
+
+        } // cho đẩy lên cả 2
+        else if (mUri !=null && mUri1==null) {
+            Call<String> loginCall = apiInterface.UploadPhoto(body);
+            loginCall.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    anhdaidien = response.body();
+                    customProgessDialog.dismiss();
+                    updateMemberViewModel.iniUpdateMember(idmember,
+                            username, name, pass, email
+                            , gioitinh, ngaysinh
+                            , ApiService.base_URL + "images/" + anhdaidien,
+                            updateanhbia);
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(edit_tt_account.this, "Lỗi ", Toast.LENGTH_SHORT).show();
+                    Log.e("AAA", t.getMessage());
+                    customProgessDialog.dismiss();
+                }
+            });
+        } // cho đẩy lên 1 cái
+        else if ( mUri==null && mUri1!=null) {
+            Call<String> callIMG_PAGE = apiInterface.UploadPhotoIMGPAGE(body1);
+            callIMG_PAGE.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    customProgessDialog.dismiss();
+                    updateMemberViewModel.iniUpdateMember(idmember,
+                            username, name, pass, email
+                            , gioitinh, ngaysinh
+                            , imgAVT,
+                            ApiService.base_URL + "image_anhbia/" + anhbia);
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(edit_tt_account.this, " gì ", Toast.LENGTH_SHORT).show();
+                    Log.e("AAA", t.getMessage());
+                    customProgessDialog.dismiss();
+                }
+            });
+        }// cho đẩy lên 1 cái
+        else {
+            customProgessDialog.dismiss();
+            updateMemberViewModel.iniUpdateMember(idmember,
+                    username, name, pass, email
+                    , gioitinh, ngaysinh
+                    , imgAVT,
+                    updateanhbia);
+        } // đẩy lên đường link hiện tại
 
     }
-
+private void checkUrl()
+    {
+        if (mUri != null && mUri1 != null) {
+            strRealPath = RealPathUtil.getRealPath(edit_tt_account.this, mUri);
+            strRealPath1 = RealPathUtil.getRealPath(edit_tt_account.this, mUri1);
+        } else if (mUri == null && mUri1 != null) {
+            strRealPath = null;
+            strRealPath1 = RealPathUtil.getRealPath(edit_tt_account.this, mUri1);
+        } else if (mUri != null && mUri1 == null) {
+            strRealPath = RealPathUtil.getRealPath(edit_tt_account.this, mUri);
+            strRealPath1 = null;
+        } else {
+            strRealPath = null;
+            strRealPath1 = null;
+        }
+    }
+    private void checkString (){
+        if (strRealPath != null && strRealPath1 != null) {
+            file = new File(strRealPath);
+            file1 = new File(strRealPath1);
+        } else if (strRealPath != null && strRealPath1 == null) {
+            file = new File(strRealPath);
+            file1 = null;
+        } else if (strRealPath == null && strRealPath1 != null) {
+            file = new File("null");
+            file1 = new File(strRealPath1);
+        } else {
+            file = new File("null");
+            file1 = new File("null");
+        }
+    }
+    private void checkFile()
+    {
+        if (file != null && file1 != null) {
+            requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            requestBody1 = RequestBody.create(MediaType.parse("multipart/form-data"), file1);
+        } else if (file == null && file1 != null) {
+            requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), "null");
+            requestBody1 = RequestBody.create(MediaType.parse("multipart/form-data"), file1);
+        } else if (file != null && file1 == null) {
+            requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            requestBody1 = RequestBody.create(MediaType.parse("multipart/form-data"), "null");
+        } else {
+            requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), "null");
+            requestBody1 = RequestBody.create(MediaType.parse("multipart/form-data"), "null");
+        }
+    }
     private void DialogUsername(int gravityUsername) {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -555,6 +660,18 @@ public class edit_tt_account extends AppCompatActivity {
         Log.e("AAA", "onDestroy");
         super.onDestroy();
         loadUser();
+    }
+    private void Toast(String text)
+    {
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.custom_toast , findViewById(R.id.layout_toast));
+        TextView textView = view.findViewById(R.id.tv_toast);
+        toast.setView(view);
+        toast.setGravity(Gravity.BOTTOM , 0 , 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        textView.setText(text);
+        toast.show();
+
     }
 }
 

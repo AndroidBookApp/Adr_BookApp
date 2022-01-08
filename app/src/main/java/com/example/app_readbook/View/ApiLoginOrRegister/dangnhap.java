@@ -6,6 +6,8 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.app_readbook.Class.CustomProgessDialog;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.login;
 import com.example.app_readbook.R;
@@ -47,7 +50,8 @@ public class dangnhap extends AppCompatActivity {
     DataManager dataManager;
     login login;
     User User;
-
+    Toast toast;
+    CustomProgessDialog customProgessDialog;
     LoginViewModel loginViewModel;
     GoogleSignInClient googleSignInClient;
     NextWorkConnect nextWorkConnect = new NextWorkConnect();
@@ -56,7 +60,9 @@ public class dangnhap extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        customProgessDialog = new CustomProgessDialog(this);
         anhxa();
+        toast = new Toast(this);
         iniLoginViewModel();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -118,19 +124,19 @@ public class dangnhap extends AppCompatActivity {
             public void onChanged(com.example.app_readbook.Model.login login) {
                 if (!user.isEmpty() || !pass.isEmpty() || !quyen.equals("2")) {
                     if (login == null) {
-                        Toast.makeText(dangnhap.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+                        Toast("Đăng nhập không thành công");
+                        customProgessDialog.dismiss();
                     } else {
                         DataManager.saveUserName(login.getUser());
                         Intent intent = new Intent(dangnhap.this, home.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-                        Toast.makeText(dangnhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
+                        Toast("Đăng nhập thành công");
+                        customProgessDialog.dismiss();
                     }
                 } else {
-                    Toast.makeText(dangnhap.this, "Vui lòng không bỏ trống tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                    Toast("Vui lòng không bỏ trống tài khoản hoặc mật khẩu");
+                    customProgessDialog.dismiss();
                 }
             }
         });
@@ -144,17 +150,21 @@ public class dangnhap extends AppCompatActivity {
         signup = findViewById(R.id.dangky);
         signin = findViewById(R.id.btn_login);
         mCheckbox = findViewById(R.id.checkbox);
-        user = mySharePreferences.saveLoginUser("username");
-        pass = mySharePreferences.saveLoginPass("password");
+        Intent intent = getIntent();
+        if(intent.hasExtra("name") && intent.hasExtra("pass"))
+        {
+            user = intent.getStringExtra("name");
+            pass = intent.getStringExtra("pass");
+        }else{
+            user = mySharePreferences.saveLoginUser("username");
+            pass = mySharePreferences.saveLoginPass("password");
+        }
         txt_username.setText(user);
         txt_password.setText(pass);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading.....");   // load khi bấm btn_login
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.show();
+                customProgessDialog.show();
                 user = txt_username.getText().toString().trim();
                 pass = txt_password.getText().toString().trim();
                 if (mCheckbox.isChecked()) {
@@ -194,6 +204,18 @@ public class dangnhap extends AppCompatActivity {
     protected void onStop() {
         unregisterReceiver(nextWorkConnect);
         super.onStop();
+    }
+    private void Toast(String text)
+    {
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.custom_toast , findViewById(R.id.layout_toast));
+        TextView textView = view.findViewById(R.id.tv_toast);
+        toast.setView(view);
+        toast.setGravity(Gravity.BOTTOM , 0 , 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        textView.setText(text);
+        toast.show();
+
     }
 
 }

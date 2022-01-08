@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.app_readbook.Model.User;
@@ -32,14 +31,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class Account_fragment extends Fragment {
-    private TextView textView, name_user;
+    private TextView name_user;
     private View view;
-    private RecyclerView recyclerView;
+
     private ImageView anh_bia;
     private CircleImageView avatar;
     private LinearLayout linearLayout, layout_out;
-    private DataManager dataManager;
-    private Context context;
+
     home mHome;
     User user;
     public Account_fragment() {
@@ -49,6 +47,7 @@ public class Account_fragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_account_fragment, container, false);
+
         linearLayout = view.findViewById(R.id.lay_out_tt);
         avatar = view.findViewById(R.id.avatar);
         anh_bia = view.findViewById(R.id.background_image_account);
@@ -59,7 +58,6 @@ public class Account_fragment extends Fragment {
         Glide.with(this).load(user.getImgBia()).into(anh_bia);
         String username = user.getMemberName();
         name_user.setText(username);
-
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

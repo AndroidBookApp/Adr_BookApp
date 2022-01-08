@@ -18,12 +18,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.app_readbook.Class.TachText;
 import com.example.app_readbook.Model.Sach;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.Model.listFavorite;
 import com.example.app_readbook.R;
-import com.example.app_readbook.Class.TachText;
 import com.example.app_readbook.View.View_Readbook.View_ReadBook;
 import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
 import com.example.app_readbook.ViewModel.Service.ApiInterface;
@@ -41,17 +41,18 @@ import retrofit2.Response;
 public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListViewHolder> {
     private List<Sach> mSach;
     private Context context;
-    public Main_ListBook main_listBook;
+
     String idmember, idBook , text;
     private TachText tachText;
     boolean favorite = false;
+
     private List<com.example.app_readbook.Model.favorite> mListFavorite;
     AddFavoriteViewModel favoriteViewModel;
     private favoriteDeleteData favoriteDeleteData;
-    public ListBookAdaptor(Context context) {
+    public ListBookAdaptor(Context context ) {
         this.context = context;
-    }
 
+    }
     @SuppressLint("NotifyDataSetChanged")
     public void setData(List<Sach> mSach) {
         this.mSach = mSach;
@@ -106,9 +107,12 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                 {
                 String idSach = sach.getIdSach();
                     for (listFavorite listFavorite: favorite) {
+                        String member = listFavorite.getIdMember();
                         String id  = listFavorite.getIdSach();
-                        if(idSach.equals(id))
+                        if(idSach.equals(id) && idmember.equals(member))
                         {
+                            Log.e("AAA" , "IdLuothic"+id);
+                            Log.e("AAA" , "idSach"+idSach);
                             holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
 
                         }
@@ -150,6 +154,7 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         holder.mIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ApiInterface apiInterface = ApiService.apiInterface();
                 Call<favoriteDeleteData> callFavorite = apiInterface.UpdateFavorites(idmember, mSach.get(position).getIdSach());
                 callFavorite.enqueue(new Callback<favoriteDeleteData>() {
@@ -159,10 +164,10 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
                         if (response.isSuccessful() && favoriteDeleteData!=null) {
                             if (favoriteDeleteData.getSuccess().equals("like")) {
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_1_24);
-                                Toast.makeText(context, "Thích", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context , "Thích" , Toast.LENGTH_LONG).show();
                             } else if (favoriteDeleteData.getSuccess().equals("unlike")) {
                                 holder.mIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
-                                Toast.makeText(context, "Bỏ Thích", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context , "Bỏ Thích" , Toast.LENGTH_LONG).show();
                             }
                         }
                     }
@@ -222,5 +227,6 @@ public class ListBookAdaptor extends RecyclerView.Adapter<ListBookAdaptor.ListVi
         }
 
     }
+
 
 }

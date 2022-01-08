@@ -1,6 +1,5 @@
 package com.example.app_readbook.View.ApiLoginOrRegister;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -11,6 +10,8 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Patterns;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.app_readbook.Class.CustomProgessDialog;
 import com.example.app_readbook.Model.User;
 import com.example.app_readbook.R;
 import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
@@ -41,16 +43,18 @@ public class dangky extends AppCompatActivity {
     String name , email , pass , pass_1 , quyen;
     private ProgressBar progressBar;
     RegisterViewModel registerViewModel;
-    ProgressDialog progressDialog;
-    User user;
+    CustomProgessDialog customProgessDialog;
+    Toast toast;
     NextWorkConnect nextWorkConnect = new NextWorkConnect();
     @Override
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dangky);
+        customProgessDialog = new CustomProgessDialog(this);
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         AnhXa();
+        toast = new Toast(this);
         iniViewModel();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,13 +70,15 @@ public class dangky extends AppCompatActivity {
             public void onChanged(User user) {
                 if(user == null)
                 {
-                    progressDialog.dismiss();
-                    Toast.makeText(dangky.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
+                    customProgessDialog.dismiss();
+                    Toast("Đăng ký không thành công");
                 }
                 else {
-                    progressDialog.dismiss();
-                    Toast.makeText(dangky.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    customProgessDialog.dismiss();
+                    Toast("Đăng ký thành công");
                     Intent intent = new Intent(dangky.this, dangnhap.class);
+                    intent.putExtra("name" , name);
+                    intent.putExtra("pass" , pass);
                     startActivity(intent);
                 }
             }
@@ -84,9 +90,6 @@ public class dangky extends AppCompatActivity {
         txt_pass = findViewById(R.id.pass);
         tvFocus = findViewById(R.id.tv_focus);
         txt_pass_1 = findViewById(R.id.pass_1);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading.....");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         String text = "Bạn có đồng ý với điều khoản của AndroidBook không"; // tạo đoạn text
         SpannableString ss = new SpannableString(text); // tạo spannable truyền text vào
         ForegroundColorSpan fcsBlue = new ForegroundColorSpan(Color.BLUE); // tạo màu
@@ -110,8 +113,7 @@ public class dangky extends AppCompatActivity {
                     register.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            progressDialog.show();
-//                register.setVisibility(View.GONE);
+                            customProgessDialog.show();
                             name = txt_name.getText().toString().trim();
                             email = txt_email.getText().toString().trim();
                             pass = txt_pass.getText().toString().trim();
@@ -125,23 +127,23 @@ public class dangky extends AppCompatActivity {
                                             registerViewModel.initRegister(name  ,pass, email , quyen);
                                         }
                                         else {
-                                            progressDialog.dismiss();
+                                            customProgessDialog.dismiss();
                                             Toast.makeText(dangky.this, "Email không chính xác", Toast.LENGTH_SHORT).show();
 
                                         }
                                     }
                                     else {
-                                        progressDialog.dismiss();
+                                        customProgessDialog.dismiss();
                                         Toast.makeText(dangky.this, "Mật khẩu xác nhận không chính xác", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }else {
                                     Toast.makeText(dangky.this, "Mật khẩu phải dài hơn 6 ký tự", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
+                                    customProgessDialog.dismiss();
                                 }
                             } else {
                                 Toast.makeText(dangky.this, "Vui lòng nhập thông tin chính ", Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
+                                customProgessDialog.dismiss();
                             }
                         }
                     });
@@ -165,5 +167,17 @@ public class dangky extends AppCompatActivity {
     protected void onStop() {
         unregisterReceiver(nextWorkConnect);
         super.onStop();
+    }
+    private void Toast(String text)
+    {
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.custom_toast , findViewById(R.id.layout_toast));
+        TextView textView = view.findViewById(R.id.tv_toast);
+        toast.setView(view);
+        toast.setGravity(Gravity.BOTTOM , 0 , 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        textView.setText(text);
+        toast.show();
+
     }
 }

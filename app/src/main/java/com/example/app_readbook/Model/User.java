@@ -6,7 +6,9 @@ import android.util.Patterns;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     @SerializedName("idMember")
     @Expose
     private String idMember;
@@ -44,20 +46,7 @@ public class User {
     @Expose
     private String idquyen;
 
-    public User(String idMember, String username, String memberName, String password, String email, String gioitinh, String ngaysinh, String success, String message, String imgAvatar, String imgBia, String idquyen) {
-        this.idMember = idMember;
-        this.username = username;
-        MemberName = memberName;
-        this.password = password;
-        Email = email;
-        Gioitinh = gioitinh;
-        Ngaysinh = ngaysinh;
-        this.success = success;
-        this.message = message;
-        this.imgAvatar = imgAvatar;
-        this.imgBia = imgBia;
-        this.idquyen = idquyen;
-    }
+
 
     public String getIdquyen() {
         return idquyen;

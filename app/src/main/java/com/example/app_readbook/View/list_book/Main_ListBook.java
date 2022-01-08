@@ -7,7 +7,11 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,11 +25,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.app_readbook.Class.CustomProgessDialog;
 import com.example.app_readbook.Model.DanhMucSach;
 import com.example.app_readbook.Model.Sach;
+import com.example.app_readbook.Model.User;
+import com.example.app_readbook.Model.favoriteDeleteData;
 import com.example.app_readbook.R;
 import com.example.app_readbook.View.BroadCastRecivice.NextWorkConnect;
 import com.example.app_readbook.ViewModel.AddFavoriteViewModel;
 import com.example.app_readbook.ViewModel.AddViewBookViewModel;
 import com.example.app_readbook.ViewModel.MainListBookViewModel;
+import com.example.app_readbook.shareFreferences.DataManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +43,7 @@ public class Main_ListBook extends AppCompatActivity {
     private ListBookAdaptor bookAdaptor;
     private Toolbar toolbar;
     public Sach sach;
+    public User user;
     List<Sach> danhMucSaches;
     private SwipeRefreshLayout layout;
     private EditText txt_searchName;
@@ -44,14 +52,19 @@ public class Main_ListBook extends AppCompatActivity {
     AddFavoriteViewModel addFavoriteViewModel;
     MainListBookViewModel mainListBookViewModel;
     AddViewBookViewModel addViewBookViewModel;
+    public Toast toast;
+    private favoriteDeleteData favoriteDeleteData;
     private CustomProgessDialog customProgessDialog;
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_list_book);
+        user = DataManager.loadUser();
+        sach = DataManager.loadObjectSach();
         customProgessDialog = new CustomProgessDialog(Main_ListBook.this);
         customProgessDialog.show();
+        toast = new Toast(this);
         iniAnhXa();
         BackView();
         LoadDanhMuc();
@@ -154,5 +167,17 @@ public class Main_ListBook extends AppCompatActivity {
     protected void onStop() {
         unregisterReceiver(nextWorkConnect);
         super.onStop();
+    }
+    private void Toast(String text)
+    {
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.custom_toast_favorite , findViewById(R.id.layout_toast_favorite));
+        TextView textView = view.findViewById(R.id.tv_toast_favorite);
+        toast.setView(view);
+        toast.setGravity(Gravity.BOTTOM , 0 , 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        textView.setText(text);
+        toast.show();
+
     }
 }
