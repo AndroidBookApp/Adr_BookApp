@@ -93,4 +93,18 @@ public class danhgia implements Serializable {
     public void setThoigian(String thoigian) {
         this.thoigian = thoigian;
     }
+
+    @Override
+    public String toString() {
+        return "danhgia{" +
+                "idMember='" + idMember + '\'' +
+                ", memberName='" + memberName + '\'' +
+                ", username='" + username + '\'' +
+                ", imgAvatar='" + imgAvatar + '\'' +
+                ", idSach='" + idSach + '\'' +
+                ", idDanhgia='" + idDanhgia + '\'' +
+                ", noidung='" + noidung + '\'' +
+                ", thoigian='" + thoigian + '\'' +
+                '}';
+    }
 }
