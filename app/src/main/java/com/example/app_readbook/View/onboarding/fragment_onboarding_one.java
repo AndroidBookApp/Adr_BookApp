@@ -69,4 +69,14 @@ private View mview;
 
         return mview;
     }
+
+    @Override
+    public String toString() {
+        return "fragment_onboarding_one{" +
+                "btnstart=" + btnstart +
+                ", mview=" + mview +
+                ", mParam1='" + mParam1 + '\'' +
+                ", mParam2='" + mParam2 + '\'' +
+                '}';
+    }
 }
