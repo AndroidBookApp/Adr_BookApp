@@ -39,4 +39,12 @@ public class DanhMucSach  implements Serializable {
         this.sosach = sosach;
     }
 
+    @Override
+    public String toString() {
+        return "DanhMucSach{" +
+                "idDanhmuc='" + idDanhmuc + '\'' +
+                ", tendanhmuc='" + tendanhmuc + '\'' +
+                ", sosach='" + sosach + '\'' +
+                '}';
+    }
 }
