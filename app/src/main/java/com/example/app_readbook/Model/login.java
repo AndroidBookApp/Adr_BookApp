@@ -41,4 +41,13 @@ public class login {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "login{" +
+                "user=" + user +
+                ", success='" + success + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
