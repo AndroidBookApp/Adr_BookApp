@@ -62,4 +62,14 @@ public class Chuong  implements Serializable {
         this.imgSach = imgSach;
     }
 
+    @Override
+    public String toString() {
+        return "Chuong{" +
+                "idChuong='" + idChuong + '\'' +
+                ", idSach='" + idSach + '\'' +
+                ", tenChuong='" + tenChuong + '\'' +
+                ", noidung='" + noidung + '\'' +
+                ", imgSach='" + imgSach + '\'' +
+                '}';
+    }
 }
