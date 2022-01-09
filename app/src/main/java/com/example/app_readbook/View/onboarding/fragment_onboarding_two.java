@@ -62,4 +62,12 @@ public class fragment_onboarding_two extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_onboarding_two, container, false);
     }
+
+    @Override
+    public String toString() {
+        return "fragment_onboarding_two{" +
+                "mParam1='" + mParam1 + '\'' +
+                ", mParam2='" + mParam2 + '\'' +
+                '}';
+    }
 }
