@@ -70,4 +70,5 @@ public class fragment_onboarding_two extends Fragment {
                 ", mParam2='" + mParam2 + '\'' +
                 '}';
     }
+
 }

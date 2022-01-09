@@ -49,4 +49,12 @@ private SpinKitView bar;
         finish();
     }
 
+    @Override
+    public String toString() {
+        return "Onboarding_View{" +
+                "textView=" + textView +
+                ", lottieAnimationView=" + lottieAnimationView +
+                ", bar=" + bar +
+                '}';
+    }
 }
