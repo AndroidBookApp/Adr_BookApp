@@ -26,4 +26,12 @@ public class favoriteDeleteData {
     public void setMessage(Boolean message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "favoriteDeleteData{" +
+                "success='" + success + '\'' +
+                ", message=" + message +
+                '}';
+    }
 }
