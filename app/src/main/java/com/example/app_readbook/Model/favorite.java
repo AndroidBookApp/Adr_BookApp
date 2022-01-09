@@ -114,4 +114,19 @@ public class favorite {
         this.tomtatND = tomtatND;
     }
 
+    @Override
+    public String toString() {
+        return "favorite{" +
+                "idMember='" + idMember + '\'' +
+                ", idSach='" + idSach + '\'' +
+                ", imgSach='" + imgSach + '\'' +
+                ", tensach='" + tensach + '\'' +
+                ", tacgia='" + tacgia + '\'' +
+                ", nxb='" + nxb + '\'' +
+                ", idDanhmuc='" + idDanhmuc + '\'' +
+                ", ngayDang='" + ngayDang + '\'' +
+                ", tomtatND='" + tomtatND + '\'' +
+                ", clickDelete=" + clickDelete +
+                '}';
+    }
 }
