@@ -27,4 +27,12 @@ public class AddComment {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "AddComment{" +
+                "success='" + success + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
