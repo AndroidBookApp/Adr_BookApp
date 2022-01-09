@@ -64,4 +64,15 @@ private Button btn_dangky;
         });
         return mview ;
     }
+
+    @Override
+    public String toString() {
+        return "fragment_onboarding_three{" +
+                "mview=" + mview +
+                ", btn_dangnhap=" + btn_dangnhap +
+                ", btn_dangky=" + btn_dangky +
+                ", mParam1='" + mParam1 + '\'' +
+                ", mParam2='" + mParam2 + '\'' +
+                '}';
+    }
 }
